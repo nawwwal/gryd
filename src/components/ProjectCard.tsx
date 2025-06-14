@@ -17,33 +17,24 @@ interface ProjectCardProps {
 }
 
 const ProjectCard = ({ project, index }: ProjectCardProps) => {
-  const isLarge = index === 0;
-  
   return (
-    <Link to={`/work/${project.slug}`} className="project-card-link">
-      <article className={`magazine-project-card ${isLarge ? 'large' : ''}`}>
-        <div className="project-image-container">
-          <div className="project-image">
-            <img src={project.image} alt={project.title} />
-            <div className="image-overlay">
-              <span className="project-category">{project.category}</span>
-              <span className="project-year">{project.year}</span>
-            </div>
+    <Link to={`/work/${project.slug}`} className="grid-article-link">
+      <article className="grid-article">
+        <div className="grid-article-image">
+          <img src={project.image} alt={project.title} />
+          <div className="article-overlay">
+            <span className="read-time">{project.year}</span>
           </div>
         </div>
         
-        <div className="project-content">
-          <h3 className="project-title">{project.title}</h3>
-          <p className="project-subtitle">{project.subtitle}</p>
-          <p className="project-description">{project.description}</p>
+        <div className="grid-article-content">
+          <div className="grid-category">{project.category}</div>
+          <h5 className="grid-headline">{project.title}</h5>
+          <p className="grid-excerpt">{project.subtitle}</p>
           
-          <div className="project-meta">
-            <span className="read-more">read more →</span>
+          <div className="grid-meta">
+            <span className="grid-impact">Read Case Study →</span>
           </div>
-        </div>
-        
-        <div className="card-decoration">
-          <div className="decoration-corner"></div>
         </div>
       </article>
     </Link>
