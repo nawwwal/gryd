@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,16 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Custom gryd palette
+				gryd: {
+					dark: '#0a0a0a',
+					soft: '#a3a3a3',
+					accent: '#00ff88'
 				}
+			},
+			fontFamily: {
+				'grotesk': ['Space Grotesk', 'monospace'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +94,49 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'pulse-line': {
+					'0%, 100%': {
+						transform: 'scaleX(1)',
+						opacity: '1'
+					},
+					'50%': {
+						transform: 'scaleX(1.1)',
+						opacity: '0.8'
+					}
+				},
+				'bounce-soft': {
+					'0%, 100%': {
+						transform: 'translateY(0)',
+					},
+					'50%': {
+						transform: 'translateY(-2px)',
+					}
+				},
+				'wiggle': {
+					'0%, 100%': {
+						transform: 'rotate(-1deg)'
+					},
+					'50%': {
+						transform: 'rotate(1deg)'
+					}
+				},
+				'spin-slow': {
+					from: {
+						transform: 'rotate(0deg)'
+					},
+					to: {
+						transform: 'rotate(360deg)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-line': 'pulse-line 2s ease-in-out infinite',
+				'bounce-soft': 'bounce-soft 1s ease-in-out infinite',
+				'wiggle': 'wiggle 0.3s ease-in-out',
+				'spin-slow': 'spin-slow 3s linear infinite'
 			}
 		}
 	},
