@@ -70,51 +70,30 @@ const Playground = () => {
 
   return (
     <div className="magazine-container">
-      {/* Magazine Header */}
-      <div className="magazine-hero">
-        <div className="hero-paper">
-          <div className="paper-binding"></div>
-          
-          <div className="hero-content">
-            <ScrollFade>
-              <div className="masthead">
-                <div className="issue-details">
-                  <span className="issue-number">Lab</span>
-                  <span className="issue-date">Experiments</span>
-                  <span className="price">Live</span>
-                </div>
-                
-                <h1 className="magazine-logo">
-                  PLAYGROUND
-                  <span className="subtitle">Experiments & Dead Ends</span>
-                </h1>
-                
-                <div className="feature-banner">
-                  <span>Lab: Things That Make Me Curious</span>
-                </div>
+      {/* Lab Bulletin Board Header */}
+      <div className="lab-bulletin-header">
+        <div className="bulletin-board">
+          <ScrollFade>
+            <div className="lab-title-section">
+              <div className="lab-badge">
+                <span className="badge-text">LAB</span>
               </div>
-            </ScrollFade>
-            
-            <ScrollFade delay={300}>
-              <div className="hero-story">
-                <div className="story-category">LABORATORY</div>
-                <h2 className="story-headline">
-                  Experiments<br/>
-                  <span className="story-subhead">Most of this is useless. Some of it changes everything.</span>
-                </h2>
-                
-                <div className="story-lead">
-                  <p className="lead-text">
-                    Dead ends, curiosities, and things that break.
-                    This page updates whenever I break something new.
-                  </p>
-                </div>
+              
+              <h1 className="lab-main-title">
+                Playground
+              </h1>
+              
+              <div className="lab-description">
+                <p>Dead ends, curiosities, and things that break.</p>
+                <p>This page updates whenever I break something new.</p>
               </div>
-            </ScrollFade>
-          </div>
-          
-          <div className="paper-corner"></div>
-          <div className="paper-shadow"></div>
+              
+              <div className="lab-status">
+                <div className="status-indicator"></div>
+                <span>Currently experimenting</span>
+              </div>
+            </div>
+          </ScrollFade>
         </div>
       </div>
 
@@ -145,21 +124,19 @@ const Playground = () => {
       </div>
 
       {/* Update Notice */}
-      <div className="table-of-contents">
+      <div className="lab-notes">
         <ScrollFade>
-          <div className="toc-header">
+          <div className="notes-content">
             <h3>Lab Notes</h3>
-            <div className="toc-line"></div>
-          </div>
-          
-          <div className="toc-entries">
-            <div className="toc-entry">
-              <span className="toc-page">•</span>
-              <span className="toc-title">This page updates whenever I break something new</span>
-            </div>
-            <div className="toc-entry">
-              <span className="toc-page">•</span>
-              <span className="toc-title">Bookmark it if you're into that sort of thing</span>
+            <div className="notes-list">
+              <div className="note-item">
+                <span>•</span>
+                <span>This page updates whenever I break something new</span>
+              </div>
+              <div className="note-item">
+                <span>•</span>
+                <span>Bookmark it if you're into that sort of thing</span>
+              </div>
             </div>
           </div>
         </ScrollFade>

@@ -9,7 +9,206 @@
     background-size: 20px 20px, 100% 100%;
   }
 
-  /* Magazine Hero Section */
+  /* Work Portfolio Header */
+  .work-portfolio-header {
+    @apply py-24 bg-white border-b-4 border-gray-900;
+  }
+
+  .portfolio-masthead {
+    @apply max-w-4xl mx-auto px-8;
+  }
+
+  .portfolio-title-section {
+    @apply text-center space-y-8;
+  }
+
+  .portfolio-meta {
+    @apply flex justify-center items-center space-x-4 text-sm uppercase tracking-wider text-gray-600;
+  }
+
+  .meta-item {
+    @apply font-mono;
+  }
+
+  .meta-divider {
+    @apply text-gray-400;
+  }
+
+  .portfolio-main-title {
+    @apply font-serif text-6xl font-black text-center tracking-tight;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+  }
+
+  .portfolio-subtitle {
+    @apply text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed;
+  }
+
+  /* About Interview Layout */
+  .interview-layout {
+    @apply max-w-4xl mx-auto px-8 py-24;
+  }
+
+  .interview-header {
+    @apply text-center pb-16 border-b-2 border-gray-200 mb-16;
+  }
+
+  .interview-meta {
+    @apply flex justify-center items-center space-x-4 text-sm uppercase tracking-wider text-gray-600 mb-8;
+  }
+
+  .interview-label {
+    @apply bg-orange-600 text-white px-3 py-1;
+  }
+
+  .interview-date {
+    @apply font-mono;
+  }
+
+  .interview-title {
+    @apply font-serif text-5xl font-bold leading-tight mb-6;
+  }
+
+  .interview-name {
+    @apply text-orange-600;
+  }
+
+  .interview-intro {
+    @apply text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed;
+  }
+
+  .interview-content {
+    @apply space-y-12;
+  }
+
+  .interview-qa {
+    @apply grid grid-cols-1 md:grid-cols-12 gap-8 items-start;
+  }
+
+  .question {
+    @apply md:col-span-4 flex items-start space-x-4;
+  }
+
+  .answer {
+    @apply md:col-span-8 flex items-start space-x-4;
+  }
+
+  .q-label {
+    @apply font-serif text-4xl font-bold text-orange-600 flex-shrink-0;
+  }
+
+  .a-label {
+    @apply font-serif text-4xl font-bold text-gray-400 flex-shrink-0;
+  }
+
+  .question p,
+  .answer p {
+    @apply text-lg leading-relaxed;
+  }
+
+  .question p {
+    @apply font-medium text-gray-900;
+  }
+
+  .answer p {
+    @apply text-gray-700;
+  }
+
+  /* Profile Stats */
+  .profile-stats {
+    @apply bg-white py-16 my-16;
+  }
+
+  .stats-grid {
+    @apply max-w-4xl mx-auto px-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-center;
+  }
+
+  .stat-item {
+    @apply space-y-2;
+  }
+
+  .stat-number {
+    @apply block font-serif text-4xl font-bold text-orange-600;
+  }
+
+  .stat-label {
+    @apply text-sm uppercase tracking-wider text-gray-600;
+  }
+
+  /* Lab Bulletin Header */
+  .lab-bulletin-header {
+    @apply py-24 bg-gradient-to-br from-yellow-50 to-orange-50;
+    background-image: 
+      linear-gradient(45deg, transparent 49%, rgba(251,146,60,0.05) 50%, transparent 51%),
+      radial-gradient(circle at 20% 80%, rgba(0,0,0,0.02) 1px, transparent 1px);
+    background-size: 30px 30px, 15px 15px;
+  }
+
+  .bulletin-board {
+    @apply max-w-4xl mx-auto px-8;
+  }
+
+  .lab-title-section {
+    @apply text-center space-y-8;
+  }
+
+  .lab-badge {
+    @apply inline-block;
+  }
+
+  .badge-text {
+    @apply bg-orange-600 text-white px-4 py-2 font-mono text-sm uppercase tracking-wider;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 100%, 10px 100%);
+  }
+
+  .lab-main-title {
+    @apply font-serif text-6xl font-black text-center tracking-tight;
+    text-shadow: 2px 2px 0px rgba(251,146,60,0.2);
+  }
+
+  .lab-description {
+    @apply space-y-2 max-w-2xl mx-auto;
+  }
+
+  .lab-description p {
+    @apply text-xl text-gray-700 leading-relaxed;
+  }
+
+  .lab-status {
+    @apply flex items-center justify-center space-x-3 text-sm text-gray-600;
+  }
+
+  .status-indicator {
+    @apply w-2 h-2 bg-green-500 rounded-full;
+    animation: pulse 2s infinite;
+  }
+
+  /* Lab Notes */
+  .lab-notes {
+    @apply max-w-4xl mx-auto p-8 bg-white shadow-lg my-8;
+    border-left: 4px solid #d97706;
+  }
+
+  .notes-content {
+    @apply space-y-6;
+  }
+
+  .notes-content h3 {
+    @apply font-serif text-2xl font-bold;
+  }
+
+  .notes-list {
+    @apply space-y-3;
+  }
+
+  .note-item {
+    @apply flex items-center space-x-6 text-gray-800;
+  }
+
+  .note-item span:first-child {
+    @apply text-orange-600 font-bold;
+  }
+
+  /* Magazine Hero Section (for homepage only) */
   .magazine-hero {
     @apply relative min-h-screen flex items-center justify-center p-8;
     perspective: 1000px;
@@ -80,6 +279,15 @@
 
   .lead-text {
     @apply text-xl leading-relaxed text-gray-700;
+  }
+
+  .story-byline {
+    @apply flex space-x-3 text-sm text-gray-500 uppercase tracking-wide;
+  }
+
+  .continue-reading {
+    @apply text-right text-sm uppercase tracking-wide text-gray-600;
+    font-style: italic;
   }
 
   .paper-corner {
