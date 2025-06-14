@@ -36,6 +36,9 @@
     --ring: 251 146 60;
 
     --radius: 0rem;
+    
+    /* Magazine variables */
+    --paper-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-opacity='0.03'%3E%3Cpolygon fill='%23000' points='50 0 60 40 100 50 60 60 50 100 40 60 0 50 40 40'/%3E%3C/g%3E%3C/svg%3E");
   }
 }
 
@@ -46,6 +49,7 @@
 
   body {
     @apply bg-gryd-bg text-gryd-text font-body antialiased;
+    background-image: var(--paper-texture);
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -75,6 +79,293 @@
 }
 
 @layer components {
+  /* Magazine Layout */
+  .magazine-layout {
+    @apply min-h-screen relative;
+  }
+
+  .magazine-header {
+    @apply border-b-2 border-gryd-text py-6 mb-8;
+    background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+  }
+
+  .magazine-masthead {
+    @apply flex items-center justify-between;
+  }
+
+  .issue-info {
+    @apply flex flex-col text-xs uppercase tracking-wider text-gryd-soft;
+  }
+
+  .magazine-title {
+    @apply font-headline text-3xl font-bold uppercase tracking-tight;
+  }
+
+  .magazine-subtitle {
+    @apply text-sm text-gryd-soft uppercase tracking-wide;
+  }
+
+  .magazine-section {
+    @apply relative mb-16;
+  }
+
+  .magazine-paper-effect {
+    @apply relative;
+    background: linear-gradient(135deg, #fafafa 0%, #f8f8f8 100%);
+    box-shadow: 
+      0 1px 3px rgba(0,0,0,0.1),
+      0 1px 2px rgba(0,0,0,0.06),
+      inset 0 0 0 1px rgba(0,0,0,0.05);
+  }
+
+  .magazine-section::before {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background: linear-gradient(45deg, transparent 49%, rgba(0,0,0,0.02) 50%, transparent 51%);
+  }
+
+  .magazine-grid {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-16 items-center py-16;
+  }
+
+  .hero-section {
+    @apply relative overflow-hidden;
+  }
+
+  .hero-content {
+    @apply space-y-8;
+  }
+
+  .hero-headline {
+    @apply font-headline text-5xl lg:text-6xl font-bold lowercase leading-tight;
+  }
+
+  .accent-text {
+    @apply text-gryd-accent;
+  }
+
+  .hero-manifesto {
+    @apply space-y-6 max-w-xl;
+  }
+
+  .manifesto-text {
+    @apply text-xl leading-relaxed text-gryd-text;
+  }
+
+  .manifesto-subtext {
+    @apply text-lg leading-relaxed text-gryd-soft;
+  }
+
+  .hero-visual {
+    @apply relative;
+  }
+
+  .magazine-cutout {
+    @apply relative p-8 bg-gryd-text text-gryd-bg transform rotate-2;
+    clip-path: polygon(0 0, 95% 0, 100% 85%, 5% 100%);
+  }
+
+  .magazine-cutout:hover {
+    @apply transform rotate-1 scale-105;
+    transition: transform 0.3s ease-out;
+  }
+
+  .cutout-content {
+    @apply space-y-4;
+  }
+
+  .cutout-label {
+    @apply text-sm uppercase tracking-wider opacity-80;
+  }
+
+  .cutout-stats {
+    @apply flex space-x-6;
+  }
+
+  .stat-item {
+    @apply flex flex-col items-center;
+  }
+
+  .stat-number {
+    @apply text-3xl font-bold;
+  }
+
+  .stat-label {
+    @apply text-sm uppercase tracking-wide opacity-80;
+  }
+
+  /* Projects Section */
+  .projects-section {
+    @apply py-16;
+  }
+
+  .section-header {
+    @apply mb-12 text-center;
+  }
+
+  .section-title {
+    @apply font-headline text-4xl font-bold lowercase mb-4;
+  }
+
+  .section-subtitle {
+    @apply text-xl text-gryd-soft max-w-2xl mx-auto;
+  }
+
+  .projects-grid {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12;
+  }
+
+  .project-card-link {
+    @apply block;
+  }
+
+  .magazine-project-card {
+    @apply relative bg-white border border-gryd-soft/20 overflow-hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .magazine-project-card:hover {
+    @apply transform -translate-y-2 shadow-xl;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  }
+
+  .magazine-project-card.large {
+    @apply lg:col-span-2;
+  }
+
+  .magazine-project-card.large .project-image-container {
+    @apply h-80;
+  }
+
+  .project-image-container {
+    @apply relative h-64 overflow-hidden;
+  }
+
+  .project-image {
+    @apply relative w-full h-full;
+  }
+
+  .project-image img {
+    @apply w-full h-full object-cover;
+    filter: grayscale(100%) contrast(110%);
+    transition: filter 0.3s ease;
+  }
+
+  .magazine-project-card:hover .project-image img {
+    filter: grayscale(0%) contrast(100%);
+  }
+
+  .image-overlay {
+    @apply absolute top-4 left-4 flex space-x-2;
+  }
+
+  .project-category,
+  .project-year {
+    @apply px-2 py-1 bg-gryd-text text-gryd-bg text-xs uppercase tracking-wide;
+  }
+
+  .project-content {
+    @apply p-6 space-y-4;
+  }
+
+  .project-title {
+    @apply font-headline text-2xl font-bold lowercase;
+  }
+
+  .project-subtitle {
+    @apply text-gryd-accent font-medium;
+  }
+
+  .project-description {
+    @apply text-gryd-soft leading-relaxed;
+  }
+
+  .project-meta {
+    @apply pt-4 border-t border-gryd-soft/20;
+  }
+
+  .read-more {
+    @apply text-sm uppercase tracking-wide text-gryd-accent;
+    transition: transform 0.2s ease;
+  }
+
+  .magazine-project-card:hover .read-more {
+    @apply transform translate-x-2;
+  }
+
+  .card-decoration {
+    @apply absolute top-0 right-0;
+  }
+
+  .decoration-corner {
+    @apply w-8 h-8 bg-gryd-accent;
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+  }
+
+  /* CTA Section */
+  .cta-section {
+    @apply py-20 text-center;
+    background: linear-gradient(135deg, #111 0%, #333 100%);
+    color: #fafafa;
+  }
+
+  .cta-content {
+    @apply space-y-8 max-w-2xl mx-auto;
+  }
+
+  .cta-headline {
+    @apply font-headline text-4xl font-bold lowercase;
+  }
+
+  .cta-text {
+    @apply text-xl leading-relaxed opacity-90;
+  }
+
+  .cta-button-wrapper {
+    @apply pt-8;
+  }
+
+  .magazine-cta {
+    @apply inline-flex items-center space-x-4 px-8 py-4 bg-gryd-accent text-gryd-text font-body font-medium uppercase tracking-wide;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .magazine-cta:hover {
+    @apply transform -translate-y-2 shadow-xl;
+    box-shadow: 0 10px 20px rgba(251, 146, 60, 0.3);
+  }
+
+  .cta-arrow {
+    @apply text-xl;
+    transition: transform 0.2s ease;
+  }
+
+  .magazine-cta:hover .cta-arrow {
+    @apply transform translate-x-2;
+  }
+
+  /* Magazine Footer */
+  .magazine-footer {
+    @apply border-t-2 border-gryd-text py-8 mt-16;
+  }
+
+  .footer-content {
+    @apply text-center space-y-4;
+  }
+
+  .footer-text {
+    @apply text-sm text-gryd-soft uppercase tracking-wide;
+  }
+
+  .footer-decoration {
+    @apply flex justify-center;
+  }
+
+  .decoration-line {
+    @apply w-32 h-px bg-gryd-accent;
+    animation: line-stretch 2s ease-out infinite alternate;
+  }
+
   /* Editorial link style */
   .editorial-link {
     @apply relative inline-block text-gryd-text lowercase;
@@ -87,24 +378,6 @@
 
   .editorial-link:hover {
     background-size: 100% 2px;
-  }
-
-  /* Call-to-action button */
-  .cta-button {
-    @apply inline-block px-8 py-4 bg-gryd-accent text-gryd-text font-body font-medium lowercase tracking-wide transition-transform duration-200;
-  }
-
-  .cta-button:hover {
-    @apply -translate-y-1;
-  }
-
-  /* Project card */
-  .project-card {
-    @apply border-b border-gryd-soft/20 pb-8 mb-8 transition-all duration-300;
-  }
-
-  .project-card:hover {
-    @apply transform translate-x-2;
   }
 
   /* Scroll fade animation */
@@ -130,7 +403,8 @@
 
   /* Navigation */
   .nav-minimal {
-    @apply fixed top-0 w-full z-50 bg-gryd-bg/80 backdrop-blur-sm;
+    @apply fixed top-0 w-full z-50 bg-gryd-bg/95 backdrop-blur-sm;
+    border-bottom: 1px solid rgba(17, 17, 17, 0.1);
   }
 
   .nav-link {
@@ -138,11 +412,27 @@
   }
 }
 
-/* Custom scroll timeline animation */
-@supports (animation-timeline: scroll()) {
-  .scroll-line {
-    animation: line-stretch linear;
-    animation-timeline: scroll(root);
-    animation-range: 0% 20%;
+/* Animations */
+@keyframes line-stretch {
+  0% { width: 0; }
+  100% { width: 8rem; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .magazine-grid {
+    @apply grid-cols-1 gap-8;
+  }
+  
+  .hero-headline {
+    @apply text-4xl;
+  }
+  
+  .projects-grid {
+    @apply grid-cols-1;
+  }
+  
+  .magazine-project-card.large {
+    @apply col-span-1;
   }
 }
