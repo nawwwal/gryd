@@ -12,6 +12,8 @@ const experiments = [
     difficulty: 'Advanced',
     tools: ['CSS', 'HTML'],
     date: 'Dec 2024',
+    visual: 'geometric',
+    intensity: 'high'
   },
   {
     title: 'photo series',
@@ -22,6 +24,8 @@ const experiments = [
     difficulty: 'Intermediate',
     tools: ['Camera', 'Lightroom'],
     date: 'Nov 2024',
+    visual: 'photographic',
+    intensity: 'medium'
   },
   {
     title: 'micro-interaction study',
@@ -32,6 +36,8 @@ const experiments = [
     difficulty: 'Expert',
     tools: ['Figma', 'Framer'],
     date: 'Dec 2024',
+    visual: 'interactive',
+    intensity: 'high'
   },
   {
     title: 'dashboard autopsy',
@@ -42,6 +48,8 @@ const experiments = [
     difficulty: 'Intermediate',
     tools: ['Analytics', 'Screenshots'],
     date: 'Oct 2024',
+    visual: 'analytical',
+    intensity: 'low'
   },
   {
     title: 'impossible color combinations',
@@ -52,6 +60,8 @@ const experiments = [
     difficulty: 'Beginner',
     tools: ['Adobe Color', 'Sketch'],
     date: 'Nov 2024',
+    visual: 'colorful',
+    intensity: 'high'
   },
   {
     title: 'form field archaeology',
@@ -62,6 +72,8 @@ const experiments = [
     difficulty: 'Advanced',
     tools: ['Browser DevTools', 'Screenshots'],
     date: 'Sep 2024',
+    visual: 'technical',
+    intensity: 'medium'
   },
   {
     title: 'animation manifesto',
@@ -72,6 +84,8 @@ const experiments = [
     difficulty: 'Expert',
     tools: ['After Effects', 'CSS'],
     date: 'Dec 2024',
+    visual: 'motion',
+    intensity: 'high'
   },
   {
     title: 'type specimen',
@@ -82,6 +96,8 @@ const experiments = [
     difficulty: 'Intermediate',
     tools: ['FontForge', 'Glyphs'],
     date: 'Oct 2024',
+    visual: 'typographic',
+    intensity: 'medium'
   },
 ];
 
@@ -89,14 +105,24 @@ const Playground = () => {
   const masonryRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const cards = masonryRef.current?.querySelectorAll('.classified-ad');
+    const cards = masonryRef.current?.querySelectorAll('.experiment-card');
     if (!cards) return;
 
+    // Staggered entrance animation
     cards.forEach((card, index) => {
-      const delay = Math.random() * 1500 + index * 150;
+      const delay = Math.random() * 800 + index * 120;
       setTimeout(() => {
         card.classList.add('animate-in');
       }, delay);
+    });
+
+    // Add random rotation and positioning
+    cards.forEach((card) => {
+      const rotation = (Math.random() - 0.5) * 4; // -2 to 2 degrees
+      const translateX = (Math.random() - 0.5) * 8; // -4 to 4px
+      const translateY = (Math.random() - 0.5) * 8;
+      
+      (card as HTMLElement).style.transform = `rotate(${rotation}deg) translate(${translateX}px, ${translateY}px)`;
     });
   }, []);
 
@@ -140,68 +166,91 @@ const Playground = () => {
         </div>
       </div>
 
-      {/* Classified Section */}
+      {/* Experiments Section */}
       <div className="magazine-spread">
-        <div className="classified-section">
-          <div className="classified-header-bar">
-            <div className="classified-title-group">
-              <h2 className="section-title">CLASSIFIED EXPERIMENTS</h2>
-              <div className="section-subtitle">ongoing research & development</div>
+        <div className="experiments-section">
+          <div className="experiments-header-bar">
+            <div className="experiments-title-group">
+              <h2 className="section-title">CURRENT EXPERIMENTS</h2>
+              <div className="section-subtitle">live research & active investigations</div>
             </div>
-            <div className="classified-meta">
-              <span className="issue-number">Issue #47</span>
-              <span className="classified-count">{experiments.length} listings</span>
+            <div className="experiments-meta">
+              <span className="lab-number">LAB #47</span>
+              <span className="experiment-count">{experiments.length} active studies</span>
             </div>
           </div>
           
-          <div ref={masonryRef} className="classifieds-grid">
+          <div ref={masonryRef} className="experiments-grid">
             {experiments.map((experiment, index) => (
               <div 
                 key={experiment.title} 
-                className="classified-ad" 
-                style={{ animationDelay: `${index * 100}ms` }}
+                className={`experiment-card experiment-${experiment.visual} intensity-${experiment.intensity}`}
+                data-type={experiment.type}
               >
-                <div className="ad-header">
-                  <div className="ad-category">
-                    <span className="category-text">{experiment.category}</span>
-                    <span className="category-separator">•</span>
-                    <span className="ad-type">{experiment.type}</span>
-                  </div>
-                  <div className="ad-number">#{String(index + 1).padStart(3, '0')}</div>
+                {/* Visual Background Element */}
+                <div className="experiment-visual">
+                  <div className="visual-pattern"></div>
+                  <div className="visual-overlay"></div>
                 </div>
 
-                <h3 className="ad-title">
-                  {experiment.title.split('').map((char, i) => (
-                    <span 
-                      key={i} 
-                      className="title-letter" 
-                      style={{ animationDelay: `${i * 30}ms` }}
-                    >
-                      {char === ' ' ? '\u00A0' : char}
-                    </span>
-                  ))}
-                </h3>
-
-                <p className="ad-description">{experiment.description}</p>
-
-                <div className="ad-details">
-                  <div className="detail-row">
-                    <span className="detail-label">Status:</span>
-                    <span className="detail-value">{experiment.status}</span>
+                {/* Content Layer */}
+                <div className="experiment-content">
+                  <div className="experiment-header">
+                    <div className="experiment-meta">
+                      <span className="experiment-number">#{String(index + 1).padStart(2, '0')}</span>
+                      <span className="experiment-type">{experiment.type}</span>
+                    </div>
+                    <div className="experiment-status">
+                      <div className="status-dot"></div>
+                      <span className="status-text">{experiment.status}</span>
+                    </div>
                   </div>
-                  <div className="detail-row">
-                    <span className="detail-label">Tools:</span>
-                    <span className="detail-value">{experiment.tools.join(', ')}</span>
+
+                  <h3 className="experiment-title">
+                    {experiment.title.split('').map((char, i) => (
+                      <span 
+                        key={i} 
+                        className="title-char" 
+                        style={{ animationDelay: `${i * 50}ms` }}
+                      >
+                        {char === ' ' ? '\u00A0' : char}
+                      </span>
+                    ))}
+                  </h3>
+
+                  <p className="experiment-description">{experiment.description}</p>
+
+                  <div className="experiment-details">
+                    <div className="detail-grid">
+                      <div className="detail-item">
+                        <span className="detail-label">Category</span>
+                        <span className="detail-value">{experiment.category}</span>
+                      </div>
+                      <div className="detail-item">
+                        <span className="detail-label">Level</span>
+                        <span className="detail-value">{experiment.difficulty}</span>
+                      </div>
+                    </div>
+                    <div className="tools-list">
+                      {experiment.tools.map((tool, i) => (
+                        <span key={i} className="tool-tag">{tool}</span>
+                      ))}
+                    </div>
                   </div>
-                  <div className="detail-row">
-                    <span className="detail-label">Level:</span>
-                    <span className="detail-value">{experiment.difficulty}</span>
+
+                  <div className="experiment-footer">
+                    <span className="experiment-date">{experiment.date}</span>
+                    <div className="interaction-hint">
+                      <span>hover to investigate</span>
+                      <div className="hint-arrow">→</div>
+                    </div>
                   </div>
                 </div>
 
-                <div className="ad-footer">
-                  <span className="ad-date">{experiment.date}</span>
-                  <span className="ad-contact">Contact: lab@gryd</span>
+                {/* Hover Effects Layer */}
+                <div className="experiment-effects">
+                  <div className="noise-overlay"></div>
+                  <div className="scan-line"></div>
                 </div>
               </div>
             ))}
