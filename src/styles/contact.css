@@ -7,7 +7,7 @@
     perspective: 1200px;
   }
 
-  /* Editorial Contact Spread */
+  /* Editorial Contact Spread - Fixed Layout */
   .contact-editorial-spread {
     @apply relative min-h-screen flex;
     
@@ -29,7 +29,7 @@
     }
   }
 
-  /* Left Page - Responsive Layout */
+  /* Left Page - Fixed Flex Layout */
   .contact-left-page {
     @apply flex-1 relative;
     background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
@@ -40,6 +40,7 @@
     transform-origin: right center;
     transition: all 0.3s ease;
     animation: paper-settle-left 1s ease-out;
+    min-width: 0; /* Prevent flex item from overflowing */
 
     &:hover {
       transform: rotateY(1deg) translateZ(10px);
@@ -49,7 +50,7 @@
     }
   }
 
-  /* Right Page - Responsive Layout */
+  /* Right Page - Fixed Flex Layout */
   .contact-right-page {
     @apply flex-1 relative;
     background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
@@ -60,6 +61,7 @@
     transform-origin: left center;
     transition: all 0.3s ease;
     animation: paper-settle-right 1s ease-out 0.2s both;
+    min-width: 0; /* Prevent flex item from overflowing */
 
     &:hover {
       transform: rotateY(-1deg) translateZ(10px);
@@ -69,11 +71,12 @@
     }
   }
 
-  /* Responsive Page Content */
+  /* Fixed Page Content */
   .page-content {
     @apply relative h-full z-10;
     padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem);
     animation: content-fade-in 1.2s ease-out 0.5s both;
+    overflow-wrap: break-word; /* Prevent text overflow */
   }
 
   /* Editorial Header */
@@ -101,6 +104,7 @@
     font-size: clamp(0.65rem, 1.5vw, 0.75rem);
     opacity: 0;
     animation: text-fade-in 0.8s ease-out 1.2s both;
+    white-space: nowrap; /* Prevent text wrapping */
   }
 
   /* Main Editorial - Responsive Typography */
@@ -116,6 +120,7 @@
     text-shadow: 1px 1px 0px rgba(0,0,0,0.05);
     transform: translateY(20px);
     opacity: 0;
+    word-break: break-word; /* Handle long titles */
   }
 
   .animated-title {
@@ -243,6 +248,7 @@
     font-size: clamp(0.75rem, 2vw, 0.875rem);
     border-radius: 0;
     transition: all 0.3s ease;
+    box-sizing: border-box; /* Ensure proper sizing */
   }
 
   .interactive-input {
@@ -348,6 +354,7 @@
     @apply font-mono text-gray-800 relative;
     font-size: clamp(0.875rem, 2vw, 1rem);
     transition: color 0.3s ease;
+    word-break: break-all; /* Handle long email addresses */
   }
 
   .interactive-contact-value {
@@ -422,6 +429,7 @@
     @apply rounded-full;
     width: clamp(0.75rem, 2vw, 1rem);
     height: clamp(0.75rem, 2vw, 1rem);
+    flex-shrink: 0; /* Prevent dot from shrinking */
   }
 
   .status-dot.available {
@@ -529,12 +537,11 @@
     transition: all 0.3s ease;
   }
 
-  /* Page Numbers - Responsive */
+  /* Page Numbers - Fixed Positioning */
   .page-numbers {
-    @apply absolute bottom-4 md:bottom-8 w-full flex justify-between font-mono text-gray-400;
+    @apply absolute bottom-4 md:bottom-8 left-0 right-0 flex justify-between font-mono text-gray-400 z-10;
     padding: 0 clamp(2rem, 5vw, 5rem);
     font-size: clamp(0.65rem, 1.5vw, 0.75rem);
-    z-index: 10;
   }
 
   .animated-page-num {
@@ -569,6 +576,7 @@
     gap: clamp(0.5rem, 1vw, 1rem);
     opacity: 0;
     animation: text-fade-in 0.8s ease-out 2s both;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
   }
 
   .pub-separator {
@@ -719,8 +727,20 @@
     }
   }
 
-  /* Responsive Design Breakpoints */
+  /* Enhanced Responsive Design */
   @media (max-width: 1024px) {
+    .contact-left-page,
+    .contact-right-page {
+      transform: rotateY(1deg);
+    }
+    
+    .contact-left-page:hover,
+    .contact-right-page:hover {
+      transform: rotateY(0.5deg) translateZ(5px);
+    }
+  }
+
+  @media (max-width: 768px) {
     .contact-editorial-spread {
       flex-direction: column;
       min-height: auto;
@@ -731,6 +751,13 @@
       transform: none;
       box-shadow: 0 4px 16px rgba(0,0,0,0.1);
       animation: none;
+      flex: none;
+    }
+    
+    .contact-left-page:hover,
+    .contact-right-page:hover {
+      transform: none;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
     }
     
     .center-binding {
@@ -741,13 +768,7 @@
       position: relative;
       bottom: auto;
       margin-top: 2rem;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .contact-left-page:hover,
-    .contact-right-page:hover {
-      transform: none;
+      padding: 0 2rem;
     }
     
     .interactive-social:hover {
@@ -755,7 +776,7 @@
     }
     
     .marker-line {
-      width: 2rem;
+      width: 2rem !important;
     }
   }
 
@@ -766,6 +787,35 @@
 
     .editorial-body {
       max-width: 100%;
+    }
+    
+    .pub-info {
+      text-align: center;
+      line-height: 1.5;
+    }
+    
+    .pub-separator {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .page-content {
+      padding: 1.5rem 1rem 1rem;
+    }
+    
+    .contact-magazine-container {
+      perspective: none;
+    }
+    
+    .editorial-title {
+      font-size: 2rem;
+      line-height: 1.1;
+    }
+    
+    .drop-cap {
+      font-size: 2.5rem;
+      margin-right: 0.5rem;
     }
   }
 }
