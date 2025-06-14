@@ -1,15 +1,14 @@
 
 import ScrollFade from '../components/ScrollFade';
-import ContactForm from '../components/ContactForm';
-import ContactInfo from '../components/ContactInfo';
-import StatusIndicator from '../components/StatusIndicator';
+import AuthorInfo from '../components/AuthorInfo';
+import DesignerStatus from '../components/DesignerStatus';
 
 const Contact = () => {
   return (
     <div className="contact-magazine-container">
-      {/* Editorial Contact Spread */}
+      {/* Editorial Epilogue Spread */}
       <div className="contact-editorial-spread">
-        {/* Left Page - Main Content */}
+        {/* Left Page - Epilogue Content */}
         <div className="contact-left-page">
           <div className="page-content">
             <ScrollFade>
@@ -24,15 +23,19 @@ const Contact = () => {
             
             <ScrollFade delay={200}>
               <div className="main-editorial">
-                <h1 className="editorial-title animated-title">let's talk.</h1>
+                <h1 className="editorial-title animated-title">every story needs an ending.</h1>
                 
                 <div className="editorial-body">
                   <p className="drop-cap-paragraph">
-                    <span className="drop-cap floating">I</span> work with teams who care deeply about what they're building. These are the collaborators who understand that great products aren't just functional—they're thoughtful, intentional, and crafted with genuine care for the people who'll use them.
+                    <span className="drop-cap floating">B</span>ut the best endings feel like beginnings. Behind every pixel, wireframe, and user journey in this magazine is a simple truth: design is about making life a little better for the people who matter most.
                   </p>
                   
                   <p className="body-text fade-in-text">
-                    If that sounds like you and your team, I'd love to hear about what you're working on.
+                    I'm Aditya Nawal, the product designer behind GRYD. This magazine isn't just a portfolio—it's a manifesto for thoughtful design that bridges human needs with business goals.
+                  </p>
+
+                  <p className="body-text fade-in-text">
+                    Every project you've seen here represents a conversation, a problem solved, a user delighted. If you're building something meaningful and need a design partner who thinks strategically, I'd love to hear your story.
                   </p>
                   
                   <div className="call-to-action">
@@ -42,16 +45,12 @@ const Contact = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <span className="action-text">book a call</span>
+                      <span className="action-text">schedule a conversation</span>
                       <span className="action-arrow animated-arrow">→</span>
                     </a>
                   </div>
                 </div>
               </div>
-            </ScrollFade>
-
-            <ScrollFade delay={400}>
-              <ContactForm />
             </ScrollFade>
           </div>
           
@@ -59,26 +58,26 @@ const Contact = () => {
           <div className="page-binding left-binding interactive-binding"></div>
         </div>
         
-        {/* Right Page - Contact Details */}
+        {/* Right Page - Author Details */}
         <div className="contact-right-page">
           <div className="page-content">
             <ScrollFade delay={600}>
-              <ContactInfo />
+              <AuthorInfo />
             </ScrollFade>
             
             <ScrollFade delay={800}>
-              <StatusIndicator />
+              <DesignerStatus />
             </ScrollFade>
             
             <ScrollFade delay={1000}>
               <div className="publication-details">
                 <div className="pub-line animated-pub-line"></div>
                 <div className="pub-info">
-                  <span>THE GRYD</span>
+                  <span>GRYD MAGAZINE</span>
                   <span className="pub-separator">•</span>
-                  <span>Portfolio & Journal</span>
+                  <span>Design Portfolio</span>
                   <span className="pub-separator">•</span>
-                  <span>2024 Edition</span>
+                  <span>By Aditya Nawal</span>
                 </div>
                 <div className="pub-line animated-pub-line"></div>
               </div>
@@ -103,10 +102,10 @@ const Contact = () => {
         <ScrollFade delay={1200}>
           <div className="back-cover-content">
             <div className="publisher-mark interactive-publisher">
-              <div className="logo-symbol floating-logo">G</div>
+              <div className="logo-symbol floating-logo">A</div>
               <div className="publisher-text">
-                <span>GRYD DESIGN</span>
-                <span>STUDIO</span>
+                <span>ADITYA NAWAL</span>
+                <span>PRODUCT DESIGNER</span>
               </div>
             </div>
           </div>
