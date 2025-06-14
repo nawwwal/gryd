@@ -4,51 +4,42 @@ import ScrollFade from '../components/ScrollFade';
 const Contact = () => {
   return (
     <div className="magazine-container">
-      {/* Magazine Header */}
-      <div className="magazine-hero">
-        <div className="hero-paper">
-          <div className="paper-binding"></div>
-          
-          <div className="hero-content">
-            <ScrollFade>
-              <div className="masthead">
-                <div className="issue-details">
-                  <span className="issue-number">Connect</span>
-                  <span className="issue-date">Contact</span>
-                  <span className="price">Open</span>
-                </div>
-                
-                <h1 className="magazine-logo">
-                  CONTACT
-                  <span className="subtitle">Let's Talk About Your Project</span>
-                </h1>
-                
-                <div className="feature-banner">
-                  <span>Open for Business: Projects That Matter</span>
-                </div>
-              </div>
-            </ScrollFade>
-            
-            <ScrollFade delay={300}>
-              <div className="hero-story">
-                <div className="story-category">CONSULTATION</div>
-                <h2 className="story-headline">
-                  Let's Talk<br/>
-                  <span className="story-subhead">Got a project keeping you up at night?</span>
-                </h2>
-                
-                <div className="story-lead">
-                  <p className="lead-text">
-                    Something your team says is impossible?
-                    A problem that needs thinking sideways?
-                  </p>
-                </div>
-              </div>
-            </ScrollFade>
+      {/* Contact Consultation Header */}
+      <div className="contact-consultation-header">
+        <div className="consultation-card">
+          <div className="card-corner-clips">
+            <div className="clip top-left"></div>
+            <div className="clip top-right"></div>
+            <div className="clip bottom-left"></div>
+            <div className="clip bottom-right"></div>
           </div>
           
-          <div className="paper-corner"></div>
-          <div className="paper-shadow"></div>
+          <div className="consultation-content">
+            <div className="consultation-badge">
+              <span>OPEN FOR BUSINESS</span>
+            </div>
+            
+            <div className="consultation-title-section">
+              <h1 className="consultation-title">
+                {'LET\'S TALK'.split('').map((letter, index) => (
+                  <span key={index} className="hover-letter contact-letter" style={{ animationDelay: `${index * 60}ms` }}>
+                    {letter === ' ' ? '\u00A0' : letter}
+                  </span>
+                ))}
+              </h1>
+              <div className="consultation-subtitle">Got a project keeping you up at night?</div>
+            </div>
+            
+            <div className="consultation-cta">
+              <div className="cta-text">Book 30 minutes. We'll figure out if I can help.</div>
+              <div className="response-time">Usually respond within a few hours</div>
+            </div>
+          </div>
+          
+          <div class="paper-clips">
+            <div class="paper-clip clip-1"></div>
+            <div class="paper-clip clip-2"></div>
+          </div>
         </div>
       </div>
 

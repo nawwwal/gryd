@@ -6,51 +6,42 @@ import ProjectCard from '../components/ProjectCard';
 const Work = () => {
   return (
     <div className="magazine-container">
-      {/* Magazine Header */}
-      <div className="magazine-hero">
-        <div className="hero-paper">
-          <div className="paper-binding"></div>
-          
-          <div className="hero-content">
-            <ScrollFade>
-              <div className="masthead">
-                <div className="issue-details">
-                  <span className="issue-number">Portfolio</span>
-                  <span className="issue-date">Selected Works</span>
-                  <span className="price">2024</span>
-                </div>
-                
-                <h1 className="magazine-logo">
-                  WORK ARCHIVE
-                  <span className="subtitle">Case Studies & Projects</span>
-                </h1>
-                
-                <div className="feature-banner">
-                  <span>Portfolio: Things I've Built That Moved Numbers</span>
-                </div>
-              </div>
-            </ScrollFade>
-            
-            <ScrollFade delay={300}>
-              <div className="hero-story">
-                <div className="story-category">EDITORIAL</div>
-                <h2 className="story-headline">
-                  Selected Work<br/>
-                  <span className="story-subhead">Usually involving panic, tight deadlines</span>
-                </h2>
-                
-                <div className="story-lead">
-                  <p className="lead-text">
-                    Things I've built that moved numbers.
-                    Each project is a story of making impossible things work.
-                  </p>
-                </div>
-              </div>
-            </ScrollFade>
+      {/* Work Portfolio Header */}
+      <div className="work-portfolio-header">
+        <div className="portfolio-masthead">
+          <div className="portfolio-breadcrumb">
+            <span>THE GRYD</span>
+            <span>•</span>
+            <span>PORTFOLIO</span>
+            <span>•</span>
+            <span>2024</span>
           </div>
           
-          <div className="paper-corner"></div>
-          <div className="paper-shadow"></div>
+          <div className="portfolio-title-section">
+            <h1 className="portfolio-main-title">
+              {'SELECTED WORK'.split('').map((letter, index) => (
+                <span key={index} className="hover-letter" style={{ animationDelay: `${index * 50}ms` }}>
+                  {letter === ' ' ? '\u00A0' : letter}
+                </span>
+              ))}
+            </h1>
+            <div className="portfolio-subtitle">Case Studies & Projects That Moved Numbers</div>
+          </div>
+          
+          <div className="portfolio-stats">
+            <div className="stat-item">
+              <span className="stat-number">12+</span>
+              <span className="stat-label">Projects</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-number">6mo</span>
+              <span className="stat-label">Full-time</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-number">∞</span>
+              <span className="stat-label">Coffee</span>
+            </div>
+          </div>
         </div>
       </div>
 

@@ -1,4 +1,6 @@
 
+@import './page-headers.css';
+
 @layer components {
   /* Magazine Container */
   .magazine-container {
@@ -80,6 +82,14 @@
 
   .lead-text {
     @apply text-xl leading-relaxed text-gray-700;
+  }
+
+  .story-byline {
+    @apply flex items-center space-x-3 text-sm text-gray-500 font-mono;
+  }
+
+  .continue-reading {
+    @apply text-sm uppercase tracking-wider text-orange-600 font-bold mt-8;
   }
 
   .paper-corner {

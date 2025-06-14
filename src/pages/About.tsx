@@ -4,51 +4,37 @@ import ScrollFade from '../components/ScrollFade';
 const About = () => {
   return (
     <div className="magazine-container">
-      {/* Magazine Header */}
-      <div className="magazine-hero">
-        <div className="hero-paper">
-          <div className="paper-binding"></div>
-          
-          <div className="hero-content">
-            <ScrollFade>
-              <div className="masthead">
-                <div className="issue-details">
-                  <span className="issue-number">Profile</span>
-                  <span className="issue-date">About</span>
-                  <span className="price">2024</span>
-                </div>
-                
-                <h1 className="magazine-logo">
-                  ABOUT
-                  <span className="subtitle">Designer Profile & Background</span>
-                </h1>
-                
-                <div className="feature-banner">
-                  <span>Profile: The Designer Behind The Work</span>
-                </div>
-              </div>
-            </ScrollFade>
+      {/* About Profile Header */}
+      <div className="about-profile-header">
+        <div className="profile-paper">
+          <div className="profile-header-content">
+            <div className="profile-byline">
+              <span>DESIGNER PROFILE</span>
+              <span>•</span>
+              <span>EST. 2021</span>
+            </div>
             
-            <ScrollFade delay={300}>
-              <div className="hero-story">
-                <div className="story-category">PROFILE</div>
-                <h2 className="story-headline">
-                  Hello — I'm Adi<br/>
-                  <span className="story-subhead">Product Designer & Problem Solver</span>
-                </h2>
-                
-                <div className="story-lead">
-                  <p className="lead-text">
-                    I started designing in my first year of college — while doing a BTech in computer science.
-                    It started with club posters and ended with me skipping algorithms class to study typography.
-                  </p>
-                </div>
-              </div>
-            </ScrollFade>
+            <div className="profile-name-section">
+              <h1 className="profile-name">
+                {'HELLO — I\'M ADI'.split('').map((letter, index) => (
+                  <span key={index} className="hover-letter ink-bleed" style={{ animationDelay: `${index * 30}ms` }}>
+                    {letter === ' ' ? '\u00A0' : letter}
+                  </span>
+                ))}
+              </h1>
+              <div className="profile-role">Product Designer & Problem Solver</div>
+            </div>
+            
+            <div className="profile-quote">
+              <div className="quote-mark">"</div>
+              <p className="quote-text">
+                Good design isn't about making things pretty. 
+                It's about making complex things feel inevitable.
+              </p>
+            </div>
           </div>
           
-          <div className="paper-corner"></div>
-          <div className="paper-shadow"></div>
+          <div className="profile-corner-fold"></div>
         </div>
       </div>
 

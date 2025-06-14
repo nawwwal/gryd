@@ -70,51 +70,41 @@ const Playground = () => {
 
   return (
     <div className="magazine-container">
-      {/* Magazine Header */}
-      <div className="magazine-hero">
-        <div className="hero-paper">
-          <div className="paper-binding"></div>
-          
-          <div className="hero-content">
-            <ScrollFade>
-              <div className="masthead">
-                <div className="issue-details">
-                  <span className="issue-number">Lab</span>
-                  <span className="issue-date">Experiments</span>
-                  <span className="price">Live</span>
-                </div>
-                
-                <h1 className="magazine-logo">
-                  PLAYGROUND
-                  <span className="subtitle">Experiments & Dead Ends</span>
-                </h1>
-                
-                <div className="feature-banner">
-                  <span>Lab: Things That Make Me Curious</span>
-                </div>
-              </div>
-            </ScrollFade>
-            
-            <ScrollFade delay={300}>
-              <div className="hero-story">
-                <div className="story-category">LABORATORY</div>
-                <h2 className="story-headline">
-                  Experiments<br/>
-                  <span className="story-subhead">Most of this is useless. Some of it changes everything.</span>
-                </h2>
-                
-                <div className="story-lead">
-                  <p className="lead-text">
-                    Dead ends, curiosities, and things that break.
-                    This page updates whenever I break something new.
-                  </p>
-                </div>
-              </div>
-            </ScrollFade>
+      {/* Lab Experimental Header */}
+      <div className="lab-experimental-header">
+        <div className="lab-notebook">
+          <div className="notebook-rings">
+            <div className="ring"></div>
+            <div className="ring"></div>
+            <div className="ring"></div>
           </div>
           
-          <div className="paper-corner"></div>
-          <div className="paper-shadow"></div>
+          <div className="lab-header-content">
+            <div className="lab-stamp">
+              <span>EXPERIMENTAL</span>
+            </div>
+            
+            <div className="lab-title-section">
+              <h1 className="lab-title">
+                {'PLAYGROUND'.split('').map((letter, index) => (
+                  <span key={index} className="hover-letter lab-letter" style={{ animationDelay: `${index * 80}ms` }}>
+                    {letter}
+                  </span>
+                ))}
+              </h1>
+              <div className="lab-subtitle">Research Lab • Experiments & Dead Ends</div>
+            </div>
+            
+            <div className="lab-warning">
+              <div className="warning-triangle">⚠</div>
+              <span>Most of this is useless. Some of it changes everything.</span>
+            </div>
+          </div>
+          
+          <div className="notebook-stains">
+            <div className="coffee-stain"></div>
+            <div className="ink-splatter"></div>
+          </div>
         </div>
       </div>
 
