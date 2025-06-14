@@ -36,9 +36,9 @@ const Contact = () => {
             </div>
           </div>
           
-          <div class="paper-clips">
-            <div class="paper-clip clip-1"></div>
-            <div class="paper-clip clip-2"></div>
+          <div className="paper-clips">
+            <div className="paper-clip clip-1"></div>
+            <div className="paper-clip clip-2"></div>
           </div>
         </div>
       </div>
