@@ -11,6 +11,7 @@ const experiments = [
     category: 'Frontend Engineering',
     difficulty: 'Advanced',
     tools: ['CSS', 'HTML'],
+    date: 'Dec 2024',
   },
   {
     title: 'photo series',
@@ -20,6 +21,7 @@ const experiments = [
     category: 'Photography',
     difficulty: 'Intermediate',
     tools: ['Camera', 'Lightroom'],
+    date: 'Nov 2024',
   },
   {
     title: 'micro-interaction study',
@@ -29,6 +31,7 @@ const experiments = [
     category: 'UX Research',
     difficulty: 'Expert',
     tools: ['Figma', 'Framer'],
+    date: 'Dec 2024',
   },
   {
     title: 'dashboard autopsy',
@@ -38,6 +41,7 @@ const experiments = [
     category: 'Design Analysis',
     difficulty: 'Intermediate',
     tools: ['Analytics', 'Screenshots'],
+    date: 'Oct 2024',
   },
   {
     title: 'impossible color combinations',
@@ -47,6 +51,7 @@ const experiments = [
     category: 'Color Theory',
     difficulty: 'Beginner',
     tools: ['Adobe Color', 'Sketch'],
+    date: 'Nov 2024',
   },
   {
     title: 'form field archaeology',
@@ -56,6 +61,7 @@ const experiments = [
     category: 'UX Audit',
     difficulty: 'Advanced',
     tools: ['Browser DevTools', 'Screenshots'],
+    date: 'Sep 2024',
   },
   {
     title: 'animation manifesto',
@@ -65,6 +71,7 @@ const experiments = [
     category: 'Motion Design',
     difficulty: 'Expert',
     tools: ['After Effects', 'CSS'],
+    date: 'Dec 2024',
   },
   {
     title: 'type specimen',
@@ -74,46 +81,19 @@ const experiments = [
     category: 'Typography',
     difficulty: 'Intermediate',
     tools: ['FontForge', 'Glyphs'],
+    date: 'Oct 2024',
   },
 ];
-
-const getTypeColor = (type: string) => {
-  const colors = {
-    code: '#e11d48',
-    visual: '#7c3aed',
-    interaction: '#0ea5e9',
-    research: '#059669',
-    design: '#dc2626',
-    analysis: '#ea580c',
-    writing: '#4338ca',
-    typography: '#be185d',
-  };
-  return colors[type as keyof typeof colors] || '#6b7280';
-};
-
-const getTypeIcon = (type: string) => {
-  const icons = {
-    code: '</>', 
-    visual: '📸',
-    interaction: '✨',
-    research: '🔍',
-    design: '🎨',
-    analysis: '📊',
-    writing: '✍️',
-    typography: 'Aa',
-  };
-  return icons[type as keyof typeof icons] || '•';
-};
 
 const Playground = () => {
   const masonryRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const cards = masonryRef.current?.querySelectorAll('.classified-card');
+    const cards = masonryRef.current?.querySelectorAll('.classified-ad');
     if (!cards) return;
 
     cards.forEach((card, index) => {
-      const delay = Math.random() * 2000 + index * 200;
+      const delay = Math.random() * 1500 + index * 150;
       setTimeout(() => {
         card.classList.add('animate-in');
       }, delay);
@@ -160,68 +140,69 @@ const Playground = () => {
         </div>
       </div>
 
-      {/* Classified Masonry Grid */}
+      {/* Classified Section */}
       <div className="magazine-spread">
-        <div className="article-grid">
-          <div className="grid-title">
-            <h4>Current Experiments</h4>
-            <div className="title-underline"></div>
+        <div className="classified-section">
+          <div className="classified-header-bar">
+            <div className="classified-title-group">
+              <h2 className="section-title">CLASSIFIED EXPERIMENTS</h2>
+              <div className="section-subtitle">ongoing research & development</div>
+            </div>
+            <div className="classified-meta">
+              <span className="issue-number">Issue #47</span>
+              <span className="classified-count">{experiments.length} listings</span>
+            </div>
           </div>
           
-          <div ref={masonryRef} className="classified-masonry">
+          <div ref={masonryRef} className="classifieds-grid">
             {experiments.map((experiment, index) => (
               <div 
                 key={experiment.title} 
-                className="classified-card" 
+                className="classified-ad" 
                 style={{ animationDelay: `${index * 100}ms` }}
-                data-type={experiment.type}
               >
-                <div className="classified-header">
-                  <div className="type-badge" style={{ backgroundColor: getTypeColor(experiment.type) }}>
-                    <span className="type-icon">{getTypeIcon(experiment.type)}</span>
-                    <span className="type-text">{experiment.type}</span>
+                <div className="ad-header">
+                  <div className="ad-category">
+                    <span className="category-text">{experiment.category}</span>
+                    <span className="category-separator">•</span>
+                    <span className="ad-type">{experiment.type}</span>
                   </div>
-                  <span className="classified-status">{experiment.status}</span>
+                  <div className="ad-number">#{String(index + 1).padStart(3, '0')}</div>
                 </div>
 
-                <div className="experiment-category">
-                  <span>{experiment.category}</span>
-                  <div className="difficulty-dots">
-                    {Array.from({ length: 3 }, (_, i) => (
-                      <div 
-                        key={i} 
-                        className={`dot ${i < (experiment.difficulty === 'Beginner' ? 1 : experiment.difficulty === 'Intermediate' ? 2 : 3) ? 'filled' : ''}`}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                <h5 className="classified-title">
+                <h3 className="ad-title">
                   {experiment.title.split('').map((char, i) => (
                     <span 
                       key={i} 
-                      className="title-char" 
-                      style={{ animationDelay: `${i * 50}ms` }}
+                      className="title-letter" 
+                      style={{ animationDelay: `${i * 30}ms` }}
                     >
                       {char === ' ' ? '\u00A0' : char}
                     </span>
                   ))}
-                </h5>
+                </h3>
 
-                <p className="classified-description">{experiment.description}</p>
+                <p className="ad-description">{experiment.description}</p>
 
-                <div className="experiment-tools">
-                  {experiment.tools.map((tool, i) => (
-                    <span key={i} className="tool-tag">{tool}</span>
-                  ))}
+                <div className="ad-details">
+                  <div className="detail-row">
+                    <span className="detail-label">Status:</span>
+                    <span className="detail-value">{experiment.status}</span>
+                  </div>
+                  <div className="detail-row">
+                    <span className="detail-label">Tools:</span>
+                    <span className="detail-value">{experiment.tools.join(', ')}</span>
+                  </div>
+                  <div className="detail-row">
+                    <span className="detail-label">Level:</span>
+                    <span className="detail-value">{experiment.difficulty}</span>
+                  </div>
                 </div>
 
-                <div className="classified-footer">
-                  <span className="classified-date">Dec 2024</span>
-                  <div className="classified-number">#{String(index + 1).padStart(2, '0')}</div>
+                <div className="ad-footer">
+                  <span className="ad-date">{experiment.date}</span>
+                  <span className="ad-contact">Contact: lab@gryd</span>
                 </div>
-
-                <div className="classified-corner-fold"></div>
               </div>
             ))}
           </div>
