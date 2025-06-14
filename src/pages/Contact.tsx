@@ -4,113 +4,62 @@ import ScrollFade from '../components/ScrollFade';
 const Contact = () => {
   return (
     <div className="magazine-container">
-      {/* Contact Consultation Header */}
-      <div className="contact-consultation-header">
-        <div className="consultation-card">
-          <div className="card-corner-clips">
-            <div className="clip top-left"></div>
-            <div className="clip top-right"></div>
-            <div className="clip bottom-left"></div>
-            <div className="clip bottom-right"></div>
-          </div>
-          
-          <div className="consultation-content">
-            <div className="consultation-badge">
-              <span>OPEN FOR BUSINESS</span>
-            </div>
-            
-            <div className="consultation-title-section">
-              <h1 className="consultation-title">
-                {'LET\'S TALK'.split('').map((letter, index) => (
-                  <span key={index} className="hover-letter contact-letter" style={{ animationDelay: `${index * 60}ms` }}>
-                    {letter === ' ' ? '\u00A0' : letter}
-                  </span>
-                ))}
-              </h1>
-              <div className="consultation-subtitle">Got a project keeping you up at night?</div>
-            </div>
-            
-            <div className="consultation-cta">
-              <div className="cta-text">Book 30 minutes. We'll figure out if I can help.</div>
-              <div className="response-time">Usually respond within a few hours</div>
-            </div>
-          </div>
-          
-          <div className="paper-clips">
-            <div className="paper-clip clip-1"></div>
-            <div className="paper-clip clip-2"></div>
-          </div>
-        </div>
-      </div>
-
-      {/* Contact Article */}
-      <div className="magazine-spread">
-        <article className="featured-article">
+      {/* Book Closing Page */}
+      <div className="book-closing-page">
+        <div className="closing-content">
           <ScrollFade>
-            <div className="article-header">
-              <div className="article-category">CONSULTATION</div>
-              <h3 className="article-headline">Book 30 Minutes</h3>
-              <p className="article-deck">We'll figure out if I can help. No sales pitch, just straight talk.</p>
-            </div>
-          </ScrollFade>
-          
-          <ScrollFade delay={200}>
-            <div className="article-excerpt">
-              <p>Usually respond within a few hours. If it's urgent, mention that in the booking. If it's not urgent, still mention that. I like clarity.</p>
+            <div className="closing-text">
+              <h1 className="closing-title">let's talk.</h1>
               
-              <div className="cta-contact">
+              <div className="closing-body">
+                <p>i work with teams who care deeply about what they're building.</p>
+                <p>if that's you, say hi.</p>
+              </div>
+              
+              <div className="closing-action">
                 <a 
                   href="https://calendly.com/your-handle" 
-                  className="editorial-button"
+                  className="book-link"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Book a Call
+                  book a call →
                 </a>
-                
-                <div className="contact-note">
-                  <span>Or reach out directly:</span>
-                  <a href="mailto:hello@gryd.dev">hello@gryd.dev</a>
-                </div>
               </div>
             </div>
           </ScrollFade>
-        </article>
+          
+          <ScrollFade delay={400}>
+            <div className="author-details">
+              <div className="contact-method">
+                <span className="method-label">or write directly</span>
+                <a href="mailto:hello@gryd.dev" className="method-link">hello@gryd.dev</a>
+              </div>
+              
+              <div className="response-note">
+                <span>usually respond within a few hours</span>
+              </div>
+            </div>
+          </ScrollFade>
+        </div>
+        
+        {/* Subtle page number like in a book */}
+        <div className="page-number">47</div>
       </div>
 
-      {/* Response Time */}
-      <div className="table-of-contents">
-        <ScrollFade>
-          <div className="toc-header">
-            <h3>Response Times</h3>
-            <div className="toc-line"></div>
-          </div>
-          
-          <div className="toc-entries">
-            <div className="toc-entry">
-              <span className="toc-page">~2h</span>
-              <span className="toc-title">Email responses (weekdays)</span>
-            </div>
-            <div className="toc-entry">
-              <span className="toc-page">~1d</span>
-              <span className="toc-title">Calendar booking confirmations</span>
-            </div>
-            <div className="toc-entry">
-              <span className="toc-page">∞</span>
-              <span className="toc-title">Spam and cold pitches</span>
+      {/* Minimal colophon/publication info */}
+      <div className="book-colophon">
+        <ScrollFade delay={600}>
+          <div className="colophon-content">
+            <div className="publication-info">
+              <span>THE GRYD</span>
+              <span>•</span>
+              <span>Available for Work</span>
+              <span>•</span>
+              <span>2024</span>
             </div>
           </div>
         </ScrollFade>
-      </div>
-
-      <div className="magazine-footer">
-        <div className="footer-content">
-          <div className="footer-logo">THE GRYD</div>
-          <div className="footer-info">
-            <span>Contact • Open for Projects</span>
-            <span>Available for Work That Matters</span>
-          </div>
-        </div>
       </div>
     </div>
   );

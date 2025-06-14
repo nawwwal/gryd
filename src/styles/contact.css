@@ -1,0 +1,134 @@
+
+@layer components {
+  /* Book Closing Page */
+  .book-closing-page {
+    @apply min-h-screen flex items-center justify-center relative;
+    background: #fefefe;
+    padding: 4rem 2rem;
+  }
+
+  .closing-content {
+    @apply max-w-lg text-center space-y-16;
+  }
+
+  .closing-text {
+    @apply space-y-12;
+  }
+
+  .closing-title {
+    @apply font-serif text-4xl md:text-5xl font-light text-gray-900;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .closing-body {
+    @apply space-y-6 text-lg md:text-xl leading-relaxed text-gray-700;
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 300;
+  }
+
+  .closing-body p {
+    @apply max-w-md mx-auto;
+  }
+
+  .closing-action {
+    @apply pt-8;
+  }
+
+  .book-link {
+    @apply inline-block font-mono text-sm uppercase tracking-wider text-gray-900;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+    padding-bottom: 2px;
+  }
+
+  .book-link:hover {
+    border-bottom-color: #d97706;
+  }
+
+  /* Author Details */
+  .author-details {
+    @apply space-y-8 pt-16 border-t border-gray-200;
+  }
+
+  .contact-method {
+    @apply flex flex-col items-center space-y-2;
+  }
+
+  .method-label {
+    @apply font-mono text-xs uppercase tracking-wider text-gray-500;
+  }
+
+  .method-link {
+    @apply font-mono text-sm text-gray-700;
+    transition: color 0.3s ease;
+  }
+
+  .method-link:hover {
+    @apply text-orange-600;
+  }
+
+  .response-note {
+    @apply font-mono text-xs text-gray-400 text-center;
+  }
+
+  /* Page Number */
+  .page-number {
+    @apply absolute bottom-8 right-8 font-mono text-xs text-gray-400;
+  }
+
+  /* Book Colophon */
+  .book-colophon {
+    @apply bg-gray-50 py-12;
+    border-top: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .colophon-content {
+    @apply max-w-4xl mx-auto px-8 text-center;
+  }
+
+  .publication-info {
+    @apply flex items-center justify-center space-x-4 font-mono text-xs uppercase tracking-wider text-gray-500;
+  }
+
+  .publication-info span:nth-child(odd):not(:first-child):not(:last-child) {
+    @apply opacity-30;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .book-closing-page {
+      padding: 2rem 1rem;
+    }
+    
+    .closing-title {
+      @apply text-3xl;
+    }
+    
+    .closing-body {
+      @apply text-lg;
+    }
+    
+    .author-details {
+      @apply pt-12;
+    }
+    
+    .page-number {
+      @apply bottom-4 right-4;
+    }
+  }
+
+  /* Subtle paper texture */
+  .book-closing-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 1px 1px, rgba(0,0,0,0.02) 1px, transparent 0);
+    background-size: 20px 20px;
+    pointer-events: none;
+  }
+}
