@@ -3,32 +3,35 @@ import ScrollFade from '../components/ScrollFade';
 
 const About = () => {
   return (
-    <div className="space-y-16 pt-8">
+    <div className="article-container space-y-article pt-16">
       <ScrollFade>
-        <h1 className="text-5xl font-bold lowercase">about</h1>
+        <h1 className="subhead">about</h1>
       </ScrollFade>
 
       <ScrollFade>
-        <div className="max-w-3xl space-y-8 text-lg leading-relaxed">
+        <div className="space-y-paragraph body">
           <p>
-            i started breaking websites in 2015 because i couldn't afford to hire someone to build mine.
-            turned out i was pretty good at making things that shouldn't work, work.
+            i started designing in my first year of college — while doing a btech in computer science.
           </p>
           
           <p>
-            spent the next few years building products for startups that were either going to make it big
-            or die trying. most died. but the ones that lived taught me everything about building under pressure.
+            it started with club posters and ended with me skipping algorithms class to study typography.
           </p>
           
           <p>
-            these days i help companies figure out why their users hate them.
-            usually it's because they built what they wanted, not what people needed.
-            i fix that.
+            over a few summer internships, design competitions, freelance gigs, and club work — i did a bit of everything: graphic design, photography, branding, decks.
           </p>
           
           <p>
-            i work fast, think differently, and don't charge for meetings that should have been emails.
-            if you're building something that keeps you up at night, we should probably talk.
+            in jan 2024, i joined quicko as a product design intern.
+            in 6 months, i went full-time.
+            i've been here since — building systems, simplifying financial complexity, and learning by shipping.
+          </p>
+          
+          <p>
+            i may be early in my career, but i care deeply about what i do.
+            i obsess over spacing, narrative, and micro-decisions.
+            i want my work to feel inevitable.
           </p>
           
           <p className="text-gryd-soft">
@@ -39,8 +42,8 @@ const About = () => {
       </ScrollFade>
 
       <ScrollFade>
-        <div className="inline-block">
-          <div className="px-4 py-2 border border-gryd-accent/30 text-gryd-accent text-sm lowercase">
+        <div className="pt-16 border-t border-gryd-soft/20">
+          <div className="caption text-gryd-accent">
             last updated: december 2024
           </div>
         </div>

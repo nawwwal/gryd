@@ -3,28 +3,26 @@ import ScrollFade from '../components/ScrollFade';
 
 const Index = () => {
   return (
-    <div className="space-y-32 pt-16">
-      {/* Hero Manifesto */}
+    <div className="editorial-container space-y-section pt-16">
+      {/* Hero */}
       <ScrollFade>
-        <div className="space-y-12">
-          <h1 className="text-6xl md:text-8xl font-bold leading-tight lowercase">
-            making things
+        <div className="space-y-article">
+          <h1 className="headline max-w-4xl">
+            hello — i'm adi.
             <br />
-            that shouldn't
-            <br />
-            exist yet
+            i fix messy products.
           </h1>
           
-          <div className="max-w-2xl space-y-6 text-xl leading-relaxed">
-            <p>
-              i build products that make people feel something.
-              interfaces that don't follow the rules.
-              systems that work better than they should.
+          <div className="max-w-2xl space-y-paragraph">
+            <p className="body text-xl">
+              six months into my first full-time role at quicko,
+              i've learned that good design isn't about making things pretty.
+              it's about making complex things feel inevitable.
             </p>
             
-            <p className="text-gryd-soft">
-              currently available for interesting problems.
-              if you're building something that scares you a little,
+            <p className="body text-gryd-soft">
+              currently building financial tools that don't make you want to cry.
+              if you're working on something that keeps you up at night,
               let's talk.
             </p>
           </div>
@@ -33,23 +31,29 @@ const Index = () => {
 
       {/* CTA */}
       <ScrollFade>
-        <div className="flex items-center space-x-4">
+        <div className="py-8">
           <a 
             href="https://calendly.com/your-handle" 
-            className="gryd-cta relative"
+            className="cta-button"
             target="_blank"
             rel="noopener noreferrer"
           >
             book a call
           </a>
-          <div className="w-4 h-4 border border-gryd-accent animate-spin-slow"></div>
         </div>
       </ScrollFade>
 
-      {/* Footer */}
+      {/* Animated line */}
       <ScrollFade>
-        <div className="text-sm text-gryd-soft/60 lowercase">
-          <p>gryd.dev — portfolio of experimental work</p>
+        <div className="relative py-16">
+          <div className="scroll-line h-px bg-gryd-accent"></div>
+        </div>
+      </ScrollFade>
+
+      {/* Footer note */}
+      <ScrollFade>
+        <div className="caption text-gryd-soft">
+          <p>gryd.dev — product designer, early career, obsessive about details</p>
         </div>
       </ScrollFade>
     </div>

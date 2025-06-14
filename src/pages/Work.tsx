@@ -4,38 +4,38 @@ import ScrollFade from '../components/ScrollFade';
 
 const projects = [
   {
-    slug: 'fixed-tax-panic',
-    title: 'fixed tax panic for 10k users',
-    subtitle: 'rebuilt entire checkout flow in 72 hours',
-    description: 'startup was losing $50k/month to abandoned carts. rewrote the whole thing.',
+    slug: 'tamed-tax-chaos',
+    title: 'tamed tax chaos',
+    subtitle: 'rebuilt checkout flow from scratch',
+    description: 'users were abandoning carts because tax calculation took forever. fixed it in 72 hours.',
   },
   {
-    slug: 'killed-boring-dashboards',
-    title: 'killed boring dashboards',
-    subtitle: 'data visualization that people actually use',
-    description: 'turned spreadsheet hell into something sales teams fight over.',
+    slug: 'channeled-dashboard-doubt',
+    title: 'channeled dashboard doubt',
+    subtitle: 'turned data paralysis into clarity',
+    description: 'sales team had dashboards they never used. made them obsess over 3 numbers instead.',
   },
   {
-    slug: 'launched-without-designers',
-    title: 'launched without designers',
-    subtitle: 'shipped b2b product with 2 developers',
-    description: 'proved you don\'t need a design team if you think like users.',
+    slug: 'fixed-signup-panic',
+    title: 'fixed signup panic',
+    subtitle: 'deleted 80% of the form fields',
+    description: '7-step signup became 1 step. conversion jumped from 2% to 8%.',
   },
   {
-    slug: 'broke-the-signup-funnel',
-    title: 'broke the signup funnel',
-    subtitle: 'then rebuilt it 300% better',
-    description: 'turned 2% conversion into 8% by deleting everything.',
+    slug: 'shipped-without-designers',
+    title: 'shipped without designers',
+    subtitle: 'b2b product with 2 developers',
+    description: 'no design budget, no problem. built a system that got out of users\' way.',
   },
 ];
 
 const Work = () => {
   return (
-    <div className="space-y-16 pt-8">
+    <div className="editorial-container space-y-article pt-16">
       <ScrollFade>
-        <div className="space-y-6">
-          <h1 className="text-5xl font-bold lowercase">selected work</h1>
-          <p className="text-xl text-gryd-soft max-w-2xl">
+        <div className="space-y-8">
+          <h1 className="subhead">selected work</h1>
+          <p className="body text-xl max-w-2xl text-gryd-soft">
             things i've built that moved numbers.
             usually involving panic, tight deadlines,
             and making impossible things work.
@@ -43,19 +43,19 @@ const Work = () => {
         </div>
       </ScrollFade>
 
-      <div className="space-y-12">
+      <div className="space-y-0 pt-8">
         {projects.map((project, index) => (
           <ScrollFade key={project.slug} delay={index * 100}>
             <Link to={`/work/${project.slug}`}>
-              <article className="gryd-card group cursor-pointer">
+              <article className="project-card group cursor-pointer">
                 <div className="space-y-4">
-                  <h2 className="text-3xl font-bold lowercase group-hover:text-gryd-accent transition-colors">
+                  <h2 className="headline text-4xl group-hover:text-gryd-accent transition-colors">
                     {project.title}
                   </h2>
-                  <p className="text-lg text-gryd-accent lowercase font-medium">
+                  <p className="subhead text-gryd-accent">
                     {project.subtitle}
                   </p>
-                  <p className="text-gryd-soft leading-relaxed">
+                  <p className="body text-gryd-soft max-w-2xl">
                     {project.description}
                   </p>
                 </div>
@@ -66,7 +66,7 @@ const Work = () => {
       </div>
 
       <ScrollFade>
-        <div className="text-gryd-soft/60 text-sm">
+        <div className="caption text-gryd-soft pt-16">
           <p>more work available under nda. happy to discuss specifics over coffee.</p>
         </div>
       </ScrollFade>

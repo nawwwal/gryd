@@ -5,7 +5,6 @@ const Navigation = () => {
   const location = useLocation();
 
   const links = [
-    { path: '/', label: 'home' },
     { path: '/work', label: 'work' },
     { path: '/about', label: 'about' },
     { path: '/playground', label: 'playground' },
@@ -13,13 +12,12 @@ const Navigation = () => {
   ];
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-gryd-dark/90 backdrop-blur-sm border-b border-gryd-soft/10">
-      <div className="max-w-4xl mx-auto px-6 py-4">
+    <nav className="nav-minimal border-b border-gryd-soft/10">
+      <div className="editorial-container py-6">
         <div className="flex items-center justify-between">
           <Link 
             to="/" 
-            className="text-2xl font-bold text-gryd-accent lowercase tracking-tight"
-            style={{ fontVariationSettings: '"wght" 700' }}
+            className="font-headline text-2xl font-bold lowercase text-gryd-text"
           >
             gryd
           </Link>
@@ -29,7 +27,7 @@ const Navigation = () => {
               <Link
                 key={path}
                 to={path}
-                className={`gryd-link lowercase tracking-wide ${
+                className={`nav-link ${
                   location.pathname === path ? 'text-gryd-accent' : ''
                 }`}
               >

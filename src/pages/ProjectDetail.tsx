@@ -3,9 +3,9 @@ import { useParams, Link } from 'react-router-dom';
 import ScrollFade from '../components/ScrollFade';
 
 const projectData: Record<string, any> = {
-  'fixed-tax-panic': {
-    title: 'fixed tax panic for 10k users',
-    subtitle: 'rebuilt entire checkout flow in 72 hours',
+  'tamed-tax-chaos': {
+    title: 'tamed tax chaos',
+    subtitle: 'rebuilt checkout flow from scratch',
     timeline: '3 days',
     impact: '$50k/month saved',
     content: [
@@ -107,29 +107,29 @@ const ProjectDetail = () => {
 
   if (!project) {
     return (
-      <div className="pt-8">
-        <p>project not found</p>
-        <Link to="/work" className="gryd-link">← back to work</Link>
+      <div className="article-container pt-16">
+        <p className="body">project not found</p>
+        <Link to="/work" className="editorial-link">← back to work</Link>
       </div>
     );
   }
 
   return (
-    <div className="space-y-16 pt-8">
+    <div className="article-container space-y-article pt-16">
       <ScrollFade>
-        <div className="space-y-6">
-          <Link to="/work" className="gryd-link text-sm">← back to work</Link>
-          <h1 className="text-5xl font-bold lowercase leading-tight">
+        <div className="space-y-8">
+          <Link to="/work" className="editorial-link caption">← back to work</Link>
+          <h1 className="headline">
             {project.title}
           </h1>
-          <p className="text-xl text-gryd-accent lowercase">
+          <p className="subhead text-gryd-accent">
             {project.subtitle}
           </p>
           
-          <div className="flex space-x-8 text-sm">
+          <div className="flex space-x-12 caption">
             <div>
               <span className="text-gryd-soft">timeline:</span>
-              <span className="ml-2 text-white">{project.timeline}</span>
+              <span className="ml-2 text-gryd-text">{project.timeline}</span>
             </div>
             <div>
               <span className="text-gryd-soft">impact:</span>
@@ -139,10 +139,10 @@ const ProjectDetail = () => {
         </div>
       </ScrollFade>
 
-      <div className="max-w-3xl space-y-8">
+      <div className="space-y-paragraph">
         {project.content.map((section: any, index: number) => (
           <ScrollFade key={index} delay={index * 100}>
-            <div className="text-lg leading-relaxed">
+            <div className="body">
               <p>{section.content}</p>
             </div>
           </ScrollFade>
@@ -150,13 +150,13 @@ const ProjectDetail = () => {
       </div>
 
       <ScrollFade>
-        <div className="pt-16 border-t border-gryd-soft/20">
-          <p className="text-gryd-soft text-sm">
+        <div className="pt-16 border-t border-gryd-soft/20 space-y-4">
+          <p className="body text-gryd-soft">
             want to discuss this project in detail? let's talk.
           </p>
           <a 
             href="https://calendly.com/your-handle" 
-            className="gryd-link mt-2 inline-block"
+            className="editorial-link"
             target="_blank"
             rel="noopener noreferrer"
           >
