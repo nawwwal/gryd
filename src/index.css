@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -364,6 +363,449 @@
   .decoration-line {
     @apply w-32 h-px bg-gryd-accent;
     animation: line-stretch 2s ease-out infinite alternate;
+  }
+
+  /* Editorial link style */
+  .editorial-link {
+    @apply relative inline-block text-gryd-text lowercase;
+    background-image: linear-gradient(to right, theme('colors.gryd.accent'), theme('colors.gryd.accent'));
+    background-size: 0% 2px;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    transition: background-size 0.3s ease-out;
+  }
+
+  .editorial-link:hover {
+    background-size: 100% 2px;
+  }
+
+  /* Scroll fade animation */
+  .scroll-fade {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .scroll-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Magazine-style layout containers */
+  .editorial-container {
+    @apply max-w-wide mx-auto px-8 md:px-16;
+  }
+
+  .article-container {
+    @apply max-w-article mx-auto px-8;
+  }
+
+  /* Navigation */
+  .nav-minimal {
+    @apply fixed top-0 w-full z-50 bg-gryd-bg/95 backdrop-blur-sm;
+    border-bottom: 1px solid rgba(17, 17, 17, 0.1);
+  }
+
+  .nav-link {
+    @apply editorial-link font-body text-sm;
+  }
+
+  /* Magazine Container */
+  .magazine-container {
+    @apply min-h-screen bg-gray-50;
+    background-image: 
+      radial-gradient(circle at 1px 1px, rgba(0,0,0,0.15) 1px, transparent 0),
+      linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+    background-size: 20px 20px, 100% 100%;
+  }
+
+  /* Magazine Hero Section */
+  .magazine-hero {
+    @apply relative min-h-screen flex items-center justify-center p-8;
+    perspective: 1000px;
+  }
+
+  .hero-paper {
+    @apply relative w-full max-w-4xl bg-white shadow-2xl;
+    transform: rotateX(2deg) rotateY(-1deg);
+    background: 
+      linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%),
+      radial-gradient(circle at 50% 50%, rgba(0,0,0,0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 10px 10px;
+    border: 1px solid rgba(0,0,0,0.1);
+    animation: paper-settle 1s ease-out;
+  }
+
+  .paper-binding {
+    @apply absolute left-0 top-0 w-12 h-full bg-gradient-to-r from-gray-200 to-gray-100;
+    box-shadow: 
+      inset -2px 0 4px rgba(0,0,0,0.1),
+      inset 2px 0 2px rgba(255,255,255,0.8);
+  }
+
+  .hero-content {
+    @apply p-16 space-y-12;
+  }
+
+  .masthead {
+    @apply border-b-2 border-gray-900 pb-8 space-y-6;
+  }
+
+  .issue-details {
+    @apply flex justify-between text-sm uppercase tracking-wider text-gray-600;
+  }
+
+  .magazine-logo {
+    @apply font-serif text-6xl font-black text-center letter-spacing-tight;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+  }
+
+  .magazine-logo .subtitle {
+    @apply block text-lg font-normal mt-2 text-gray-600;
+  }
+
+  .feature-banner {
+    @apply text-center text-sm uppercase tracking-widest bg-gray-900 text-white py-2;
+  }
+
+  .hero-story {
+    @apply space-y-8;
+  }
+
+  .story-category {
+    @apply text-sm uppercase tracking-widest text-orange-600 font-bold;
+  }
+
+  .story-headline {
+    @apply font-serif text-5xl font-bold leading-tight;
+  }
+
+  .story-subhead {
+    @apply text-orange-600;
+  }
+
+  .story-lead {
+    @apply space-y-4 max-w-2xl;
+  }
+
+  .lead-text {
+    @apply text-xl leading-relaxed text-gray-700;
+  }
+
+  .story-byline {
+    @apply flex space-x-3 text-sm text-gray-500 uppercase tracking-wide;
+  }
+
+  .continue-reading {
+    @apply text-right text-sm uppercase tracking-wide text-gray-600;
+    font-style: italic;
+  }
+
+  .paper-corner {
+    @apply absolute top-0 right-0 w-8 h-8 bg-gradient-to-br from-transparent to-gray-200;
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+  }
+
+  .paper-shadow {
+    @apply absolute -bottom-2 -right-2 w-full h-full bg-gray-400 opacity-20 -z-10;
+    filter: blur(4px);
+  }
+
+  /* Table of Contents */
+  .table-of-contents {
+    @apply max-w-4xl mx-auto p-8 bg-white shadow-lg my-8;
+    border-left: 4px solid #d97706;
+  }
+
+  .toc-header {
+    @apply border-b border-gray-300 pb-4 mb-6;
+  }
+
+  .toc-header h3 {
+    @apply font-serif text-2xl font-bold;
+  }
+
+  .toc-line {
+    @apply w-16 h-px bg-orange-600 mt-2;
+  }
+
+  .toc-entries {
+    @apply space-y-3;
+  }
+
+  .toc-entry {
+    @apply flex items-center space-x-6 py-2;
+  }
+
+  .toc-page {
+    @apply font-mono text-lg font-bold text-orange-600 min-w-8;
+  }
+
+  .toc-title {
+    @apply text-gray-800;
+  }
+
+  /* Magazine Spread */
+  .magazine-spread {
+    @apply max-w-6xl mx-auto p-8;
+  }
+
+  .featured-article {
+    @apply bg-white shadow-xl p-12 space-y-12;
+    background: 
+      linear-gradient(135deg, #ffffff 0%, #fdfdfd 100%),
+      radial-gradient(circle at 20% 80%, rgba(251,146,60,0.05) 0%, transparent 50%);
+  }
+
+  .article-header {
+    @apply space-y-6 border-l-4 border-orange-600 pl-8;
+  }
+
+  .article-category {
+    @apply text-sm uppercase tracking-widest text-orange-600 font-bold;
+  }
+
+  .article-headline {
+    @apply font-serif text-4xl font-bold leading-tight;
+  }
+
+  .article-deck {
+    @apply text-xl text-gray-600 leading-relaxed;
+  }
+
+  .article-meta {
+    @apply flex space-x-3 text-sm text-gray-500 uppercase tracking-wide;
+  }
+
+  .impact {
+    @apply text-orange-600 font-semibold;
+  }
+
+  .article-visual {
+    @apply relative;
+  }
+
+  .photo-frame {
+    @apply relative bg-white p-4 shadow-lg;
+    transform: rotate(-0.5deg);
+    transition: transform 0.3s ease;
+  }
+
+  .photo-frame:hover {
+    transform: rotate(0deg) scale(1.02);
+  }
+
+  .photo-frame img {
+    @apply w-full h-80 object-cover grayscale;
+    transition: filter 0.4s ease;
+  }
+
+  .photo-frame:hover img {
+    filter: none;
+  }
+
+  .photo-caption {
+    @apply absolute -bottom-6 -right-6 bg-gray-900 text-white p-3 text-sm;
+    max-width: 300px;
+  }
+
+  .article-excerpt {
+    @apply space-y-6 max-w-3xl;
+  }
+
+  .article-excerpt p {
+    @apply text-lg leading-relaxed text-gray-700 first-letter:text-5xl first-letter:font-serif first-letter:float-left first-letter:mr-3 first-letter:mt-1;
+  }
+
+  .read-full-story {
+    @apply inline-flex items-center space-x-2 text-orange-600 font-semibold uppercase tracking-wide text-sm;
+    transition: all 0.3s ease;
+  }
+
+  .read-full-story:hover {
+    @apply text-orange-700 transform translate-x-2;
+  }
+
+  /* Article Grid */
+  .article-grid {
+    @apply max-w-6xl mx-auto p-8 space-y-8;
+  }
+
+  .grid-title {
+    @apply border-b-2 border-gray-900 pb-4;
+  }
+
+  .grid-title h4 {
+    @apply font-serif text-3xl font-bold;
+  }
+
+  .title-underline {
+    @apply w-24 h-1 bg-orange-600 mt-2;
+  }
+
+  .grid-articles {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+  }
+
+  .grid-article-link {
+    @apply block;
+  }
+
+  .grid-article {
+    @apply bg-white shadow-lg overflow-hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .grid-article:hover {
+    @apply shadow-2xl transform -translate-y-2;
+  }
+
+  .grid-article-image {
+    @apply relative h-48 overflow-hidden;
+  }
+
+  .grid-article-image img {
+    @apply w-full h-full object-cover grayscale;
+    transition: all 0.4s ease;
+  }
+
+  .grid-article:hover .grid-article-image img {
+    filter: none;
+    transform: scale(1.05);
+  }
+
+  .article-overlay {
+    @apply absolute top-4 right-4 bg-white px-3 py-1 text-xs uppercase tracking-wide;
+  }
+
+  .grid-article-content {
+    @apply p-6 space-y-4;
+  }
+
+  .grid-category {
+    @apply text-xs uppercase tracking-widest text-orange-600 font-bold;
+  }
+
+  .grid-headline {
+    @apply font-serif text-xl font-bold leading-tight;
+  }
+
+  .grid-excerpt {
+    @apply text-gray-600 leading-relaxed;
+  }
+
+  .grid-meta {
+    @apply pt-4 border-t border-gray-200;
+  }
+
+  .grid-impact {
+    @apply text-sm font-semibold text-orange-600;
+  }
+
+  /* Editorial CTA */
+  .editorial-cta {
+    @apply max-w-4xl mx-auto p-8 my-16;
+  }
+
+  .cta-paper {
+    @apply relative bg-gradient-to-br from-gray-900 to-gray-800 text-white p-12;
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(251,146,60,0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(251,146,60,0.05) 0%, transparent 50%);
+  }
+
+  .cta-content {
+    @apply space-y-8;
+  }
+
+  .cta-headline {
+    @apply font-serif text-4xl font-bold;
+  }
+
+  .cta-text {
+    @apply text-xl leading-relaxed text-gray-300;
+  }
+
+  .cta-contact {
+    @apply space-y-6;
+  }
+
+  .editorial-button {
+    @apply inline-block bg-orange-600 text-white px-8 py-4 font-bold uppercase tracking-wide;
+    transition: all 0.3s ease;
+  }
+
+  .editorial-button:hover {
+    @apply bg-orange-700 transform -translate-y-1 shadow-xl;
+  }
+
+  .contact-note {
+    @apply flex flex-col space-y-2 text-sm text-gray-400;
+  }
+
+  .contact-note a {
+    @apply text-orange-400;
+  }
+
+  .cta-decoration {
+    @apply absolute top-4 right-4;
+  }
+
+  .ink-blot {
+    @apply w-8 h-8 bg-orange-600 rounded-full opacity-20;
+    filter: blur(2px);
+  }
+
+  /* Magazine Footer */
+  .magazine-footer {
+    @apply bg-gray-900 text-white py-12;
+  }
+
+  .footer-content {
+    @apply max-w-4xl mx-auto px-8 text-center space-y-4;
+  }
+
+  .footer-logo {
+    @apply font-serif text-2xl font-bold;
+  }
+
+  .footer-info {
+    @apply flex flex-col space-y-2 text-sm text-gray-400;
+  }
+
+  /* Animations */
+  @keyframes paper-settle {
+    0% {
+      transform: rotateX(10deg) rotateY(-5deg) translateY(-50px);
+      opacity: 0;
+    }
+    100% {
+      transform: rotateX(2deg) rotateY(-1deg) translateY(0);
+      opacity: 1;
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero-content {
+      @apply p-8;
+    }
+    
+    .magazine-logo {
+      @apply text-4xl;
+    }
+    
+    .story-headline {
+      @apply text-3xl;
+    }
+    
+    .featured-article {
+      @apply p-6;
+    }
+    
+    .article-headline {
+      @apply text-3xl;
+    }
   }
 
   /* Editorial link style */

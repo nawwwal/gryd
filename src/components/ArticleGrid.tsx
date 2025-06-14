@@ -1,0 +1,48 @@
+
+import { Link } from 'react-router-dom';
+import ScrollFade from './ScrollFade';
+import { Project } from '../data/projects';
+
+interface ArticleGridProps {
+  projects: Project[];
+}
+
+const ArticleGrid = ({ projects }: ArticleGridProps) => {
+  return (
+    <div className="article-grid">
+      <div className="grid-title">
+        <h4>More Stories</h4>
+        <div className="title-underline"></div>
+      </div>
+      
+      <div className="grid-articles">
+        {projects.map((project, index) => (
+          <ScrollFade key={project.slug} delay={index * 150}>
+            <Link to={`/work/${project.slug}`} className="grid-article-link">
+              <article className="grid-article">
+                <div className="grid-article-image">
+                  <img src={project.image} alt={project.title} />
+                  <div className="article-overlay">
+                    <span className="read-time">3 min read</span>
+                  </div>
+                </div>
+                
+                <div className="grid-article-content">
+                  <div className="grid-category">{project.category}</div>
+                  <h5 className="grid-headline">{project.title}</h5>
+                  <p className="grid-excerpt">{project.subtitle}</p>
+                  
+                  <div className="grid-meta">
+                    <span className="grid-impact">{project.impact}</span>
+                  </div>
+                </div>
+              </article>
+            </Link>
+          </ScrollFade>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default ArticleGrid;
