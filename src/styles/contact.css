@@ -132,7 +132,7 @@
   }
 
   .primary-action {
-    @apply inline-flex items-center space-x-3 group;
+    @apply inline-flex items-center space-x-3;
     text-decoration: none;
   }
 
