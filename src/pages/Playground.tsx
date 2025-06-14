@@ -55,7 +55,7 @@ const experiments = [
 
 const Playground = () => {
   const masonryRef = useRef<HTMLDivElement>(null);
-  const labTitleRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const cards = masonryRef.current?.querySelectorAll('.classified-card');
@@ -70,61 +70,75 @@ const Playground = () => {
   }, []);
 
   useEffect(() => {
-    // Experimental glitch effect on lab title
-    const title = labTitleRef.current;
+    // Add hover effects to title letters
+    const title = titleRef.current;
     if (!title) return;
 
-    const glitchInterval = setInterval(() => {
-      if (Math.random() > 0.95) {
-        title.classList.add('glitch-effect');
-        setTimeout(() => {
-          title.classList.remove('glitch-effect');
-        }, 200);
-      }
-    }, 1000);
-
-    return () => clearInterval(glitchInterval);
+    const letters = title.querySelectorAll('.hover-letter');
+    letters.forEach((letter) => {
+      letter.addEventListener('mouseenter', () => {
+        letter.classList.add('letter-hover');
+      });
+      letter.addEventListener('mouseleave', () => {
+        letter.classList.remove('letter-hover');
+      });
+    });
   }, []);
+
+  const renderInteractiveTitle = (text: string) => {
+    return text.split('').map((char, index) => (
+      <span
+        key={index}
+        className={`hover-letter inline-block ${char === ' ' ? 'w-4' : ''}`}
+        style={{ animationDelay: `${index * 50}ms` }}
+      >
+        {char === ' ' ? '\u00A0' : char}
+      </span>
+    ));
+  };
 
   return (
     <div className="magazine-container">
-      {/* Experimental Lab Header */}
-      <div className="experimental-lab-header">
-        <div className="lab-workspace">
+      {/* Newspaper Header */}
+      <div className="newspaper-header">
+        <div className="paper-sheet">
           <ScrollFade>
-            <div className="workspace-grid">
-              <div className="lab-status-board">
-                <div className="status-indicator pulsing"></div>
-                <span className="status-text">CURRENTLY EXPERIMENTING</span>
+            <div className="newspaper-masthead">
+              <div className="publication-info">
+                <div className="date-stamp">December 14, 2024</div>
+                <div className="edition">Digital Laboratory Edition</div>
+                <div className="price">Est. 2024 • Always Experimental</div>
               </div>
               
-              <div ref={labTitleRef} className="lab-title-experimental">
-                <div className="title-stack">
-                  <span className="title-shadow">PLAYGROUND</span>
-                  <span className="title-main">PLAYGROUND</span>
-                  <span className="title-glitch">PL4YGR0UND</span>
-                </div>
-                <div className="title-subtitle">
-                  Where good ideas come to break
+              <div className="main-headline-section">
+                <div className="headline-kicker">EXPERIMENTAL LABORATORY</div>
+                <h1 ref={titleRef} className="main-headline">
+                  {renderInteractiveTitle('PLAYGROUND')}
+                </h1>
+                <div className="headline-deck">
+                  Where Good Ideas Come to Break Things
                 </div>
               </div>
               
-              <div className="experiment-counter">
-                <div className="counter-display">
-                  <span className="counter-number">{experiments.length}</span>
-                  <span className="counter-label">Active Experiments</span>
+              <div className="newspaper-columns">
+                <div className="column">
+                  <p className="column-text">
+                    Dead ends, curiosities, and things that shouldn't work but somehow do. 
+                    This laboratory updates whenever something interesting breaks.
+                  </p>
                 </div>
-                <div className="counter-ticker">
-                  <div className="ticker-line"></div>
+                <div className="column">
+                  <div className="experiment-stats">
+                    <div className="stat">
+                      <span className="stat-number">{experiments.length}</span>
+                      <span className="stat-label">Active Experiments</span>
+                    </div>
+                    <div className="stat">
+                      <span className="stat-number">∞</span>
+                      <span className="stat-label">Potential Failures</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            
-            <div className="lab-description-experimental">
-              <p className="description-line">Dead ends, curiosities, and things that break.</p>
-              <p className="description-line">This page updates whenever I break something new.</p>
-              <div className="description-accent">
-                <span>⚠️ Results not guaranteed</span>
               </div>
             </div>
           </ScrollFade>
@@ -161,15 +175,19 @@ const Playground = () => {
       <div className="lab-notes">
         <ScrollFade>
           <div className="notes-content">
-            <h3>Lab Notes</h3>
+            <h3>Laboratory Notes</h3>
             <div className="notes-list">
               <div className="note-item">
                 <span>•</span>
-                <span>This page updates whenever I break something new</span>
+                <span>This page updates whenever something interesting breaks</span>
               </div>
               <div className="note-item">
                 <span>•</span>
-                <span>Bookmark it if you're into that sort of thing</span>
+                <span>Results not guaranteed, side effects may include curiosity</span>
+              </div>
+              <div className="note-item">
+                <span>•</span>
+                <span>Bookmark if you enjoy watching things fall apart beautifully</span>
               </div>
             </div>
           </div>
@@ -181,7 +199,7 @@ const Playground = () => {
           <div className="footer-logo">THE GRYD</div>
           <div className="footer-info">
             <span>Playground • Live Experiments</span>
-            <span>Updated: As Things Break</span>
+            <span>Updated: When Things Break Beautifully</span>
           </div>
         </div>
       </div>
