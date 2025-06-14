@@ -55,6 +55,7 @@ const experiments = [
 
 const Playground = () => {
   const masonryRef = useRef<HTMLDivElement>(null);
+  const labTitleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const cards = masonryRef.current?.querySelectorAll('.classified-card');
@@ -68,29 +69,62 @@ const Playground = () => {
     });
   }, []);
 
+  useEffect(() => {
+    // Experimental glitch effect on lab title
+    const title = labTitleRef.current;
+    if (!title) return;
+
+    const glitchInterval = setInterval(() => {
+      if (Math.random() > 0.95) {
+        title.classList.add('glitch-effect');
+        setTimeout(() => {
+          title.classList.remove('glitch-effect');
+        }, 200);
+      }
+    }, 1000);
+
+    return () => clearInterval(glitchInterval);
+  }, []);
+
   return (
     <div className="magazine-container">
-      {/* Lab Bulletin Board Header */}
-      <div className="lab-bulletin-header">
-        <div className="bulletin-board">
+      {/* Experimental Lab Header */}
+      <div className="experimental-lab-header">
+        <div className="lab-workspace">
           <ScrollFade>
-            <div className="lab-title-section">
-              <div className="lab-badge">
-                <span className="badge-text">LAB</span>
+            <div className="workspace-grid">
+              <div className="lab-status-board">
+                <div className="status-indicator pulsing"></div>
+                <span className="status-text">CURRENTLY EXPERIMENTING</span>
               </div>
               
-              <h1 className="lab-main-title">
-                Playground
-              </h1>
-              
-              <div className="lab-description">
-                <p>Dead ends, curiosities, and things that break.</p>
-                <p>This page updates whenever I break something new.</p>
+              <div ref={labTitleRef} className="lab-title-experimental">
+                <div className="title-stack">
+                  <span className="title-shadow">PLAYGROUND</span>
+                  <span className="title-main">PLAYGROUND</span>
+                  <span className="title-glitch">PL4YGR0UND</span>
+                </div>
+                <div className="title-subtitle">
+                  Where good ideas come to break
+                </div>
               </div>
               
-              <div className="lab-status">
-                <div className="status-indicator"></div>
-                <span>Currently experimenting</span>
+              <div className="experiment-counter">
+                <div className="counter-display">
+                  <span className="counter-number">{experiments.length}</span>
+                  <span className="counter-label">Active Experiments</span>
+                </div>
+                <div className="counter-ticker">
+                  <div className="ticker-line"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="lab-description-experimental">
+              <p className="description-line">Dead ends, curiosities, and things that break.</p>
+              <p className="description-line">This page updates whenever I break something new.</p>
+              <div className="description-accent">
+                <span>⚠️ Results not guaranteed</span>
               </div>
             </div>
           </ScrollFade>
@@ -123,7 +157,7 @@ const Playground = () => {
         </div>
       </div>
 
-      {/* Update Notice */}
+      {/* Lab Notes */}
       <div className="lab-notes">
         <ScrollFade>
           <div className="notes-content">
