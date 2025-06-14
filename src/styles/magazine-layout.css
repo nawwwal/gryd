@@ -1,0 +1,150 @@
+
+@layer components {
+  /* Magazine Container */
+  .magazine-container {
+    @apply min-h-screen bg-gray-50;
+    background-image: 
+      radial-gradient(circle at 1px 1px, rgba(0,0,0,0.15) 1px, transparent 0),
+      linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+    background-size: 20px 20px, 100% 100%;
+  }
+
+  /* Magazine Hero Section */
+  .magazine-hero {
+    @apply relative min-h-screen flex items-center justify-center p-8;
+    perspective: 1000px;
+  }
+
+  .hero-paper {
+    @apply relative w-full max-w-4xl bg-white shadow-2xl;
+    transform: rotateX(2deg) rotateY(-1deg);
+    background: 
+      linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%),
+      radial-gradient(circle at 50% 50%, rgba(0,0,0,0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 10px 10px;
+    border: 1px solid rgba(0,0,0,0.1);
+    animation: paper-settle 1s ease-out;
+  }
+
+  .paper-binding {
+    @apply absolute left-0 top-0 w-12 h-full bg-gradient-to-r from-gray-200 to-gray-100;
+    box-shadow: 
+      inset -2px 0 4px rgba(0,0,0,0.1),
+      inset 2px 0 2px rgba(255,255,255,0.8);
+  }
+
+  .hero-content {
+    @apply p-16 space-y-12;
+  }
+
+  .masthead {
+    @apply border-b-2 border-gray-900 pb-8 space-y-6;
+  }
+
+  .issue-details {
+    @apply flex justify-between text-sm uppercase tracking-wider text-gray-600;
+  }
+
+  .magazine-logo {
+    @apply font-serif text-6xl font-black text-center tracking-tight;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+  }
+
+  .magazine-logo .subtitle {
+    @apply block text-lg font-normal mt-2 text-gray-600;
+  }
+
+  .feature-banner {
+    @apply text-center text-sm uppercase tracking-widest bg-gray-900 text-white py-2;
+  }
+
+  .hero-story {
+    @apply space-y-8;
+  }
+
+  .story-category {
+    @apply text-sm uppercase tracking-widest text-orange-600 font-bold;
+  }
+
+  .story-headline {
+    @apply font-serif text-5xl font-bold leading-tight;
+  }
+
+  .story-subhead {
+    @apply text-orange-600;
+  }
+
+  .story-lead {
+    @apply space-y-4 max-w-2xl;
+  }
+
+  .lead-text {
+    @apply text-xl leading-relaxed text-gray-700;
+  }
+
+  .paper-corner {
+    @apply absolute top-0 right-0 w-8 h-8 bg-gradient-to-br from-transparent to-gray-200;
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+  }
+
+  .paper-shadow {
+    @apply absolute -bottom-2 -right-2 w-full h-full bg-gray-400 opacity-20 -z-10;
+    filter: blur(4px);
+  }
+
+  /* Magazine Spread */
+  .magazine-spread {
+    @apply max-w-6xl mx-auto p-8;
+  }
+
+  /* Magazine Footer */
+  .magazine-footer {
+    @apply bg-gray-900 text-white py-12;
+  }
+
+  .footer-content {
+    @apply max-w-4xl mx-auto px-8 text-center space-y-4;
+  }
+
+  .footer-logo {
+    @apply font-serif text-2xl font-bold;
+  }
+
+  .footer-info {
+    @apply flex flex-col space-y-2 text-sm text-gray-400;
+  }
+
+  /* Table of Contents */
+  .table-of-contents {
+    @apply max-w-4xl mx-auto p-8 bg-white shadow-lg my-8;
+    border-left: 4px solid #d97706;
+  }
+
+  .toc-header {
+    @apply border-b border-gray-300 pb-4 mb-6;
+  }
+
+  .toc-header h3 {
+    @apply font-serif text-2xl font-bold;
+  }
+
+  .toc-line {
+    @apply w-16 h-px bg-orange-600 mt-2;
+  }
+
+  .toc-entries {
+    @apply space-y-3;
+  }
+
+  .toc-entry {
+    @apply flex items-center space-x-6 py-2;
+  }
+
+  .toc-page {
+    @apply font-mono text-lg font-bold text-orange-600 min-w-8;
+  }
+
+  .toc-title {
+    @apply text-gray-800;
+  }
+}

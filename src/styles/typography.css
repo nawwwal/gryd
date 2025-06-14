@@ -1,0 +1,45 @@
+
+/* Typography Classes */
+@layer base {
+  .headline {
+    @apply font-headline text-headline font-bold lowercase tracking-tight;
+  }
+
+  .subhead {
+    @apply font-headline text-subhead font-medium lowercase;
+  }
+
+  .body {
+    @apply font-body text-body;
+  }
+
+  .caption {
+    @apply font-body text-caption text-gryd-soft uppercase tracking-wide;
+  }
+}
+
+@layer components {
+  /* Editorial link style */
+  .editorial-link {
+    @apply relative inline-block text-gryd-text lowercase;
+    background-image: linear-gradient(to right, theme('colors.gryd.accent'), theme('colors.gryd.accent'));
+    background-size: 0% 2px;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    transition: background-size 0.3s ease-out;
+  }
+
+  .editorial-link:hover {
+    background-size: 100% 2px;
+  }
+
+  /* Navigation */
+  .nav-minimal {
+    @apply fixed top-0 w-full z-50 bg-gryd-bg/95 backdrop-blur-sm;
+    border-bottom: 1px solid rgba(17, 17, 17, 0.1);
+  }
+
+  .nav-link {
+    @apply editorial-link font-body text-sm;
+  }
+}
