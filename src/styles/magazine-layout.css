@@ -2,529 +2,149 @@
 @layer components {
   /* Magazine Container */
   .magazine-container {
-    @apply min-h-screen bg-[#faf9f6];
-    font-family: 'Newsreader', serif;
+    @apply min-h-screen bg-gray-50;
+    background-image: 
+      radial-gradient(circle at 1px 1px, rgba(0,0,0,0.15) 1px, transparent 0),
+      linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+    background-size: 20px 20px, 100% 100%;
   }
 
-  /* Work Portfolio Specific */
-  .work-portfolio-header {
-    @apply py-20 px-8 bg-gradient-to-b from-white to-[#faf9f6];
-    border-bottom: 3px solid #333;
+  /* Magazine Hero Section */
+  .magazine-hero {
+    @apply relative min-h-screen flex items-center justify-center p-8;
+    perspective: 1000px;
   }
 
-  .portfolio-masthead {
-    @apply max-w-6xl mx-auto;
-  }
-
-  .portfolio-title-section {
-    @apply text-center;
-  }
-
-  .portfolio-meta {
-    @apply flex justify-center items-center gap-4 mb-8;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #666;
-  }
-
-  .meta-item {
-    @apply text-gray-600;
-  }
-
-  .meta-divider {
-    @apply text-gray-400;
-  }
-
-  .portfolio-main-title {
-    @apply text-6xl md:text-8xl font-bold mb-6;
-    font-family: 'Newsreader', serif;
-    color: #111;
-    text-transform: uppercase;
-    letter-spacing: -0.02em;
-  }
-
-  .portfolio-subtitle {
-    @apply text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed;
-    font-family: 'Newsreader', serif;
-  }
-
-  /* About Interview Specific */
-  .interview-layout {
-    @apply py-20 px-8 max-w-4xl mx-auto;
-  }
-
-  .interview-header {
-    @apply mb-16 pb-8 border-b-2 border-gray-300;
-  }
-
-  .interview-meta {
-    @apply flex justify-between items-center mb-6;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    color: #666;
-  }
-
-  .interview-title {
-    @apply text-5xl md:text-7xl font-bold mb-6;
-    font-family: 'Newsreader', serif;
-    color: #111;
-    line-height: 0.9;
-  }
-
-  .interview-name {
-    @apply text-orange-600;
-  }
-
-  .interview-intro {
-    @apply text-lg text-gray-700 leading-relaxed;
-    font-family: 'Newsreader', serif;
-  }
-
-  .interview-content {
-    @apply space-y-12;
-  }
-
-  .interview-qa {
-    @apply border-l-4 border-orange-200 pl-8;
-  }
-
-  .question {
-    @apply mb-4;
-  }
-
-  .q-label {
-    @apply inline-block w-8 text-lg font-bold text-orange-600 mr-4;
-    font-family: 'IBM Plex Mono', monospace;
-  }
-
-  .question p {
-    @apply inline text-lg font-semibold text-gray-900;
-    font-family: 'Newsreader', serif;
-  }
-
-  .answer {
-    @apply ml-0;
-  }
-
-  .a-label {
-    @apply inline-block w-8 text-lg font-bold text-gray-600 mr-4;
-    font-family: 'IBM Plex Mono', monospace;
-  }
-
-  .answer p {
-    @apply inline text-lg text-gray-700 leading-relaxed;
-    font-family: 'Newsreader', serif;
-  }
-
-  .profile-stats {
-    @apply py-16 px-8 bg-gray-50 border-t-2 border-gray-300;
-  }
-
-  .stats-grid {
-    @apply max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center;
-  }
-
-  .stat-item {
-    @apply space-y-2;
-  }
-
-  .stat-number {
-    @apply block text-4xl font-bold text-orange-600;
-    font-family: 'IBM Plex Mono', monospace;
-  }
-
-  .stat-label {
-    @apply block text-sm text-gray-600 uppercase tracking-wide;
-    font-family: 'IBM Plex Mono', monospace;
-  }
-
-  /* Contact Consultation Specific */
-  .consultation-header {
-    @apply py-20 px-8;
-    background: linear-gradient(135deg, #faf9f6 0%, #f5f5f5 100%);
-    border-bottom: 3px solid #333;
-  }
-
-  .consultation-layout {
-    @apply max-w-4xl mx-auto text-center;
-  }
-
-  .consultation-meta {
-    @apply flex justify-center items-center gap-6 mb-8;
-  }
-
-  .meta-badge {
-    @apply px-4 py-2 bg-green-100 text-green-800 font-semibold rounded-full;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.875rem;
-    text-transform: uppercase;
-  }
-
-  .consultation-status {
-    @apply flex items-center gap-2;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    color: #666;
-  }
-
-  .status-dot {
-    @apply w-2 h-2 bg-green-500 rounded-full animate-pulse;
-  }
-
-  .consultation-title {
-    @apply text-5xl md:text-7xl font-bold mb-8;
-    font-family: 'Newsreader', serif;
-    color: #111;
-    line-height: 0.9;
-  }
-
-  .consultation-subtitle {
-    @apply text-orange-600;
-  }
-
-  .consultation-intro {
-    @apply max-w-2xl mx-auto space-y-4;
-  }
-
-  .intro-text {
-    @apply text-xl text-gray-700 leading-relaxed;
-    font-family: 'Newsreader', serif;
-  }
-
-  .intro-subtext {
-    @apply text-lg text-gray-600;
-    font-family: 'Newsreader', serif;
-  }
-
-  .contact-methods {
-    @apply max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 py-16;
-  }
-
-  .method-primary,
-  .method-secondary {
-    @apply text-center p-8 bg-white border-2 border-gray-200 rounded-lg;
-  }
-
-  .method-title {
-    @apply text-2xl font-bold mb-4;
-    font-family: 'Newsreader', serif;
-    color: #111;
-  }
-
-  .method-description {
-    @apply text-gray-600 mb-6 leading-relaxed;
-    font-family: 'Newsreader', serif;
-  }
-
-  .editorial-button {
-    @apply inline-block px-8 py-3 font-semibold rounded-lg transition-all duration-300;
-    font-family: 'IBM Plex Mono', monospace;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .editorial-button.primary {
-    @apply bg-orange-600 text-white hover:bg-orange-700 transform hover:scale-105;
-  }
-
-  .editorial-button.secondary {
-    @apply bg-gray-100 text-gray-800 hover:bg-gray-200 border-2 border-gray-300;
-  }
-
-  .response-times {
-    @apply max-w-3xl mx-auto py-16 px-8;
-  }
-
-  .times-header {
-    @apply text-center mb-8;
-  }
-
-  .times-header h3 {
-    @apply text-2xl font-bold mb-4;
-    font-family: 'Newsreader', serif;
-    color: #111;
-  }
-
-  .times-line {
-    @apply w-24 h-1 bg-orange-600 mx-auto;
-  }
-
-  .times-table {
-    @apply space-y-4;
-  }
-
-  .time-row {
-    @apply flex justify-between items-center py-3 border-b border-gray-200;
-  }
-
-  .time-duration {
-    @apply font-bold text-orange-600;
-    font-family: 'IBM Plex Mono', monospace;
-  }
-
-  .time-description {
-    @apply text-gray-700;
-    font-family: 'Newsreader', serif;
-  }
-
-  /* Playground Experimental Header */
-  .experimental-lab-header {
-    @apply py-20 px-8 bg-gradient-to-br from-gray-900 via-gray-800 to-orange-900 text-white overflow-hidden relative;
-  }
-
-  .experimental-lab-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  .hero-paper {
+    @apply relative w-full max-w-4xl bg-white shadow-2xl;
+    transform: rotateX(2deg) rotateY(-1deg);
     background: 
-      repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 2px,
-        rgba(255,255,255,0.02) 2px,
-        rgba(255,255,255,0.02) 4px
-      );
-    pointer-events: none;
+      linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%),
+      radial-gradient(circle at 50% 50%, rgba(0,0,0,0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 10px 10px;
+    border: 1px solid rgba(0,0,0,0.1);
+    animation: paper-settle 1s ease-out;
   }
 
-  .lab-workspace {
-    @apply max-w-6xl mx-auto relative z-10;
+  .paper-binding {
+    @apply absolute left-0 top-0 w-12 h-full bg-gradient-to-r from-gray-200 to-gray-100;
+    box-shadow: 
+      inset -2px 0 4px rgba(0,0,0,0.1),
+      inset 2px 0 2px rgba(255,255,255,0.8);
   }
 
-  .workspace-grid {
-    @apply grid grid-cols-1 md:grid-cols-3 gap-8 mb-12;
+  .hero-content {
+    @apply p-16 space-y-12;
   }
 
-  .lab-status-board {
-    @apply flex items-center gap-3;
+  .masthead {
+    @apply border-b-2 border-gray-900 pb-8 space-y-6;
   }
 
-  .status-indicator.pulsing {
-    @apply w-3 h-3 bg-orange-500 rounded-full;
-    animation: pulse-lab 2s infinite;
+  .issue-details {
+    @apply flex justify-between text-sm uppercase tracking-wider text-gray-600;
   }
 
-  .status-text {
-    @apply text-sm font-bold tracking-widest;
-    font-family: 'IBM Plex Mono', monospace;
-    color: #fbbf24;
+  .magazine-logo {
+    @apply font-serif text-6xl font-black text-center tracking-tight;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
   }
 
-  .lab-title-experimental {
-    @apply text-center relative;
+  .magazine-logo .subtitle {
+    @apply block text-lg font-normal mt-2 text-gray-600;
   }
 
-  .title-stack {
-    @apply relative inline-block;
+  .feature-banner {
+    @apply text-center text-sm uppercase tracking-widest bg-gray-900 text-white py-2;
   }
 
-  .title-shadow,
-  .title-main,
-  .title-glitch {
-    @apply absolute top-0 left-0 text-6xl md:text-8xl font-black;
-    font-family: 'IBM Plex Mono', monospace;
+  .hero-story {
+    @apply space-y-8;
   }
 
-  .title-shadow {
-    @apply text-gray-600;
-    transform: translate(4px, 4px);
-    z-index: 1;
+  .story-category {
+    @apply text-sm uppercase tracking-widest text-orange-600 font-bold;
   }
 
-  .title-main {
-    @apply text-white;
-    z-index: 3;
+  .story-headline {
+    @apply font-serif text-5xl font-bold leading-tight;
   }
 
-  .title-glitch {
-    @apply text-orange-500 opacity-0;
-    z-index: 2;
-    font-family: 'Courier New', monospace;
+  .story-subhead {
+    @apply text-orange-600;
   }
 
-  .glitch-effect .title-glitch {
-    @apply opacity-100;
-    animation: glitch-flicker 0.2s;
+  .story-lead {
+    @apply space-y-4 max-w-2xl;
   }
 
-  .title-subtitle {
-    @apply text-lg text-gray-300 mt-20 italic;
-    font-family: 'Newsreader', serif;
+  .lead-text {
+    @apply text-xl leading-relaxed text-gray-700;
   }
 
-  .experiment-counter {
-    @apply text-right;
+  .paper-corner {
+    @apply absolute top-0 right-0 w-8 h-8 bg-gradient-to-br from-transparent to-gray-200;
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
   }
 
-  .counter-display {
-    @apply space-y-1;
+  .paper-shadow {
+    @apply absolute -bottom-2 -right-2 w-full h-full bg-gray-400 opacity-20 -z-10;
+    filter: blur(4px);
   }
 
-  .counter-number {
-    @apply block text-4xl font-black text-orange-400;
-    font-family: 'IBM Plex Mono', monospace;
-  }
-
-  .counter-label {
-    @apply block text-sm text-gray-300 uppercase tracking-wide;
-    font-family: 'IBM Plex Mono', monospace;
-  }
-
-  .counter-ticker {
-    @apply mt-2;
-  }
-
-  .ticker-line {
-    @apply h-1 bg-orange-500 rounded;
-    animation: ticker-expand 3s ease-in-out infinite alternate;
-  }
-
-  .lab-description-experimental {
-    @apply text-center space-y-3 max-w-2xl mx-auto;
-  }
-
-  .description-line {
-    @apply text-lg text-gray-300;
-    font-family: 'Newsreader', serif;
-  }
-
-  .description-accent {
-    @apply pt-4;
-  }
-
-  .description-accent span {
-    @apply text-yellow-400 font-semibold;
-    font-family: 'IBM Plex Mono', monospace;
-  }
-
-  /* Common Magazine Elements */
+  /* Magazine Spread */
   .magazine-spread {
-    @apply py-16 px-8;
+    @apply max-w-6xl mx-auto p-8;
   }
 
-  .article-grid {
-    @apply max-w-6xl mx-auto;
-  }
-
-  .grid-title {
-    @apply mb-12;
-  }
-
-  .grid-title h4 {
-    @apply text-3xl font-bold mb-4;
-    font-family: 'Newsreader', serif;
-    color: #111;
-  }
-
-  .title-underline {
-    @apply w-32 h-1 bg-orange-600;
-    animation: line-stretch 1s ease-out;
-  }
-
-  .lab-notes {
-    @apply py-16 px-8 bg-gray-50 border-t-2 border-gray-300;
-  }
-
-  .notes-content {
-    @apply max-w-4xl mx-auto;
-  }
-
-  .notes-content h3 {
-    @apply text-2xl font-bold mb-6;
-    font-family: 'Newsreader', serif;
-    color: #111;
-  }
-
-  .notes-list {
-    @apply space-y-3;
-  }
-
-  .note-item {
-    @apply flex items-start gap-3;
-  }
-
-  .note-item span:first-child {
-    @apply text-orange-600 font-bold;
-  }
-
-  .note-item span:last-child {
-    @apply text-gray-700;
-    font-family: 'Newsreader', serif;
-  }
-
+  /* Magazine Footer */
   .magazine-footer {
-    @apply py-12 px-8 bg-gray-900 text-white;
+    @apply bg-gray-900 text-white py-12;
   }
 
   .footer-content {
-    @apply max-w-6xl mx-auto flex justify-between items-center;
+    @apply max-w-4xl mx-auto px-8 text-center space-y-4;
   }
 
   .footer-logo {
-    @apply text-2xl font-bold;
-    font-family: 'IBM Plex Mono', monospace;
+    @apply font-serif text-2xl font-bold;
   }
 
   .footer-info {
-    @apply text-right space-y-1;
+    @apply flex flex-col space-y-2 text-sm text-gray-400;
   }
 
-  .footer-info span {
-    @apply block text-sm text-gray-400;
-    font-family: 'IBM Plex Mono', monospace;
+  /* Table of Contents */
+  .table-of-contents {
+    @apply max-w-4xl mx-auto p-8 bg-white shadow-lg my-8;
+    border-left: 4px solid #d97706;
   }
-}
 
-/* Experimental Animations */
-@keyframes pulse-lab {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.2); }
-}
+  .toc-header {
+    @apply border-b border-gray-300 pb-4 mb-6;
+  }
 
-@keyframes glitch-flicker {
-  0% { transform: translate(0); }
-  20% { transform: translate(-2px, 2px); }
-  40% { transform: translate(-2px, -2px); }
-  60% { transform: translate(2px, 2px); }
-  80% { transform: translate(2px, -2px); }
-  100% { transform: translate(0); }
-}
+  .toc-header h3 {
+    @apply font-serif text-2xl font-bold;
+  }
 
-@keyframes ticker-expand {
-  0% { width: 20%; }
-  100% { width: 100%; }
-}
+  .toc-line {
+    @apply w-16 h-px bg-orange-600 mt-2;
+  }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .portfolio-main-title,
-  .interview-title,
-  .consultation-title {
-    @apply text-4xl;
+  .toc-entries {
+    @apply space-y-3;
   }
-  
-  .title-main,
-  .title-shadow,
-  .title-glitch {
-    @apply text-4xl;
+
+  .toc-entry {
+    @apply flex items-center space-x-6 py-2;
   }
-  
-  .title-subtitle {
-    @apply mt-16;
+
+  .toc-page {
+    @apply font-mono text-lg font-bold text-orange-600 min-w-8;
   }
-  
-  .workspace-grid {
-    @apply grid-cols-1 gap-6;
-  }
-  
-  .footer-content {
-    @apply flex-col gap-4 text-center;
+
+  .toc-title {
+    @apply text-gray-800;
   }
 }

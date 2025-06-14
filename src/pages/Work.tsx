@@ -6,29 +6,51 @@ import ProjectCard from '../components/ProjectCard';
 const Work = () => {
   return (
     <div className="magazine-container">
-      {/* Work Portfolio Header - Clean, Professional */}
-      <div className="work-portfolio-header">
-        <div className="portfolio-masthead">
-          <ScrollFade>
-            <div className="portfolio-title-section">
-              <div className="portfolio-meta">
-                <span className="meta-item">Portfolio</span>
-                <span className="meta-divider">•</span>
-                <span className="meta-item">Selected Works 2024</span>
-                <span className="meta-divider">•</span>
-                <span className="meta-item">{projects.length} Projects</span>
+      {/* Magazine Header */}
+      <div className="magazine-hero">
+        <div className="hero-paper">
+          <div className="paper-binding"></div>
+          
+          <div className="hero-content">
+            <ScrollFade>
+              <div className="masthead">
+                <div className="issue-details">
+                  <span className="issue-number">Portfolio</span>
+                  <span className="issue-date">Selected Works</span>
+                  <span className="price">2024</span>
+                </div>
+                
+                <h1 className="magazine-logo">
+                  WORK ARCHIVE
+                  <span className="subtitle">Case Studies & Projects</span>
+                </h1>
+                
+                <div className="feature-banner">
+                  <span>Portfolio: Things I've Built That Moved Numbers</span>
+                </div>
               </div>
-              
-              <h1 className="portfolio-main-title">
-                Work Archive
-              </h1>
-              
-              <p className="portfolio-subtitle">
-                Things I've built that moved numbers.
-                Each project is a story of making impossible things work.
-              </p>
-            </div>
-          </ScrollFade>
+            </ScrollFade>
+            
+            <ScrollFade delay={300}>
+              <div className="hero-story">
+                <div className="story-category">EDITORIAL</div>
+                <h2 className="story-headline">
+                  Selected Work<br/>
+                  <span className="story-subhead">Usually involving panic, tight deadlines</span>
+                </h2>
+                
+                <div className="story-lead">
+                  <p className="lead-text">
+                    Things I've built that moved numbers.
+                    Each project is a story of making impossible things work.
+                  </p>
+                </div>
+              </div>
+            </ScrollFade>
+          </div>
+          
+          <div className="paper-corner"></div>
+          <div className="paper-shadow"></div>
         </div>
       </div>
 
