@@ -1,722 +1,94 @@
 
 @layer components {
-  /* Contact Magazine Container */
-  .contact-magazine-container {
-    @apply min-h-screen;
-    background: linear-gradient(135deg, #fefefe 0%, #f8f8f8 100%);
-    perspective: 1200px;
+  /* Flip Card Container */
+  .flip-card-container {
+    @apply max-w-4xl mx-auto;
+    perspective: 1000px;
+    min-height: 600px;
   }
 
-  /* Editorial Contact Spread - Fixed Layout */
-  .contact-editorial-spread {
-    @apply relative min-h-screen flex;
+  .flip-card {
+    @apply relative w-full h-full;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+  }
+
+  .flip-card.flipped {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    @apply absolute inset-0 w-full;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    padding: clamp(2rem, 5vw, 4rem);
+    background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+    border-radius: 12px;
+    box-shadow: 
+      0 20px 40px rgba(0,0,0,0.1),
+      0 0 0 1px rgba(0,0,0,0.05);
+    min-height: 600px;
+  }
+
+  .flip-card-back {
+    transform: rotateY(180deg);
+  }
+
+  /* Flip Indicator */
+  .flip-indicator {
+    @apply cursor-pointer transition-all duration-300;
     
-    /* Enhanced paper texture */
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: 
-        radial-gradient(circle at 2px 2px, rgba(0,0,0,0.08) 1px, transparent 0),
-        radial-gradient(circle at 8px 8px, rgba(139,69,19,0.03) 1px, transparent 0);
-      background-size: 20px 20px, 40px 40px;
-      pointer-events: none;
-      z-index: 1;
-      transition: opacity 0.3s ease;
-    }
-  }
-
-  /* Left Page - Fixed Flex Layout */
-  .contact-left-page {
-    @apply flex-1 relative;
-    background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
-    box-shadow: 
-      inset -8px 0 16px rgba(0,0,0,0.1),
-      0 0 30px rgba(0,0,0,0.1);
-    transform: rotateY(2deg);
-    transform-origin: right center;
-    transition: all 0.3s ease;
-    animation: paper-settle-left 1s ease-out;
-    min-width: 0; /* Prevent flex item from overflowing */
-
     &:hover {
-      transform: rotateY(1deg) translateZ(10px);
-      box-shadow: 
-        inset -8px 0 20px rgba(0,0,0,0.12),
-        0 5px 40px rgba(0,0,0,0.15);
+      transform: translateY(-2px);
     }
   }
 
-  /* Right Page - Fixed Flex Layout */
-  .contact-right-page {
-    @apply flex-1 relative;
-    background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
-    box-shadow: 
-      inset 8px 0 16px rgba(0,0,0,0.1),
-      0 0 30px rgba(0,0,0,0.1);
-    transform: rotateY(-2deg);
-    transform-origin: left center;
-    transition: all 0.3s ease;
-    animation: paper-settle-right 1s ease-out 0.2s both;
-    min-width: 0; /* Prevent flex item from overflowing */
-
-    &:hover {
-      transform: rotateY(-1deg) translateZ(10px);
-      box-shadow: 
-        inset 8px 0 20px rgba(0,0,0,0.12),
-        0 5px 40px rgba(0,0,0,0.15);
-    }
+  .flip-icon {
+    @apply flex flex-col items-center space-y-2;
   }
 
-  /* Fixed Page Content */
-  .page-content {
-    @apply relative h-full z-10;
-    padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem);
-    animation: content-fade-in 1.2s ease-out 0.5s both;
-    overflow-wrap: break-word; /* Prevent text overflow */
+  .flip-arrow {
+    @apply text-2xl text-gryd-accent transition-transform duration-300;
+    transform: rotate(90deg);
   }
 
-  /* Editorial Header */
-  .editorial-header {
-    @apply mb-8 md:mb-16;
+  .flip-indicator:hover .flip-arrow {
+    transform: rotate(90deg) translateX(4px);
   }
 
-  .section-marker {
-    @apply flex items-center justify-center;
-    gap: clamp(1rem, 3vw, 1.5rem);
+  /* Back Button */
+  .flip-back-btn {
+    @apply flex items-center space-x-2 text-gryd-soft hover:text-gryd-accent transition-colors;
   }
 
-  .marker-line {
-    @apply h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent;
-    width: 0;
-    transition: width 0.8s ease-out;
-  }
-
-  .animated-line {
-    animation: line-expand 1.5s ease-out 0.8s both;
-  }
-
-  .marker-text {
-    @apply font-mono uppercase tracking-[0.3em] text-gray-500 font-semibold;
-    font-size: clamp(0.65rem, 1.5vw, 0.75rem);
-    opacity: 0;
-    animation: text-fade-in 0.8s ease-out 1.2s both;
-    white-space: nowrap; /* Prevent text wrapping */
-  }
-
-  /* Main Editorial - Responsive Typography */
-  .main-editorial {
-    @apply space-y-6 md:space-y-8;
-  }
-
-  .editorial-title {
-    @apply font-serif font-light text-gray-900 mb-8 md:mb-12;
-    font-size: clamp(2.5rem, 6vw, 3.5rem);
-    letter-spacing: -0.03em;
-    line-height: 0.9;
-    text-shadow: 1px 1px 0px rgba(0,0,0,0.05);
-    transform: translateY(20px);
-    opacity: 0;
-    word-break: break-word; /* Handle long titles */
-  }
-
-  .animated-title {
-    animation: title-rise 1s ease-out 0.6s both;
-  }
-
-  .editorial-body {
-    @apply space-y-4 md:space-y-6;
-    max-width: min(28rem, 90%);
-  }
-
-  /* Enhanced Drop Cap - Responsive */
-  .drop-cap-paragraph {
-    @apply leading-relaxed text-gray-800 relative;
-    font-size: clamp(1rem, 2.5vw, 1.125rem);
-    font-family: 'Newsreader', Georgia, serif;
-    font-weight: 400;
-  }
-
-  .drop-cap {
-    @apply float-left font-serif leading-none mr-2 md:mr-3 mt-1;
-    font-size: clamp(3rem, 8vw, 4rem);
-    color: #d97706;
-    text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
-    line-height: 0.7;
-    transition: all 0.3s ease;
-  }
-
-  .floating {
-    animation: gentle-float 4s ease-in-out infinite;
-  }
-
-  .body-text {
-    @apply leading-relaxed text-gray-700;
-    font-size: clamp(1rem, 2.5vw, 1.125rem);
-    font-family: 'Newsreader', Georgia, serif;
-    font-weight: 400;
-    opacity: 0;
-  }
-
-  .fade-in-text {
-    animation: text-fade-in 0.8s ease-out 1s both;
-  }
-
-  /* Interactive Call to Action */
-  .call-to-action {
-    @apply pt-6 md:pt-8;
-  }
-
-  .primary-action {
-    @apply inline-flex items-center relative;
-    gap: clamp(0.5rem, 2vw, 0.75rem);
+  /* Social Links */
+  .social-link-item {
+    @apply flex items-center justify-between p-3 border border-gryd-soft/20 rounded hover:border-gryd-accent hover:bg-gryd-accent/5 transition-all duration-300;
     text-decoration: none;
-    transition: all 0.3s ease;
-  }
-
-  .interactive-link {
-    &::before {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #d97706, #f59e0b);
-      transition: width 0.4s ease;
-    }
-
-    &:hover::before {
-      width: 100%;
-    }
-
-    &:hover {
-      transform: translateY(-2px);
-    }
-  }
-
-  .action-text {
-    @apply font-mono uppercase tracking-wider text-gray-900 font-semibold;
-    font-size: clamp(0.75rem, 2vw, 0.875rem);
-    transition: all 0.3s ease;
-  }
-
-  .action-arrow {
-    @apply text-orange-600 font-bold;
-    font-size: clamp(1rem, 2.5vw, 1.125rem);
-    transition: transform 0.3s ease;
-  }
-
-  .animated-arrow {
-    animation: arrow-pulse 2s ease-in-out infinite;
-  }
-
-  .interactive-link:hover .action-arrow {
-    transform: translateX(6px) scale(1.1);
-  }
-
-  /* Contact Form - Responsive */
-  .contact-form-section {
-    @apply mt-8 md:mt-12 pt-6 md:pt-8 border-t border-gray-200;
-  }
-
-  .form-title {
-    @apply font-serif font-medium text-gray-900 mb-4 md:mb-6;
-    font-size: clamp(1.25rem, 3vw, 1.5rem);
-  }
-
-  .editorial-form {
-    @apply space-y-4 md:space-y-6;
-  }
-
-  .form-group {
-    @apply space-y-2;
-  }
-
-  .form-label {
-    @apply block font-mono uppercase tracking-wider text-gray-600;
-    font-size: clamp(0.65rem, 1.5vw, 0.75rem);
-  }
-
-  .form-input,
-  .form-textarea {
-    @apply w-full border border-gray-300 bg-white/80 font-mono;
-    padding: clamp(0.75rem, 2vw, 1rem);
-    font-size: clamp(0.75rem, 2vw, 0.875rem);
-    border-radius: 0;
-    transition: all 0.3s ease;
-    box-sizing: border-box; /* Ensure proper sizing */
-  }
-
-  .interactive-input {
-    &:focus {
-      outline: none;
-      border-color: #d97706;
-      box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1);
-      background: white;
-      transform: translateY(-1px);
-    }
-
-    &:hover {
-      border-color: #f59e0b;
-      background: white;
-    }
-  }
-
-  .form-submit {
-    @apply flex items-center bg-gray-900 text-white font-mono uppercase tracking-wider;
-    padding: clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 3vw, 2rem);
-    font-size: clamp(0.75rem, 2vw, 0.875rem);
-    gap: clamp(0.5rem, 1vw, 0.75rem);
-    border-radius: 0;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .interactive-submit {
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.5s ease;
-    }
-
-    &:hover::before {
-      left: 100%;
-    }
-
-    &:hover {
-      background: #d97706;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
-    }
-  }
-
-  .submit-arrow {
-    transition: transform 0.3s ease;
-  }
-
-  .interactive-submit:hover .submit-arrow {
-    transform: translateX(4px);
-  }
-
-  /* Contact Info - Responsive */
-  .author-colophon {
-    @apply space-y-8 md:space-y-12;
-  }
-
-  .author-section,
-  .availability-section,
-  .social-section {
-    @apply space-y-4 md:space-y-6;
-  }
-
-  .section-title {
-    @apply font-serif font-medium text-gray-900 mb-4 md:mb-6;
-    font-size: clamp(1.25rem, 3vw, 1.5rem);
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-    padding-bottom: 4px;
-    position: relative;
-  }
-
-  .contact-details {
-    @apply space-y-3 md:space-y-4;
-  }
-
-  .contact-item {
-    @apply flex flex-col space-y-1 relative;
-  }
-
-  .interactive-contact-item {
-    transition: all 0.3s ease;
     
     &:hover {
       transform: translateX(4px);
     }
   }
 
-  .contact-label {
-    @apply font-mono uppercase tracking-wider text-gray-500;
-    font-size: clamp(0.65rem, 1.5vw, 0.75rem);
-  }
-
-  .contact-value {
-    @apply font-mono text-gray-800 relative;
-    font-size: clamp(0.875rem, 2vw, 1rem);
-    transition: color 0.3s ease;
-    word-break: break-all; /* Handle long email addresses */
-  }
-
-  .interactive-contact-value {
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #d97706;
-      transition: width 0.3s ease;
-    }
-
-    &:hover {
-      color: #d97706;
-    }
-
-    &:hover::after {
-      width: 100%;
-    }
-  }
-
-  .response-time {
-    @apply text-gray-600;
-    font-size: clamp(0.75rem, 1.8vw, 0.875rem);
-  }
-
-  /* Social Links - Responsive */
-  .social-links {
-    @apply flex flex-col space-y-2 md:space-y-3;
-  }
-
-  .social-link {
-    @apply flex items-center justify-between border border-gray-200 bg-white/50;
-    padding: clamp(0.75rem, 2vw, 1rem);
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
-
-  .interactive-social {
-    &:hover {
-      border-color: #d97706;
-      background: white;
-      transform: translateX(8px);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-  }
-
-  .social-label {
-    @apply font-mono text-gray-700;
-    font-size: clamp(0.75rem, 2vw, 0.875rem);
-  }
-
   .social-arrow {
-    @apply text-gray-400;
-    transition: all 0.3s ease;
+    @apply text-gryd-soft transition-all duration-300;
   }
 
-  .interactive-social:hover .social-arrow {
-    color: #d97706;
+  .social-link-item:hover .social-arrow {
+    @apply text-gryd-accent;
     transform: translateX(4px);
   }
 
-  /* Status Indicator - Responsive */
-  .status-indicator {
-    @apply flex items-center mb-3 md:mb-4;
-    gap: clamp(0.5rem, 2vw, 0.75rem);
-  }
-
-  .status-dot {
-    @apply rounded-full;
-    width: clamp(0.75rem, 2vw, 1rem);
-    height: clamp(0.75rem, 2vw, 1rem);
-    flex-shrink: 0; /* Prevent dot from shrinking */
-  }
-
-  .status-dot.available {
-    @apply bg-green-500;
+  /* Status Elements */
+  .status-dot-green {
+    @apply w-3 h-3 bg-green-500 rounded-full;
     box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+    animation: pulse-green 2s infinite;
   }
 
-  .pulsing-dot {
-    animation: pulse-available 2s infinite;
-  }
-
-  .status-text {
-    @apply font-mono text-gray-700 font-medium;
-    font-size: clamp(0.75rem, 2vw, 0.875rem);
-  }
-
-  .availability-note {
-    @apply leading-relaxed text-gray-600;
-    font-size: clamp(0.75rem, 2vw, 0.875rem);
-    font-family: 'Newsreader', Georgia, serif;
-  }
-
-  /* Availability Calendar - Responsive */
-  .availability-calendar {
-    @apply mt-4 md:mt-6 border border-gray-200 bg-white/50;
-    padding: clamp(0.75rem, 2vw, 1rem);
-  }
-
-  .calendar-header {
-    @apply mb-2 md:mb-3;
-  }
-
-  .calendar-label {
-    @apply font-mono uppercase tracking-wider text-gray-500;
-    font-size: clamp(0.65rem, 1.5vw, 0.75rem);
-  }
-
-  .calendar-date {
-    @apply flex items-center;
-    gap: clamp(0.5rem, 1.5vw, 0.75rem);
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .interactive-calendar:hover {
-    transform: scale(1.02);
-  }
-
-  .date-month {
-    @apply font-mono font-bold text-orange-600;
-    font-size: clamp(0.75rem, 2vw, 0.875rem);
-  }
-
-  .date-day {
-    @apply font-serif font-bold text-gray-900;
-    font-size: clamp(1.25rem, 3vw, 1.5rem);
-  }
-
-  .date-year {
-    @apply font-mono text-gray-500;
-    font-size: clamp(0.75rem, 2vw, 0.875rem);
-  }
-
-  /* Interactive Bindings - Responsive */
-  .page-binding {
-    @apply absolute top-0 h-full;
-    width: clamp(1rem, 2vw, 2rem);
-    background: linear-gradient(to right, 
-      rgba(0,0,0,0.15) 0%, 
-      rgba(139,69,19,0.1) 30%, 
-      rgba(139,69,19,0.05) 60%, 
-      transparent 100%);
-    transition: all 0.3s ease;
-  }
-
-  .left-binding {
-    @apply right-0;
-    box-shadow: inset -2px 0 8px rgba(0,0,0,0.2);
-  }
-
-  .right-binding {
-    @apply left-0;
-    background: linear-gradient(to left, 
-      rgba(0,0,0,0.15) 0%, 
-      rgba(139,69,19,0.1) 30%, 
-      rgba(139,69,19,0.05) 60%, 
-      transparent 100%);
-    box-shadow: inset 2px 0 8px rgba(0,0,0,0.2);
-  }
-
-  .center-binding {
-    @apply absolute top-0 left-1/2 transform -translate-x-1/2 h-full;
-    width: clamp(0.75rem, 1.5vw, 1rem);
-    background: linear-gradient(to bottom,
-      rgba(0,0,0,0.3) 0%,
-      rgba(139,69,19,0.2) 20%,
-      rgba(139,69,19,0.15) 40%,
-      rgba(139,69,19,0.15) 60%,
-      rgba(139,69,19,0.2) 80%,
-      rgba(0,0,0,0.3) 100%);
-    box-shadow: 
-      inset 2px 0 4px rgba(0,0,0,0.3),
-      inset -2px 0 4px rgba(0,0,0,0.3);
-    z-index: 20;
-    transition: all 0.3s ease;
-  }
-
-  /* Page Numbers - Fixed Positioning */
-  .page-numbers {
-    @apply absolute bottom-4 md:bottom-8 left-0 right-0 flex justify-between font-mono text-gray-400 z-10;
-    padding: 0 clamp(2rem, 5vw, 5rem);
-    font-size: clamp(0.65rem, 1.5vw, 0.75rem);
-  }
-
-  .animated-page-num {
-    opacity: 0;
-    animation: text-fade-in 0.5s ease-out 1.5s both;
-    transition: all 0.3s ease;
-  }
-
-  .animated-page-num:hover {
-    color: #d97706;
-    transform: scale(1.1);
-  }
-
-  /* Publication Details - Responsive */
-  .publication-details {
-    @apply mt-12 md:mt-16 pt-6 md:pt-8;
-  }
-
-  .pub-line {
-    @apply w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent mb-3 md:mb-4;
-    transform: scaleX(0);
-    transition: transform 0.8s ease;
-  }
-
-  .animated-pub-line {
-    animation: line-expand 1s ease-out 1.8s both;
-  }
-
-  .pub-info {
-    @apply flex items-center justify-center font-mono uppercase tracking-wider text-gray-500 mb-3 md:mb-4;
-    font-size: clamp(0.65rem, 1.5vw, 0.75rem);
-    gap: clamp(0.5rem, 1vw, 1rem);
-    opacity: 0;
-    animation: text-fade-in 0.8s ease-out 2s both;
-    flex-wrap: wrap; /* Allow wrapping on small screens */
-  }
-
-  .pub-separator {
-    @apply opacity-40;
-  }
-
-  /* Enhanced Back Cover - Responsive */
-  .back-cover {
-    @apply min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center relative overflow-hidden;
-    background-image: 
-      radial-gradient(circle at 1px 1px, rgba(0,0,0,0.1) 1px, transparent 0);
-    background-size: 30px 30px;
-    padding: clamp(2rem, 5vw, 4rem);
-  }
-
-  .back-cover-content {
-    @apply text-center relative z-10;
-  }
-
-  .publisher-mark {
-    @apply flex flex-col items-center;
-    gap: clamp(1rem, 3vw, 1.5rem);
-  }
-
-  .logo-symbol {
-    @apply rounded-full bg-gray-900 text-white flex items-center justify-center font-serif font-bold;
-    width: clamp(4rem, 8vw, 5rem);
-    height: clamp(4rem, 8vw, 5rem);
-    font-size: clamp(1.5rem, 4vw, 2rem);
-    box-shadow: 
-      0 8px 16px rgba(0,0,0,0.2),
-      inset 0 2px 4px rgba(255,255,255,0.1);
-    transition: all 0.8s ease;
-  }
-
-  .floating-logo {
-    animation: gentle-float 6s ease-in-out infinite;
-  }
-
-  .publisher-text {
-    @apply flex flex-col items-center font-mono uppercase tracking-wider text-gray-600 space-y-1;
-    font-size: clamp(0.65rem, 1.5vw, 0.75rem);
-    transition: all 0.3s ease;
-  }
-
-  .interactive-publisher:hover .publisher-text {
-    color: #d97706;
-    transform: translateY(-2px);
-  }
-
-  .interactive-publisher:hover .logo-symbol {
-    transform: rotateY(360deg) scale(1.1);
-  }
-
-  /* Animations */
-  @keyframes paper-settle-left {
-    0% {
-      transform: rotateY(10deg) translateY(-100px) translateX(-50px);
-      opacity: 0;
-    }
-    100% {
-      transform: rotateY(2deg) translateY(0) translateX(0);
-      opacity: 1;
-    }
-  }
-
-  @keyframes paper-settle-right {
-    0% {
-      transform: rotateY(-10deg) translateY(-100px) translateX(50px);
-      opacity: 0;
-    }
-    100% {
-      transform: rotateY(-2deg) translateY(0) translateX(0);
-      opacity: 1;
-    }
-  }
-
-  @keyframes content-fade-in {
-    0% {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes line-expand {
-    0% { 
-      width: 0;
-      transform: scaleX(0);
-    }
-    100% { 
-      width: 4rem;
-      transform: scaleX(1);
-    }
-  }
-
-  @keyframes text-fade-in {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes title-rise {
-    0% {
-      opacity: 0;
-      transform: translateY(40px) rotateX(15deg);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0) rotateX(0);
-    }
-  }
-
-  @keyframes gentle-float {
-    0%, 100% { 
-      transform: translateY(0) rotateZ(0deg); 
-    }
-    50% { 
-      transform: translateY(-8px) rotateZ(2deg); 
-    }
-  }
-
-  @keyframes arrow-pulse {
-    0%, 100% { 
-      transform: translateX(0) scale(1); 
-    }
-    50% { 
-      transform: translateX(2px) scale(1.1); 
-    }
-  }
-
-  @keyframes pulse-available {
+  @keyframes pulse-green {
     0%, 100% { 
       opacity: 1; 
       box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
@@ -727,95 +99,30 @@
     }
   }
 
-  /* Enhanced Responsive Design */
-  @media (max-width: 1024px) {
-    .contact-left-page,
-    .contact-right-page {
-      transform: rotateY(1deg);
-    }
+  /* Availability Card */
+  .availability-card {
+    @apply p-4 border border-gryd-soft/20 rounded hover:border-gryd-accent/50 transition-all duration-300;
+  }
+
+  .schedule-link {
+    @apply block text-gryd-text hover:text-gryd-accent transition-colors duration-300;
+    text-decoration: none;
     
-    .contact-left-page:hover,
-    .contact-right-page:hover {
-      transform: rotateY(0.5deg) translateZ(5px);
+    &:hover {
+      transform: scale(1.02);
     }
   }
 
+  /* Responsive Design */
   @media (max-width: 768px) {
-    .contact-editorial-spread {
-      flex-direction: column;
-      min-height: auto;
+    .flip-card-front,
+    .flip-card-back {
+      padding: 1.5rem;
+      min-height: 500px;
     }
     
-    .contact-left-page,
-    .contact-right-page {
-      transform: none;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-      animation: none;
-      flex: none;
-    }
-    
-    .contact-left-page:hover,
-    .contact-right-page:hover {
-      transform: none;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-    }
-    
-    .center-binding {
-      display: none;
-    }
-    
-    .page-numbers {
-      position: relative;
-      bottom: auto;
-      margin-top: 2rem;
-      padding: 0 2rem;
-    }
-    
-    .interactive-social:hover {
-      transform: translateX(4px);
-    }
-    
-    .marker-line {
-      width: 2rem !important;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .social-links {
-      @apply space-y-2;
-    }
-
-    .editorial-body {
-      max-width: 100%;
-    }
-    
-    .pub-info {
-      text-align: center;
-      line-height: 1.5;
-    }
-    
-    .pub-separator {
-      display: none;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .page-content {
-      padding: 1.5rem 1rem 1rem;
-    }
-    
-    .contact-magazine-container {
-      perspective: none;
-    }
-    
-    .editorial-title {
-      font-size: 2rem;
-      line-height: 1.1;
-    }
-    
-    .drop-cap {
-      font-size: 2.5rem;
-      margin-right: 0.5rem;
+    .flip-card-container {
+      min-height: 500px;
     }
   }
 }

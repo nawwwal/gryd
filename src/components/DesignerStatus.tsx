@@ -1,32 +1,34 @@
 
 const DesignerStatus = () => {
   return (
-    <div className="availability-section">
-      <h3 className="section-title">Current Status</h3>
-      <div className="status-indicator">
-        <div className="status-dot available pulsing-dot"></div>
-        <span className="status-text">Open to new opportunities</span>
-      </div>
-      <p className="availability-note">
-        Currently exploring product design roles and strategic partnerships. 
-        Passionate about creating meaningful experiences that bridge 
-        user needs with business objectives.
-      </p>
-      
-      <div className="availability-calendar">
-        <div className="calendar-header">
-          <span className="calendar-label">Let's Connect</span>
+    <div className="space-y-8">
+      <div className="space-y-6">
+        <h3 className="subhead">Current Status</h3>
+        <div className="flex items-center space-x-3">
+          <div className="status-dot-green"></div>
+          <span className="body font-medium">Open to new opportunities</span>
         </div>
-        <div className="calendar-date interactive-calendar">
+        <p className="body text-gryd-soft">
+          Currently exploring product design roles and strategic partnerships. 
+          Passionate about creating meaningful experiences that bridge 
+          user needs with business objectives.
+        </p>
+      </div>
+      
+      <div className="availability-card">
+        <div className="space-y-3">
+          <span className="caption text-gryd-soft">Let's Connect</span>
           <a 
             href="https://calendly.com/your-handle" 
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 text-decoration-none"
+            className="schedule-link"
           >
-            <span className="date-month">SCHEDULE</span>
-            <span className="date-day">A</span>
-            <span className="date-year">CONVERSATION</span>
+            <div className="flex items-center space-x-4">
+              <span className="body font-medium">SCHEDULE</span>
+              <span className="subhead">A</span>
+              <span className="body font-medium">CONVERSATION</span>
+            </div>
           </a>
         </div>
       </div>
