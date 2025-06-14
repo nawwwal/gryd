@@ -1,37 +1,9 @@
-
 import ScrollFade from '../components/ScrollFade';
 import MagazineSection from '../components/MagazineSection';
 import ProjectCard from '../components/ProjectCard';
+import { projects } from '../data/projects';
 
-const topProjects = [
-  {
-    slug: 'tamed-tax-chaos',
-    title: 'tamed tax chaos',
-    subtitle: 'rebuilt checkout flow from scratch',
-    description: 'users were abandoning carts because tax calculation took forever. fixed it in 72 hours.',
-    image: '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png',
-    category: 'product design',
-    year: '2024'
-  },
-  {
-    slug: 'channeled-dashboard-doubt',
-    title: 'channeled dashboard doubt', 
-    subtitle: 'turned data paralysis into clarity',
-    description: 'sales team had dashboards they never used. made them obsess over 3 numbers instead.',
-    image: '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png',
-    category: 'ux design',
-    year: '2024'
-  },
-  {
-    slug: 'fixed-signup-panic',
-    title: 'fixed signup panic',
-    subtitle: 'deleted 80% of the form fields', 
-    description: '7-step signup became 1 step. conversion jumped from 2% to 8%.',
-    image: '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png',
-    category: 'conversion',
-    year: '2024'
-  }
-];
+const topProjects = projects.slice(0, 3);
 
 const Index = () => {
   return (
@@ -55,6 +27,7 @@ const Index = () => {
       {/* Hero Section - Magazine Style */}
       <MagazineSection className="hero-section">
         <div className="magazine-grid">
+          {/* Hero Content */}
           <div className="hero-content">
             <ScrollFade>
               <div className="hero-text">
@@ -88,7 +61,7 @@ const Index = () => {
                   <span className="cutout-label">featured work</span>
                   <div className="cutout-stats">
                     <div className="stat-item">
-                      <span className="stat-number">3</span>
+                      <span className="stat-number">{projects.length}</span>
                       <span className="stat-label">projects</span>
                     </div>
                     <div className="stat-item">

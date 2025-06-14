@@ -1,33 +1,7 @@
 
-import { Link } from 'react-router-dom';
 import ScrollFade from '../components/ScrollFade';
-
-const projects = [
-  {
-    slug: 'tamed-tax-chaos',
-    title: 'tamed tax chaos',
-    subtitle: 'rebuilt checkout flow from scratch',
-    description: 'users were abandoning carts because tax calculation took forever. fixed it in 72 hours.',
-  },
-  {
-    slug: 'channeled-dashboard-doubt',
-    title: 'channeled dashboard doubt',
-    subtitle: 'turned data paralysis into clarity',
-    description: 'sales team had dashboards they never used. made them obsess over 3 numbers instead.',
-  },
-  {
-    slug: 'fixed-signup-panic',
-    title: 'fixed signup panic',
-    subtitle: 'deleted 80% of the form fields',
-    description: '7-step signup became 1 step. conversion jumped from 2% to 8%.',
-  },
-  {
-    slug: 'shipped-without-designers',
-    title: 'shipped without designers',
-    subtitle: 'b2b product with 2 developers',
-    description: 'no design budget, no problem. built a system that got out of users\' way.',
-  },
-];
+import { projects } from '../data/projects';
+import ProjectCard from '../components/ProjectCard';
 
 const Work = () => {
   return (
@@ -43,24 +17,10 @@ const Work = () => {
         </div>
       </ScrollFade>
 
-      <div className="space-y-0 pt-8">
+      <div className="projects-grid mt-16">
         {projects.map((project, index) => (
           <ScrollFade key={project.slug} delay={index * 100}>
-            <Link to={`/work/${project.slug}`}>
-              <article className="project-card group cursor-pointer">
-                <div className="space-y-4">
-                  <h2 className="headline text-4xl group-hover:text-gryd-accent transition-colors">
-                    {project.title}
-                  </h2>
-                  <p className="subhead text-gryd-accent">
-                    {project.subtitle}
-                  </p>
-                  <p className="body text-gryd-soft max-w-2xl">
-                    {project.description}
-                  </p>
-                </div>
-              </article>
-            </Link>
+            <ProjectCard project={project} index={-1} />
           </ScrollFade>
         ))}
       </div>
