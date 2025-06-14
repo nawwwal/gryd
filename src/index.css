@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -456,7 +457,7 @@
   }
 
   .magazine-logo {
-    @apply font-serif text-6xl font-black text-center letter-spacing-tight;
+    @apply font-serif text-6xl font-black text-center tracking-tight;
     text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
   }
 
