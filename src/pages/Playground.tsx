@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from 'react';
 import ScrollFade from '../components/ScrollFade';
 import { loadPlaygroundExperiments } from '../utils/contentLoader';
@@ -6,14 +7,36 @@ import { useGyroscopic } from '../hooks/useGyroscopic';
 
 const Playground = () => {
   const masonryRef = useRef<HTMLDivElement>(null);
+  const backgroundRef = useRef<HTMLDivElement>(null);
   const [experiments, setExperiments] = useState<PlaygroundExperiment[]>([]);
   const [loading, setLoading] = useState(true);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  
   const notebookRef = useGyroscopic({
     maxRotation: 8,
     intensity: 1.5,
     restRotationX: 1,
     restRotationY: -2
   });
+
+  // Mouse tracking for interactive background
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (backgroundRef.current) {
+        const rect = backgroundRef.current.getBoundingClientRect();
+        setMousePos({
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top
+        });
+      }
+    };
+
+    const backgroundElement = backgroundRef.current;
+    if (backgroundElement) {
+      backgroundElement.addEventListener('mousemove', handleMouseMove);
+      return () => backgroundElement.removeEventListener('mousemove', handleMouseMove);
+    }
+  }, []);
 
   useEffect(() => {
     const loadContent = async () => {
@@ -71,8 +94,15 @@ const Playground = () => {
     <div className="magazine-container">
       {/* Enhanced Experimental Hero */}
       <div className="playground-hero-container">
-        <div className="playground-hero-background">
-          <div className="halftone-pattern"></div>
+        <div 
+          ref={backgroundRef}
+          className="playground-hero-background"
+          style={{
+            '--mouse-x': `${mousePos.x}px`,
+            '--mouse-y': `${mousePos.y}px`
+          } as React.CSSProperties}
+        >
+          <div className="interactive-halftone-pattern"></div>
           <div className="newsprint-grain"></div>
           <div className="vintage-texture"></div>
         </div>
@@ -95,9 +125,9 @@ const Playground = () => {
                   {'PLAYGROUND'.split('').map((letter, index) => (
                     <span 
                       key={index} 
-                      className="playground-letter experimental-letter" 
+                      className="playground-letter experimental-letter visible" 
                       style={{ 
-                        animationDelay: `${index * 200}ms`,
+                        animationDelay: `${index * 100}ms`,
                         '--letter-index': index
                       } as React.CSSProperties}
                       data-letter={letter}
@@ -111,7 +141,7 @@ const Playground = () => {
               
               <div className="lab-warning animated-warning">
                 <div className="warning-triangle pulse-triangle">⚠</div>
-                <span>Most of this is useless. Some of it changes everything.</span>
+                <span className="warning-text">Most of this is useless. Some of it changes everything.</span>
               </div>
             </div>
             
