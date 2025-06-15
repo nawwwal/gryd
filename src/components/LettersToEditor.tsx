@@ -41,46 +41,6 @@ const LettersToEditor = () => {
                   </div>
                 </div>
 
-                <div className="editorial-address">
-                  <div className="address-header">Editorial Office</div>
-                  <div className="address-line">The Gryd Design Quarterly</div>
-                  <div className="address-line">Digital Publishing House</div>
-                  <div className="address-line">Available Worldwide</div>
-                </div>
-              </div>
-
-              <div className="letter-section">
-                <h4 className="font-serif text-xl font-bold text-gray-900 mb-4">
-                  Submission Guidelines
-                </h4>
-                
-                <div className="submission-guidelines">
-                  <div className="guideline-item">
-                    <div className="guideline-bullet"></div>
-                    <div className="guideline-text">
-                      Project inquiries should include scope, timeline, and budget range
-                    </div>
-                  </div>
-                  <div className="guideline-item">
-                    <div className="guideline-bullet"></div>
-                    <div className="guideline-text">
-                      Editorial feedback welcomed on published case studies
-                    </div>
-                  </div>
-                  <div className="guideline-item">
-                    <div className="guideline-bullet"></div>
-                    <div className="guideline-text">
-                      Guest contributions considered for future issues
-                    </div>
-                  </div>
-                  <div className="guideline-item">
-                    <div className="guideline-bullet"></div>
-                    <div className="guideline-text">
-                      All correspondence reviewed by the editorial team
-                    </div>
-                  </div>
-                </div>
-
                 <div className="signature-section">
                   <div className="editor-signature">
                     Looking forward to your correspondence

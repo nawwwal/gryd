@@ -1,4 +1,3 @@
-
 @import './page-headers.css';
 @import './contact.css';
 
@@ -17,170 +16,125 @@
     @apply max-w-6xl mx-auto px-8;
   }
 
-  /* Collapsible Magazine Navigation */
-  .magazine-masthead-nav {
-    @apply fixed top-0 left-0 right-0 z-50 bg-white shadow-md;
+  /* Compact Newspaper Header */
+  .newspaper-header {
+    @apply fixed top-0 left-0 right-0 z-50 bg-white shadow-lg;
+    height: 60px;
     background: 
       linear-gradient(135deg, #ffffff 0%, #fafafa 100%),
-      radial-gradient(circle at 10% 20%, rgba(0,0,0,0.02) 1px, transparent 1px);
-    background-size: 100% 100%, 15px 15px;
-    border-bottom: 2px solid #d97706;
+      radial-gradient(circle at 25% 25%, rgba(139,69,19,0.02) 1px, transparent 1px),
+      radial-gradient(circle at 75% 75%, rgba(139,69,19,0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 15px 15px, 20px 20px;
+    border-bottom: 3px solid #d97706;
+    transition: transform 0.3s ease-in-out;
+    overflow: hidden;
   }
 
-  .masthead-paper {
-    @apply relative;
-    background: inherit;
+  .header-visible {
+    transform: translateY(0);
   }
 
-  .paper-binding {
-    @apply absolute left-0 top-0 w-3 h-full bg-gradient-to-r from-gray-200 to-gray-100;
-    box-shadow: 
-      inset -1px 0 2px rgba(0,0,0,0.1),
-      inset 1px 0 1px rgba(255,255,255,0.8);
+  .header-hidden {
+    transform: translateY(-100%);
   }
 
-  /* Minimal Header - Always Visible */
-  .minimal-header {
-    @apply relative z-10 bg-inherit;
+  .newspaper-pattern {
+    @apply absolute top-0 left-0 w-full h-full opacity-20;
+    background-image: 
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(139,69,19,0.1) 2px,
+        rgba(139,69,19,0.1) 3px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 15px,
+        rgba(139,69,19,0.05) 15px,
+        rgba(139,69,19,0.05) 16px
+      );
   }
 
-  .minimal-container {
-    @apply flex items-center justify-between px-8 py-3 ml-3;
+  .newspaper-grid {
+    @apply absolute top-0 left-0 w-full h-full opacity-10;
+    background-image: 
+      radial-gradient(circle at 2px 2px, rgba(139,69,19,0.3) 1px, transparent 1px);
+    background-size: 12px 12px;
+    animation: gridFloat 8s ease-in-out infinite;
   }
 
-  .minimal-left {
-    @apply flex-shrink-0;
+  .newspaper-container {
+    @apply relative h-full flex items-center justify-between px-8;
   }
 
-  .minimal-logo {
-    @apply transition-colors hover:text-orange-600;
-  }
-
-  .minimal-title {
-    @apply font-serif text-xl font-black tracking-tight text-gray-900;
-    text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
-  }
-
-  .minimal-nav {
-    @apply flex items-center space-x-6;
-  }
-
-  .minimal-nav-link {
-    @apply text-sm font-mono uppercase tracking-wider text-gray-600;
-    @apply hover:text-orange-600 transition-colors;
-  }
-
-  .minimal-nav-link.active {
-    @apply text-orange-600 font-bold;
-  }
-
-  .expand-trigger {
-    @apply flex items-center justify-center w-8 h-8 text-gray-600;
-    @apply hover:text-orange-600 hover:bg-gray-100 rounded-full transition-all;
-  }
-
-  /* Expandable Masthead Content */
-  .masthead-expandable {
-    @apply overflow-hidden;
-    /* Fold animation effect */
-    transform-origin: top;
-    animation: unfoldPaper 0.4s ease-out;
-  }
-
-  .masthead-expandable[data-state="closed"] {
-    animation: foldPaper 0.3s ease-in;
-  }
-
-  .masthead-container {
-    @apply px-8 py-4 ml-3 space-y-3;
-    background: 
-      linear-gradient(135deg, #fefefe 0%, #f8f8f8 100%),
-      radial-gradient(circle at 20% 30%, rgba(139,69,19,0.03) 1px, transparent 1px);
-    background-size: 100% 100%, 25px 25px;
-    border-top: 1px solid rgba(0,0,0,0.05);
-  }
-
-  /* Full Publication Details */
-  .publication-header {
-    @apply flex justify-between items-center text-xs text-gray-600 border-b border-gray-200 pb-2;
-  }
-
-  .issue-details {
-    @apply font-mono uppercase tracking-wider;
-  }
-
-  .publication-date {
-    @apply font-mono uppercase tracking-wider;
-  }
-
-  /* Full Main Masthead */
-  .masthead-main {
-    @apply flex items-center justify-between py-2;
-  }
-
-  .masthead-left {
-    @apply flex-shrink-0;
+  .newspaper-left {
+    @apply flex items-center space-x-4 text-xs font-mono uppercase tracking-widest text-gray-600;
   }
 
   .publication-mark {
-    @apply text-xs font-mono uppercase tracking-wider text-gray-500;
+    @apply font-bold;
   }
 
-  .masthead-center {
-    @apply flex-1 text-center;
+  .issue-number {
+    @apply opacity-70;
   }
 
-  .magazine-title {
-    @apply block transition-colors hover:text-orange-600;
+  .newspaper-center {
+    @apply absolute left-1/2 transform -translate-x-1/2;
   }
 
-  .title-the {
-    @apply block text-xs font-mono uppercase tracking-widest text-gray-500;
+  .newspaper-logo {
+    @apply flex items-baseline space-x-1 transition-colors hover:text-orange-600;
   }
 
-  .title-main {
-    @apply block font-serif text-3xl font-black tracking-tight text-gray-900;
+  .logo-the {
+    @apply text-xs font-serif font-medium text-gray-600 tracking-widest;
+  }
+
+  .logo-gryd {
+    @apply text-2xl font-serif font-black tracking-tight text-gray-900;
     text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
   }
 
-  .title-subtitle {
-    @apply block text-xs text-gray-600 font-normal;
+  .newspaper-right {
+    @apply flex items-center;
   }
 
-  .masthead-right {
-    @apply flex-shrink-0;
+  .newspaper-nav {
+    @apply flex items-center space-x-6;
   }
 
-  .download-issue-btn {
-    @apply flex items-center space-x-1 text-xs font-mono uppercase tracking-wider;
-    @apply text-gray-600 hover:text-orange-600 transition-colors px-3 py-1;
-    @apply border border-gray-300 hover:border-orange-600 rounded;
+  .newspaper-nav-link {
+    @apply text-sm font-mono uppercase tracking-wider text-gray-600;
+    @apply hover:text-orange-600 transition-colors relative;
+    padding: 4px 8px;
   }
 
-  /* Full Navigation Sections */
-  .masthead-sections {
-    @apply border-t border-gray-200 pt-2;
+  .newspaper-nav-link::before {
+    content: '';
+    @apply absolute left-0 top-0 w-full h-full bg-orange-100 opacity-0 transition-opacity;
+    transform: skew(-5deg);
+    z-index: -1;
   }
 
-  .sections-nav {
-    @apply flex justify-center space-x-8;
+  .newspaper-nav-link:hover::before {
+    @apply opacity-100;
   }
 
-  .section-link {
-    @apply flex items-center space-x-2 text-xs font-mono uppercase tracking-wider;
-    @apply text-gray-600 hover:text-orange-600 transition-colors py-1;
-  }
-
-  .section-link.active {
+  .newspaper-nav-link.active {
     @apply text-orange-600 font-bold;
   }
 
-  .section-number {
-    @apply text-xs;
+  .newspaper-nav-link.active::before {
+    @apply opacity-100;
   }
 
-  .section-label {
-    @apply text-xs;
+  .newspaper-border-bottom {
+    @apply absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-orange-600 via-orange-500 to-orange-600;
+    background-size: 200% 100%;
+    animation: borderShimmer 3s ease-in-out infinite;
   }
 
   /* Magazine Hero Section */
@@ -402,7 +356,7 @@
     @apply hover:text-orange-700 transition-colors;
   }
 
-  /* Letters to the Editor Section */
+  /* Letters to the Editor Section - Now with editorial-container width */
   .letters-to-editor {
     @apply bg-white border-t-4 border-orange-600;
     background: 
@@ -415,7 +369,7 @@
   }
 
   .letters-paper {
-    @apply relative editorial-container py-16;
+    @apply relative editorial-container py-12;
   }
 
   .letters-binding {
@@ -426,11 +380,11 @@
   }
 
   .letters-content {
-    @apply max-w-4xl mx-auto ml-6 space-y-12;
+    @apply max-w-4xl mx-auto ml-6 space-y-8;
   }
 
   .letters-header {
-    @apply text-center space-y-6;
+    @apply text-center space-y-4;
   }
 
   .letters-category {
@@ -438,7 +392,7 @@
   }
 
   .letters-title {
-    @apply font-serif text-4xl font-bold text-gray-900;
+    @apply font-serif text-3xl font-bold text-gray-900;
   }
 
   .letters-subtitle {
@@ -450,7 +404,7 @@
   }
 
   .letters-body {
-    @apply grid md:grid-cols-2 gap-12;
+    @apply space-y-8;
   }
 
   .letter-section {
@@ -458,57 +412,27 @@
   }
 
   .letter-intro {
-    @apply text-lg leading-relaxed text-gray-700;
+    @apply text-lg leading-relaxed text-gray-700 text-center;
   }
 
   .contact-details {
-    @apply space-y-4;
+    @apply grid md:grid-cols-3 gap-6 max-w-2xl mx-auto;
   }
 
   .contact-item {
-    @apply flex items-start space-x-3;
+    @apply text-center space-y-2;
   }
 
   .contact-label {
-    @apply font-mono text-sm uppercase tracking-wider text-gray-500 min-w-20;
+    @apply font-mono text-sm uppercase tracking-wider text-gray-500;
   }
 
   .contact-value {
-    @apply text-gray-900;
-  }
-
-  .editorial-address {
-    @apply bg-gray-50 p-6 border-l-4 border-orange-600 space-y-3;
-    background: 
-      linear-gradient(135deg, #f9f7f4 0%, #f5f3f0 100%);
-  }
-
-  .address-header {
-    @apply font-serif text-lg font-bold text-gray-900;
-  }
-
-  .address-line {
-    @apply text-gray-700;
-  }
-
-  .submission-guidelines {
-    @apply space-y-4;
-  }
-
-  .guideline-item {
-    @apply flex items-start space-x-3;
-  }
-
-  .guideline-bullet {
-    @apply w-2 h-2 bg-orange-600 rounded-full mt-2 flex-shrink-0;
-  }
-
-  .guideline-text {
-    @apply text-gray-700;
+    @apply text-gray-900 font-medium;
   }
 
   .signature-section {
-    @apply text-center space-y-4 pt-8 border-t border-gray-200;
+    @apply text-center space-y-3 pt-6 border-t border-gray-200;
   }
 
   .editor-signature {
@@ -571,6 +495,19 @@
   }
 }
 
+/* Newspaper Header Animations */
+@keyframes gridFloat {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(2px) translateY(-1px); }
+  50% { transform: translateX(-1px) translateY(1px); }
+  75% { transform: translateX(1px) translateY(-2px); }
+}
+
+@keyframes borderShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
 /* Newspaper Fold Animations */
 @keyframes unfoldPaper {
   0% {
@@ -611,4 +548,24 @@
     transform: rotateX(2deg) rotateY(-1deg) translateY(0);
     opacity: 1;
   }
+}
+
+@keyframes classified-pop-in {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) rotate(-3deg) scale(0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-5px) rotate(1deg) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(-0.5deg) scale(1);
+  }
+}
+
+@keyframes line-stretch {
+  0% { width: 0; }
+  100% { width: 8rem; }
 }
