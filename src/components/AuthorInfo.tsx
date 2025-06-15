@@ -1,7 +1,5 @@
-
 const AuthorInfo = () => {
-  return (
-    <div className="space-y-6">
+  return <div className="space-y-6">
       <div className="space-y-4">
         <h3 className="subhead text-lg">About the Author</h3>
         <div className="space-y-3">
@@ -9,9 +7,9 @@ const AuthorInfo = () => {
             <span className="caption text-gryd-soft">Designer</span>
             <div className="body font-medium">Aditya Nawal</div>
           </div>
-          <div className="space-y-1">
+          <div className="space-y-1 mx-0">
             <span className="caption text-gryd-soft">Email</span>
-            <a href="mailto:aditya@example.com" className="editorial-link body">
+            <a href="mailto:aditya@example.com" className="editorial-link body mx-[16px]">
               aditya@example.com
             </a>
           </div>
@@ -38,8 +36,6 @@ const AuthorInfo = () => {
           </a>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default AuthorInfo;
