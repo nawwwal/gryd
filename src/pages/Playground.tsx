@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 import ScrollFade from '../components/ScrollFade';
 import MagazineFooter from '../components/MagazineFooter';
@@ -6,7 +5,6 @@ import InteractiveBackground from '../components/InteractiveBackground';
 import { MorphingText } from '../components/MorphingText';
 import { loadPlaygroundExperiments } from '../utils/contentLoader';
 import { PlaygroundExperiment } from '../types/content';
-
 const Playground = () => {
   const masonryRef = useRef<HTMLDivElement>(null);
   const backgroundRef = useRef<HTMLDivElement>(null);
@@ -28,14 +26,12 @@ const Playground = () => {
         });
       }
     };
-
     const backgroundElement = backgroundRef.current;
     if (backgroundElement) {
       backgroundElement.addEventListener('mousemove', handleMouseMove);
       return () => backgroundElement.removeEventListener('mousemove', handleMouseMove);
     }
   }, []);
-
   useEffect(() => {
     const loadContent = async () => {
       try {
@@ -49,7 +45,6 @@ const Playground = () => {
     };
     loadContent();
   }, []);
-
   useEffect(() => {
     if (!loading && experiments.length > 0) {
       const cards = masonryRef.current?.querySelectorAll('.experiment-card');
@@ -72,7 +67,6 @@ const Playground = () => {
       });
     }
   }, [loading, experiments]);
-
   if (loading) {
     return <div className="magazine-container">
         <div className="editorial-container py-16">
@@ -83,7 +77,6 @@ const Playground = () => {
         </div>
       </div>;
   }
-
   return <div className="magazine-container">
       {/* Enhanced Experimental Hero - Full Viewport Height */}
       <div className="playground-hero-container">
@@ -101,12 +94,9 @@ const Playground = () => {
             <div className="lab-header-content">
               <div className="lab-title-section">
                 <div className="morphing-title-container">
-                  <MorphingText 
-                    texts={['PLAYGROUND', 'LABORATORY', 'WORKSHOP', 'STUDIO']}
-                    className="experimental-title"
-                  />
+                  <MorphingText texts={['PLAYGROUND', 'LABORATORY', 'WORKSHOP', 'STUDIO']} className="experimental-title" />
                 </div>
-                <div className="lab-subtitle animated-subtitle">Research Lab • Experiments & Dead Ends</div>
+                <div className="lab-subtitle animated-subtitle bg-transparent">Research Lab • Experiments & Dead Ends</div>
               </div>
               
               <div className="lab-warning animated-warning">
@@ -280,5 +270,4 @@ const Playground = () => {
       <MagazineFooter />
     </div>;
 };
-
 export default Playground;
