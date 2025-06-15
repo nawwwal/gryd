@@ -1,34 +1,12 @@
 
-/* Design Tokens - Load First */
-@import './styles/tokens/spacing.css';
-@import './styles/tokens/colors.css';
-@import './styles/tokens/typography.css';
-@import './styles/tokens/effects.css';
-
-/* Core Styles */
+/* Import all CSS modules */
 @import './styles/base.css';
-@import './styles/core/base.css';
-@import './styles/core/grid.css';
-
-/* Component Styles */
-@import './styles/components/paper.css';
-@import './styles/components/navigation.css';
-@import './styles/components/cards.css';
-
-/* Page Styles */
-@import './styles/pages/hero-sections.css';
-
-/* Typography and Articles */
 @import './styles/typography.css';
+@import './styles/magazine-layout.css';
 @import './styles/articles.css';
-
-/* Legacy Styles - To be refactored */
 @import './styles/playground.css';
 @import './styles/playground-hero.css';
 @import './styles/animations.css';
 @import './styles/about-editor.css';
-@import './styles/footer.css';
-
-/* Responsive Design */
-@import './styles/responsive/breakpoints.css';
 @import './styles/mobile-enhancements.css';
+@import './styles/footer.css';

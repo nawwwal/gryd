@@ -1,3 +1,4 @@
+
 @import './page-headers.css';
 @import './contact.css';
 @import './responsive.css';
@@ -368,6 +369,7 @@
     padding-right: clamp(1rem, 4vw, 4rem);
   }
 
+  /* ... keep existing code (article grid and other sections) */
   .article-grid {
     @apply space-y-8 sm:space-y-12;
     max-width: 1200px;
