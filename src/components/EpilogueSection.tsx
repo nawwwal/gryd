@@ -1,26 +1,21 @@
-
 import { useState, useEffect } from 'react';
 import ScrollFade from './ScrollFade';
 import AuthorInfo from './AuthorInfo';
 import DesignerStatus from './DesignerStatus';
-
 const EpilogueSection = () => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
-
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
-
-  return (
-    <div className="magazine-spread">
+  return <div className="magazine-spread">
       <ScrollFade>
         <div className="epilogue-section">
           <div className="flip-card-container">
             <div className={`flip-card ${isFlipped ? 'flipped' : ''}`}>
               {/* Front of the card */}
-              <div className="flip-card-front">
+              <div className="flip-card-front h-fit ">
                 <div className="epilogue-front-content">
                   {/* Page Header */}
                   <div className="text-center mb-12">
@@ -93,8 +88,6 @@ const EpilogueSection = () => {
           </div>
         </div>
       </ScrollFade>
-    </div>
-  );
+    </div>;
 };
-
 export default EpilogueSection;
