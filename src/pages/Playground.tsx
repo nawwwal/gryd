@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import ScrollFade from '../components/ScrollFade';
 import MagazineFooter from '../components/MagazineFooter';
 import InteractiveBackground from '../components/InteractiveBackground';
+import { MorphingText } from '../components/MorphingText';
 import { loadPlaygroundExperiments } from '../utils/contentLoader';
 import { PlaygroundExperiment } from '../types/content';
-import { useGyroscopic } from '../hooks/useGyroscopic';
 
 const Playground = () => {
   const masonryRef = useRef<HTMLDivElement>(null);
@@ -14,14 +14,6 @@ const Playground = () => {
   const [mousePos, setMousePos] = useState({
     x: 0,
     y: 0
-  });
-  
-  // Reduced gyroscopic intensity
-  const notebookRef = useGyroscopic({
-    maxRotation: 3,
-    intensity: 0.4,
-    restRotationX: 0.5,
-    restRotationY: -0.5
   });
 
   // Mouse tracking for interactive background
@@ -35,6 +27,7 @@ const Playground = () => {
         });
       }
     };
+
     const backgroundElement = backgroundRef.current;
     if (backgroundElement) {
       backgroundElement.addEventListener('mousemove', handleMouseMove);
@@ -91,28 +84,26 @@ const Playground = () => {
   }
 
   return <div className="magazine-container">
-      {/* Enhanced Experimental Hero */}
+      {/* Enhanced Experimental Hero - Full Height */}
       <div className="playground-hero-container">
         <div ref={backgroundRef} className="playground-hero-background">
           <InteractiveBackground mousePos={mousePos} />
         </div>
         
         <div className="playground-hero-content">
-          <div ref={notebookRef} className="lab-notebook enhanced-gyroscopic">
+          <div className="lab-notebook enhanced-gyroscopic">
             <div className="lab-header-content">
               <div className="lab-stamp animated-stamp">
                 <span>EXPERIMENTAL</span>
               </div>
               
               <div className="lab-title-section">
-                <h1 className="lab-title experimental-title">
-                  {'PLAYGROUND'.split('').map((letter, index) => <span key={index} className="playground-letter experimental-letter visible" style={{
-                  animationDelay: `${index * 100}ms`,
-                  '--letter-index': index
-                } as React.CSSProperties} data-letter={letter}>
-                      {letter}
-                    </span>)}
-                </h1>
+                <div className="morphing-title-container">
+                  <MorphingText 
+                    texts={['PLAYGROUND', 'LABORATORY', 'WORKSHOP', 'STUDIO']}
+                    className="experimental-title"
+                  />
+                </div>
                 <div className="lab-subtitle animated-subtitle">Research Lab • Experiments & Dead Ends</div>
               </div>
               
@@ -120,14 +111,6 @@ const Playground = () => {
                 <div className="warning-triangle pulse-triangle">⚠</div>
                 <span className="warning-text">Most of this is useless. Some of it changes everything.</span>
               </div>
-            </div>
-            
-            <div className="notebook-stains animated-stains">
-              <div className="coffee-stain growing-stain"></div>
-              <div className="ink-splatter floating-splatter"></div>
-              <div className="ink-drop drop-1"></div>
-              <div className="ink-drop drop-2"></div>
-              <div className="ink-drop drop-3"></div>
             </div>
           </div>
         </div>

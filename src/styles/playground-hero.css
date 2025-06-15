@@ -1,5 +1,6 @@
+
 @layer components {
-  /* Playground Hero Container */
+  /* Playground Hero Container - Full Height & Responsive */
   .playground-hero-container {
     @apply relative min-h-screen flex items-center justify-center overflow-hidden;
     background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 50%, #f0f0f0 100%);
@@ -11,124 +12,64 @@
     cursor: none;
   }
 
-  /* Hero Content */
+  /* Hero Content - Full Width */
   .playground-hero-content {
-    @apply relative z-10 w-full max-w-6xl mx-auto px-8;
+    @apply relative z-10 w-full h-full flex items-center justify-center;
+    padding: clamp(1rem, 4vw, 2rem);
   }
 
-  /* Enhanced Lab Notebook with Reduced Perspective */
+  /* Seamless Lab Notebook - No Perspective */
   .lab-notebook.enhanced-gyroscopic {
-    @apply relative mx-auto;
-    width: 900px;
-    height: 650px;
-    background: 
-      linear-gradient(135deg, #fefefe 0%, #f8f8f8 100%);
-    border: 3px solid #ddd;
-    border-radius: 12px;
-    box-shadow: 
-      0 15px 40px rgba(0,0,0,0.08),
-      inset 0 1px 0 rgba(255,255,255,0.8);
-    transition: all 0.2s ease-out;
-    
-    /* Subtle paper texture */
-    background-image: 
-      radial-gradient(circle at 25% 25%, rgba(0,0,0,0.01) 1px, transparent 1px),
-      radial-gradient(circle at 75% 75%, rgba(0,0,0,0.015) 1px, transparent 1px);
-    background-size: 30px 30px, 40px 40px;
+    @apply relative w-full h-full flex items-center justify-center;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    transform: none !important;
+    transition: none;
+    max-width: none;
+    max-height: none;
   }
 
   .lab-notebook.enhanced-gyroscopic:hover {
-    box-shadow: 
-      0 20px 50px rgba(0,0,0,0.12),
-      0 8px 20px rgba(0,0,0,0.08),
-      inset 0 1px 0 rgba(255,255,255,0.9);
+    transform: none !important;
+    box-shadow: none;
   }
 
-  /* Animated Notebook Rings */
-  .notebook-rings {
-    @apply absolute left-8 top-0 bottom-0 flex flex-col justify-center space-y-12;
-    width: 20px;
-  }
-
-  .ring {
-    @apply w-4 h-8 border-2 border-gray-400 rounded-full;
-    background: linear-gradient(135deg, #e0e0e0, #c0c0c0);
-    box-shadow: 
-      inset 2px 2px 4px rgba(0,0,0,0.1),
-      0 2px 4px rgba(0,0,0,0.2);
-  }
-
-  .ring-1 { animation: ring-float 4s ease-in-out infinite; }
-  .ring-2 { animation: ring-float 4s ease-in-out infinite 1.3s; }
-  .ring-3 { animation: ring-float 4s ease-in-out infinite 2.6s; }
-
-  /* Enhanced Lab Content with Proper Typography Hierarchy */
+  /* Enhanced Lab Content - Centered Layout */
   .lab-header-content {
-    @apply relative p-12 h-full flex flex-col justify-center;
-    margin-left: 60px;
+    @apply relative w-full max-w-6xl mx-auto text-center;
+    padding: clamp(2rem, 6vw, 4rem);
   }
 
-  /* Animated Stamp - Secondary Element */
+  /* Animated Stamp - Responsive */
   .animated-stamp {
-    @apply absolute top-8 right-8 bg-red-600 text-white px-4 py-2 transform -rotate-12;
-    font-family: 'Schibsted Grotesk', sans-serif;
+    @apply absolute top-4 right-4 sm:top-8 sm:right-8 bg-red-600 text-white px-3 py-2 sm:px-4 sm:py-2 transform -rotate-12;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
     font-weight: bold;
-    font-size: 0.85rem;
+    font-size: clamp(0.7rem, 2vw, 0.85rem);
     border: 3px solid #dc2626;
     box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
     animation: stamp-pulse 3s ease-in-out infinite;
   }
 
-  /* PRIMARY: Main Title with Proper Hierarchy */
+  /* Title Section - Responsive */
   .lab-title-section {
-    @apply text-center mb-8;
+    @apply text-center mb-6 sm:mb-8;
   }
 
-  .experimental-title {
-    @apply mb-4;
-    font-size: 5rem;
-    font-weight: 900;
-    line-height: 0.85;
-    color: #111;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+  /* Morphing Title Container */
+  .morphing-title-container {
+    @apply mb-4 sm:mb-6;
+    min-height: clamp(4rem, 12vw, 8rem);
   }
 
-  .experimental-letter {
-    @apply inline-block cursor-pointer;
-    font-family: 'Schibsted Grotesk', sans-serif;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-    opacity: 1;
-    transform: translateY(0) rotate(0deg);
-  }
-
-  .experimental-letter.visible {
-    animation: letter-entrance 0.8s ease-out forwards;
-  }
-
-  .experimental-letter:hover {
-    transform: translateY(-8px) scale(1.15) rotate(-3deg);
-    color: #fb923c;
-    text-shadow: 
-      0 4px 12px rgba(251, 146, 60, 0.3),
-      0 0 20px rgba(251, 146, 60, 0.2);
-    animation: font-cycle 1.8s ease-in-out infinite;
-    z-index: 10;
-  }
-
-  .experimental-letter:nth-child(odd):hover {
-    animation: font-cycle-alt 1.8s ease-in-out infinite;
-  }
-
-  /* SECONDARY: Subtitle with Proper Contrast */
+  /* Subtitle with Mono Font */
   .animated-subtitle {
-    @apply text-center text-gray-600 mb-6;
-    font-family: 'Schibsted Grotesk', sans-serif;
-    font-size: 1.1rem;
+    @apply text-center text-gray-600 mb-4 sm:mb-6;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
     text-transform: lowercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
     font-style: italic;
     font-weight: 400;
     animation: typewriter 2.5s steps(45) 1s forwards;
@@ -139,11 +80,11 @@
     margin: 0 auto 2rem;
   }
 
-  /* TERTIARY: Warning Text with Reduced Prominence */
+  /* Warning Text with Mono Font */
   .animated-warning {
     @apply flex items-center justify-center space-x-3 text-center;
-    font-family: 'Schibsted Grotesk', sans-serif;
-    font-size: 0.9rem;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
     color: #888;
   }
 
@@ -158,90 +99,21 @@
     filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.5));
   }
 
-  /* Animated Stains */
-  .animated-stains {
-    @apply absolute pointer-events-none;
-  }
-
-  .growing-stain {
-    @apply absolute bottom-16 right-16 w-12 h-12 rounded-full;
-    background: radial-gradient(circle, rgba(101, 67, 33, 0.2) 0%, transparent 70%);
-    animation: stain-grow 6s ease-in-out infinite;
-  }
-
-  .floating-splatter {
-    @apply absolute top-20 left-20 w-8 h-8;
-    background: 
-      radial-gradient(circle at 30% 30%, rgba(0,0,0,0.1) 2px, transparent 2px),
-      radial-gradient(circle at 70% 70%, rgba(0,0,0,0.08) 1px, transparent 1px);
-    background-size: 8px 8px, 12px 12px;
-    animation: splatter-float 8s ease-in-out infinite;
-  }
-
-  .ink-drop {
-    @apply absolute w-2 h-2 bg-black rounded-full opacity-20;
-  }
-
-  .drop-1 {
-    top: 40%;
-    left: 15%;
-    animation: drop-fall 10s ease-in-out infinite;
-  }
-
-  .drop-2 {
-    top: 60%;
-    right: 20%;
-    animation: drop-fall 10s ease-in-out infinite 3s;
-  }
-
-  .drop-3 {
-    bottom: 30%;
-    left: 70%;
-    animation: drop-fall 10s ease-in-out infinite 6s;
-  }
-
-  /* Hover Particles */
+  /* Remove Complex Decorative Elements */
+  .notebook-rings,
+  .ring,
+  .notebook-stains,
+  .animated-stains,
+  .growing-stain,
+  .floating-splatter,
+  .ink-drop,
   .hover-particles {
-    @apply absolute inset-0 pointer-events-none opacity-0;
-    transition: opacity 0.5s ease;
-  }
-
-  .lab-notebook:hover .hover-particles {
-    @apply opacity-100;
-  }
-
-  .particle {
-    @apply absolute w-1 h-1 bg-orange-400 rounded-full;
-    animation: particle-float 3s ease-in-out infinite;
-  }
-
-  .particle-1 {
-    top: 20%;
-    left: 30%;
-    animation-delay: 0s;
-  }
-
-  .particle-2 {
-    top: 70%;
-    left: 60%;
-    animation-delay: 0.8s;
-  }
-
-  .particle-3 {
-    top: 40%;
-    right: 25%;
-    animation-delay: 1.6s;
-  }
-
-  .particle-4 {
-    bottom: 30%;
-    left: 80%;
-    animation-delay: 2.4s;
+    display: none;
   }
 
   /* Fixed Experiments Header */
   .experiments-header-bar-new {
-    @apply flex justify-between items-end pb-8 mb-12 relative;
+    @apply flex flex-col sm:flex-row justify-between items-start sm:items-end pb-6 sm:pb-8 mb-8 sm:mb-12 relative;
     border-bottom: 2px solid #e5e5e5;
   }
 
@@ -255,91 +127,34 @@
     background: #fb923c;
     width: 8rem;
   }
+
+  .experiments-title-group {
+    @apply space-y-2 mb-4 sm:mb-0;
+  }
+
+  .experiments-meta {
+    @apply flex flex-col items-start sm:items-end text-left sm:text-right space-y-2;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: clamp(0.7rem, 1.5vw, 0.8rem);
+    text-transform: uppercase;
+    color: #666;
+  }
+
+  .lab-number {
+    @apply font-bold;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: #111;
+  }
+
+  .experiment-count {
+    @apply text-gray-500;
+  }
 }
 
 /* Enhanced Keyframe Animations */
-@keyframes halftone-shift {
-  0%, 100% { transform: translateX(0) translateY(0); }
-  25% { transform: translateX(8px) translateY(-8px); }
-  50% { transform: translateX(-5px) translateY(5px); }
-  75% { transform: translateX(5px) translateY(8px); }
-}
-
-@keyframes grain-move {
-  0% { transform: translateX(0) translateY(0); }
-  100% { transform: translateX(25px) translateY(-25px); }
-}
-
-@keyframes vintage-pulse {
-  0%, 100% { opacity: 0.1; }
-  50% { opacity: 0.15; }
-}
-
-@keyframes ring-float {
-  0%, 100% { transform: translateY(0) rotateZ(0deg); opacity: 1; }
-  50% { transform: translateY(-12px) rotateZ(180deg); opacity: 0.8; }
-}
-
 @keyframes stamp-pulse {
   0%, 100% { transform: rotate(-12deg) scale(1); }
   50% { transform: rotate(-10deg) scale(1.08); }
-}
-
-@keyframes letter-entrance {
-  0% {
-    opacity: 0;
-    transform: translateY(50px) rotate(5deg);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) rotate(0deg);
-  }
-}
-
-@keyframes font-cycle {
-  0%, 100% { 
-    font-family: 'Schibsted Grotesk', sans-serif; 
-    font-weight: 900;
-  }
-  20% { 
-    font-family: 'Fraunces', serif; 
-    font-style: italic; 
-    font-weight: 700;
-  }
-  40% { 
-    font-family: 'Platypi', serif; 
-    font-weight: 900; 
-    letter-spacing: 0.1em;
-  }
-  60% { 
-    font-family: 'Schibsted Grotesk', sans-serif; 
-    letter-spacing: 0.3em;
-    font-weight: bold;
-  }
-  80% { 
-    font-family: 'Platypi', serif; 
-    transform: translateY(-8px) scale(1.15) rotate(-3deg) scaleY(1.2);
-  }
-}
-
-@keyframes font-cycle-alt {
-  0%, 100% { 
-    font-family: 'Schibsted Grotesk', sans-serif; 
-    font-weight: 900;
-  }
-  25% { 
-    font-family: 'Platypi', serif; 
-    font-weight: bold; 
-    font-style: italic;
-  }
-  50% { 
-    font-family: 'Fraunces', serif; 
-    transform: translateY(-8px) scale(1.15) rotate(-3deg) scaleY(1.3);
-  }
-  75% { 
-    font-family: 'Platypi', serif; 
-    transform: translateY(-8px) scale(1.15) rotate(-3deg) skew(-10deg);
-  }
 }
 
 @keyframes typewriter {
@@ -352,53 +167,14 @@
   50% { transform: scale(1.3); opacity: 0.7; }
 }
 
-@keyframes stain-grow {
-  0%, 100% { transform: scale(1); opacity: 0.2; }
-  50% { transform: scale(1.4); opacity: 0.1; }
-}
-
-@keyframes splatter-float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-15px) rotate(180deg); }
-}
-
-@keyframes drop-fall {
-  0% { opacity: 0; transform: translateY(-20px); }
-  10% { opacity: 0.3; }
-  90% { opacity: 0.3; }
-  100% { opacity: 0; transform: translateY(20px); }
-}
-
-@keyframes particle-float {
-  0%, 100% { 
-    transform: translateY(0) scale(1); 
-    opacity: 0.8; 
-  }
-  50% { 
-    transform: translateY(-25px) scale(1.8); 
-    opacity: 1; 
-  }
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
   .playground-hero-container {
-    @apply min-h-[85vh] px-4;
-  }
-
-  .lab-notebook.enhanced-gyroscopic {
-    width: 100%;
-    max-width: 500px;
-    height: 450px;
-  }
-
-  .experimental-title {
-    @apply text-3xl;
+    @apply min-h-screen;
   }
 
   .lab-header-content {
-    @apply p-6;
-    margin-left: 30px;
+    padding: clamp(1.5rem, 4vw, 2rem);
   }
 
   .animated-stamp {
@@ -407,16 +183,29 @@
 
   .animated-subtitle {
     @apply text-sm;
+    white-space: normal;
+    border-right: none;
+    width: auto;
+    overflow: visible;
+    animation: none;
   }
 
   .animated-warning {
-    @apply text-xs;
+    @apply text-xs flex-col space-x-0 space-y-2;
+  }
+
+  .experiments-header-bar-new {
+    @apply flex-col items-start space-y-4;
+  }
+
+  .experiments-meta {
+    @apply items-start text-left;
   }
 }
 
 /* Editorial Lab Notes Section */
 .lab-notes-section {
-  @apply bg-gray-50 py-16 mt-16;
+  @apply bg-gray-50 py-12 sm:py-16 mt-12 sm:mt-16;
   border-top: 3px solid #2c2c2c;
   position: relative;
   
@@ -432,12 +221,12 @@
 }
 
 .lab-notes-container {
-  @apply max-w-6xl mx-auto px-8;
+  @apply max-w-6xl mx-auto px-4 sm:px-8;
 }
 
 .editorial-divider {
-  @apply flex items-center justify-center mb-12;
-  font-family: 'Schibsted Grotesk', sans-serif;
+  @apply flex items-center justify-center mb-8 sm:mb-12;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
 }
 
 .divider-ornament {
@@ -450,12 +239,13 @@
 }
 
 .divider-text {
-  @apply text-gray-600 text-sm font-bold uppercase tracking-widest mx-6;
+  @apply text-gray-600 text-xs sm:text-sm font-bold uppercase tracking-widest mx-4 sm:mx-6;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
   letter-spacing: 0.2em;
 }
 
 .lab-notes-content {
-  @apply grid md:grid-cols-2 gap-12 mb-12;
+  @apply grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 mb-8 sm:mb-12;
 }
 
 .editorial-column {
@@ -467,14 +257,14 @@
 }
 
 .editorial-title {
-  @apply text-2xl font-bold mb-2;
+  @apply text-xl sm:text-2xl font-bold mb-2;
   font-family: 'Platypi', serif;
   color: #2c2c2c;
 }
 
 .editorial-subtitle {
-  @apply text-sm text-gray-600 uppercase tracking-wider;
-  font-family: 'Schibsted Grotesk', sans-serif;
+  @apply text-xs sm:text-sm text-gray-600 uppercase tracking-wider;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
   letter-spacing: 0.1em;
 }
 
@@ -485,13 +275,12 @@
 .editorial-note {
   @apply text-gray-700 leading-relaxed text-justify;
   font-family: 'Fraunces', serif;
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
   line-height: 1.7;
-  column-count: 1;
 }
 
 .dropcap {
-  @apply float-left text-6xl font-bold leading-none mr-2 mt-1;
+  @apply float-left text-4xl sm:text-6xl font-bold leading-none mr-2 mt-1;
   font-family: 'Fraunces', serif;
   color: #2c2c2c;
   line-height: 0.8;
@@ -503,8 +292,8 @@
 
 .list-item {
   @apply flex items-start space-x-3;
-  font-family: 'Schibsted Grotesk', sans-serif;
-  font-size: 0.9rem;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: clamp(0.8rem, 1.8vw, 0.9rem);
   line-height: 1.6;
   color: #4a4a4a;
 }
@@ -515,16 +304,16 @@
 }
 
 .editorial-signature {
-  @apply flex items-center justify-end space-x-4 pt-8 border-t border-gray-300;
+  @apply flex flex-col sm:flex-row items-center sm:justify-end space-y-4 sm:space-y-0 sm:space-x-4 pt-8 border-t border-gray-300;
 }
 
 .signature-line {
-  @apply w-32 h-px bg-gray-400;
+  @apply w-24 sm:w-32 h-px bg-gray-400;
 }
 
 .signature-text {
-  @apply flex flex-col items-end;
-  font-family: 'Schibsted Grotesk', sans-serif;
+  @apply flex flex-col items-center sm:items-end;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
 }
 
 .signature-name {
@@ -533,35 +322,4 @@
 
 .signature-title {
   @apply text-xs text-gray-500 uppercase tracking-wider;
-}
-
-/* Responsive Design for Lab Notes */
-@media (max-width: 768px) {
-  .lab-notes-section {
-    @apply py-12 mt-12;
-  }
-  
-  .lab-notes-container {
-    @apply px-4;
-  }
-  
-  .lab-notes-content {
-    @apply grid-cols-1 gap-8;
-  }
-  
-  .editorial-title {
-    @apply text-xl;
-  }
-  
-  .editorial-note {
-    @apply text-sm;
-  }
-  
-  .dropcap {
-    @apply text-4xl;
-  }
-  
-  .editorial-signature {
-    @apply justify-center;
-  }
 }
