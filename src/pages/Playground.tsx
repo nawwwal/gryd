@@ -5,6 +5,7 @@ import InteractiveBackground from '../components/InteractiveBackground';
 import { MorphingText } from '../components/MorphingText';
 import { loadPlaygroundExperiments } from '../utils/contentLoader';
 import { PlaygroundExperiment } from '../types/content';
+
 const Playground = () => {
   const masonryRef = useRef<HTMLDivElement>(null);
   const backgroundRef = useRef<HTMLDivElement>(null);
@@ -85,8 +86,8 @@ const Playground = () => {
         </div>
         
         <div className="playground-hero-content">
-          {/* Centered Experimental Tag */}
-          <div className="experimental-tag-centered">
+          {/* Realistic Paper Stamp */}
+          <div className="experimental-stamp-realistic">
             <span>EXPERIMENTAL</span>
           </div>
           
@@ -96,12 +97,15 @@ const Playground = () => {
                 <div className="morphing-title-container">
                   <MorphingText texts={['PLAYGROUND', 'LABORATORY', 'WORKSHOP', 'STUDIO']} className="experimental-title" />
                 </div>
-                <div className="lab-subtitle animated-subtitle bg-transparent">Research Lab • Experiments & Dead Ends</div>
-              </div>
-              
-              <div className="lab-warning animated-warning">
-                <div className="warning-triangle pulse-triangle">⚠</div>
-                <span className="warning-text">Most of this is useless. Some of it changes everything.</span>
+                
+                {/* Combined Subtitle and Warning */}
+                <div className="lab-combined-content">
+                  <div className="lab-subtitle-text">Research Lab • Experiments & Dead Ends</div>
+                  <div className="lab-warning-box">
+                    <div className="warning-triangle">⚠</div>
+                    <span className="warning-text">Most of this is useless. Some of it changes everything.</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -270,4 +274,5 @@ const Playground = () => {
       <MagazineFooter />
     </div>;
 };
+
 export default Playground;

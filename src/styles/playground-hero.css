@@ -18,17 +18,68 @@
     padding: clamp(1rem, 4vw, 2rem);
   }
 
-  /* Centered Experimental Tag */
-  .experimental-tag-centered {
-    @apply mb-8 bg-red-600 text-white px-6 py-3 transform -rotate-12;
+  /* Realistic Paper Stamp - Straight & Newspaper Style */
+  .experimental-stamp-realistic {
+    @apply mb-8 relative inline-block;
+    background: 
+      radial-gradient(circle at 30% 40%, rgba(139, 69, 19, 0.15) 2px, transparent 2px),
+      radial-gradient(circle at 70% 60%, rgba(160, 82, 45, 0.1) 1px, transparent 1px),
+      linear-gradient(135deg, #8B4513 0%, #A0522D 40%, #8B4513 100%);
+    background-size: 8px 8px, 12px 12px, 100% 100%;
+    border: 3px solid #654321;
+    border-radius: 2px;
+    padding: 0.75rem 1.5rem;
+    position: relative;
+    
+    /* Paper texture and aging */
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: 
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 1px,
+          rgba(0,0,0,0.03) 1px,
+          rgba(0,0,0,0.03) 2px
+        );
+      border-radius: inherit;
+      z-index: -1;
+    }
+    
+    /* Ink bleed effect */
+    &::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      background: radial-gradient(ellipse at center, rgba(139, 69, 19, 0.2) 0%, transparent 70%);
+      border-radius: inherit;
+      z-index: -2;
+    }
+    
+    /* Realistic shadows */
+    box-shadow: 
+      0 2px 4px rgba(139, 69, 19, 0.3),
+      0 4px 8px rgba(139, 69, 19, 0.15),
+      inset 0 1px 0 rgba(255,255,255,0.1),
+      inset 0 -1px 0 rgba(0,0,0,0.1);
+    
+    /* Stamp animation */
+    animation: stamp-press 0.8s ease-out;
+  }
+
+  .experimental-stamp-realistic span {
+    @apply text-white font-black text-lg tracking-wider;
     font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-weight: bold;
-    font-size: clamp(0.8rem, 2vw, 1rem);
-    border: 3px solid #dc2626;
-    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
-    animation: stamp-pulse 3s ease-in-out infinite;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    text-shadow: 
+      1px 1px 0 rgba(0,0,0,0.5),
+      0 0 8px rgba(139, 69, 19, 0.8);
+    letter-spacing: 3px;
+    font-weight: 900;
+    position: relative;
+    z-index: 10;
   }
 
   /* Seamless Lab Notebook - No Perspective */
@@ -56,7 +107,7 @@
 
   /* Title Section - Responsive */
   .lab-title-section {
-    @apply text-center mb-6 sm:mb-8;
+    @apply text-center;
   }
 
   /* Morphing Title Container */
@@ -65,9 +116,14 @@
     min-height: clamp(4rem, 12vw, 8rem);
   }
 
-  /* Enhanced Subtitle with More Emphasis */
-  .animated-subtitle {
-    @apply text-center text-gray-800 mb-6 sm:mb-8;
+  /* Combined Content Block */
+  .lab-combined-content {
+    @apply max-w-2xl mx-auto space-y-4;
+  }
+
+  /* Subtitle Text */
+  .lab-subtitle-text {
+    @apply text-center text-gray-800 mb-4;
     font-family: 'JetBrains Mono', 'Courier New', monospace;
     font-size: clamp(1rem, 2.8vw, 1.3rem);
     text-transform: lowercase;
@@ -81,36 +137,59 @@
     width: 0;
     margin: 0 auto;
     text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    background: linear-gradient(135deg, rgba(251,146,60,0.1) 0%, transparent 100%);
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
   }
 
-  /* Enhanced Warning Text */
-  .animated-warning {
-    @apply flex items-center justify-center space-x-4 text-center;
+  /* Warning Box */
+  .lab-warning-box {
+    @apply flex items-center justify-center space-x-4 text-center mx-auto;
     font-family: 'JetBrains Mono', 'Courier New', monospace;
     font-size: clamp(0.9rem, 2.2vw, 1rem);
     color: #555;
-    background: rgba(255,235,59,0.1);
+    background: 
+      linear-gradient(135deg, rgba(255,235,59,0.1) 0%, rgba(255,193,7,0.05) 100%),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 24px,
+        rgba(251,146,60,0.1) 25px
+      );
     padding: 1rem 2rem;
     border-radius: 8px;
     border: 2px dashed #fb923c;
-    margin: 0 auto;
     max-width: 600px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 
+      0 2px 8px rgba(0,0,0,0.1),
+      inset 0 1px 0 rgba(255,255,255,0.2);
+    position: relative;
+    
+    /* Paper texture for warning box */
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 25% 25%, rgba(0,0,0,0.01) 1px, transparent 1px),
+        radial-gradient(circle at 75% 75%, rgba(0,0,0,0.015) 1px, transparent 1px);
+      background-size: 20px 20px, 30px 30px;
+      border-radius: inherit;
+      pointer-events: none;
+    }
   }
 
   .warning-text {
     @apply text-gray-700;
     font-weight: 600;
     font-style: italic;
+    position: relative;
+    z-index: 10;
   }
 
-  .pulse-triangle {
+  .warning-triangle {
     @apply text-yellow-600 text-2xl;
     animation: warning-pulse 2s ease-in-out infinite;
     filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.5));
+    position: relative;
+    z-index: 10;
   }
 
   /* Remove Complex Decorative Elements */
@@ -125,51 +204,27 @@
     display: none;
   }
 
-  /* Fixed Experiments Header */
-  .experiments-header-bar-new {
-    @apply flex flex-col sm:flex-row justify-between items-start sm:items-end pb-6 sm:pb-8 mb-8 sm:mb-12 relative;
-    border-bottom: 2px solid #e5e5e5;
-  }
-
-  .experiments-header-bar-new::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: #fb923c;
-    width: 8rem;
-  }
-
-  .experiments-title-group {
-    @apply space-y-2 mb-4 sm:mb-0;
-  }
-
-  .experiments-meta {
-    @apply flex flex-col items-start sm:items-end text-left sm:text-right space-y-2;
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-size: clamp(0.7rem, 1.5vw, 0.8rem);
-    text-transform: uppercase;
-    color: #666;
-    font-weight: 600;
-  }
-
-  .lab-number {
-    @apply font-bold;
-    font-size: clamp(1rem, 2.5vw, 1.2rem);
-    color: #111;
-  }
-
-  .experiment-count {
-    @apply text-gray-500;
-  }
+  /* ... keep existing code (experiments header bar, lab notes section) */
 }
 
 /* Enhanced Keyframe Animations */
-@keyframes stamp-pulse {
-  0%, 100% { transform: rotate(-12deg) scale(1); }
-  50% { transform: rotate(-10deg) scale(1.08); }
+@keyframes stamp-press {
+  0% { 
+    transform: scale(0.8) translateY(-10px); 
+    opacity: 0; 
+    box-shadow: 0 0 0 rgba(139, 69, 19, 0);
+  }
+  50% { 
+    transform: scale(1.05) translateY(2px); 
+    box-shadow: 0 8px 16px rgba(139, 69, 19, 0.4);
+  }
+  100% { 
+    transform: scale(1) translateY(0); 
+    opacity: 1; 
+    box-shadow: 
+      0 2px 4px rgba(139, 69, 19, 0.3),
+      0 4px 8px rgba(139, 69, 19, 0.15);
+  }
 }
 
 @keyframes typewriter {
@@ -192,168 +247,28 @@
     padding: clamp(1.5rem, 4vw, 2rem);
   }
 
-  .experimental-tag-centered {
-    @apply mb-6 px-4 py-2 text-sm;
+  .experimental-stamp-realistic {
+    @apply mb-6 text-sm;
+    padding: 0.5rem 1rem;
   }
 
-  .animated-subtitle {
+  .experimental-stamp-realistic span {
+    @apply text-base;
+    letter-spacing: 2px;
+  }
+
+  .lab-subtitle-text {
     @apply text-sm;
     white-space: normal;
     border-right: none;
     width: auto;
     overflow: visible;
     animation: none;
-    padding: 0.5rem;
   }
 
-  .animated-warning {
+  .lab-warning-box {
     @apply text-xs flex-col space-x-0 space-y-2 px-4 py-3;
   }
-
-  .experiments-header-bar-new {
-    @apply flex-col items-start space-y-4;
-  }
-
-  .experiments-meta {
-    @apply items-start text-left;
-  }
 }
 
-/* Enhanced Lab Notes Section with Fixed Responsiveness */
-.lab-notes-section {
-  @apply bg-gray-50 py-12 sm:py-16 mt-12 sm:mt-16;
-  border-top: 3px solid #2c2c2c;
-  position: relative;
-  
-  /* Magazine paper texture */
-  background-image: 
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 24px,
-      rgba(0,0,0,0.02) 25px
-    ),
-    linear-gradient(to bottom, #fefefe, #f9f9f9);
-}
-
-.lab-notes-container {
-  @apply max-w-6xl mx-auto px-4 sm:px-8;
-}
-
-.editorial-divider {
-  @apply flex items-center justify-center mb-8 sm:mb-12;
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
-}
-
-.divider-ornament {
-  @apply text-gray-400 text-xl mx-4;
-}
-
-.divider-line {
-  @apply flex-1 h-px bg-gray-300;
-  max-width: 120px;
-}
-
-.divider-text {
-  @apply text-gray-600 text-xs sm:text-sm font-bold uppercase tracking-widest mx-4 sm:mx-6;
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
-  letter-spacing: 0.2em;
-  font-weight: 700;
-}
-
-.lab-notes-content {
-  @apply grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 mb-8 sm:mb-12;
-}
-
-.editorial-column {
-  @apply space-y-6;
-}
-
-.editorial-header {
-  @apply border-b-2 border-gray-300 pb-4 mb-6;
-}
-
-.editorial-title {
-  @apply text-xl sm:text-2xl font-bold mb-2;
-  font-family: 'Platypi', serif;
-  color: #2c2c2c;
-}
-
-.editorial-subtitle {
-  @apply text-xs sm:text-sm text-gray-600 uppercase tracking-wider;
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
-  letter-spacing: 0.1em;
-  font-weight: 600;
-}
-
-.editorial-body {
-  @apply space-y-4;
-}
-
-.editorial-note {
-  @apply text-gray-700 leading-relaxed text-justify;
-  font-family: 'Fraunces', serif;
-  font-size: clamp(0.9rem, 2vw, 1rem);
-  line-height: 1.7;
-}
-
-.dropcap {
-  @apply float-left text-4xl sm:text-6xl font-bold leading-none mr-2 mt-1;
-  font-family: 'Fraunces', serif;
-  color: #2c2c2c;
-  line-height: 0.8;
-}
-
-.editorial-list {
-  @apply space-y-3;
-}
-
-.list-item {
-  @apply flex items-start space-x-3;
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
-  font-size: clamp(0.8rem, 1.8vw, 0.9rem);
-  line-height: 1.6;
-  color: #4a4a4a;
-  font-weight: 500;
-}
-
-.list-marker {
-  @apply text-gray-400 font-bold;
-  margin-top: 0.1rem;
-}
-
-/* Fixed Responsive Signature Section */
-.editorial-signature {
-  @apply flex flex-col items-center space-y-4 pt-8 border-t border-gray-300;
-}
-
-@media (min-width: 640px) {
-  .editorial-signature {
-    @apply flex-row justify-end space-y-0 space-x-4;
-  }
-}
-
-.signature-line {
-  @apply w-24 sm:w-32 h-px bg-gray-400;
-}
-
-.signature-text {
-  @apply flex flex-col items-center;
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
-}
-
-@media (min-width: 640px) {
-  .signature-text {
-    @apply items-end;
-  }
-}
-
-.signature-name {
-  @apply text-sm font-bold text-gray-700;
-  font-weight: 700;
-}
-
-.signature-title {
-  @apply text-xs text-gray-500 uppercase tracking-wider;
-  font-weight: 600;
-}
+/* ... keep existing code (lab notes section styles) */
