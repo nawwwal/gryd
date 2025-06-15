@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./hooks/useAuth";
 import Layout from "./components/Layout";
 import Index from "./pages/Index";
 import Work from "./pages/Work";
@@ -21,25 +22,27 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          {/* CMS Routes - No Layout */}
-          <Route path="/cms" element={<CMS />} />
-          <Route path="/cms/work" element={<WorkCMSPage />} />
-          <Route path="/cms/playground" element={<PlaygroundCMSPage />} />
-          
-          {/* Public Routes - With Layout */}
-          <Route path="/" element={<Layout><Index /></Layout>} />
-          <Route path="/work" element={<Layout><Work /></Layout>} />
-          <Route path="/work/:slug" element={<Layout><ProjectDetail /></Layout>} />
-          <Route path="/about" element={<Layout><About /></Layout>} />
-          <Route path="/playground" element={<Layout><Playground /></Layout>} />
-          <Route path="/contact" element={<Layout><Contact /></Layout>} />
-          <Route path="*" element={<Layout><NotFound /></Layout>} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            {/* CMS Routes - No Layout */}
+            <Route path="/cms" element={<CMS />} />
+            <Route path="/cms/work" element={<WorkCMSPage />} />
+            <Route path="/cms/playground" element={<PlaygroundCMSPage />} />
+            
+            {/* Public Routes - With Layout */}
+            <Route path="/" element={<Layout><Index /></Layout>} />
+            <Route path="/work" element={<Layout><Work /></Layout>} />
+            <Route path="/work/:slug" element={<Layout><ProjectDetail /></Layout>} />
+            <Route path="/about" element={<Layout><About /></Layout>} />
+            <Route path="/playground" element={<Layout><Playground /></Layout>} />
+            <Route path="/contact" element={<Layout><Contact /></Layout>} />
+            <Route path="*" element={<Layout><NotFound /></Layout>} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

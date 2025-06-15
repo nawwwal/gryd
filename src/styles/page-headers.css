@@ -234,11 +234,11 @@
   }
 
   .lab-warning {
-    @apply flex items-center justify-center space-x-3 bg-yellow-50 border-2 border-dashed border-yellow-300 p-4 text-yellow-800 font-mono text-sm;
+    @apply flex items-center justify-center space-x-3 bg-gryd-soft/10 border-2 border-dashed border-gryd-soft/30 p-4 text-gryd-soft font-mono text-sm;
   }
 
   .warning-triangle {
-    @apply text-yellow-600 text-lg;
+    @apply text-gryd-soft text-lg;
   }
 
   .notebook-stains {
@@ -246,12 +246,12 @@
   }
 
   .coffee-stain {
-    @apply absolute bottom-8 right-12 w-16 h-16 bg-yellow-100 rounded-full opacity-30;
+    @apply absolute bottom-8 right-12 w-16 h-16 bg-gryd-soft/10 rounded-full opacity-30;
     filter: blur(4px);
   }
 
   .ink-splatter {
-    @apply absolute top-16 right-20 w-8 h-8 bg-blue-100 rounded-full opacity-20;
+    @apply absolute top-16 right-20 w-8 h-8 bg-gryd-accent/10 rounded-full opacity-20;
     filter: blur(2px);
   }
 

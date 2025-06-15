@@ -1,14 +1,21 @@
 
 import { Link, useLocation } from 'react-router-dom';
-import { FileText, Code, Home } from 'lucide-react';
+import { FileText, Code, Home, LogOut } from 'lucide-react';
+import { useAuth } from '../../hooks/useAuth';
+import { Button } from '../ui/button';
 
 const CMSNavigation = () => {
   const location = useLocation();
+  const { logout } = useAuth();
 
   const navItems = [
     { path: '/cms/work', label: 'Work Portfolio', icon: FileText },
     { path: '/cms/playground', label: 'Playground', icon: Code },
   ];
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <div className="border-b border-gryd-soft/10 bg-gryd-soft/5">
@@ -40,7 +47,18 @@ const CMSNavigation = () => {
               ))}
             </div>
           </div>
-          <div className="caption text-gryd-soft">Content Management System</div>
+          <div className="flex items-center gap-4">
+            <div className="caption text-gryd-soft">Content Management System</div>
+            <Button 
+              size="sm" 
+              variant="outline" 
+              onClick={handleLogout}
+              className="border-gryd-soft/20 text-gryd-soft hover:bg-gryd-soft/5"
+            >
+              <LogOut className="w-4 h-4 mr-2" />
+              Logout
+            </Button>
+          </div>
         </div>
       </div>
     </div>
