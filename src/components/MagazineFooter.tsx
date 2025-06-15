@@ -94,6 +94,20 @@ const MagazineFooter = () => {
       <div className="footer-paper">
         <div className="footer-binding"></div>
         
+        {/* Magazine Footer Title */}
+        <div className="footer-magazine-title">
+          <div className="footer-title-ornaments">
+            <div className="footer-ornament-left">◆</div>
+            <div className="footer-title-line"></div>
+          </div>
+          <h2 className="footer-main-title">APPENDIX</h2>
+          <div className="footer-title-ornaments">
+            <div className="footer-title-line"></div>
+            <div className="footer-ornament-right">◆</div>
+          </div>
+          <div className="footer-subtitle">Reference Materials & Further Reading</div>
+        </div>
+        
         {/* Editorial Stamp */}
         <div className="footer-editorial-stamp">
           <div className="stamp-text">
@@ -150,7 +164,7 @@ const MagazineFooter = () => {
           <div className="footer-section">
             <div className="footer-section-header">SPECIFICATIONS</div>
             <div className="footer-details">
-              <div>Typography: Inter + Playfair</div>
+              <div>Typography: JetBrains Mono + Fraunces</div>
               <div>Paper Stock: Digital Canvas</div>
               <div>Print Run: Unlimited</div>
               <div>Binding: Perfect Web</div>
