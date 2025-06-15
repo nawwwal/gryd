@@ -1,4 +1,3 @@
-
 @layer components {
   /* Playground Hero Container */
   .playground-hero-container {
@@ -469,5 +468,157 @@
 
   .animated-warning {
     @apply text-xs;
+  }
+}
+
+/* Editorial Lab Notes Section */
+.lab-notes-section {
+  @apply bg-gray-50 py-16 mt-16;
+  border-top: 3px solid #2c2c2c;
+  position: relative;
+  
+  /* Magazine paper texture */
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 24px,
+      rgba(0,0,0,0.02) 25px
+    ),
+    linear-gradient(to bottom, #fefefe, #f9f9f9);
+}
+
+.lab-notes-container {
+  @apply max-w-6xl mx-auto px-8;
+}
+
+.editorial-divider {
+  @apply flex items-center justify-center mb-12;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.divider-ornament {
+  @apply text-gray-400 text-xl mx-4;
+}
+
+.divider-line {
+  @apply flex-1 h-px bg-gray-300;
+  max-width: 120px;
+}
+
+.divider-text {
+  @apply text-gray-600 text-sm font-bold uppercase tracking-widest mx-6;
+  letter-spacing: 0.2em;
+}
+
+.lab-notes-content {
+  @apply grid md:grid-cols-2 gap-12 mb-12;
+}
+
+.editorial-column {
+  @apply space-y-6;
+}
+
+.editorial-header {
+  @apply border-b-2 border-gray-300 pb-4 mb-6;
+}
+
+.editorial-title {
+  @apply text-2xl font-bold mb-2;
+  font-family: 'Newsreader', serif;
+  color: #2c2c2c;
+}
+
+.editorial-subtitle {
+  @apply text-sm text-gray-600 uppercase tracking-wider;
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.1em;
+}
+
+.editorial-body {
+  @apply space-y-4;
+}
+
+.editorial-note {
+  @apply text-gray-700 leading-relaxed text-justify;
+  font-family: 'Newsreader', serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  column-count: 1;
+}
+
+.dropcap {
+  @apply float-left text-6xl font-bold leading-none mr-2 mt-1;
+  font-family: 'Newsreader', serif;
+  color: #2c2c2c;
+  line-height: 0.8;
+}
+
+.editorial-list {
+  @apply space-y-3;
+}
+
+.list-item {
+  @apply flex items-start space-x-3;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #4a4a4a;
+}
+
+.list-marker {
+  @apply text-gray-400 font-bold;
+  margin-top: 0.1rem;
+}
+
+.editorial-signature {
+  @apply flex items-center justify-end space-x-4 pt-8 border-t border-gray-300;
+}
+
+.signature-line {
+  @apply w-32 h-px bg-gray-400;
+}
+
+.signature-text {
+  @apply flex flex-col items-end;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.signature-name {
+  @apply text-sm font-bold text-gray-700;
+}
+
+.signature-title {
+  @apply text-xs text-gray-500 uppercase tracking-wider;
+}
+
+/* Responsive Design for Lab Notes */
+@media (max-width: 768px) {
+  .lab-notes-section {
+    @apply py-12 mt-12;
+  }
+  
+  .lab-notes-container {
+    @apply px-4;
+  }
+  
+  .lab-notes-content {
+    @apply grid-cols-1 gap-8;
+  }
+  
+  .editorial-title {
+    @apply text-xl;
+  }
+  
+  .editorial-note {
+    @apply text-sm;
+  }
+  
+  .dropcap {
+    @apply text-4xl;
+  }
+  
+  .editorial-signature {
+    @apply justify-center;
   }
 }

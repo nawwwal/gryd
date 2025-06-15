@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import ScrollFade from '../components/ScrollFade';
+import MagazineFooter from '../components/MagazineFooter';
 import { loadPlaygroundExperiments } from '../utils/contentLoader';
 import { PlaygroundExperiment } from '../types/content';
 import { useGyroscopic } from '../hooks/useGyroscopic';
+
 const Playground = () => {
   const masonryRef = useRef<HTMLDivElement>(null);
   const backgroundRef = useRef<HTMLDivElement>(null);
@@ -223,36 +225,82 @@ const Playground = () => {
         </div>
       </div>
 
-      {/* Update Notice */}
-      <div className="table-of-contents">
+      {/* Editorial Lab Notes Section */}
+      <div className="lab-notes-section">
         <ScrollFade>
-          <div className="toc-header">
-            <h3>Lab Notes</h3>
-            <div className="toc-line"></div>
-          </div>
-          
-          <div className="toc-entries">
-            <div className="toc-entry">
-              <span className="toc-page">•</span>
-              <span className="toc-title">This page updates whenever I break something new</span>
+          <div className="lab-notes-container">
+            <div className="editorial-divider">
+              <div className="divider-ornament">◆</div>
+              <div className="divider-line"></div>
+              <div className="divider-text">LAB NOTES</div>
+              <div className="divider-line"></div>
+              <div className="divider-ornament">◆</div>
             </div>
-            <div className="toc-entry">
-              <span className="toc-page">•</span>
-              <span className="toc-title">Bookmark it if you're into that sort of thing</span>
+            
+            <div className="lab-notes-content">
+              <div className="editorial-column">
+                <div className="editorial-header">
+                  <h3 className="editorial-title">From the Laboratory</h3>
+                  <div className="editorial-subtitle">Research Director's Notes</div>
+                </div>
+                
+                <div className="editorial-body">
+                  <p className="editorial-note">
+                    <span className="dropcap">T</span>his laboratory exists at the intersection of curiosity and chaos. 
+                    Each experiment documented here represents a question asked, a hypothesis tested, 
+                    or simply the delightful pursuit of "what if?"
+                  </p>
+                  
+                  <p className="editorial-note">
+                    Some discoveries here have shaped entire projects. Others remain beautiful failures—
+                    the kind that teach you more than success ever could. All are preserved in the spirit 
+                    of scientific transparency.
+                  </p>
+                </div>
+              </div>
+
+              <div className="editorial-column">
+                <div className="editorial-header">
+                  <h3 className="editorial-title">Reader's Guide</h3>
+                  <div className="editorial-subtitle">How to Navigate</div>
+                </div>
+                
+                <div className="editorial-body">
+                  <div className="editorial-list">
+                    <div className="list-item">
+                      <span className="list-marker">•</span>
+                      <span>This page updates whenever something breaks in an interesting way</span>
+                    </div>
+                    <div className="list-item">
+                      <span className="list-marker">•</span>
+                      <span>Bookmark it if you enjoy watching creative processes unfold</span>
+                    </div>
+                    <div className="list-item">
+                      <span className="list-marker">•</span>
+                      <span>Most experiments are documented with both successes and failures</span>
+                    </div>
+                    <div className="list-item">
+                      <span className="list-marker">•</span>
+                      <span>Feel free to steal ideas—that's how innovation spreads</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="editorial-signature">
+              <div className="signature-line"></div>
+              <div className="signature-text">
+                <span className="signature-name">A. Nawal</span>
+                <span className="signature-title">Laboratory Director</span>
+              </div>
             </div>
           </div>
         </ScrollFade>
       </div>
 
-      <div className="magazine-footer">
-        <div className="footer-content">
-          <div className="footer-logo">THE GRYD</div>
-          <div className="footer-info">
-            <span>Playground • Live Experiments</span>
-            <span>Updated: As Things Break</span>
-          </div>
-        </div>
-      </div>
+      <MagazineFooter />
     </div>;
 };
+
 export default Playground;
