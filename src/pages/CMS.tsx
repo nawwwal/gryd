@@ -82,11 +82,11 @@ const CMS = () => {
 
         <ScrollFade delay={50}>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <Card className="border-gryd-soft/20">
+            <Card className="border-gryd-soft/20 bg-gryd-soft/5">
               <CardContent className="p-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-gryd-accent/10 rounded-lg flex items-center justify-center">
-                    <FileText className="w-6 h-6 text-gryd-accent" />
+                  <div className="w-12 h-12 bg-gryd-text/10 rounded-lg flex items-center justify-center">
+                    <FileText className="w-6 h-6 text-gryd-text" />
                   </div>
                   <div>
                     <div className="subhead text-gryd-text">{totalContent}</div>
@@ -96,10 +96,10 @@ const CMS = () => {
               </CardContent>
             </Card>
             
-            <Card className="border-gryd-soft/20">
+            <Card className="border-gryd-soft/20 bg-gryd-accent/5">
               <CardContent className="p-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-gryd-accent/10 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gryd-accent/20 rounded-lg flex items-center justify-center">
                     <TrendingUp className="w-6 h-6 text-gryd-accent" />
                   </div>
                   <div>
@@ -110,24 +110,24 @@ const CMS = () => {
               </CardContent>
             </Card>
 
-            <Card className="border-gryd-soft/20">
+            <Card className="border-gryd-soft/20 bg-gryd-accent/5">
               <CardContent className="p-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-gryd-accent/10 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gryd-accent/20 rounded-lg flex items-center justify-center">
                     <Star className="w-6 h-6 text-gryd-accent" />
                   </div>
                   <div>
-                    <div className="subhead text-gryd-text">{totalFeatured}</div>
+                    <div className="subhead text-gryd-accent">{totalFeatured}</div>
                     <div className="caption text-gryd-soft">Featured</div>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-gryd-soft/20">
+            <Card className="border-gryd-soft/20 bg-gryd-soft/5">
               <CardContent className="p-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-gryd-soft/10 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gryd-soft/20 rounded-lg flex items-center justify-center">
                     <Clock className="w-6 h-6 text-gryd-soft" />
                   </div>
                   <div>
@@ -142,7 +142,7 @@ const CMS = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <ScrollFade delay={100}>
-            <Card className="border-gryd-soft/20">
+            <Card className="border-gryd-soft/20 bg-gryd-soft/5">
               <CardHeader className="pb-4">
                 <div className="flex items-center justify-between">
                   <CardTitle className="subhead text-gryd-text flex items-center gap-2">
@@ -159,7 +159,7 @@ const CMS = () => {
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 gap-4 mb-4">
-                  <div className="text-center p-3 bg-gryd-soft/5 rounded-lg">
+                  <div className="text-center p-3 bg-gryd-text/5 rounded-lg">
                     <div className="subhead text-gryd-text">{workStats.total}</div>
                     <div className="caption text-gryd-soft">Total Projects</div>
                   </div>
@@ -169,11 +169,11 @@ const CMS = () => {
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center p-3 bg-gryd-soft/5 rounded-lg">
-                    <div className="subhead text-gryd-text">{workStats.featured}</div>
+                  <div className="text-center p-3 bg-gryd-accent/10 rounded-lg">
+                    <div className="subhead text-gryd-accent">{workStats.featured}</div>
                     <div className="caption text-gryd-soft">Featured</div>
                   </div>
-                  <div className="text-center p-3 bg-gryd-soft/5 rounded-lg">
+                  <div className="text-center p-3 bg-gryd-soft/10 rounded-lg">
                     <div className="subhead text-gryd-soft">{workStats.draft}</div>
                     <div className="caption text-gryd-soft">Drafts</div>
                   </div>
@@ -189,7 +189,7 @@ const CMS = () => {
           </ScrollFade>
 
           <ScrollFade delay={200}>
-            <Card className="border-gryd-soft/20">
+            <Card className="border-gryd-soft/20 bg-gryd-soft/5">
               <CardHeader className="pb-4">
                 <div className="flex items-center justify-between">
                   <CardTitle className="subhead text-gryd-text flex items-center gap-2">
@@ -206,7 +206,7 @@ const CMS = () => {
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 gap-4 mb-4">
-                  <div className="text-center p-3 bg-gryd-soft/5 rounded-lg">
+                  <div className="text-center p-3 bg-gryd-text/5 rounded-lg">
                     <div className="subhead text-gryd-text">{playgroundStats.total}</div>
                     <div className="caption text-gryd-soft">Total Experiments</div>
                   </div>
@@ -216,11 +216,11 @@ const CMS = () => {
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center p-3 bg-gryd-soft/5 rounded-lg">
-                    <div className="subhead text-gryd-text">{playgroundStats.featured}</div>
+                  <div className="text-center p-3 bg-gryd-accent/10 rounded-lg">
+                    <div className="subhead text-gryd-accent">{playgroundStats.featured}</div>
                     <div className="caption text-gryd-soft">Featured</div>
                   </div>
-                  <div className="text-center p-3 bg-gryd-soft/5 rounded-lg">
+                  <div className="text-center p-3 bg-gryd-soft/10 rounded-lg">
                     <div className="subhead text-gryd-soft">{playgroundStats.draft}</div>
                     <div className="caption text-gryd-soft">Drafts</div>
                   </div>
