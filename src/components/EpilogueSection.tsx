@@ -1,20 +1,15 @@
-
 import { useState, useEffect } from 'react';
 import ScrollFade from './ScrollFade';
 import AuthorInfo from './AuthorInfo';
 import DesignerStatus from './DesignerStatus';
-
 const EpilogueSection = () => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
-
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
-
-  return (
-    <div className="magazine-spread">
+  return <div className="magazine-spread">
       <ScrollFade>
         <div className="flip-card-container">
           <div className={`flip-card ${isFlipped ? 'flipped' : ''}`}>
@@ -74,16 +69,7 @@ const EpilogueSection = () => {
                     <DesignerStatus />
                     
                     {/* Contact CTA on back */}
-                    <div className="mt-8 pt-6 border-t border-gray-200">
-                      <div className="text-center">
-                        <p className="text-sm text-gray-600 mb-4">
-                          Building something meaningful?
-                        </p>
-                        <a href="https://calendly.com/your-handle" className="editorial-link text-lg" target="_blank" rel="noopener noreferrer">
-                          schedule a conversation
-                        </a>
-                      </div>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -91,8 +77,6 @@ const EpilogueSection = () => {
           </div>
         </div>
       </ScrollFade>
-    </div>
-  );
+    </div>;
 };
-
 export default EpilogueSection;
