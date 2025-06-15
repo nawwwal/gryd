@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { PlaygroundExperiment } from '../../types/content';
 import { loadPlaygroundExperiments } from '../../utils/contentLoader';
@@ -67,9 +66,9 @@ const PlaygroundCMS = () => {
     switch (status) {
       case 'live': return 'text-gryd-accent bg-gryd-accent/10';
       case 'prototype': return 'text-gryd-text bg-gryd-soft/10';
-      case 'ongoing': return 'text-yellow-600 bg-yellow-50';
+      case 'ongoing': return 'text-gryd-accent bg-gryd-accent/10';
       case 'archived': return 'text-gryd-soft bg-gryd-soft/5';
-      case 'draft': return 'text-orange-600 bg-orange-50';
+      case 'draft': return 'text-gryd-soft bg-gryd-soft/10';
       default: return 'text-gryd-soft bg-gryd-soft/5';
     }
   };

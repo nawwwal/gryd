@@ -7,7 +7,7 @@ import { WorkProject, PlaygroundExperiment } from '../types/content';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
-import { FileText, Code, Plus, Edit, BarChart } from 'lucide-react';
+import { FileText, Code, Plus, Edit, BarChart, TrendingUp, Clock, Star } from 'lucide-react';
 import ScrollFade from '../components/ScrollFade';
 
 const CMS = () => {
@@ -40,6 +40,7 @@ const CMS = () => {
       live: items.filter(item => item.metadata.status === 'live').length,
       draft: items.filter(item => item.metadata.status === 'draft').length,
       featured: items.filter(item => item.metadata.featured).length,
+      ongoing: items.filter(item => item.metadata.status === 'ongoing').length,
     };
   };
 
@@ -49,6 +50,10 @@ const CMS = () => {
   const recentContent = [...workProjects, ...playgroundExperiments]
     .sort((a, b) => new Date(b.metadata.lastUpdated).getTime() - new Date(a.metadata.lastUpdated).getTime())
     .slice(0, 5);
+
+  const totalContent = workProjects.length + playgroundExperiments.length;
+  const totalLive = workStats.live + playgroundStats.live;
+  const totalFeatured = workStats.featured + playgroundStats.featured;
 
   if (loading) {
     return (
@@ -70,8 +75,68 @@ const CMS = () => {
       <div className="editorial-container py-8 space-y-8">
         <ScrollFade>
           <div className="space-y-2">
-            <h1 className="headline text-gryd-text">Content Management System</h1>
-            <p className="body text-gryd-soft">Manage your portfolio and experiments</p>
+            <h1 className="headline text-gryd-text">Content Management Dashboard</h1>
+            <p className="body text-gryd-soft">Overview of your portfolio and experiments</p>
+          </div>
+        </ScrollFade>
+
+        <ScrollFade delay={50}>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <Card className="border-gryd-soft/20">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-gryd-accent/10 rounded-lg flex items-center justify-center">
+                    <FileText className="w-6 h-6 text-gryd-accent" />
+                  </div>
+                  <div>
+                    <div className="subhead text-gryd-text">{totalContent}</div>
+                    <div className="caption text-gryd-soft">Total Content</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card className="border-gryd-soft/20">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-gryd-accent/10 rounded-lg flex items-center justify-center">
+                    <TrendingUp className="w-6 h-6 text-gryd-accent" />
+                  </div>
+                  <div>
+                    <div className="subhead text-gryd-accent">{totalLive}</div>
+                    <div className="caption text-gryd-soft">Live Items</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-gryd-soft/20">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-gryd-accent/10 rounded-lg flex items-center justify-center">
+                    <Star className="w-6 h-6 text-gryd-accent" />
+                  </div>
+                  <div>
+                    <div className="subhead text-gryd-text">{totalFeatured}</div>
+                    <div className="caption text-gryd-soft">Featured</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-gryd-soft/20">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-gryd-soft/10 rounded-lg flex items-center justify-center">
+                    <Clock className="w-6 h-6 text-gryd-soft" />
+                  </div>
+                  <div>
+                    <div className="subhead text-gryd-soft">{workStats.ongoing + playgroundStats.ongoing}</div>
+                    <div className="caption text-gryd-soft">In Progress</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </ScrollFade>
 
