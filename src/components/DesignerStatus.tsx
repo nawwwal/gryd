@@ -1,7 +1,5 @@
-
 const DesignerStatus = () => {
-  return (
-    <div className="space-y-6">
+  return <div className="space-y-6">
       <div className="space-y-4">
         <h3 className="subhead text-lg">Current Status</h3>
         <div className="flex items-center space-x-3">
@@ -16,23 +14,16 @@ const DesignerStatus = () => {
       
       <div className="availability-card">
         <div className="space-y-2">
-          <span className="caption text-gryd-soft text-xs">Let's Connect</span>
-          <a 
-            href="https://calendly.com/your-handle" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="schedule-link"
-          >
+          <span className="caption text-gryd-soft text-xs">BUILDING SOMETHING MEANINGFUL?</span>
+          <a href="https://calendly.com/your-handle" target="_blank" rel="noopener noreferrer" className="schedule-link">
             <div className="flex items-center space-x-2">
-              <span className="body font-medium text-sm">SCHEDULE</span>
-              <span className="subhead text-sm">A</span>
-              <span className="body font-medium text-sm">CONVERSATION</span>
+              <span className="body font-medium text-sm">let's talk</span>
+              
+              
             </div>
           </a>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default DesignerStatus;
