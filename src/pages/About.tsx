@@ -4,6 +4,7 @@ import EditorInterview from '../components/EditorInterview';
 import EditorsPicks from '../components/EditorsPicks';
 import RapidFire from '../components/RapidFire';
 import EpilogueSection from '../components/EpilogueSection';
+import MagazineFooter from '../components/MagazineFooter';
 
 const About = () => {
   return (
@@ -42,6 +43,14 @@ const About = () => {
                 
                 <div className="publication-subtitle">
                   A publication of systems, stories & sidequests
+                </div>
+                
+                {/* PDF Download Button */}
+                <div className="masthead-actions mt-8">
+                  <button className="print-issue-btn">
+                    <span>📄</span>
+                    <span>PRINT THIS ISSUE</span>
+                  </button>
                 </div>
               </div>
             </ScrollFade>
@@ -122,20 +131,10 @@ const About = () => {
       </div>
 
       {/* Epilogue Section */}
-      <div className="magazine-spread">
-        <EpilogueSection />
-      </div>
+      <EpilogueSection />
 
-      {/* Magazine Footer */}
-      <div className="magazine-footer">
-        <div className="footer-content">
-          <div className="footer-logo">GRYD MAGAZINE</div>
-          <div className="footer-info">
-            <span>About the Editor • Issue 001 • Page 32</span>
-            <span>First Published: December 2024</span>
-          </div>
-        </div>
-      </div>
+      {/* Enhanced Magazine Footer */}
+      <MagazineFooter />
     </div>
   );
 };
