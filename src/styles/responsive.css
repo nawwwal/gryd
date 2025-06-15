@@ -1,0 +1,173 @@
+
+@layer base {
+  /* Responsive Typography Scale */
+  .headline {
+    @apply font-headline font-bold lowercase tracking-tight;
+    font-size: clamp(2rem, 5vw, 3.75rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .subhead {
+    @apply font-headline font-medium lowercase;
+    font-size: clamp(1.125rem, 3vw, 1.5rem);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  .body {
+    @apply font-body;
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: 1.7;
+  }
+
+  .caption {
+    @apply font-body text-gryd-soft uppercase tracking-wide;
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    line-height: 1.5;
+  }
+}
+
+@layer components {
+  /* Responsive Container System */
+  .editorial-container {
+    @apply w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16;
+    max-width: min(90vw, 1200px);
+    margin: 0 auto;
+  }
+
+  /* Responsive Spacing System */
+  .section-padding {
+    @apply py-8 sm:py-12 md:py-16 lg:py-20;
+  }
+
+  .article-padding {
+    @apply py-6 sm:py-8 md:py-12;
+  }
+
+  .paragraph-spacing {
+    @apply space-y-4 sm:space-y-6 md:space-y-8;
+  }
+
+  /* Mobile-first Grid System */
+  .responsive-grid {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8;
+  }
+
+  .responsive-grid-2 {
+    @apply grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8;
+  }
+
+  /* Mobile-optimized Card Layouts */
+  .mobile-card {
+    @apply p-4 sm:p-6 md:p-8;
+    background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+
+  /* Responsive Text Scaling */
+  .mobile-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    line-height: 1.2;
+  }
+
+  .mobile-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    line-height: 1.4;
+  }
+
+  .mobile-body {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    line-height: 1.6;
+  }
+
+  /* Mobile Navigation Adjustments */
+  .mobile-nav-height {
+    height: 64px;
+  }
+
+  .mobile-nav-padding {
+    @apply pt-16 sm:pt-20 md:pt-24;
+  }
+
+  /* Touch-friendly Interactive Elements */
+  .touch-target {
+    @apply min-h-12 min-w-12 flex items-center justify-center;
+  }
+
+  .mobile-button {
+    @apply px-6 py-3 text-base sm:px-8 sm:py-4 sm:text-lg;
+    min-height: 48px;
+  }
+
+  /* Responsive Image Handling */
+  .responsive-image {
+    @apply w-full h-auto object-cover;
+    max-height: 50vh;
+  }
+
+  .mobile-hero-image {
+    @apply h-48 sm:h-64 md:h-80 lg:h-96;
+  }
+}
+
+/* Responsive Breakpoint Utilities */
+@media (max-width: 640px) {
+  .hide-mobile {
+    display: none !important;
+  }
+  
+  .mobile-only {
+    display: block !important;
+  }
+
+  /* Reduce animation complexity on mobile */
+  .gyroscopic-card {
+    transform: none !important;
+  }
+
+  .gyroscopic-card:hover {
+    transform: scale(1.02) !important;
+    transition: transform 0.2s ease;
+  }
+}
+
+@media (min-width: 641px) {
+  .mobile-only {
+    display: none !important;
+  }
+  
+  .hide-mobile {
+    display: block !important;
+  }
+}
+
+/* Performance optimizations for mobile */
+@media (max-width: 768px) {
+  /* Reduce complex backgrounds on mobile */
+  .newspaper-pattern,
+  .newspaper-grid {
+    opacity: 0.1;
+  }
+
+  /* Simplify shadows and effects */
+  .magazine-container {
+    background-image: none;
+    background-color: #fafafa;
+  }
+
+  /* Optimize animations for touch devices */
+  .hover-letter:hover {
+    transform: translateY(-1px) scale(1.02);
+  }
+
+  /* Reduce motion for better performance */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

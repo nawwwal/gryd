@@ -1,24 +1,26 @@
 @import './page-headers.css';
 @import './contact.css';
+@import './responsive.css';
 
 @layer components {
-  /* Magazine Container */
+  /* Magazine Container - Mobile First */
   .magazine-container {
-    @apply min-h-screen bg-gray-50;
-    background-image: 
-      radial-gradient(circle at 1px 1px, rgba(0,0,0,0.15) 1px, transparent 0),
-      linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
-    background-size: 20px 20px, 100% 100%;
+    @apply min-h-screen;
+    background: #fafafa;
   }
 
-  /* Editorial Container - Consistent Width */
-  .editorial-container {
-    @apply max-w-6xl mx-auto px-8;
+  @media (min-width: 768px) {
+    .magazine-container {
+      background-image: 
+        radial-gradient(circle at 1px 1px, rgba(0,0,0,0.15) 1px, transparent 0),
+        linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+      background-size: 20px 20px, 100% 100%;
+    }
   }
 
-  /* Compact Newspaper Header */
+  /* Compact Newspaper Header - Desktop Only */
   .newspaper-header {
-    @apply fixed top-0 left-0 right-0 z-50 bg-white shadow-lg;
+    @apply fixed top-0 left-0 right-0 z-50 bg-white shadow-lg hidden md:block;
     height: 60px;
     background: 
       linear-gradient(135deg, #ffffff 0%, #fafafa 100%),
@@ -137,9 +139,11 @@
     animation: borderShimmer 3s ease-in-out infinite;
   }
 
-  /* Magazine Hero Section */
+  /* Magazine Hero Section - Responsive */
   .magazine-hero {
-    @apply relative min-h-screen flex items-center justify-center p-8;
+    @apply relative flex items-center justify-center;
+    min-height: clamp(70vh, 100vh, 100vh);
+    padding: clamp(1rem, 4vw, 2rem);
     perspective: 1000px;
   }
 
@@ -177,7 +181,8 @@
   }
 
   .hero-paper {
-    @apply relative w-full max-w-6xl bg-white shadow-2xl;
+    @apply relative w-full bg-white shadow-2xl;
+    max-width: min(95vw, 1400px);
     transform: rotateX(0.5deg) rotateY(-0.25deg);
     background: 
       linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%),
@@ -187,8 +192,16 @@
     animation: paper-settle 1s ease-out;
   }
 
+  @media (max-width: 768px) {
+    .hero-paper {
+      transform: none;
+      margin: 0.5rem;
+    }
+  }
+
   .hero-content {
-    @apply p-16 space-y-12;
+    padding: clamp(2rem, 6vw, 4rem);
+    @apply space-y-8 sm:space-y-12;
   }
 
   .masthead {
@@ -197,6 +210,7 @@
 
   .magazine-logo {
     @apply font-serif text-6xl font-black text-center tracking-tight;
+    font-size: clamp(3rem, 8vw, 6rem);
     text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
   }
 
@@ -218,6 +232,7 @@
 
   .story-headline {
     @apply font-serif text-5xl font-bold leading-tight;
+    font-size: clamp(2rem, 6vw, 5rem);
   }
 
   .story-subhead {
@@ -229,7 +244,8 @@
   }
 
   .lead-text {
-    @apply text-xl leading-relaxed text-gray-700;
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    @apply leading-relaxed text-gray-700;
   }
 
   .story-byline {
@@ -250,14 +266,18 @@
     filter: blur(4px);
   }
 
-  /* Magazine Spread - Consistent Width */
+  /* Magazine Spread - Responsive Container */
   .magazine-spread {
-    @apply editorial-container py-16;
+    @apply py-12 sm:py-16 md:py-20;
+    padding-left: clamp(1rem, 4vw, 4rem);
+    padding-right: clamp(1rem, 4vw, 4rem);
   }
 
-  /* Article Grid - Fixed Consistency */
+  /* Article Grid - Mobile Responsive */
   .article-grid {
-    @apply space-y-12;
+    @apply space-y-8 sm:space-y-12;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   .grid-title {
@@ -273,7 +293,14 @@
   }
 
   .grid-articles {
-    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+    @apply grid gap-6 sm:gap-8;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  }
+
+  @media (max-width: 640px) {
+    .grid-articles {
+      @apply grid-cols-1;
+    }
   }
 
   .grid-article-link {
@@ -285,10 +312,12 @@
     background: 
       linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
     border: 1px solid rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .grid-article-image {
-    @apply relative h-48 overflow-hidden;
+    @apply relative overflow-hidden;
+    height: clamp(12rem, 25vw, 16rem);
   }
 
   .grid-article-image img {
@@ -296,7 +325,7 @@
   }
 
   .grid-article-link:hover .grid-article-image img {
-    @apply scale-110;
+    @apply scale-105;
   }
 
   .article-overlay {
@@ -314,10 +343,12 @@
 
   .grid-headline {
     @apply font-serif text-xl font-bold text-gray-900 leading-tight;
+    font-size: clamp(1.125rem, 3vw, 1.25rem);
   }
 
   .grid-excerpt {
     @apply text-gray-600 leading-relaxed;
+    font-size: clamp(0.875rem, 2vw, 1rem);
   }
 
   .grid-meta {
@@ -328,9 +359,12 @@
     @apply text-sm font-mono uppercase tracking-widest text-orange-600 font-bold;
   }
 
-  /* Featured Article - Consistent Width */
+  /* Featured Article - Mobile Responsive */
   .featured-article {
-    @apply editorial-container py-16 space-y-12;
+    padding: clamp(2rem, 6vw, 4rem);
+    @apply space-y-8 sm:space-y-12;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   .article-header {
@@ -343,10 +377,12 @@
 
   .article-headline {
     @apply font-serif text-5xl font-bold leading-tight text-gray-900;
+    font-size: clamp(2rem, 6vw, 5rem);
   }
 
   .article-deck {
-    @apply text-xl text-gray-600 leading-relaxed;
+    font-size: clamp(1.125rem, 3vw, 1.25rem);
+    @apply text-gray-600 leading-relaxed;
   }
 
   .article-meta {
@@ -363,6 +399,7 @@
 
   .photo-frame {
     @apply relative bg-white p-4 shadow-xl;
+    padding: clamp(0.75rem, 3vw, 1rem);
     background: 
       linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
     border: 1px solid rgba(0,0,0,0.1);
@@ -389,9 +426,9 @@
     @apply hover:text-orange-700 transition-colors;
   }
 
-  /* Editorial Contact Section - Redesigned */
+  /* Editorial Contact Section - Mobile Responsive */
   .editorial-contact-section {
-    @apply py-16 bg-gray-50;
+    @apply section-padding;
     background: 
       linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%),
       radial-gradient(circle at 20% 80%, rgba(251,146,60,0.02) 1px, transparent 1px),
@@ -400,141 +437,67 @@
   }
 
   .editorial-contact-card {
-    @apply bg-white rounded-lg shadow-xl p-8 max-w-2xl mx-auto;
-    background: 
-      linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+    @apply bg-white rounded-lg shadow-xl max-w-2xl mx-auto mobile-card;
+    background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
     border: 1px solid rgba(0,0,0,0.05);
     position: relative;
     overflow: hidden;
   }
 
-  .editorial-contact-card::before {
-    content: '';
-    @apply absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-orange-600;
-  }
-
-  .editorial-contact-card::after {
-    content: '';
-    @apply absolute top-4 right-4 w-8 h-8 opacity-5;
-    background: radial-gradient(circle at center, rgba(251,146,60,0.3) 2px, transparent 2px);
-    background-size: 8px 8px;
-  }
-
-  .contact-header {
-    @apply text-center space-y-3 mb-8;
-  }
-
-  .contact-category {
-    @apply text-xs uppercase tracking-widest text-orange-600 font-bold;
-  }
-
   .contact-title {
-    @apply font-serif text-2xl font-bold text-gray-900;
-  }
-
-  .contact-subtitle {
-    @apply text-gray-600 text-lg;
-  }
-
-  .contact-grid {
-    @apply space-y-6 mb-8;
+    @apply font-serif font-bold text-gray-900;
+    font-size: clamp(1.5rem, 4vw, 2rem);
   }
 
   .contact-method {
-    @apply flex items-center space-x-4 p-4 rounded-lg bg-gray-50 transition-all duration-300;
+    @apply flex items-center rounded-lg bg-gray-50 transition-all duration-300;
     @apply hover:bg-orange-50 hover:shadow-md;
-  }
-
-  .contact-icon {
-    @apply flex items-center justify-center w-10 h-10 bg-orange-100 text-orange-600 rounded-full;
-    @apply transition-all duration-300;
-  }
-
-  .contact-method:hover .contact-icon {
-    @apply bg-orange-600 text-white transform scale-110;
-  }
-
-  .contact-details {
-    @apply flex-1 space-y-1;
-  }
-
-  .contact-label {
-    @apply text-xs uppercase tracking-wider text-gray-500 font-medium;
+    padding: clamp(0.75rem, 3vw, 1rem);
+    gap: clamp(0.75rem, 3vw, 1rem);
   }
 
   .contact-value {
-    @apply text-gray-900 font-medium text-lg;
+    @apply text-gray-900 font-medium;
     @apply hover:text-orange-600 transition-colors;
-  }
-
-  .contact-value[href] {
-    @apply cursor-pointer;
-  }
-
-  .contact-cta {
-    @apply text-center pt-6 border-t border-gray-100;
+    font-size: clamp(1rem, 3vw, 1.125rem);
   }
 
   .cta-button {
-    @apply inline-flex items-center space-x-2 px-6 py-3 bg-orange-600 text-white font-medium rounded-lg;
+    @apply inline-flex items-center justify-center bg-orange-600 text-white font-medium rounded-lg;
     @apply hover:bg-orange-700 hover:shadow-lg transition-all duration-300;
     @apply hover:transform hover:-translate-y-1;
+    padding: clamp(0.75rem, 3vw, 1rem) clamp(1.5rem, 4vw, 2rem);
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
+    min-height: 48px;
     text-decoration: none;
   }
 
-  .cta-button:hover {
-    box-shadow: 0 10px 25px rgba(251,146,60,0.3);
-  }
-
-  /* Magazine Footer */
+  /* Magazine Footer - Mobile Responsive */
   .magazine-footer {
-    @apply bg-gray-900 text-white py-12;
+    @apply bg-gray-900 text-white;
+    padding: clamp(2rem, 6vw, 3rem) clamp(1rem, 4vw, 2rem);
   }
 
   .footer-content {
-    @apply editorial-container text-center space-y-4;
+    @apply text-center space-y-4;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   .footer-logo {
-    @apply font-serif text-2xl font-bold;
+    @apply font-serif font-bold;
+    font-size: clamp(1.5rem, 4vw, 2rem);
   }
 
   .footer-info {
-    @apply flex flex-col space-y-2 text-sm text-gray-400;
+    @apply flex flex-col space-y-2 text-gray-400;
+    font-size: clamp(0.875rem, 2vw, 1rem);
   }
 
-  /* Table of Contents */
-  .table-of-contents {
-    @apply editorial-container bg-white shadow-lg my-8;
-    border-left: 4px solid #d97706;
-  }
-
-  .toc-header {
-    @apply border-b border-gray-300 pb-4 mb-6;
-  }
-
-  .toc-header h3 {
-    @apply font-serif text-2xl font-bold;
-  }
-
-  .toc-line {
-    @apply w-16 h-px bg-orange-600 mt-2;
-  }
-
-  .toc-entries {
-    @apply space-y-3;
-  }
-
-  .toc-entry {
-    @apply flex items-center space-x-6 py-2;
-  }
-
-  .toc-page {
-    @apply font-mono text-lg font-bold text-orange-600 min-w-8;
-  }
-
-  .toc-title {
-    @apply text-gray-800;
+  @media (min-width: 640px) {
+    .footer-info {
+      @apply flex-row space-y-0 space-x-4 justify-center;
+    }
   }
 }
 
@@ -611,4 +574,28 @@
 @keyframes line-stretch {
   0% { width: 0; }
   100% { width: 8rem; }
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  /* Reduce complex patterns and effects */
+  .newspaper-pattern,
+  .newspaper-grid {
+    display: none;
+  }
+
+  /* Simplify hover states for touch */
+  .grid-article-link:hover .grid-article-image img {
+    @apply scale-105;
+  }
+
+  /* Optimize performance */
+  * {
+    will-change: auto;
+  }
+  
+  .gyroscopic-card,
+  .hover-letter {
+    will-change: transform;
+  }
 }
