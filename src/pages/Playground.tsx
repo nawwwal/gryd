@@ -8,7 +8,12 @@ const Playground = () => {
   const masonryRef = useRef<HTMLDivElement>(null);
   const [experiments, setExperiments] = useState<PlaygroundExperiment[]>([]);
   const [loading, setLoading] = useState(true);
-  const notebookRef = useGyroscopic();
+  const notebookRef = useGyroscopic({
+    maxRotation: 8,
+    intensity: 1.5,
+    restRotationX: 1,
+    restRotationY: -2
+  });
 
   useEffect(() => {
     const loadContent = async () => {
@@ -64,47 +69,66 @@ const Playground = () => {
 
   return (
     <div className="magazine-container">
-      {/* Lab Experimental Header */}
-      <div className="lab-experimental-header">
-        <div ref={notebookRef} className="lab-notebook gyroscopic-card">
-          <div className="notebook-rings">
-            <div className="ring"></div>
-            <div className="ring"></div>
-            <div className="ring"></div>
-          </div>
-          
-          <div className="lab-header-content">
-            <div className="lab-stamp">
-              <span>EXPERIMENTAL</span>
+      {/* Enhanced Experimental Hero */}
+      <div className="playground-hero-container">
+        <div className="playground-hero-background">
+          <div className="halftone-pattern"></div>
+          <div className="newsprint-grain"></div>
+          <div className="vintage-texture"></div>
+        </div>
+        
+        <div className="playground-hero-content">
+          <div ref={notebookRef} className="lab-notebook enhanced-gyroscopic">
+            <div className="notebook-rings">
+              <div className="ring ring-1"></div>
+              <div className="ring ring-2"></div>
+              <div className="ring ring-3"></div>
             </div>
             
-            <div className="lab-title-section">
-              <h1 className="lab-title">
-                {'PLAYGROUND'.split('').map((letter, index) => (
-                  <span 
-                    key={index} 
-                    className="playground-letter" 
-                    style={{ 
-                      animationDelay: `${index * 150}ms`,
-                      animationDuration: `${2000 + Math.random() * 1000}ms`
-                    }}
-                  >
-                    {letter}
-                  </span>
-                ))}
-              </h1>
-              <div className="lab-subtitle">Research Lab • Experiments & Dead Ends</div>
+            <div className="lab-header-content">
+              <div className="lab-stamp animated-stamp">
+                <span>EXPERIMENTAL</span>
+              </div>
+              
+              <div className="lab-title-section">
+                <h1 className="lab-title experimental-title">
+                  {'PLAYGROUND'.split('').map((letter, index) => (
+                    <span 
+                      key={index} 
+                      className="playground-letter experimental-letter" 
+                      style={{ 
+                        animationDelay: `${index * 200}ms`,
+                        '--letter-index': index
+                      } as React.CSSProperties}
+                      data-letter={letter}
+                    >
+                      {letter}
+                    </span>
+                  ))}
+                </h1>
+                <div className="lab-subtitle animated-subtitle">Research Lab • Experiments & Dead Ends</div>
+              </div>
+              
+              <div className="lab-warning animated-warning">
+                <div className="warning-triangle pulse-triangle">⚠</div>
+                <span>Most of this is useless. Some of it changes everything.</span>
+              </div>
             </div>
             
-            <div className="lab-warning">
-              <div className="warning-triangle">⚠</div>
-              <span>Most of this is useless. Some of it changes everything.</span>
+            <div className="notebook-stains animated-stains">
+              <div className="coffee-stain growing-stain"></div>
+              <div className="ink-splatter floating-splatter"></div>
+              <div className="ink-drop drop-1"></div>
+              <div className="ink-drop drop-2"></div>
+              <div className="ink-drop drop-3"></div>
             </div>
-          </div>
-          
-          <div className="notebook-stains">
-            <div className="coffee-stain"></div>
-            <div className="ink-splatter"></div>
+
+            <div className="hover-particles">
+              <div className="particle particle-1"></div>
+              <div className="particle particle-2"></div>
+              <div className="particle particle-3"></div>
+              <div className="particle particle-4"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -112,7 +136,7 @@ const Playground = () => {
       {/* Experiments Section */}
       <div className="magazine-spread">
         <div className="experiments-section">
-          <div className="experiments-header-bar">
+          <div className="experiments-header-bar-new">
             <div className="experiments-title-group">
               <h2 className="section-title">CURRENT EXPERIMENTS</h2>
               <div className="section-subtitle">live research & active investigations</div>

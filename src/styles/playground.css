@@ -1,23 +1,12 @@
-
 @layer components {
   /* Experiments Section */
   .experiments-section {
     @apply max-w-7xl mx-auto px-8 py-16;
   }
 
+  /* Remove the old problematic header bar styles */
   .experiments-header-bar {
-    @apply flex justify-between items-end pb-8 mb-12 relative;
-    border-bottom: 4px solid #111;
-  }
-
-  .experiments-header-bar::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: #111;
+    display: none;
   }
 
   .experiments-title-group {
