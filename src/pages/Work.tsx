@@ -1,13 +1,14 @@
-
-import { useState, useEffect } from 'react';
-import ScrollFade from '../components/ScrollFade';
-import { loadWorkProjects } from '../utils/contentLoader';
+import { useEffect, useState } from 'react';
 import { WorkProject } from '../types/content';
+import { loadWorkProjects } from '../utils/contentLoader';
 import ProjectCard from '../components/ProjectCard';
+import ScrollFade from '../components/ScrollFade';
+import { useGyroscopic } from '../hooks/useGyroscopic';
 
 const Work = () => {
   const [projects, setProjects] = useState<WorkProject[]>([]);
   const [loading, setLoading] = useState(true);
+  const portfolioRef = useGyroscopic();
 
   useEffect(() => {
     const loadContent = async () => {
@@ -30,7 +31,7 @@ const Work = () => {
         <div className="editorial-container py-16">
           <div className="text-center">
             <div className="animate-spin w-8 h-8 border-2 border-gryd-accent border-t-transparent rounded-full mx-auto mb-4"></div>
-            <p className="body text-gryd-soft">Loading work projects...</p>
+            <p className="body text-gryd-soft">Loading portfolio...</p>
           </div>
         </div>
       </div>
@@ -39,40 +40,38 @@ const Work = () => {
 
   return (
     <div className="magazine-container">
-      {/* Work Portfolio Header */}
+      {/* Portfolio Header */}
       <div className="work-portfolio-header">
-        <div className="portfolio-masthead">
+        <div ref={portfolioRef} className="portfolio-masthead gyroscopic-card">
           <div className="portfolio-breadcrumb">
             <span>THE GRYD</span>
-            <span>•</span>
-            <span>PORTFOLIO</span>
-            <span>•</span>
-            <span>2024</span>
+            <span>→</span>
+            <span>WORK</span>
           </div>
           
           <div className="portfolio-title-section">
             <h1 className="portfolio-main-title">
-              {'SELECTED WORK'.split('').map((letter, index) => (
-                <span key={index} className="hover-letter" style={{ animationDelay: `${index * 50}ms` }}>
-                  {letter === ' ' ? '\u00A0' : letter}
+              {'WORK'.split('').map((letter, index) => (
+                <span key={index} className="hover-letter ink-bleed" style={{ animationDelay: `${index * 100}ms` }}>
+                  {letter}
                 </span>
               ))}
             </h1>
-            <div className="portfolio-subtitle">Case Studies & Projects That Moved Numbers</div>
+            <p className="portfolio-subtitle">Case Studies & Client Projects</p>
           </div>
           
           <div className="portfolio-stats">
             <div className="stat-item">
-              <span className="stat-number">{projects.length}+</span>
+              <span className="stat-number">{projects.length}</span>
               <span className="stat-label">Projects</span>
             </div>
             <div className="stat-item">
-              <span className="stat-number">{projects.filter(p => p.metadata.status === 'live').length}</span>
-              <span className="stat-label">Live</span>
+              <span className="stat-number">{projects.filter(p => p.metadata.featured).length}</span>
+              <span className="stat-label">Featured</span>
             </div>
             <div className="stat-item">
-              <span className="stat-number">∞</span>
-              <span className="stat-label">Coffee</span>
+              <span className="stat-number">{new Set(projects.map(p => p.metadata.category)).size}</span>
+              <span className="stat-label">Categories</span>
             </div>
           </div>
         </div>
@@ -80,32 +79,19 @@ const Work = () => {
 
       {/* Projects Grid */}
       <div className="magazine-spread">
-        <div className="article-grid">
-          <div className="grid-title">
-            <h4>Case Studies</h4>
-            <div className="title-underline"></div>
-          </div>
-          
-          <div className="grid-articles">
-            {projects.map((project, index) => (
-              <ScrollFade key={project.slug} delay={index * 150}>
-                <ProjectCard project={project} index={index} />
-              </ScrollFade>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Editorial Footer */}
-      <div className="editorial-cta">
         <ScrollFade>
-          <div className="cta-paper">
-            <div className="cta-content">
-              <h4 className="cta-headline">More Work Available</h4>
-              <p className="cta-text">
-                Additional case studies available under NDA.
-                Happy to discuss specifics over coffee.
-              </p>
+          <div className="article-grid">
+            <div className="grid-title">
+              <h4>Selected Work</h4>
+              <div className="title-underline"></div>
+            </div>
+            
+            <div className="grid-articles">
+              {projects.map((project, index) => (
+                <ScrollFade key={project.slug} delay={index * 200}>
+                  <ProjectCard project={project} />
+                </ScrollFade>
+              ))}
             </div>
           </div>
         </ScrollFade>
@@ -115,8 +101,8 @@ const Work = () => {
         <div className="footer-content">
           <div className="footer-logo">THE GRYD</div>
           <div className="footer-info">
-            <span>Work Archive • 2024</span>
-            <span>Selected Projects & Case Studies</span>
+            <span>Work Portfolio • Selected Projects</span>
+            <span>Updated: {new Date().toLocaleDateString()}</span>
           </div>
         </div>
       </div>

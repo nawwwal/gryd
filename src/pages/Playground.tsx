@@ -1,13 +1,14 @@
-
 import { useEffect, useRef, useState } from 'react';
 import ScrollFade from '../components/ScrollFade';
 import { loadPlaygroundExperiments } from '../utils/contentLoader';
 import { PlaygroundExperiment } from '../types/content';
+import { useGyroscopic } from '../hooks/useGyroscopic';
 
 const Playground = () => {
   const masonryRef = useRef<HTMLDivElement>(null);
   const [experiments, setExperiments] = useState<PlaygroundExperiment[]>([]);
   const [loading, setLoading] = useState(true);
+  const notebookRef = useGyroscopic();
 
   useEffect(() => {
     const loadContent = async () => {
@@ -65,7 +66,7 @@ const Playground = () => {
     <div className="magazine-container">
       {/* Lab Experimental Header */}
       <div className="lab-experimental-header">
-        <div className="lab-notebook">
+        <div ref={notebookRef} className="lab-notebook gyroscopic-card">
           <div className="notebook-rings">
             <div className="ring"></div>
             <div className="ring"></div>
@@ -80,7 +81,14 @@ const Playground = () => {
             <div className="lab-title-section">
               <h1 className="lab-title">
                 {'PLAYGROUND'.split('').map((letter, index) => (
-                  <span key={index} className="hover-letter lab-letter" style={{ animationDelay: `${index * 80}ms` }}>
+                  <span 
+                    key={index} 
+                    className="playground-letter" 
+                    style={{ 
+                      animationDelay: `${index * 150}ms`,
+                      animationDuration: `${2000 + Math.random() * 1000}ms`
+                    }}
+                  >
                     {letter}
                   </span>
                 ))}

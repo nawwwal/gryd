@@ -178,7 +178,7 @@
 
   .hero-paper {
     @apply relative w-full max-w-6xl bg-white shadow-2xl;
-    transform: rotateX(2deg) rotateY(-1deg);
+    transform: rotateX(0.5deg) rotateY(-0.25deg);
     background: 
       linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%),
       radial-gradient(circle at 50% 50%, rgba(0,0,0,0.02) 1px, transparent 1px);
@@ -584,11 +584,11 @@
 
 @keyframes paper-settle {
   0% {
-    transform: rotateX(8deg) rotateY(-4deg) translateY(-50px);
+    transform: rotateX(2deg) rotateY(-1deg) translateY(-20px);
     opacity: 0;
   }
   100% {
-    transform: rotateX(1deg) rotateY(-0.5deg) translateY(0);
+    transform: rotateX(0.5deg) rotateY(-0.25deg) translateY(0);
     opacity: 1;
   }
 }
