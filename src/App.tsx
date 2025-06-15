@@ -11,6 +11,7 @@ import About from "./pages/About";
 import Playground from "./pages/Playground";
 import Contact from "./pages/Contact";
 import ProjectDetail from "./pages/ProjectDetail";
+import CMS from "./pages/CMS";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/work/:slug" element={<ProjectDetail />} />
             <Route path="/about" element={<About />} />
             <Route path="/playground" element={<Playground />} />
+            <Route path="/cms" element={<CMS />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

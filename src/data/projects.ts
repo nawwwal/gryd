@@ -1,4 +1,6 @@
 
+import { WorkProject } from '../types/content';
+
 export interface Project {
   slug: string;
   title: string;
@@ -12,6 +14,7 @@ export interface Project {
   content: { type: string; content: string }[];
 }
 
+// Legacy projects interface for backward compatibility
 export const projects: Project[] = [
   {
     slug: 'tamed-tax-chaos',
