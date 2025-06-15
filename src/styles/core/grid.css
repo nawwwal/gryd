@@ -1,0 +1,40 @@
+
+@layer components {
+  /* Grid Systems */
+  .magazine-grid {
+    display: grid;
+    gap: clamp(1.5rem, 4vw, 2.5rem);
+    margin-top: clamp(2rem, 5vw, 4rem);
+  }
+  
+  .magazine-grid-auto {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+  
+  .magazine-grid-2 {
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  }
+  
+  @media (max-width: 768px) {
+    .magazine-grid-2 {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  /* Article Layouts */
+  .article-layout {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .article-content {
+    padding: var(--padding-section);
+  }
+  
+  .article-header {
+    max-width: 4xl;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+  }
+}

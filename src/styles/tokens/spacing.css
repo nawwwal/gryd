@@ -1,0 +1,25 @@
+
+@layer tokens {
+  :root {
+    /* Spacing Scale */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+    --space-4xl: 6rem;
+    
+    /* Container Max Widths */
+    --container-sm: 640px;
+    --container-md: 768px;
+    --container-lg: 1024px;
+    --container-xl: 1280px;
+    --container-2xl: 1536px;
+    
+    /* Responsive Padding */
+    --padding-responsive: clamp(1rem, 4vw, 2rem);
+    --padding-section: clamp(2rem, 6vw, 4rem);
+  }
+}

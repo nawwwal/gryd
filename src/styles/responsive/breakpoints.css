@@ -1,0 +1,64 @@
+
+@layer utilities {
+  /* Mobile First Responsive Utilities */
+  
+  /* Small screens and up */
+  @media (min-width: 640px) {
+    .sm\:grid-cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .sm\:space-y-0 > * + * {
+      margin-top: 0;
+    }
+    
+    .sm\:space-x-4 > * + * {
+      margin-left: 1rem;
+    }
+  }
+  
+  /* Medium screens and up */
+  @media (min-width: 768px) {
+    .md\:grid-cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .md\:flex-row {
+      flex-direction: row;
+    }
+    
+    .md\:justify-between {
+      justify-content: space-between;
+    }
+  }
+  
+  /* Large screens and up */
+  @media (min-width: 1024px) {
+    .lg\:grid-cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .lg\:grid-cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  
+  /* Mobile-specific overrides */
+  @media (max-width: 768px) {
+    .mobile-single-column {
+      grid-template-columns: 1fr !important;
+    }
+    
+    .mobile-no-transform {
+      transform: none !important;
+    }
+    
+    .mobile-simple-shadow {
+      box-shadow: var(--shadow-md) !important;
+    }
+    
+    .mobile-reduced-padding {
+      padding: var(--space-lg) !important;
+    }
+  }
+}

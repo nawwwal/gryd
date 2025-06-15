@@ -1,0 +1,83 @@
+
+@layer components {
+  /* Common Hero Layout */
+  .hero-section {
+    min-height: clamp(70vh, 100vh, 100vh);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-responsive);
+    perspective: 1000px;
+  }
+  
+  /* Work Page Hero */
+  .work-hero {
+    background: 
+      linear-gradient(135deg, #f8f6f3 0%, #f0ede8 100%),
+      radial-gradient(circle at 20% 80%, rgba(251,146,60,0.05) 0%, transparent 50%);
+  }
+  
+  .portfolio-masthead {
+    @apply paper-base paper-texture;
+    width: 100%;
+    max-width: min(95vw, 1400px);
+    padding: var(--padding-section);
+    transform: rotateX(0.5deg) rotateY(-0.25deg);
+  }
+  
+  @media (max-width: 768px) {
+    .portfolio-masthead {
+      transform: none;
+      margin: var(--space-md);
+    }
+  }
+  
+  /* About Page Hero */
+  .about-hero {
+    background: 
+      linear-gradient(45deg, #faf8f5 0%, #f5f2ed 100%);
+  }
+  
+  .profile-paper {
+    @apply paper-base paper-lines;
+    width: 100%;
+    max-width: min(95vw, 1400px);
+    padding: var(--padding-section);
+    border: 2px solid #e5d3b3;
+    transform: rotate(-0.5deg);
+  }
+  
+  @media (max-width: 768px) {
+    .profile-paper {
+      transform: none;
+      margin: var(--space-md);
+      border-width: 1px;
+    }
+  }
+  
+  /* Playground Hero */
+  .playground-hero {
+    background: 
+      linear-gradient(135deg, #f7f5f3 0%, #ebe7e0 100%);
+  }
+  
+  .lab-notebook {
+    @apply paper-base paper-lines;
+    width: 100%;
+    max-width: min(95vw, 1400px);
+    padding: var(--padding-section);
+    border-left: 6px solid rgb(var(--color-primary));
+    transform: rotateX(0.5deg) rotateY(-0.25deg);
+    box-shadow: 
+      var(--shadow-2xl),
+      -6px 0 12px rgba(217,119,6,0.1);
+  }
+  
+  @media (max-width: 768px) {
+    .lab-notebook {
+      transform: none;
+      margin: var(--space-md);
+      border-left-width: 4px;
+    }
+  }
+}
