@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from 'react';
 import ScrollFade from '../components/ScrollFade';
 import MagazineFooter from '../components/MagazineFooter';
@@ -84,19 +85,20 @@ const Playground = () => {
   }
 
   return <div className="magazine-container">
-      {/* Enhanced Experimental Hero - Full Height */}
+      {/* Enhanced Experimental Hero - Full Viewport Height */}
       <div className="playground-hero-container">
         <div ref={backgroundRef} className="playground-hero-background">
           <InteractiveBackground mousePos={mousePos} />
         </div>
         
         <div className="playground-hero-content">
+          {/* Centered Experimental Tag */}
+          <div className="experimental-tag-centered">
+            <span>EXPERIMENTAL</span>
+          </div>
+          
           <div className="lab-notebook enhanced-gyroscopic">
             <div className="lab-header-content">
-              <div className="lab-stamp animated-stamp">
-                <span>EXPERIMENTAL</span>
-              </div>
-              
               <div className="lab-title-section">
                 <div className="morphing-title-container">
                   <MorphingText 

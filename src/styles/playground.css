@@ -29,6 +29,7 @@
     text-transform: lowercase;
     letter-spacing: 1px;
     font-style: italic;
+    font-weight: 600;
   }
 
   .experiments-meta {
@@ -37,15 +38,18 @@
     font-size: 0.8rem;
     text-transform: uppercase;
     color: #666;
+    font-weight: 600;
   }
 
   .lab-number {
     @apply font-bold text-lg;
     color: #111;
+    font-weight: 700;
   }
 
   .experiment-count {
     @apply text-gray-500;
+    font-weight: 600;
   }
 
   /* Experiments Grid - Responsive */
@@ -193,16 +197,19 @@
     text-transform: uppercase;
     color: #666;
     letter-spacing: 0.5px;
+    font-weight: 600;
   }
 
   .experiment-number {
     @apply font-bold bg-black text-white px-2 py-1;
     font-size: 0.65rem;
+    font-weight: 700;
   }
 
   .experiment-type {
     @apply italic;
     text-transform: lowercase;
+    font-weight: 500;
   }
 
   .experiment-status {
@@ -210,6 +217,7 @@
     font-family: 'JetBrains Mono', 'Courier New', monospace;
     font-size: 0.65rem;
     color: #999;
+    font-weight: 600;
   }
 
   .status-dot {
@@ -221,6 +229,7 @@
     @apply text-gray-600;
     text-transform: lowercase;
     font-style: italic;
+    font-weight: 500;
   }
 
   /* Title */
@@ -277,11 +286,13 @@
     @apply text-xs text-gray-500 uppercase;
     font-family: 'JetBrains Mono', 'Courier New', monospace;
     letter-spacing: 0.5px;
+    font-weight: 600;
   }
 
   .detail-value {
     @apply text-sm text-gray-800 font-medium;
     font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-weight: 600;
   }
 
   .tools-list {
@@ -293,6 +304,7 @@
     font-family: 'JetBrains Mono', 'Courier New', monospace;
     text-transform: lowercase;
     transition: all 0.2s ease;
+    font-weight: 500;
   }
 
   .experiment-card:hover .tool-tag {
@@ -306,10 +318,12 @@
     font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    font-weight: 600;
   }
 
   .experiment-date {
     @apply font-medium;
+    font-weight: 600;
   }
 
   .interaction-hint {
@@ -317,6 +331,7 @@
     transition: opacity 0.3s ease;
     text-transform: lowercase;
     font-style: italic;
+    font-weight: 500;
   }
 
   .experiment-card:hover .interaction-hint {

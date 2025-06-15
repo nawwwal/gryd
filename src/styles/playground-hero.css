@@ -2,7 +2,7 @@
 @layer components {
   /* Playground Hero Container - Full Height & Responsive */
   .playground-hero-container {
-    @apply relative min-h-screen flex items-center justify-center overflow-hidden;
+    @apply relative h-screen flex items-center justify-center overflow-hidden;
     background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 50%, #f0f0f0 100%);
   }
 
@@ -14,13 +14,26 @@
 
   /* Hero Content - Full Width */
   .playground-hero-content {
-    @apply relative z-10 w-full h-full flex items-center justify-center;
+    @apply relative z-10 w-full h-full flex flex-col items-center justify-center;
     padding: clamp(1rem, 4vw, 2rem);
+  }
+
+  /* Centered Experimental Tag */
+  .experimental-tag-centered {
+    @apply mb-8 bg-red-600 text-white px-6 py-3 transform -rotate-12;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-weight: bold;
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    border: 3px solid #dc2626;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+    animation: stamp-pulse 3s ease-in-out infinite;
+    text-transform: uppercase;
+    letter-spacing: 2px;
   }
 
   /* Seamless Lab Notebook - No Perspective */
   .lab-notebook.enhanced-gyroscopic {
-    @apply relative w-full h-full flex items-center justify-center;
+    @apply relative w-full h-auto flex flex-col items-center justify-center;
     background: transparent;
     border: none;
     box-shadow: none;
@@ -41,17 +54,6 @@
     padding: clamp(2rem, 6vw, 4rem);
   }
 
-  /* Animated Stamp - Responsive */
-  .animated-stamp {
-    @apply absolute top-4 right-4 sm:top-8 sm:right-8 bg-red-600 text-white px-3 py-2 sm:px-4 sm:py-2 transform -rotate-12;
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-weight: bold;
-    font-size: clamp(0.7rem, 2vw, 0.85rem);
-    border: 3px solid #dc2626;
-    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
-    animation: stamp-pulse 3s ease-in-out infinite;
-  }
-
   /* Title Section - Responsive */
   .lab-title-section {
     @apply text-center mb-6 sm:mb-8;
@@ -59,42 +61,54 @@
 
   /* Morphing Title Container */
   .morphing-title-container {
-    @apply mb-4 sm:mb-6;
+    @apply mb-6 sm:mb-8;
     min-height: clamp(4rem, 12vw, 8rem);
   }
 
-  /* Subtitle with Mono Font */
+  /* Enhanced Subtitle with More Emphasis */
   .animated-subtitle {
-    @apply text-center text-gray-600 mb-4 sm:mb-6;
+    @apply text-center text-gray-800 mb-6 sm:mb-8;
     font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    font-size: clamp(1rem, 2.8vw, 1.3rem);
     text-transform: lowercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     font-style: italic;
-    font-weight: 400;
+    font-weight: 700;
     animation: typewriter 2.5s steps(45) 1s forwards;
     overflow: hidden;
     white-space: nowrap;
-    border-right: 2px solid #fb923c;
+    border-right: 3px solid #fb923c;
     width: 0;
-    margin: 0 auto 2rem;
+    margin: 0 auto;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, rgba(251,146,60,0.1) 0%, transparent 100%);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
   }
 
-  /* Warning Text with Mono Font */
+  /* Enhanced Warning Text */
   .animated-warning {
-    @apply flex items-center justify-center space-x-3 text-center;
+    @apply flex items-center justify-center space-x-4 text-center;
     font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-size: clamp(0.8rem, 2vw, 0.9rem);
-    color: #888;
+    font-size: clamp(0.9rem, 2.2vw, 1rem);
+    color: #555;
+    background: rgba(255,235,59,0.1);
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    border: 2px dashed #fb923c;
+    margin: 0 auto;
+    max-width: 600px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   }
 
   .warning-text {
-    @apply text-gray-600;
-    font-weight: 400;
+    @apply text-gray-700;
+    font-weight: 600;
+    font-style: italic;
   }
 
   .pulse-triangle {
-    @apply text-yellow-500 text-xl;
+    @apply text-yellow-600 text-2xl;
     animation: warning-pulse 2s ease-in-out infinite;
     filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.5));
   }
@@ -138,6 +152,7 @@
     font-size: clamp(0.7rem, 1.5vw, 0.8rem);
     text-transform: uppercase;
     color: #666;
+    font-weight: 600;
   }
 
   .lab-number {
@@ -177,8 +192,8 @@
     padding: clamp(1.5rem, 4vw, 2rem);
   }
 
-  .animated-stamp {
-    @apply top-4 right-4 px-2 py-1 text-xs;
+  .experimental-tag-centered {
+    @apply mb-6 px-4 py-2 text-sm;
   }
 
   .animated-subtitle {
@@ -188,10 +203,11 @@
     width: auto;
     overflow: visible;
     animation: none;
+    padding: 0.5rem;
   }
 
   .animated-warning {
-    @apply text-xs flex-col space-x-0 space-y-2;
+    @apply text-xs flex-col space-x-0 space-y-2 px-4 py-3;
   }
 
   .experiments-header-bar-new {
@@ -203,7 +219,7 @@
   }
 }
 
-/* Editorial Lab Notes Section */
+/* Enhanced Lab Notes Section with Fixed Responsiveness */
 .lab-notes-section {
   @apply bg-gray-50 py-12 sm:py-16 mt-12 sm:mt-16;
   border-top: 3px solid #2c2c2c;
@@ -242,6 +258,7 @@
   @apply text-gray-600 text-xs sm:text-sm font-bold uppercase tracking-widest mx-4 sm:mx-6;
   font-family: 'JetBrains Mono', 'Courier New', monospace;
   letter-spacing: 0.2em;
+  font-weight: 700;
 }
 
 .lab-notes-content {
@@ -266,6 +283,7 @@
   @apply text-xs sm:text-sm text-gray-600 uppercase tracking-wider;
   font-family: 'JetBrains Mono', 'Courier New', monospace;
   letter-spacing: 0.1em;
+  font-weight: 600;
 }
 
 .editorial-body {
@@ -296,6 +314,7 @@
   font-size: clamp(0.8rem, 1.8vw, 0.9rem);
   line-height: 1.6;
   color: #4a4a4a;
+  font-weight: 500;
 }
 
 .list-marker {
@@ -303,8 +322,15 @@
   margin-top: 0.1rem;
 }
 
+/* Fixed Responsive Signature Section */
 .editorial-signature {
-  @apply flex flex-col sm:flex-row items-center sm:justify-end space-y-4 sm:space-y-0 sm:space-x-4 pt-8 border-t border-gray-300;
+  @apply flex flex-col items-center space-y-4 pt-8 border-t border-gray-300;
+}
+
+@media (min-width: 640px) {
+  .editorial-signature {
+    @apply flex-row justify-end space-y-0 space-x-4;
+  }
 }
 
 .signature-line {
@@ -312,14 +338,22 @@
 }
 
 .signature-text {
-  @apply flex flex-col items-center sm:items-end;
+  @apply flex flex-col items-center;
   font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+@media (min-width: 640px) {
+  .signature-text {
+    @apply items-end;
+  }
 }
 
 .signature-name {
   @apply text-sm font-bold text-gray-700;
+  font-weight: 700;
 }
 
 .signature-title {
   @apply text-xs text-gray-500 uppercase tracking-wider;
+  font-weight: 600;
 }
