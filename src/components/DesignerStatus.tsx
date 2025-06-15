@@ -1,33 +1,32 @@
 
 const DesignerStatus = () => {
   return (
-    <div className="space-y-8">
-      <div className="space-y-6">
-        <h3 className="subhead">Current Status</h3>
+    <div className="space-y-6">
+      <div className="space-y-4">
+        <h3 className="subhead text-lg">Current Status</h3>
         <div className="flex items-center space-x-3">
           <div className="status-dot-green"></div>
-          <span className="body font-medium">Open to new opportunities</span>
+          <span className="body font-medium text-sm">Open to new opportunities</span>
         </div>
-        <p className="body text-gryd-soft">
+        <p className="body text-gryd-soft text-sm leading-relaxed">
           Currently exploring product design roles and strategic partnerships. 
-          Passionate about creating meaningful experiences that bridge 
-          user needs with business objectives.
+          Passionate about creating meaningful experiences.
         </p>
       </div>
       
       <div className="availability-card">
-        <div className="space-y-3">
-          <span className="caption text-gryd-soft">Let's Connect</span>
+        <div className="space-y-2">
+          <span className="caption text-gryd-soft text-xs">Let's Connect</span>
           <a 
             href="https://calendly.com/your-handle" 
             target="_blank"
             rel="noopener noreferrer"
             className="schedule-link"
           >
-            <div className="flex items-center space-x-4">
-              <span className="body font-medium">SCHEDULE</span>
-              <span className="subhead">A</span>
-              <span className="body font-medium">CONVERSATION</span>
+            <div className="flex items-center space-x-2">
+              <span className="body font-medium text-sm">SCHEDULE</span>
+              <span className="subhead text-sm">A</span>
+              <span className="body font-medium text-sm">CONVERSATION</span>
             </div>
           </a>
         </div>
