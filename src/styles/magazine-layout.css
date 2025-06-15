@@ -1,3 +1,4 @@
+
 @import './page-headers.css';
 @import './contact.css';
 @import './responsive.css';
@@ -629,4 +630,24 @@
   }
 }
 
-// ... keep existing code (animations and mobile optimizations)
+/* Animation keyframes */
+@keyframes gridFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-2px); }
+}
+
+@keyframes borderShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes paper-settle {
+  0% {
+    transform: rotateX(10deg) rotateY(-5deg) translateY(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateX(2deg) rotateY(-1deg) translateY(0);
+    opacity: 1;
+  }
+}
