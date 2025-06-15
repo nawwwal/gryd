@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const MagazineFooter = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -7,6 +8,7 @@ const MagazineFooter = () => {
     const conditions = ['Partly Cloudy', 'Sunny', 'Overcast', 'Light Rain', 'Clear Skies'];
     return conditions[Math.floor(Math.random() * conditions.length)];
   });
+  const location = useLocation();
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -25,20 +27,90 @@ const MagazineFooter = () => {
     });
   };
 
+  const getPageVariant = () => {
+    if (location.pathname.includes('/work')) return 'footer-work-variant';
+    if (location.pathname.includes('/about')) return 'footer-about-variant';
+    if (location.pathname.includes('/playground')) return 'footer-playground-variant';
+    return '';
+  };
+
+  const getPageSpecificContent = () => {
+    switch (true) {
+      case location.pathname.includes('/work'):
+        return {
+          specialSection: {
+            header: 'PORTFOLIO STATS',
+            details: [
+              'Projects Completed: 12+',
+              'Clients Satisfied: 8',
+              'Design Systems Built: 3',
+              'Lines of Code: 50,000+'
+            ]
+          }
+        };
+      case location.pathname.includes('/about'):
+        return {
+          specialSection: {
+            header: 'EDITORIAL TEAM',
+            details: [
+              'Editor-in-Chief: Aditya Nawal',
+              'Design Director: Aditya Nawal',
+              'UX Lead: Aditya Nawal',
+              'One-Person Army: Active'
+            ]
+          }
+        };
+      case location.pathname.includes('/playground'):
+        return {
+          specialSection: {
+            header: 'EXPERIMENTS',
+            details: [
+              'Active Projects: 5',
+              'Prototypes Built: 23',
+              'Ideas Brewing: ∞',
+              'Last Update: Today'
+            ]
+          }
+        };
+      default:
+        return {
+          specialSection: {
+            header: 'PUBLICATION',
+            details: [
+              'GRYD MAGAZINE',
+              'Volume I, Issue 001',
+              'First Published: Dec 2024',
+              'Digital Edition'
+            ]
+          }
+        };
+    }
+  };
+
+  const pageContent = getPageSpecificContent();
+
   return (
-    <div className="magazine-footer-enhanced">
+    <div className={`magazine-footer-enhanced ${getPageVariant()}`}>
       <div className="footer-paper">
         <div className="footer-binding"></div>
         
+        {/* Editorial Stamp */}
+        <div className="footer-editorial-stamp">
+          <div className="stamp-text">
+            <div>GRYD</div>
+            <div>EST.</div>
+            <div>2024</div>
+          </div>
+        </div>
+        
         <div className="footer-content-grid">
-          {/* Publication Details */}
+          {/* Page-Specific Content */}
           <div className="footer-section">
-            <div className="footer-section-header">PUBLICATION</div>
+            <div className="footer-section-header">{pageContent.specialSection.header}</div>
             <div className="footer-details">
-              <div>GRYD MAGAZINE</div>
-              <div>Volume I, Issue 001</div>
-              <div>First Published: Dec 2024</div>
-              <div>Digital Edition</div>
+              {pageContent.specialSection.details.map((detail, index) => (
+                <div key={index}>{detail}</div>
+              ))}
             </div>
           </div>
 
@@ -50,6 +122,16 @@ const MagazineFooter = () => {
               <div>Design & Systems Dept.</div>
               <div>Currently: Gandhinagar, IN</div>
               <div>Previously: Quicko HQ</div>
+            </div>
+            <div className="footer-social-links">
+              <a href="mailto:hello@adityanawal.com" className="footer-social-link">
+                <span>✉</span>
+                <span>Correspondence</span>
+              </a>
+              <a href="https://linkedin.com/in/adityanawal" className="footer-social-link" target="_blank" rel="noopener noreferrer">
+                <span>🔗</span>
+                <span>Professional</span>
+              </a>
             </div>
           </div>
 
@@ -94,6 +176,14 @@ const MagazineFooter = () => {
               <div>All Rights Reserved</div>
               <div>No AI Training Data</div>
               <div>Made with ♥ & ☕</div>
+            </div>
+            
+            {/* Subscription Box Mockup */}
+            <div className="footer-subscription-box">
+              <div className="subscription-title">STAY UPDATED</div>
+              <div className="subscription-text">
+                Follow the journey of pixels, products & processes
+              </div>
             </div>
           </div>
         </div>

@@ -1,8 +1,10 @@
+
 import { useEffect, useState } from 'react';
 import { WorkProject } from '../types/content';
 import { loadWorkProjects } from '../utils/contentLoader';
 import ProjectCard from '../components/ProjectCard';
 import ScrollFade from '../components/ScrollFade';
+import MagazineFooter from '../components/MagazineFooter';
 import { useGyroscopic } from '../hooks/useGyroscopic';
 import { useMobileOptimization } from '../hooks/useMobileOptimization';
 import { useSwipeGesture } from '../hooks/useSwipeGesture';
@@ -110,15 +112,8 @@ const Work = () => {
         </ScrollFade>
       </div>
 
-      <div className="magazine-footer">
-        <div className="footer-content">
-          <div className="footer-logo">THE GRYD</div>
-          <div className="footer-info">
-            <span>Work Portfolio • Selected Projects</span>
-            <span>Updated: {new Date().toLocaleDateString()}</span>
-          </div>
-        </div>
-      </div>
+      {/* Enhanced Magazine Footer - Now Common Component */}
+      <MagazineFooter />
     </div>
   );
 };

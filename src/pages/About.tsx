@@ -133,7 +133,7 @@ const About = () => {
       {/* Epilogue Section */}
       <EpilogueSection />
 
-      {/* Enhanced Magazine Footer */}
+      {/* Enhanced Magazine Footer - Now Common Component */}
       <MagazineFooter />
     </div>
   );
