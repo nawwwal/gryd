@@ -1,38 +1,83 @@
 
 import { Link, useLocation } from 'react-router-dom';
+import { Download } from 'lucide-react';
 
 const Navigation = () => {
   const location = useLocation();
 
   const links = [
-    { path: '/work', label: 'work' },
-    { path: '/about', label: 'about' },
-    { path: '/playground', label: 'playground' },
+    { path: '/work', label: 'portfolio' },
+    { path: '/about', label: 'editor' },
+    { path: '/playground', label: 'experiments' },
   ];
 
   return (
-    <nav className="nav-minimal border-b border-gryd-soft/10">
-      <div className="editorial-container py-6">
-        <div className="flex items-center justify-between">
-          <Link 
-            to="/" 
-            className="font-headline text-2xl font-bold lowercase text-gryd-text"
-          >
-            gryd
-          </Link>
-          
-          <div className="flex space-x-8">
-            {links.map(({ path, label }) => (
-              <Link
-                key={path}
-                to={path}
-                className={`nav-link ${
-                  location.pathname === path ? 'text-gryd-accent' : ''
-                }`}
-              >
-                {label}
+    <nav className="magazine-masthead-nav">
+      <div className="masthead-paper">
+        <div className="paper-binding"></div>
+        
+        <div className="masthead-container">
+          {/* Publication Details */}
+          <div className="publication-header">
+            <div className="issue-details">
+              <span>Issue No. 01</span>
+              <span>•</span>
+              <span>Winter 2024</span>
+              <span>•</span>
+              <span>Digital Edition</span>
+            </div>
+            
+            <div className="publication-divider"></div>
+          </div>
+
+          {/* Main Masthead */}
+          <div className="masthead-main">
+            <div className="masthead-left">
+              <div className="publication-mark">EST. 2024</div>
+            </div>
+            
+            <div className="masthead-center">
+              <Link to="/" className="magazine-title">
+                <span className="title-the">THE</span>
+                <span className="title-main">GRYD</span>
+                <span className="title-subtitle">Design & Strategy Quarterly</span>
               </Link>
-            ))}
+            </div>
+            
+            <div className="masthead-right">
+              <button className="download-issue-btn">
+                <Download className="w-4 h-4" />
+                <span>PDF</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Navigation Sections */}
+          <div className="masthead-sections">
+            <div className="sections-divider"></div>
+            <div className="sections-nav">
+              {links.map(({ path, label }) => (
+                <Link
+                  key={path}
+                  to={path}
+                  className={`section-link ${
+                    location.pathname === path ? 'active' : ''
+                  }`}
+                >
+                  <span className="section-number">
+                    {path === '/work' ? '01' : path === '/about' ? '02' : '03'}
+                  </span>
+                  <span className="section-label">{label}</span>
+                </Link>
+              ))}
+            </div>
+            <div className="publication-date">
+              {new Date().toLocaleDateString('en-US', { 
+                month: 'long', 
+                day: 'numeric', 
+                year: 'numeric' 
+              })}
+            </div>
           </div>
         </div>
       </div>
