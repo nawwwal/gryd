@@ -292,7 +292,7 @@
   }
 
   .grid-impact {
-    @apply text-sm font-mono uppercase tracking-wider text-orange-600 font-bold;
+    @apply text-sm font-mono uppercase tracking-widest text-orange-600 font-bold;
   }
 
   /* Featured Article - Consistent Width */
@@ -356,91 +356,101 @@
     @apply hover:text-orange-700 transition-colors;
   }
 
-  /* Letters to the Editor Section - Now with editorial-container width */
-  .letters-to-editor {
-    @apply bg-white border-t-4 border-orange-600;
+  /* Editorial Contact Section - Redesigned */
+  .editorial-contact-section {
+    @apply py-16 bg-gray-50;
     background: 
-      linear-gradient(135deg, #ffffff 0%, #fdfcfa 100%),
-      radial-gradient(circle at 10% 20%, rgba(139,69,19,0.02) 1px, transparent 1px);
-    background-size: 100% 100%, 20px 20px;
-    box-shadow: 
-      0 -10px 20px rgba(0,0,0,0.05),
-      inset 0 1px 0 rgba(255,255,255,0.8);
+      linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%),
+      radial-gradient(circle at 20% 80%, rgba(251,146,60,0.02) 1px, transparent 1px),
+      radial-gradient(circle at 80% 20%, rgba(251,146,60,0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 30px 30px, 40px 40px;
   }
 
-  .letters-paper {
-    @apply relative editorial-container py-12;
+  .editorial-contact-card {
+    @apply bg-white rounded-lg shadow-xl p-8 max-w-2xl mx-auto;
+    background: 
+      linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+    border: 1px solid rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
   }
 
-  .letters-binding {
-    @apply absolute left-0 top-0 w-6 h-full bg-gradient-to-r from-gray-200 to-gray-100;
-    box-shadow: 
-      inset -2px 0 4px rgba(0,0,0,0.1),
-      inset 2px 0 2px rgba(255,255,255,0.8);
+  .editorial-contact-card::before {
+    content: '';
+    @apply absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-orange-600;
   }
 
-  .letters-content {
-    @apply max-w-4xl mx-auto ml-6 space-y-8;
+  .editorial-contact-card::after {
+    content: '';
+    @apply absolute top-4 right-4 w-8 h-8 opacity-5;
+    background: radial-gradient(circle at center, rgba(251,146,60,0.3) 2px, transparent 2px);
+    background-size: 8px 8px;
   }
 
-  .letters-header {
-    @apply text-center space-y-4;
+  .contact-header {
+    @apply text-center space-y-3 mb-8;
   }
 
-  .letters-category {
-    @apply text-sm uppercase tracking-widest text-orange-600 font-bold;
+  .contact-category {
+    @apply text-xs uppercase tracking-widest text-orange-600 font-bold;
   }
 
-  .letters-title {
-    @apply font-serif text-3xl font-bold text-gray-900;
+  .contact-title {
+    @apply font-serif text-2xl font-bold text-gray-900;
   }
 
-  .letters-subtitle {
-    @apply text-lg text-gray-600 font-serif italic;
+  .contact-subtitle {
+    @apply text-gray-600 text-lg;
   }
 
-  .letters-divider {
-    @apply w-16 h-px bg-orange-600 mx-auto;
+  .contact-grid {
+    @apply space-y-6 mb-8;
   }
 
-  .letters-body {
-    @apply space-y-8;
+  .contact-method {
+    @apply flex items-center space-x-4 p-4 rounded-lg bg-gray-50 transition-all duration-300;
+    @apply hover:bg-orange-50 hover:shadow-md;
   }
 
-  .letter-section {
-    @apply space-y-6;
+  .contact-icon {
+    @apply flex items-center justify-center w-10 h-10 bg-orange-100 text-orange-600 rounded-full;
+    @apply transition-all duration-300;
   }
 
-  .letter-intro {
-    @apply text-lg leading-relaxed text-gray-700 text-center;
+  .contact-method:hover .contact-icon {
+    @apply bg-orange-600 text-white transform scale-110;
   }
 
   .contact-details {
-    @apply grid md:grid-cols-3 gap-6 max-w-2xl mx-auto;
-  }
-
-  .contact-item {
-    @apply text-center space-y-2;
+    @apply flex-1 space-y-1;
   }
 
   .contact-label {
-    @apply font-mono text-sm uppercase tracking-wider text-gray-500;
+    @apply text-xs uppercase tracking-wider text-gray-500 font-medium;
   }
 
   .contact-value {
-    @apply text-gray-900 font-medium;
+    @apply text-gray-900 font-medium text-lg;
+    @apply hover:text-orange-600 transition-colors;
   }
 
-  .signature-section {
-    @apply text-center space-y-3 pt-6 border-t border-gray-200;
+  .contact-value[href] {
+    @apply cursor-pointer;
   }
 
-  .editor-signature {
-    @apply font-serif text-lg italic text-gray-600;
+  .contact-cta {
+    @apply text-center pt-6 border-t border-gray-100;
   }
 
-  .editor-title {
-    @apply text-sm font-mono uppercase tracking-wider text-gray-500;
+  .cta-button {
+    @apply inline-flex items-center space-x-2 px-6 py-3 bg-orange-600 text-white font-medium rounded-lg;
+    @apply hover:bg-orange-700 hover:shadow-lg transition-all duration-300;
+    @apply hover:transform hover:translateY(-1px);
+    text-decoration: none;
+  }
+
+  .cta-button:hover {
+    box-shadow: 0 10px 25px rgba(251,146,60,0.3);
   }
 
   /* Magazine Footer */
