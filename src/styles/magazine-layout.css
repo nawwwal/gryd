@@ -1,31 +1,302 @@
 
-@import './core/layout.css';
-@import './core/paper-effects.css';
-@import './components/cards.css';
+@import './page-headers.css';
+@import './contact.css';
+@import './responsive.css';
 
-@layer magazine {
-  /* Magazine Container */
+@layer components {
+  /* Magazine Container - Mobile First */
   .magazine-container {
     @apply min-h-screen;
     background: transparent;
   }
 
-  /* Magazine Hero Section */
+  /* Work Page Linear Layout */
+  .work-projects-linear {
+    @apply space-y-12 max-w-6xl mx-auto;
+  }
+
+  .linear-project-card {
+    @apply bg-white shadow-lg overflow-hidden;
+    background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+    border: 1px solid rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .linear-project-card:hover {
+    @apply transform -translate-y-2 shadow-2xl;
+  }
+
+  .linear-project-content {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-0;
+  }
+
+  .linear-project-image {
+    @apply relative overflow-hidden;
+    height: clamp(20rem, 40vh, 28rem);
+  }
+
+  .linear-project-image img {
+    @apply w-full h-full object-cover transition-transform duration-500;
+  }
+
+  .linear-project-card:hover .linear-project-image img {
+    @apply scale-105;
+  }
+
+  .linear-project-info {
+    @apply p-8 lg:p-12 flex flex-col justify-center space-y-6;
+  }
+
+  .linear-project-category {
+    @apply text-sm uppercase tracking-widest text-orange-600 font-mono font-semibold;
+  }
+
+  .linear-project-title {
+    @apply font-headline text-3xl lg:text-4xl font-bold text-gray-900 leading-tight;
+  }
+
+  .linear-project-subtitle {
+    @apply text-lg text-gray-600 leading-relaxed font-body;
+  }
+
+  .linear-project-meta {
+    @apply flex flex-col sm:flex-row sm:items-center sm:justify-between pt-6 border-t border-gray-100 space-y-4 sm:space-y-0;
+  }
+
+  .linear-project-year {
+    @apply text-sm font-mono font-medium uppercase tracking-widest text-gray-500;
+  }
+
+  .linear-project-cta {
+    @apply inline-flex items-center text-orange-600 font-mono font-semibold uppercase tracking-widest text-sm hover:text-orange-700 transition-colors;
+  }
+
+  /* Enhanced Hero Card Effects */
+  .hero-paper {
+    @apply relative w-full bg-white shadow-2xl;
+    max-width: min(95vw, 1400px);
+    transform: rotateX(0.5deg) rotateY(-0.25deg);
+    background: 
+      linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%),
+      radial-gradient(circle at 50% 50%, rgba(0,0,0,0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 10px 10px;
+    border: 1px solid rgba(0,0,0,0.1);
+    animation: paper-settle 1.2s ease-out;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hero-paper:hover {
+    box-shadow: 
+      0 32px 64px -12px rgba(0, 0, 0, 0.25),
+      0 8px 32px -8px rgba(251, 146, 60, 0.15),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
+  .hero-paper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+      rgba(251,146,60,0.05) 0%, 
+      transparent 30%, 
+      transparent 70%,
+      rgba(251,146,60,0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  .hero-paper:hover::before {
+    opacity: 1;
+  }
+
+  .gyroscopic-card {
+    transition: transform 0.1s ease-out;
+    transform-style: preserve-3d;
+    cursor: pointer;
+  }
+
+  .gyroscopic-card:hover {
+    box-shadow: 
+      0 25px 50px -12px rgba(0, 0, 0, 0.25),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  .gyroscopic-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+      rgba(251,146,60,0.03) 0%, 
+      transparent 50%, 
+      rgba(251,146,60,0.03) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  .gyroscopic-card:hover::before {
+    opacity: 1;
+  }
+
+  /* Compact Newspaper Header - Desktop Only */
+  .newspaper-header {
+    @apply fixed top-0 left-0 right-0 z-50 bg-white shadow-lg hidden md:block;
+    height: 60px;
+    background: 
+      linear-gradient(135deg, #ffffff 0%, #fafafa 100%),
+      radial-gradient(circle at 25% 25%, rgba(139,69,19,0.02) 1px, transparent 1px),
+      radial-gradient(circle at 75% 75%, rgba(139,69,19,0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 15px 15px, 20px 20px;
+    border-bottom: 3px solid #d97706;
+    transition: transform 0.3s ease-in-out;
+    overflow: hidden;
+  }
+
+  .header-visible {
+    transform: translateY(0);
+  }
+
+  .header-hidden {
+    transform: translateY(-100%);
+  }
+
+  .newspaper-pattern {
+    @apply absolute top-0 left-0 w-full h-full opacity-20;
+    background-image: 
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(139,69,19,0.1) 2px,
+        rgba(139,69,19,0.1) 3px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 15px,
+        rgba(139,69,19,0.05) 15px,
+        rgba(139,69,19,0.05) 16px
+      );
+  }
+
+  .newspaper-grid {
+    @apply absolute top-0 left-0 w-full h-full opacity-10;
+    background-image: 
+      radial-gradient(circle at 2px 2px, rgba(139,69,19,0.3) 1px, transparent 1px);
+    background-size: 12px 12px;
+    animation: gridFloat 8s ease-in-out infinite;
+  }
+
+  .newspaper-container {
+    @apply relative h-full flex items-center justify-between px-8;
+  }
+
+  .newspaper-left {
+    @apply flex items-center space-x-4 text-xs font-mono font-medium uppercase tracking-widest text-gray-600;
+  }
+
+  .publication-mark {
+    @apply font-semibold;
+  }
+
+  .issue-number {
+    @apply opacity-70;
+  }
+
+  .newspaper-center {
+    @apply absolute left-1/2 transform -translate-x-1/2;
+  }
+
+  .newspaper-logo {
+    @apply flex items-baseline space-x-1 transition-colors hover:text-orange-600;
+  }
+
+  .logo-the {
+    @apply text-xs font-headline font-medium text-gray-600 tracking-widest;
+  }
+
+  .logo-gryd {
+    @apply text-2xl font-headline font-black tracking-tight text-gray-900;
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+  }
+
+  .newspaper-right {
+    @apply flex items-center;
+  }
+
+  .newspaper-nav {
+    @apply flex items-center space-x-6;
+  }
+
+  .newspaper-nav-link {
+    @apply text-sm font-mono font-medium uppercase tracking-wider text-gray-600;
+    @apply hover:text-orange-600 transition-colors relative;
+    padding: 4px 8px;
+  }
+
+  .newspaper-nav-link::before {
+    content: '';
+    @apply absolute left-0 top-0 w-full h-full bg-orange-100 opacity-0 transition-opacity;
+    transform: skew(-5deg);
+    z-index: -1;
+  }
+
+  .newspaper-nav-link:hover::before {
+    @apply opacity-100;
+  }
+
+  .newspaper-nav-link.active {
+    @apply text-orange-600 font-semibold;
+  }
+
+  .newspaper-nav-link.active::before {
+    @apply opacity-100;
+  }
+
+  .newspaper-border-bottom {
+    @apply absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-orange-600 via-orange-500 to-orange-600;
+    background-size: 200% 100%;
+    animation: borderShimmer 3s ease-in-out infinite;
+  }
+
+  /* Magazine Hero Section - Responsive */
   .magazine-hero {
-    @apply relative flex-center;
+    @apply relative flex items-center justify-center;
     min-height: clamp(70vh, 100vh, 100vh);
-    padding: var(--space-md);
+    padding: clamp(1rem, 4vw, 2rem);
     perspective: 1000px;
   }
 
   .hero-paper {
-    @apply paper-base paper-tilted paper-hover;
+    @apply relative w-full bg-white shadow-2xl;
     max-width: min(95vw, 1400px);
+    transform: rotateX(0.5deg) rotateY(-0.25deg);
+    background: 
+      linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%),
+      radial-gradient(circle at 50% 50%, rgba(0,0,0,0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 10px 10px;
+    border: 1px solid rgba(0,0,0,0.1);
     animation: paper-settle 1s ease-out;
   }
 
+  @media (max-width: 768px) {
+    .hero-paper {
+      transform: none;
+      margin: 0.5rem;
+    }
+  }
+
   .hero-content {
-    padding: var(--space-2xl);
+    padding: clamp(2rem, 6vw, 4rem);
     @apply space-y-8 sm:space-y-12;
   }
 
@@ -35,17 +306,33 @@
 
   .magazine-logo {
     @apply font-headline text-6xl font-black text-center tracking-tight;
-    font-size: var(--font-size-6xl);
+    font-size: clamp(3rem, 8vw, 6rem);
     text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+  }
+
+  .magazine-logo .subtitle {
+    @apply block text-lg font-normal mt-2 text-gray-600 font-body;
   }
 
   .feature-banner {
     @apply text-center text-sm uppercase tracking-widest bg-gray-900 text-white py-2 font-mono font-medium;
   }
 
+  .hero-story {
+    @apply space-y-8;
+  }
+
+  .story-category {
+    @apply text-sm uppercase tracking-widest text-orange-600 font-mono font-semibold;
+  }
+
   .story-headline {
     @apply font-headline text-5xl font-bold leading-tight;
-    font-size: var(--font-size-5xl);
+    font-size: clamp(2rem, 6vw, 5rem);
+  }
+
+  .story-subhead {
+    @apply text-orange-600;
   }
 
   .story-lead {
@@ -53,46 +340,281 @@
   }
 
   .lead-text {
-    font-size: var(--font-size-xl);
+    font-size: clamp(1rem, 3vw, 1.25rem);
     @apply leading-relaxed text-gray-700 font-body;
   }
 
-  /* Magazine Spread */
-  .magazine-spread {
-    @apply section-padding;
+  .story-byline {
+    @apply flex items-center space-x-3 text-sm text-gray-500 font-body;
   }
 
-  /* Article Grid */
+  .continue-reading {
+    @apply text-sm uppercase tracking-wider text-orange-600 font-mono font-semibold mt-8;
+  }
+
+  .paper-corner {
+    @apply absolute top-0 right-0 w-8 h-8 bg-gradient-to-br from-transparent to-gray-200;
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+  }
+
+  .paper-shadow {
+    @apply absolute -bottom-2 -right-2 w-full h-full bg-gray-400 opacity-20 -z-10;
+    filter: blur(4px);
+  }
+
+  /* Magazine Spread - Responsive Container */
+  .magazine-spread {
+    @apply py-12 sm:py-16 md:py-20;
+    padding-left: clamp(1rem, 4vw, 4rem);
+    padding-right: clamp(1rem, 4vw, 4rem);
+  }
+
+  /* ... keep existing code (article grid and other sections) */
   .article-grid {
-    @apply space-y-8 sm:space-y-12 container-wide;
+    @apply space-y-8 sm:space-y-12;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .grid-title {
+    @apply text-center border-b border-gray-200 pb-6;
+  }
+
+  .grid-title h4 {
+    @apply font-headline text-3xl font-bold text-gray-900 mb-4;
+  }
+
+  .title-underline {
+    @apply w-16 h-px bg-orange-600 mx-auto;
   }
 
   .grid-articles {
-    @apply grid-auto-fit;
+    @apply grid gap-6 sm:gap-8;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   }
 
-  /* Editorial Contact Section */
+  @media (max-width: 640px) {
+    .grid-articles {
+      @apply grid-cols-1;
+    }
+  }
+
+  .grid-article-link {
+    @apply block transition-transform duration-300 hover:scale-105;
+  }
+
+  .grid-article {
+    @apply bg-white shadow-lg overflow-hidden;
+    background: 
+      linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+    border: 1px solid rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .grid-article-image {
+    @apply relative overflow-hidden;
+    height: clamp(12rem, 25vw, 16rem);
+  }
+
+  .grid-article-image img {
+    @apply w-full h-full object-cover transition-transform duration-300;
+  }
+
+  .grid-article-link:hover .grid-article-image img {
+    @apply scale-105;
+  }
+
+  .article-overlay {
+    @apply absolute top-4 right-4 bg-white px-2 py-1 text-xs font-mono font-medium uppercase tracking-wider text-gray-600;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .grid-article-content {
+    @apply p-6 space-y-3;
+  }
+
+  .grid-category {
+    @apply text-xs uppercase tracking-widest text-orange-600 font-mono font-semibold;
+  }
+
+  .grid-headline {
+    @apply font-headline text-xl font-bold text-gray-900 leading-tight;
+    font-size: clamp(1.125rem, 3vw, 1.25rem);
+  }
+
+  .grid-excerpt {
+    @apply text-gray-600 leading-relaxed font-body;
+    font-size: clamp(0.875rem, 2vw, 1rem);
+  }
+
+  .grid-meta {
+    @apply flex justify-between items-center pt-4 border-t border-gray-100;
+  }
+
+  .grid-impact {
+    @apply text-sm font-mono font-semibold uppercase tracking-widest text-orange-600;
+  }
+
+  /* Featured Article - Mobile Responsive */
+  .featured-article {
+    padding: clamp(2rem, 6vw, 4rem);
+    @apply space-y-8 sm:space-y-12;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .article-header {
+    @apply max-w-4xl mx-auto text-center space-y-6;
+  }
+
+  .article-category {
+    @apply text-sm uppercase tracking-widest text-orange-600 font-mono font-semibold;
+  }
+
+  .article-headline {
+    @apply font-headline text-5xl font-bold leading-tight text-gray-900;
+    font-size: clamp(2rem, 6vw, 5rem);
+  }
+
+  .article-deck {
+    font-size: clamp(1.125rem, 3vw, 1.25rem);
+    @apply text-gray-600 leading-relaxed font-body;
+  }
+
+  .article-meta {
+    @apply flex items-center justify-center space-x-3 text-sm text-gray-500 font-body;
+  }
+
+  .impact {
+    @apply text-orange-600 font-semibold;
+  }
+
+  .article-visual {
+    @apply max-w-5xl mx-auto;
+  }
+
+  .photo-frame {
+    @apply relative bg-white p-4 shadow-xl;
+    padding: clamp(0.75rem, 3vw, 1rem);
+    background: 
+      linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .photo-frame img {
+    @apply w-full h-auto;
+  }
+
+  .photo-caption {
+    @apply mt-4 text-sm text-gray-600 italic text-center font-body;
+  }
+
+  .article-excerpt {
+    @apply max-w-4xl mx-auto space-y-6;
+  }
+
+  .article-excerpt p {
+    @apply text-lg leading-relaxed text-gray-700 font-body;
+  }
+
+  .read-full-story {
+    @apply inline-block text-orange-600 font-mono font-semibold uppercase tracking-wider text-sm;
+    @apply hover:text-orange-700 transition-colors;
+  }
+
+  /* Editorial Contact Section - Mobile Responsive */
   .editorial-contact-section {
     @apply section-padding;
     background: 
       linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%),
-      radial-gradient(circle at 20% 80%, rgba(251,146,60,0.02) 1px, transparent 1px);
-    background-size: 100% 100%, 30px 30px;
+      radial-gradient(circle at 20% 80%, rgba(251,146,60,0.02) 1px, transparent 1px),
+      radial-gradient(circle at 80% 20%, rgba(251,146,60,0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 30px 30px, 40px 40px;
   }
 
   .editorial-contact-card {
-    @apply bg-white rounded-lg shadow-xl max-w-2xl mx-auto;
+    @apply bg-white rounded-lg shadow-xl max-w-2xl mx-auto mobile-card;
     background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
     border: 1px solid rgba(0,0,0,0.05);
-    padding: var(--space-xl);
+    position: relative;
+    overflow: hidden;
   }
 
-  /* Magazine Footer */
+  .contact-title {
+    @apply font-headline font-bold text-gray-900;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .contact-method {
+    @apply flex items-center rounded-lg bg-gray-50 transition-all duration-300;
+    @apply hover:bg-orange-50 hover:shadow-md;
+    padding: clamp(0.75rem, 3vw, 1rem);
+    gap: clamp(0.75rem, 3vw, 1rem);
+  }
+
+  .contact-value {
+    @apply text-gray-900 font-medium font-body;
+    @apply hover:text-orange-600 transition-colors;
+    font-size: clamp(1rem, 3vw, 1.125rem);
+  }
+
+  .cta-button {
+    @apply inline-flex items-center justify-center bg-orange-600 text-white font-medium rounded-lg font-mono;
+    @apply hover:bg-orange-700 hover:shadow-lg transition-all duration-300;
+    @apply hover:transform hover:-translate-y-1;
+    padding: clamp(0.75rem, 3vw, 1rem) clamp(1.5rem, 4vw, 2rem);
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
+    min-height: 48px;
+    text-decoration: none;
+  }
+
+  /* Magazine Footer - Mobile Responsive */
   .magazine-footer {
-    @apply bg-gray-900 text-white section-padding;
+    @apply bg-gray-900 text-white;
+    padding: clamp(2rem, 6vw, 3rem) clamp(1rem, 4vw, 2rem);
   }
 
   .footer-content {
-    @apply text-center space-y-4 container-wide;
+    @apply text-center space-y-4;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-logo {
+    @apply font-headline font-bold;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .footer-info {
+    @apply flex flex-col space-y-2 text-gray-400 font-body;
+    font-size: clamp(0.875rem, 2vw, 1rem);
+  }
+
+  @media (min-width: 640px) {
+    .footer-info {
+      @apply flex-row space-y-0 space-x-4 justify-center;
+    }
+  }
+}
+
+/* Animation keyframes */
+@keyframes gridFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-2px); }
+}
+
+@keyframes borderShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes paper-settle {
+  0% {
+    transform: rotateX(10deg) rotateY(-5deg) translateY(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateX(2deg) rotateY(-1deg) translateY(0);
+    opacity: 1;
   }
 }
