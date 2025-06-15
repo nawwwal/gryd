@@ -4,17 +4,17 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Import all our style modules */
+/* Import our style modules in the correct order */
 @import './styles/base.css';
 @import './styles/typography.css';
+@import './styles/responsive.css';
 @import './styles/animations.css';
-@import './styles/magazine-layout.css';
 @import './styles/page-headers.css';
+@import './styles/magazine-layout.css';
 @import './styles/articles.css';
 @import './styles/about-editor.css';
 @import './styles/playground.css';
 @import './styles/contact.css';
-@import './styles/responsive.css';
 @import './styles/mobile-optimizations.css';
 
 /* Performance optimizations */
