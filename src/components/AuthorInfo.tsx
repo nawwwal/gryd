@@ -3,13 +3,13 @@ const AuthorInfo = () => {
       <div className="space-y-4">
         <h3 className="subhead text-lg">About the Author</h3>
         <div className="space-y-3">
-          <div className="space-y-1">
-            <span className="caption text-gryd-soft">Designer</span>
-            <div className="body font-medium">Aditya Nawal</div>
+          <div className="space-y-1 flex justify-start items-end ">
+            <span className="caption text-gryd-soft h-fit my-[4px]">Designer</span>
+            <div className="body font-medium mx-[10px]">Aditya Nawal</div>
           </div>
           <div className="space-y-1 mx-0">
             <span className="caption text-gryd-soft">Email</span>
-            <a href="mailto:aditya@example.com" className="editorial-link body mx-[16px]">
+            <a href="mailto:aditya@example.com" className="editorial-link body mx-[40px]">
               aditya@example.com
             </a>
           </div>
