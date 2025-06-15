@@ -143,6 +143,39 @@
     perspective: 1000px;
   }
 
+  .gyroscopic-card {
+    transition: transform 0.1s ease-out;
+    transform-style: preserve-3d;
+    cursor: pointer;
+  }
+
+  .gyroscopic-card:hover {
+    box-shadow: 
+      0 25px 50px -12px rgba(0, 0, 0, 0.25),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  .gyroscopic-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+      rgba(251,146,60,0.03) 0%, 
+      transparent 50%, 
+      rgba(251,146,60,0.03) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  .gyroscopic-card:hover::before {
+    opacity: 1;
+  }
+
   .hero-paper {
     @apply relative w-full max-w-6xl bg-white shadow-2xl;
     transform: rotateX(2deg) rotateY(-1deg);
