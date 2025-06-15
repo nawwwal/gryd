@@ -1,0 +1,62 @@
+
+@import '../tokens/design-tokens.css';
+
+@layer animations {
+  /* Scroll Animations */
+  .scroll-fade {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity var(--duration-slow) var(--ease-out), 
+                transform var(--duration-slow) var(--ease-out);
+  }
+
+  .scroll-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Hover Effects */
+  .hover-lift {
+    transition: transform var(--duration-normal) var(--ease-out);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
+
+  .hover-scale {
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.02);
+  }
+
+  /* Entry Animations */
+  .animate-in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Keyframes */
+  @keyframes paper-settle {
+    0% {
+      transform: rotateX(10deg) rotateY(-5deg) translateY(-50px);
+      opacity: 0;
+    }
+    100% {
+      transform: rotateX(2deg) rotateY(-1deg) translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  @keyframes typewriter {
+    0% { width: 0; }
+    100% { width: 100%; border-right: none; }
+  }
+}

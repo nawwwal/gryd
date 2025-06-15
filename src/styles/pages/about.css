@@ -1,0 +1,41 @@
+
+@import '../core/layout.css';
+@import '../core/paper-effects.css';
+
+@layer about {
+  .about-profile-header {
+    @apply min-h-[70vh] flex-center;
+    padding: var(--space-md);
+    background: 
+      linear-gradient(45deg, #faf8f5 0%, #f5f2ed 100%),
+      url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="0.5" fill="%23e5d3b3" opacity="0.3"/></svg>');
+  }
+
+  .profile-paper {
+    @apply relative w-full max-w-4xl bg-white;
+    padding: var(--space-2xl);
+    box-shadow: var(--shadow-lg);
+    border: 2px solid #e5d3b3;
+    transform: rotate(-0.5deg);
+    background: 
+      linear-gradient(135deg, #ffffff 0%, #fefefe 100%),
+      repeating-linear-gradient(90deg, transparent, transparent 24px, rgba(0,0,0,0.02) 25px);
+  }
+
+  .profile-name {
+    @apply font-headline font-black tracking-tight text-gray-900;
+    font-size: var(--font-size-5xl);
+  }
+
+  .profile-role {
+    @apply tracking-wide font-mono;
+    font-size: var(--font-size-xl);
+    color: #d97706;
+    font-weight: 500;
+  }
+
+  .quote-text {
+    @apply italic text-gray-700 leading-relaxed font-body;
+    font-size: var(--font-size-xl);
+  }
+}

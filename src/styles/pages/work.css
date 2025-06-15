@@ -1,0 +1,91 @@
+
+@import '../core/layout.css';
+@import '../core/paper-effects.css';
+@import '../components/cards.css';
+
+@layer work {
+  /* Work Portfolio Header */
+  .work-portfolio-header {
+    @apply min-h-[60vh] flex-center;
+    padding: var(--space-md);
+    background: 
+      linear-gradient(135deg, #f8f6f3 0%, #f0ede8 100%),
+      radial-gradient(circle at 20% 80%, rgba(251,146,60,0.05) 0%, transparent 50%);
+    perspective: 1000px;
+  }
+
+  .portfolio-masthead {
+    @apply relative w-full max-w-4xl paper-base paper-tilted;
+    padding: var(--space-2xl);
+  }
+
+  .portfolio-breadcrumb {
+    @apply flex items-center justify-center sm:justify-start space-x-3 text-sm uppercase tracking-wider text-gray-600 mb-8 font-mono;
+    font-weight: 500;
+  }
+
+  .portfolio-title-section {
+    @apply text-center space-y-4 mb-12;
+  }
+
+  .portfolio-main-title {
+    @apply font-headline font-black tracking-tight text-gray-900;
+    font-size: var(--font-size-6xl);
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.05);
+    line-height: 0.9;
+  }
+
+  .portfolio-subtitle {
+    @apply text-gray-600 tracking-wide font-mono;
+    font-size: var(--font-size-xl);
+    font-weight: 500;
+  }
+
+  .portfolio-stats {
+    @apply flex flex-wrap justify-center gap-8 pt-8 border-t border-gray-200;
+  }
+
+  .stat-item {
+    @apply text-center min-w-16;
+  }
+
+  .stat-number {
+    @apply block font-bold text-orange-600 font-headline;
+    font-size: var(--font-size-4xl);
+  }
+
+  .stat-label {
+    @apply uppercase tracking-wide text-gray-500 font-mono;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+  }
+
+  /* Linear Project Layout */
+  .work-projects-linear {
+    @apply space-y-12 container-wide;
+  }
+
+  .linear-project-card {
+    @apply project-card;
+  }
+
+  .linear-project-content {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-0;
+  }
+
+  .linear-project-info {
+    @apply p-8 lg:p-12 flex flex-col justify-center space-y-6;
+  }
+
+  .linear-project-category {
+    @apply text-sm uppercase tracking-widest text-orange-600 font-mono font-semibold;
+  }
+
+  .linear-project-title {
+    @apply font-headline text-3xl lg:text-4xl font-bold text-gray-900 leading-tight;
+  }
+
+  .linear-project-subtitle {
+    @apply text-lg text-gray-600 leading-relaxed font-body;
+  }
+}

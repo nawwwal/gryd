@@ -1,11 +1,12 @@
 
-@import './responsive.css';
+@import './core/layout.css';
+@import './core/animations.css';
 
-@layer components {
-  /* Common Hover Letter Effects */
+@layer page-headers {
+  /* Common Hover Effects */
   .hover-letter {
     @apply inline-block cursor-default;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all var(--duration-normal) var(--ease-bounce);
     position: relative;
   }
 
@@ -13,41 +14,15 @@
     transform: translateY(-2px) scale(1.05);
   }
 
-  /* Gyroscopic Card Base */
-  .gyroscopic-card {
-    transition: transform 0.1s ease-out;
-    transform-style: preserve-3d;
-    cursor: pointer;
+  /* Ink Effects */
+  .ink-bleed:hover {
+    text-shadow: 
+      0 0 8px rgba(0,0,0,0.3),
+      2px 2px 4px rgba(0,0,0,0.1);
+    filter: blur(0.5px);
   }
 
-  .gyroscopic-card:hover {
-    box-shadow: 
-      0 25px 50px -12px rgba(0, 0, 0, 0.25),
-      0 0 0 1px rgba(255, 255, 255, 0.05);
-  }
-
-  .gyroscopic-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, 
-      rgba(251,146,60,0.03) 0%, 
-      transparent 50%, 
-      rgba(251,146,60,0.03) 100%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-    border-radius: inherit;
-  }
-
-  .gyroscopic-card:hover::before {
-    opacity: 1;
-  }
-
-  /* Playground Letter Micro-animations */
+  /* Playground Letter Animations */
   .playground-letter {
     @apply inline-block;
     animation: playground-float infinite ease-in-out alternate;
@@ -66,301 +41,23 @@
     animation-name: playground-bounce;
   }
 
-  /* Ink Bleed Effect */
-  .ink-bleed:hover {
-    text-shadow: 
-      0 0 8px rgba(0,0,0,0.3),
-      2px 2px 4px rgba(0,0,0,0.1);
-    filter: blur(0.5px);
-  }
-
-  .ink-bleed:hover::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  /* Paper Crinkle Effect */
-  .hover-letter::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: 
-      radial-gradient(circle at 30% 40%, rgba(0,0,0,0.03) 1px, transparent 1px),
-      radial-gradient(circle at 70% 80%, rgba(0,0,0,0.02) 1px, transparent 1px);
-    background-size: 4px 4px, 6px 6px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-  }
-
-  .hover-letter:hover::before {
-    opacity: 1;
-  }
-
-  /* WORK PAGE STYLES - Mobile Responsive */
-  .work-portfolio-header {
-    @apply min-h-[50vh] sm:min-h-[60vh] flex items-center justify-center;
-    padding: clamp(1rem, 4vw, 2rem);
-    background: 
-      linear-gradient(135deg, #f8f6f3 0%, #f0ede8 100%),
-      radial-gradient(circle at 20% 80%, rgba(251,146,60,0.05) 0%, transparent 50%);
-    perspective: 1000px;
-  }
-
-  .portfolio-masthead {
-    @apply relative w-full max-w-4xl;
-    background: #ffffff;
-    padding: clamp(1.5rem, 4vw, 3rem);
-    box-shadow: 
-      0 20px 40px rgba(0,0,0,0.1),
-      inset 0 1px 0 rgba(255,255,255,0.8);
-    border: 1px solid rgba(0,0,0,0.1);
-    position: relative;
-    transform: rotateX(0.5deg) rotateY(-0.25deg);
-  }
-
-  @media (max-width: 768px) {
-    .portfolio-masthead {
-      transform: none;
-      margin: 1rem;
-    }
-  }
-
-  .portfolio-breadcrumb {
-    @apply flex items-center justify-center sm:justify-start space-x-2 sm:space-x-3 text-xs sm:text-sm uppercase tracking-wider text-gray-600 mb-6 sm:mb-8;
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
-    flex-wrap: wrap;
-    font-weight: 500;
-  }
-
-  .portfolio-title-section {
-    @apply text-center space-y-3 sm:space-y-4 mb-8 sm:mb-12;
-  }
-
-  .portfolio-main-title {
-    @apply font-black tracking-tight text-gray-900;
-    font-family: 'Platypi', serif;
-    font-size: clamp(2.5rem, 8vw, 6rem);
-    text-shadow: 2px 2px 0px rgba(0,0,0,0.05);
-    line-height: 0.9;
-  }
-
-  .portfolio-subtitle {
-    @apply text-gray-600 tracking-wide;
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-size: clamp(1rem, 3vw, 1.25rem);
-    color: #666;
-    font-weight: 500;
-  }
-
-  .portfolio-stats {
-    @apply flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-12 pt-6 sm:pt-8 border-t border-gray-200;
-  }
-
-  .stat-item {
-    @apply text-center min-w-16;
-  }
-
-  .stat-number {
-    @apply block font-bold text-orange-600;
-    font-family: 'Platypi', serif;
-    font-size: clamp(1.5rem, 4vw, 3rem);
-  }
-
-  .stat-label {
-    @apply uppercase tracking-wide text-gray-500;
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-size: clamp(0.75rem, 2vw, 0.875rem);
-    font-weight: 500;
-  }
-
-  /* ABOUT PAGE STYLES - Mobile Responsive */
-  .about-profile-header {
-    @apply min-h-[50vh] sm:min-h-[70vh] flex items-center justify-center;
-    padding: clamp(1rem, 4vw, 2rem);
-    background: 
-      linear-gradient(45deg, #faf8f5 0%, #f5f2ed 100%),
-      url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="0.5" fill="%23e5d3b3" opacity="0.3"/></svg>');
-  }
-
-  .profile-paper {
-    @apply relative w-full max-w-4xl bg-white;
-    padding: clamp(2rem, 5vw, 3rem);
-    box-shadow: 
-      0 25px 50px rgba(0,0,0,0.15),
-      inset 0 1px 0 rgba(255,255,255,0.9);
-    border: 2px solid #e5d3b3;
-    transform: rotate(-0.5deg);
-    background: 
-      linear-gradient(135deg, #ffffff 0%, #fefefe 100%),
-      repeating-linear-gradient(90deg, transparent, transparent 24px, rgba(0,0,0,0.02) 25px);
-  }
-
-  @media (max-width: 768px) {
-    .profile-paper {
-      transform: none;
-      margin: 1rem;
-      border-width: 1px;
-    }
-  }
-
-  .profile-name {
-    @apply font-black tracking-tight text-gray-900;
-    font-family: 'Platypi', serif;
-    font-size: clamp(2rem, 6vw, 5rem);
-  }
-
-  .profile-role {
-    @apply tracking-wide;
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-size: clamp(1rem, 3vw, 1.25rem);
-    color: #d97706;
-    font-weight: 500;
-  }
-
-  .quote-text {
-    @apply italic text-gray-700 leading-relaxed;
-    font-family: 'Fraunces', serif;
-    font-size: clamp(1rem, 3vw, 1.25rem);
-  }
-
-  /* PLAYGROUND PAGE STYLES - Mobile Responsive */
-  .lab-experimental-header {
-    @apply min-h-[50vh] sm:min-h-[65vh] flex items-center justify-center;
-    padding: clamp(1rem, 4vw, 2rem);
-    background: 
-      linear-gradient(135deg, #f7f5f3 0%, #ebe7e0 100%),
-      repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px);
-    perspective: 1000px;
-  }
-
-  .lab-notebook {
-    @apply relative w-full max-w-4xl bg-white;
-    padding: clamp(1.5rem, 4vw, 3rem);
-    border-left: 6px solid #d97706;
-    box-shadow: 
-      0 20px 40px rgba(0,0,0,0.1),
-      -6px 0 12px rgba(217,119,6,0.1);
-    background: 
-      linear-gradient(135deg, #ffffff 0%, #fdfcfa 100%),
-      repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(0,0,0,0.03) 29px);
-    transform: rotateX(0.5deg) rotateY(-0.25deg);
-  }
-
-  @media (max-width: 768px) {
-    .lab-notebook {
-      transform: none;
-      margin: 1rem;
-      border-left-width: 4px;
-    }
-  }
-
-  .lab-title {
-    @apply font-black tracking-tight text-gray-900;
-    font-family: 'Platypi', serif;
-    font-size: clamp(2.5rem, 8vw, 6rem);
-  }
-
-  .lab-subtitle {
-    @apply text-gray-600 tracking-wide;
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-size: clamp(1rem, 3vw, 1.125rem);
-    font-weight: 500;
-  }
-
-  /* CONTACT PAGE STYLES - Mobile Responsive */
-  .contact-consultation-header {
-    @apply min-h-[50vh] sm:min-h-[60vh] flex items-center justify-center;
-    padding: clamp(1rem, 4vw, 2rem);
-    background: 
-      linear-gradient(135deg, #f9f7f4 0%, #f1ede6 100%),
-      radial-gradient(circle at 80% 20%, rgba(34,197,94,0.05) 0%, transparent 50%);
-  }
-
-  .consultation-card {
-    @apply relative w-full max-w-4xl bg-white;
-    padding: clamp(2rem, 5vw, 3rem);
-    box-shadow: 
-      0 20px 40px rgba(0,0,0,0.1),
-      inset 0 1px 0 rgba(255,255,255,0.8);
-    border: 1px solid rgba(0,0,0,0.1);
-    background: 
-      linear-gradient(135deg, #ffffff 0%, #fdfdfd 100%),
-      radial-gradient(circle at 90% 10%, rgba(34,197,94,0.02) 0%, transparent 50%);
-  }
-
-  .consultation-title {
-    @apply font-black tracking-tight text-gray-900;
-    font-family: 'Platypi', serif;
-    font-size: clamp(2.5rem, 8vw, 6rem);
-  }
-
-  /* Responsive Design - Mobile Specific Adjustments */
-  @media (max-width: 768px) {
-    .hover-letter:hover {
-      transform: translateY(-1px) scale(1.02);
-    }
-    
-    .gyroscopic-card {
-      transform: none !important;
-    }
-
-    .gyroscopic-card:hover {
-      transform: scale(1.02) !important;
-      transition: transform 0.2s ease;
-    }
-
-    /* Hide complex decorative elements on mobile */
-    .notebook-rings,
-    .ring,
-    .paper-clips,
-    .paper-clip,
-    .coffee-stain,
-    .ink-splatter {
-      display: none;
-    }
-
-    /* Simplify corner elements */
-    .profile-corner-fold,
-    .paper-corner {
-      width: 1rem;
-      height: 1rem;
-    }
-
-    /* Adjust quote styling for mobile */
-    .quote-mark {
-      @apply -top-2 -left-4 text-4xl;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .portfolio-stats {
-      @apply grid grid-cols-2 gap-4 justify-items-center;
-    }
-
-    .stat-item {
-      @apply w-full;
-    }
-  }
-}
-
-/* Mobile-specific micro-animations */
-@media (max-width: 768px) {
-  @keyframes mobile-float {
+  @keyframes playground-float {
     0% { transform: translateY(0px); }
-    100% { transform: translateY(-2px); }
+    100% { transform: translateY(-4px); }
   }
 
-  .playground-letter {
-    animation: mobile-float 2s ease-in-out infinite alternate;
+  @keyframes playground-float-alt {
+    0% { transform: translateY(0px) rotate(0deg); }
+    100% { transform: translateY(-3px) rotate(1deg); }
+  }
+
+  @keyframes playground-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(2deg); }
+  }
+
+  @keyframes playground-bounce {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-6px); }
   }
 }

@@ -1,0 +1,76 @@
+
+@import '../core/layout.css';
+@import '../core/animations.css';
+
+@layer navigation {
+  /* Desktop Navigation */
+  .newspaper-header {
+    @apply fixed top-0 left-0 right-0 z-50 bg-white shadow-lg hidden md:block;
+    height: 60px;
+    background: 
+      linear-gradient(135deg, #ffffff 0%, #fafafa 100%),
+      radial-gradient(circle at 25% 25%, rgba(139,69,19,0.02) 1px, transparent 1px),
+      radial-gradient(circle at 75% 75%, rgba(139,69,19,0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 15px 15px, 20px 20px;
+    border-bottom: 3px solid #d97706;
+    transition: transform var(--duration-normal) ease-in-out;
+  }
+
+  .header-visible {
+    transform: translateY(0);
+  }
+
+  .header-hidden {
+    transform: translateY(-100%);
+  }
+
+  .newspaper-container {
+    @apply relative h-full flex items-center justify-between px-8;
+  }
+
+  .newspaper-logo {
+    @apply flex items-baseline space-x-1 transition-colors hover:text-orange-600;
+  }
+
+  .logo-the {
+    @apply text-xs font-mono font-medium text-gray-600 tracking-widest;
+  }
+
+  .logo-gryd {
+    @apply text-2xl font-headline font-black tracking-tight text-gray-900;
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+  }
+
+  .newspaper-nav {
+    @apply flex items-center space-x-6;
+  }
+
+  .newspaper-nav-link {
+    @apply text-sm font-mono font-medium uppercase tracking-wider text-gray-600;
+    @apply hover:text-orange-600 transition-colors relative;
+    padding: 4px 8px;
+  }
+
+  .newspaper-nav-link.active {
+    @apply text-orange-600 font-semibold;
+  }
+
+  /* Mobile Navigation */
+  .mobile-header {
+    @apply fixed top-0 left-0 right-0 z-50 md:hidden bg-white shadow-lg border-b-2 border-orange-600;
+    transition: transform var(--duration-normal);
+  }
+
+  .mobile-menu-slide {
+    @apply fixed top-0 right-0 h-full w-80 bg-white z-50 transform transition-transform;
+    transition-duration: var(--duration-normal);
+  }
+
+  .mobile-nav-link {
+    @apply block px-6 py-4 text-lg font-mono font-medium uppercase tracking-wider transition-colors;
+  }
+
+  .mobile-nav-link.active {
+    @apply text-orange-600 bg-orange-50 border-r-2 border-orange-600;
+  }
+}

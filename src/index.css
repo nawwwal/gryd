@@ -1,12 +1,27 @@
 
-/* Import all CSS modules */
+/* Import design tokens first */
+@import './styles/tokens/design-tokens.css';
+
+/* Core styles */
 @import './styles/base.css';
 @import './styles/typography.css';
-@import './styles/magazine-layout.css';
-@import './styles/articles.css';
-@import './styles/playground.css';
-@import './styles/playground-hero.css';
-@import './styles/animations.css';
-@import './styles/about-editor.css';
+@import './styles/core/layout.css';
+@import './styles/core/paper-effects.css';
+@import './styles/core/animations.css';
+
+/* Component styles */
+@import './styles/components/navigation.css';
+@import './styles/components/cards.css';
+
+/* Page-specific styles */
+@import './styles/pages/work.css';
+@import './styles/pages/about.css';
+@import './styles/pages/playground.css';
+
+/* Responsive styles */
+@import './styles/responsive/mobile.css';
+
+/* Legacy styles (to be gradually removed) */
+@import './styles/contact.css';
 @import './styles/mobile-enhancements.css';
 @import './styles/footer.css';

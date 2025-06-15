@@ -1,0 +1,56 @@
+
+@import '../tokens/design-tokens.css';
+
+@layer layout {
+  /* Container System */
+  .container-full {
+    @apply w-full;
+  }
+
+  .container-wide {
+    @apply max-w-7xl mx-auto px-4 sm:px-8;
+  }
+
+  .container-content {
+    @apply max-w-4xl mx-auto px-4 sm:px-8;
+  }
+
+  .container-narrow {
+    @apply max-w-2xl mx-auto px-4;
+  }
+
+  /* Section Spacing */
+  .section-padding {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .section-padding-sm {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  /* Responsive Grid System */
+  .grid-auto-fit {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: var(--space-lg);
+  }
+
+  .grid-auto-fill {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+    gap: var(--space-lg);
+  }
+
+  /* Flex Utilities */
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .flex-between {
+    @apply flex items-center justify-between;
+  }
+
+  .flex-col-center {
+    @apply flex flex-col items-center justify-center;
+  }
+}
