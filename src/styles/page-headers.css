@@ -135,7 +135,8 @@
   }
 
   .portfolio-breadcrumb {
-    @apply flex items-center justify-center sm:justify-start space-x-2 sm:space-x-3 text-xs sm:text-sm font-mono uppercase tracking-wider text-gray-600 mb-6 sm:mb-8;
+    @apply flex items-center justify-center sm:justify-start space-x-2 sm:space-x-3 text-xs sm:text-sm uppercase tracking-wider text-gray-600 mb-6 sm:mb-8;
+    font-family: 'Schibsted Grotesk', sans-serif;
     flex-wrap: wrap;
   }
 
@@ -144,14 +145,16 @@
   }
 
   .portfolio-main-title {
-    @apply font-serif font-black tracking-tight text-gray-900;
+    @apply font-black tracking-tight text-gray-900;
+    font-family: 'Platypi', serif;
     font-size: clamp(2.5rem, 8vw, 6rem);
     text-shadow: 2px 2px 0px rgba(0,0,0,0.05);
     line-height: 0.9;
   }
 
   .portfolio-subtitle {
-    @apply font-mono;
+    @apply;
+    font-family: 'Schibsted Grotesk', sans-serif;
     font-size: clamp(1rem, 3vw, 1.25rem);
     color: #666;
   }
@@ -165,12 +168,14 @@
   }
 
   .stat-number {
-    @apply block font-serif font-bold text-orange-600;
+    @apply block font-bold text-orange-600;
+    font-family: 'Platypi', serif;
     font-size: clamp(1.5rem, 4vw, 3rem);
   }
 
   .stat-label {
-    @apply uppercase tracking-wide text-gray-500 font-mono;
+    @apply uppercase tracking-wide text-gray-500;
+    font-family: 'Schibsted Grotesk', sans-serif;
     font-size: clamp(0.75rem, 2vw, 0.875rem);
   }
 
@@ -205,18 +210,21 @@
   }
 
   .profile-name {
-    @apply font-serif font-black tracking-tight text-gray-900;
+    @apply font-black tracking-tight text-gray-900;
+    font-family: 'Platypi', serif;
     font-size: clamp(2rem, 6vw, 5rem);
   }
 
   .profile-role {
-    @apply font-mono tracking-wide;
+    @apply tracking-wide;
+    font-family: 'Schibsted Grotesk', sans-serif;
     font-size: clamp(1rem, 3vw, 1.25rem);
     color: #d97706;
   }
 
   .quote-text {
-    @apply italic text-gray-700 leading-relaxed font-serif;
+    @apply italic text-gray-700 leading-relaxed;
+    font-family: 'Fraunces', serif;
     font-size: clamp(1rem, 3vw, 1.25rem);
   }
 
@@ -252,12 +260,14 @@
   }
 
   .lab-title {
-    @apply font-serif font-black tracking-tight text-gray-900;
+    @apply font-black tracking-tight text-gray-900;
+    font-family: 'Platypi', serif;
     font-size: clamp(2.5rem, 8vw, 6rem);
   }
 
   .lab-subtitle {
-    @apply text-gray-600 font-mono tracking-wide;
+    @apply text-gray-600 tracking-wide;
+    font-family: 'Schibsted Grotesk', sans-serif;
     font-size: clamp(1rem, 3vw, 1.125rem);
   }
 
@@ -283,7 +293,8 @@
   }
 
   .consultation-title {
-    @apply font-serif font-black tracking-tight text-gray-900;
+    @apply font-black tracking-tight text-gray-900;
+    font-family: 'Platypi', serif;
     font-size: clamp(2.5rem, 8vw, 6rem);
   }
 

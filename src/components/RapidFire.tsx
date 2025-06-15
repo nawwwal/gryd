@@ -5,7 +5,7 @@ const RapidFire = () => {
   const rapidFire = [
     { q: "Coffee or Tea?", a: "Chai, always chai" },
     { q: "Figma or Sketch?", a: "Figma. Is this even a question anymore?" },
-    { q: "Favorite Font?", a: "Inter for everything, Tiempos for dreams" },
+    { q: "Favorite Font?", a: "Platypi for headlines, Fraunces for reading" },
     { q: "Design Inspiration?", a: "Japanese packaging, old National Geographic" },
     { q: "Guilty Pleasure?", a: "Spending 3 hours perfecting a hover state" },
     { q: "Best Design Advice?", a: "Ship it. Perfect is the enemy of good." },

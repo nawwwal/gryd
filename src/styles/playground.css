@@ -1,3 +1,4 @@
+
 @layer components {
   /* Experiments Section */
   .experiments-section {
@@ -15,7 +16,7 @@
 
   .section-title {
     @apply font-bold text-4xl;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'Platypi', serif;
     text-transform: uppercase;
     letter-spacing: 3px;
     color: #111;
@@ -24,7 +25,7 @@
 
   .section-subtitle {
     @apply text-base text-gray-600;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'Schibsted Grotesk', sans-serif;
     text-transform: lowercase;
     letter-spacing: 1px;
     font-style: italic;
@@ -32,7 +33,7 @@
 
   .experiments-meta {
     @apply flex flex-col items-end text-right space-y-2;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'Schibsted Grotesk', sans-serif;
     font-size: 0.8rem;
     text-transform: uppercase;
     color: #666;
@@ -174,7 +175,7 @@
 
   .experiment-meta {
     @apply flex items-center space-x-3;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'Schibsted Grotesk', sans-serif;
     font-size: 0.75rem;
     text-transform: uppercase;
     color: #666;
@@ -193,7 +194,7 @@
 
   .experiment-status {
     @apply flex items-center space-x-2;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'Schibsted Grotesk', sans-serif;
     font-size: 0.7rem;
     color: #999;
   }
@@ -212,7 +213,7 @@
   /* Title */
   .experiment-title {
     @apply mb-4 flex-shrink-0;
-    font-family: 'Newsreader', serif;
+    font-family: 'Platypi', serif;
     font-size: 1.4rem;
     font-weight: bold;
     line-height: 1.2;
@@ -241,7 +242,7 @@
   /* Description */
   .experiment-description {
     @apply mb-6 text-gray-700 leading-relaxed flex-grow;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'Fraunces', serif;
     font-size: 0.9rem;
     line-height: 1.6;
   }
@@ -261,13 +262,13 @@
 
   .detail-label {
     @apply text-xs text-gray-500 uppercase;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'Schibsted Grotesk', sans-serif;
     letter-spacing: 0.5px;
   }
 
   .detail-value {
     @apply text-sm text-gray-800 font-medium;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'Schibsted Grotesk', sans-serif;
   }
 
   .tools-list {
@@ -276,7 +277,7 @@
 
   .tool-tag {
     @apply text-xs bg-gray-100 text-gray-700 px-2 py-1 border;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'Schibsted Grotesk', sans-serif;
     text-transform: lowercase;
     transition: all 0.2s ease;
   }
@@ -288,7 +289,7 @@
   /* Footer */
   .experiment-footer {
     @apply flex justify-between items-center text-gray-500;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'Schibsted Grotesk', sans-serif;
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
