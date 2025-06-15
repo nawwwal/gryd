@@ -1,17 +1,17 @@
-
 import { useEffect, useRef, useState } from 'react';
 import ScrollFade from '../components/ScrollFade';
 import { loadPlaygroundExperiments } from '../utils/contentLoader';
 import { PlaygroundExperiment } from '../types/content';
 import { useGyroscopic } from '../hooks/useGyroscopic';
-
 const Playground = () => {
   const masonryRef = useRef<HTMLDivElement>(null);
   const backgroundRef = useRef<HTMLDivElement>(null);
   const [experiments, setExperiments] = useState<PlaygroundExperiment[]>([]);
   const [loading, setLoading] = useState(true);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  
+  const [mousePos, setMousePos] = useState({
+    x: 0,
+    y: 0
+  });
   const notebookRef = useGyroscopic({
     maxRotation: 8,
     intensity: 1.5,
@@ -30,14 +30,12 @@ const Playground = () => {
         });
       }
     };
-
     const backgroundElement = backgroundRef.current;
     if (backgroundElement) {
       backgroundElement.addEventListener('mousemove', handleMouseMove);
       return () => backgroundElement.removeEventListener('mousemove', handleMouseMove);
     }
   }, []);
-
   useEffect(() => {
     const loadContent = async () => {
       try {
@@ -49,10 +47,8 @@ const Playground = () => {
         setLoading(false);
       }
     };
-
     loadContent();
   }, []);
-
   useEffect(() => {
     if (!loading && experiments.length > 0) {
       const cards = masonryRef.current?.querySelectorAll('.experiment-card');
@@ -67,41 +63,31 @@ const Playground = () => {
       });
 
       // Add random rotation and positioning
-      cards.forEach((card) => {
+      cards.forEach(card => {
         const rotation = (Math.random() - 0.5) * 4; // -2 to 2 degrees
         const translateX = (Math.random() - 0.5) * 8; // -4 to 4px
         const translateY = (Math.random() - 0.5) * 8;
-        
         (card as HTMLElement).style.transform = `rotate(${rotation}deg) translate(${translateX}px, ${translateY}px)`;
       });
     }
   }, [loading, experiments]);
-
   if (loading) {
-    return (
-      <div className="magazine-container">
+    return <div className="magazine-container">
         <div className="editorial-container py-16">
           <div className="text-center">
             <div className="animate-spin w-8 h-8 border-2 border-gryd-accent border-t-transparent rounded-full mx-auto mb-4"></div>
             <p className="body text-gryd-soft">Loading playground experiments...</p>
           </div>
         </div>
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <div className="magazine-container">
+  return <div className="magazine-container">
       {/* Enhanced Experimental Hero */}
       <div className="playground-hero-container">
-        <div 
-          ref={backgroundRef}
-          className="playground-hero-background"
-          style={{
-            '--mouse-x': `${mousePos.x}px`,
-            '--mouse-y': `${mousePos.y}px`
-          } as React.CSSProperties}
-        >
+        <div ref={backgroundRef} className="playground-hero-background" style={{
+        '--mouse-x': `${mousePos.x}px`,
+        '--mouse-y': `${mousePos.y}px`
+      } as React.CSSProperties}>
           <div className="interactive-halftone-pattern"></div>
           <div className="newsprint-grain"></div>
           <div className="vintage-texture"></div>
@@ -109,11 +95,7 @@ const Playground = () => {
         
         <div className="playground-hero-content">
           <div ref={notebookRef} className="lab-notebook enhanced-gyroscopic">
-            <div className="notebook-rings">
-              <div className="ring ring-1"></div>
-              <div className="ring ring-2"></div>
-              <div className="ring ring-3"></div>
-            </div>
+            
             
             <div className="lab-header-content">
               <div className="lab-stamp animated-stamp">
@@ -122,19 +104,12 @@ const Playground = () => {
               
               <div className="lab-title-section">
                 <h1 className="lab-title experimental-title">
-                  {'PLAYGROUND'.split('').map((letter, index) => (
-                    <span 
-                      key={index} 
-                      className="playground-letter experimental-letter visible" 
-                      style={{ 
-                        animationDelay: `${index * 100}ms`,
-                        '--letter-index': index
-                      } as React.CSSProperties}
-                      data-letter={letter}
-                    >
+                  {'PLAYGROUND'.split('').map((letter, index) => <span key={index} className="playground-letter experimental-letter visible" style={{
+                  animationDelay: `${index * 100}ms`,
+                  '--letter-index': index
+                } as React.CSSProperties} data-letter={letter}>
                       {letter}
-                    </span>
-                  ))}
+                    </span>)}
                 </h1>
                 <div className="lab-subtitle animated-subtitle">Research Lab • Experiments & Dead Ends</div>
               </div>
@@ -178,12 +153,7 @@ const Playground = () => {
           </div>
           
           <div ref={masonryRef} className="experiments-grid">
-            {experiments.map((experiment, index) => (
-              <div 
-                key={experiment.slug} 
-                className={`experiment-card experiment-${experiment.visual} intensity-${experiment.intensity}`}
-                data-type={experiment.metadata.type}
-              >
+            {experiments.map((experiment, index) => <div key={experiment.slug} className={`experiment-card experiment-${experiment.visual} intensity-${experiment.intensity}`} data-type={experiment.metadata.type}>
                 {/* Visual Background Element */}
                 <div className="experiment-visual">
                   <div className="visual-pattern"></div>
@@ -204,15 +174,11 @@ const Playground = () => {
                   </div>
 
                   <h3 className="experiment-title">
-                    {experiment.title.split('').map((char, i) => (
-                      <span 
-                        key={i} 
-                        className="title-char" 
-                        style={{ animationDelay: `${i * 50}ms` }}
-                      >
+                    {experiment.title.split('').map((char, i) => <span key={i} className="title-char" style={{
+                  animationDelay: `${i * 50}ms`
+                }}>
                         {char === ' ' ? '\u00A0' : char}
-                      </span>
-                    ))}
+                      </span>)}
                   </h3>
 
                   <p className="experiment-description">{experiment.description}</p>
@@ -229,18 +195,16 @@ const Playground = () => {
                       </div>
                     </div>
                     <div className="tools-list">
-                      {experiment.metadata.tools.map((tool, i) => (
-                        <span key={i} className="tool-tag">{tool}</span>
-                      ))}
+                      {experiment.metadata.tools.map((tool, i) => <span key={i} className="tool-tag">{tool}</span>)}
                     </div>
                   </div>
 
                   <div className="experiment-footer">
                     <span className="experiment-date">
-                      {new Date(experiment.metadata.publishDate).toLocaleDateString('en-US', { 
-                        month: 'short', 
-                        year: 'numeric' 
-                      })}
+                      {new Date(experiment.metadata.publishDate).toLocaleDateString('en-US', {
+                    month: 'short',
+                    year: 'numeric'
+                  })}
                     </span>
                     <div className="interaction-hint">
                       <span>hover to investigate</span>
@@ -254,8 +218,7 @@ const Playground = () => {
                   <div className="noise-overlay"></div>
                   <div className="scan-line"></div>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </div>
@@ -290,8 +253,6 @@ const Playground = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Playground;
