@@ -5,7 +5,6 @@ import InteractiveBackground from '../components/InteractiveBackground';
 import { MorphingText } from '../components/MorphingText';
 import { loadPlaygroundExperiments } from '../utils/contentLoader';
 import { PlaygroundExperiment } from '../types/content';
-
 const Playground = () => {
   const masonryRef = useRef<HTMLDivElement>(null);
   const backgroundRef = useRef<HTMLDivElement>(null);
@@ -86,23 +85,24 @@ const Playground = () => {
         </div>
         
         <div className="playground-hero-content">
-          {/* Realistic Paper Stamp */}
-          <div className="paper-stamp">
+          {/* Centered Experimental Tag */}
+          <div className="experimental-tag-centered">
             <span>EXPERIMENTAL</span>
           </div>
           
-          {/* Combined Lab Header with Warning */}
-          <div className="lab-header-combined">
-            <div className="lab-title-section">
-              <div className="morphing-title-container">
-                <MorphingText texts={['PLAYGROUND', 'LABORATORY', 'WORKSHOP', 'STUDIO']} className="experimental-title" />
+          <div className="lab-notebook enhanced-gyroscopic">
+            <div className="lab-header-content">
+              <div className="lab-title-section">
+                <div className="morphing-title-container">
+                  <MorphingText texts={['PLAYGROUND', 'LABORATORY', 'WORKSHOP', 'STUDIO']} className="experimental-title" />
+                </div>
+                <div className="lab-subtitle animated-subtitle bg-transparent">Research Lab • Experiments & Dead Ends</div>
               </div>
-              <div className="lab-subtitle-enhanced">Research Lab • Experiments & Dead Ends</div>
-            </div>
-            
-            <div className="lab-warning-integrated">
-              <div className="warning-triangle-icon">⚠</div>
-              <span className="warning-message">Most of this is useless. Some of it changes everything.</span>
+              
+              <div className="lab-warning animated-warning">
+                <div className="warning-triangle pulse-triangle">⚠</div>
+                <span className="warning-text">Most of this is useless. Some of it changes everything.</span>
+              </div>
             </div>
           </div>
         </div>
@@ -270,5 +270,4 @@ const Playground = () => {
       <MagazineFooter />
     </div>;
 };
-
 export default Playground;
