@@ -3,14 +3,13 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./hooks/useAuth";
 import Layout from "./components/Layout";
 import Index from "./pages/Index";
 import Work from "./pages/Work";
 import About from "./pages/About";
 import Playground from "./pages/Playground";
-import Contact from "./pages/Contact";
 import ProjectDetail from "./pages/ProjectDetail";
 import CMS from "./pages/CMS";
 import WorkCMSPage from "./pages/WorkCMSPage";
@@ -38,7 +37,8 @@ const App = () => (
             <Route path="/work/:slug" element={<Layout><ProjectDetail /></Layout>} />
             <Route path="/about" element={<Layout><About /></Layout>} />
             <Route path="/playground" element={<Layout><Playground /></Layout>} />
-            <Route path="/contact" element={<Layout><Contact /></Layout>} />
+            {/* Redirect contact to about page */}
+            <Route path="/contact" element={<Navigate to="/about" replace />} />
             <Route path="*" element={<Layout><NotFound /></Layout>} />
           </Routes>
         </BrowserRouter>

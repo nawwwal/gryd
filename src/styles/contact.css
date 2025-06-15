@@ -1,10 +1,21 @@
 
 @layer components {
+  /* Epilogue Section Integration */
+  .epilogue-section {
+    @apply py-16;
+    background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+    border-radius: 12px;
+    box-shadow: 
+      0 20px 40px rgba(0,0,0,0.1),
+      0 0 0 1px rgba(0,0,0,0.05);
+    margin: 2rem 0;
+  }
+
   /* Flip Card Container */
   .flip-card-container {
-    @apply max-w-5xl mx-auto;
+    @apply max-w-4xl mx-auto;
     perspective: 1000px;
-    height: 100%;
+    min-height: 500px;
   }
 
   .flip-card {
@@ -22,16 +33,19 @@
     @apply absolute inset-0 w-full h-full;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    padding: clamp(1rem, 3vw, 2rem);
-    background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
-    border-radius: 12px;
-    box-shadow: 
-      0 20px 40px rgba(0,0,0,0.1),
-      0 0 0 1px rgba(0,0,0,0.05);
+    padding: 2rem;
   }
 
   .flip-card-back {
     transform: rotateY(180deg);
+  }
+
+  .epilogue-front-content {
+    @apply h-full flex flex-col justify-between;
+  }
+
+  .epilogue-back-content {
+    @apply h-full;
   }
 
   /* Inline Flip Indicator */
@@ -101,9 +115,21 @@
 
   /* Responsive Design */
   @media (max-width: 768px) {
+    .epilogue-section {
+      @apply py-8 mx-4;
+    }
+    
+    .flip-card-container {
+      min-height: 400px;
+    }
+    
     .flip-card-front,
     .flip-card-back {
-      padding: 1rem;
+      padding: 1.5rem;
+    }
+    
+    .epilogue-back-content .grid {
+      @apply grid-cols-1 gap-6;
     }
   }
 }

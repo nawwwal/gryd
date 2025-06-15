@@ -1,5 +1,6 @@
 
 import ScrollFade from '../components/ScrollFade';
+import EpilogueSection from '../components/EpilogueSection';
 
 const About = () => {
   return (
@@ -63,23 +64,12 @@ const About = () => {
         </article>
       </div>
 
-      {/* Last Updated */}
-      <div className="table-of-contents">
-        <ScrollFade>
-          <div className="toc-header">
-            <h3>Last Updated</h3>
-            <div className="toc-line"></div>
-          </div>
-          
-          <div className="toc-entries">
-            <div className="toc-entry">
-              <span className="toc-page">•</span>
-              <span className="toc-title">December 2024</span>
-            </div>
-          </div>
-        </ScrollFade>
+      {/* Epilogue Section */}
+      <div className="magazine-spread">
+        <EpilogueSection />
       </div>
 
+      {/* Magazine Footer */}
       <div className="magazine-footer">
         <div className="footer-content">
           <div className="footer-logo">THE GRYD</div>
