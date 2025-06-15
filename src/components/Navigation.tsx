@@ -17,20 +17,21 @@ const Navigation = () => {
         <div className="paper-binding"></div>
         
         <div className="masthead-container">
-          {/* Publication Details */}
+          {/* Compact Publication Header */}
           <div className="publication-header">
             <div className="issue-details">
-              <span>Issue No. 01</span>
-              <span>•</span>
-              <span>Winter 2024</span>
-              <span>•</span>
-              <span>Digital Edition</span>
+              <span>Issue No. 01 • Winter 2024 • Digital Edition</span>
             </div>
-            
-            <div className="publication-divider"></div>
+            <div className="publication-date">
+              {new Date().toLocaleDateString('en-US', { 
+                month: 'short', 
+                day: 'numeric', 
+                year: 'numeric' 
+              })}
+            </div>
           </div>
 
-          {/* Main Masthead */}
+          {/* Compact Main Masthead */}
           <div className="masthead-main">
             <div className="masthead-left">
               <div className="publication-mark">EST. 2024</div>
@@ -46,15 +47,14 @@ const Navigation = () => {
             
             <div className="masthead-right">
               <button className="download-issue-btn">
-                <Download className="w-4 h-4" />
+                <Download className="w-3 h-3" />
                 <span>PDF</span>
               </button>
             </div>
           </div>
 
-          {/* Navigation Sections */}
+          {/* Compact Navigation */}
           <div className="masthead-sections">
-            <div className="sections-divider"></div>
             <div className="sections-nav">
               {links.map(({ path, label }) => (
                 <Link
@@ -70,13 +70,6 @@ const Navigation = () => {
                   <span className="section-label">{label}</span>
                 </Link>
               ))}
-            </div>
-            <div className="publication-date">
-              {new Date().toLocaleDateString('en-US', { 
-                month: 'long', 
-                day: 'numeric', 
-                year: 'numeric' 
-              })}
             </div>
           </div>
         </div>

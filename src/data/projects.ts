@@ -11,6 +11,7 @@ export interface Project {
   year: string;
   timeline: string;
   impact: string;
+  featured: boolean;
   content: { type: string; content: string }[];
 }
 
@@ -26,6 +27,7 @@ export const projects: Project[] = [
     year: '2024',
     timeline: '3 days',
     impact: '$50k/month saved',
+    featured: true,
     content: [
       { type: 'text', content: 'the problem was obvious once you saw it. users would add items to cart, start checkout, then disappear. classic abandonment, but at scale that hurt.' },
       { type: 'text', content: 'dug into the data. tax calculation was taking 15+ seconds. people thought the site was broken. they were right.' },
@@ -43,6 +45,7 @@ export const projects: Project[] = [
     year: '2024',
     timeline: '2 weeks',
     impact: '340% increase in daily active users',
+    featured: false,
     content: [
       { type: 'text', content: 'sales team had a dashboard. they never used it. asked why. "too much clicking to find what matters."' },
       { type: 'text', content: 'watched them work for a day. they wanted 3 numbers: pipeline health, monthly recurring revenue, deals closing this week. everything else was noise.' },
@@ -60,6 +63,7 @@ export const projects: Project[] = [
     year: '2024',
     timeline: '1 week',
     impact: '2% to 8% conversion rate',
+    featured: false,
     content: [
       { type: 'text', content: 'signup flow had 7 steps. email, password, confirm password, first name, last name, company, phone. by step 3, we lost 60% of users.' },
       { type: 'text', content: 'deleted everything except email. let people use the product immediately. asked for other details only when we needed them.' },
@@ -77,6 +81,7 @@ export const projects: Project[] = [
     year: '2023',
     timeline: '6 weeks',
     impact: '10k signups in first month',
+    featured: false,
     content: [
       { type: 'text', content: 'startup with no design budget. two developers who could code but couldn\'t make things pretty. classic problem.' },
       { type: 'text', content: 'studied the best b2b tools. stripe, linear, notion. they all had one thing in common: they got out of the user\'s way.' },
