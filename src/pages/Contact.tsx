@@ -2,8 +2,8 @@ import ScrollFade from '../components/ScrollFade';
 import AuthorInfo from '../components/AuthorInfo';
 import DesignerStatus from '../components/DesignerStatus';
 import { useState } from 'react';
-import useMobileOptimization from '../hooks/useMobileOptimization';
-import useSwipeGesture from '../hooks/useSwipeGesture';
+import { useMobileOptimization } from '../hooks/useMobileOptimization';
+import { useSwipeGesture } from '../hooks/useSwipeGesture';
 
 const Contact = () => {
   const [isFlipped, setIsFlipped] = useState(false);
