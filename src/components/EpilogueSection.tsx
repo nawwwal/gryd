@@ -1,20 +1,15 @@
-
 import { useState, useEffect } from 'react';
 import ScrollFade from './ScrollFade';
 import AuthorInfo from './AuthorInfo';
 import DesignerStatus from './DesignerStatus';
-
 const EpilogueSection = () => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
-
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
-
-  return (
-    <ScrollFade>
+  return <ScrollFade>
       <div className="epilogue-section">
         <div className="flip-card-container">
           <div className={`flip-card ${isFlipped ? 'flipped' : ''}`}>
@@ -48,10 +43,7 @@ const EpilogueSection = () => {
 
                   {/* Primary Call to Action - Flip Card */}
                   <div className="pt-8">
-                    <button 
-                      onClick={() => setIsFlipped(true)}
-                      className="magazine-cta-button"
-                    >
+                    <button onClick={() => setIsFlipped(true)} className="magazine-cta-button">
                       <span className="cta-text">Turn the Page</span>
                       <span className="cta-arrow">→</span>
                     </button>
@@ -59,19 +51,7 @@ const EpilogueSection = () => {
                 </div>
 
                 {/* Bottom Section with Page Info */}
-                <div className="flex justify-between items-end mt-16 pt-8 border-t border-gray-200">
-                  <div className="text-sm text-gray-500 font-mono">
-                    GRYD MAGAZINE • ISSUE 001
-                  </div>
-                  <div className="text-sm text-gray-500 font-mono">
-                    PAGE 32 • {currentTime.toLocaleString('en-US', { 
-                      month: 'short', 
-                      day: 'numeric',
-                      hour: '2-digit',
-                      minute: '2-digit'
-                    })}
-                  </div>
-                </div>
+                
               </div>
             </div>
 
@@ -79,10 +59,7 @@ const EpilogueSection = () => {
             <div className="flip-card-back">
               <div className="epilogue-back-content">
                 {/* Back Button */}
-                <button 
-                  onClick={() => setIsFlipped(false)}
-                  className="flip-back-btn mb-8"
-                >
+                <button onClick={() => setIsFlipped(false)} className="flip-back-btn mb-8">
                   <span>←</span>
                   <span className="text-sm uppercase tracking-wider">back to story</span>
                 </button>
@@ -100,12 +77,7 @@ const EpilogueSection = () => {
                         <p className="text-sm text-gray-600 mb-4">
                           Building something meaningful?
                         </p>
-                        <a 
-                          href="https://calendly.com/your-handle" 
-                          className="editorial-link text-lg"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
+                        <a href="https://calendly.com/your-handle" className="editorial-link text-lg" target="_blank" rel="noopener noreferrer">
                           schedule a conversation
                         </a>
                       </div>
@@ -117,8 +89,6 @@ const EpilogueSection = () => {
           </div>
         </div>
       </div>
-    </ScrollFade>
-  );
+    </ScrollFade>;
 };
-
 export default EpilogueSection;
