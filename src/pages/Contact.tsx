@@ -1,14 +1,26 @@
-
 import ScrollFade from '../components/ScrollFade';
 import AuthorInfo from '../components/AuthorInfo';
 import DesignerStatus from '../components/DesignerStatus';
 import { useState } from 'react';
+import useMobileOptimization from '../hooks/useMobileOptimization';
+import useSwipeGesture from '../hooks/useSwipeGesture';
 
 const Contact = () => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const { isMobile, isTouch } = useMobileOptimization();
+
+  // Enhanced mobile interactions
+  const swipeRef = useSwipeGesture<HTMLDivElement>({
+    onSwipeLeft: () => {
+      if (!isFlipped) setIsFlipped(true);
+    },
+    onSwipeRight: () => {
+      if (isFlipped) setIsFlipped(false);
+    }
+  });
 
   return (
-    <div className="h-screen bg-gryd-bg overflow-hidden">
+    <div className="h-screen bg-gryd-bg overflow-hidden" ref={swipeRef}>
       <div className="editorial-container h-full py-4">
         <div className="flip-card-container h-full">
           <div className={`flip-card ${isFlipped ? 'flipped' : ''}`}>
@@ -65,7 +77,7 @@ const Contact = () => {
                     >
                       <div className="flex items-center space-x-2">
                         <span className="caption text-gryd-soft hover:text-gryd-accent transition-colors">
-                          more details
+                          {isMobile ? 'swipe left' : 'more details'}
                         </span>
                         <div className="text-lg text-gryd-accent">→</div>
                       </div>
@@ -85,7 +97,7 @@ const Contact = () => {
                     className="flip-back-btn self-start"
                   >
                     <span>←</span>
-                    <span className="caption">back</span>
+                    <span className="caption">{isMobile ? 'swipe right' : 'back'}</span>
                   </button>
 
                   <div className="grid md:grid-cols-2 gap-6 overflow-y-auto">
@@ -102,6 +114,15 @@ const Contact = () => {
           </div>
         </div>
       </div>
+
+      {/* Mobile Swipe Hint */}
+      {isMobile && isTouch && (
+        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-40">
+          <div className="bg-black bg-opacity-75 text-white px-3 py-1 rounded-full text-xs">
+            Swipe to navigate
+          </div>
+        </div>
+      )}
     </div>
   );
 };

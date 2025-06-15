@@ -1,15 +1,27 @@
-
 import { useEffect, useState } from 'react';
 import { WorkProject } from '../types/content';
 import { loadWorkProjects } from '../utils/contentLoader';
 import ProjectCard from '../components/ProjectCard';
 import ScrollFade from '../components/ScrollFade';
 import { useGyroscopic } from '../hooks/useGyroscopic';
+import { useMobileOptimization } from '../hooks/useMobileOptimization';
+import { useSwipeGesture } from '../hooks/useSwipeGesture';
 
 const Work = () => {
   const [projects, setProjects] = useState<WorkProject[]>([]);
   const [loading, setLoading] = useState(true);
   const portfolioRef = useGyroscopic();
+  const { isMobile, isTouch, reducedMotion } = useMobileOptimization();
+
+  // Enhanced swipe navigation for mobile
+  const swipeRef = useSwipeGesture<HTMLDivElement>({
+    onSwipeLeft: () => {
+      // Could implement project filtering or navigation
+    },
+    onSwipeRight: () => {
+      // Could implement back navigation
+    }
+  });
 
   useEffect(() => {
     const loadContent = async () => {
@@ -31,7 +43,7 @@ const Work = () => {
       <div className="magazine-container">
         <div className="editorial-container py-16">
           <div className="text-center">
-            <div className="animate-spin w-8 h-8 border-2 border-gryd-accent border-t-transparent rounded-full mx-auto mb-4"></div>
+            <div className={`animate-spin w-8 h-8 border-2 border-gryd-accent border-t-transparent rounded-full mx-auto mb-4 ${reducedMotion ? 'animate-none' : ''}`}></div>
             <p className="body text-gryd-soft">Loading portfolio...</p>
           </div>
         </div>
@@ -40,10 +52,10 @@ const Work = () => {
   }
 
   return (
-    <div className="magazine-container">
+    <div className="magazine-container" ref={swipeRef}>
       {/* Portfolio Header */}
       <div className="work-portfolio-header">
-        <div ref={portfolioRef} className="portfolio-masthead gyroscopic-card">
+        <div ref={portfolioRef} className={`portfolio-masthead ${isMobile ? '' : 'gyroscopic-card'}`}>
           <div className="portfolio-breadcrumb">
             <span>THE GRYD</span>
             <span>→</span>
@@ -89,7 +101,7 @@ const Work = () => {
             
             <div className="grid-articles">
               {projects.map((project, index) => (
-                <ScrollFade key={project.slug} delay={index * 200}>
+                <ScrollFade key={project.slug} delay={reducedMotion ? 0 : index * 200}>
                   <ProjectCard project={project} index={index} />
                 </ScrollFade>
               ))}
