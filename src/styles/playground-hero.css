@@ -18,111 +18,124 @@
     padding: clamp(1rem, 4vw, 2rem);
   }
 
-  /* Centered Experimental Tag */
-  .experimental-tag-centered {
-    @apply mb-8 bg-red-600 text-white px-6 py-3 transform -rotate-12;
+  /* Realistic Paper Stamp - Straight Design */
+  .paper-stamp {
+    @apply mb-12 relative;
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    color: white;
+    padding: 1rem 2rem;
     font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-weight: bold;
-    font-size: clamp(0.8rem, 2vw, 1rem);
-    border: 3px solid #dc2626;
-    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
-    animation: stamp-pulse 3s ease-in-out infinite;
+    font-weight: 900;
+    font-size: clamp(0.9rem, 2.2vw, 1.1rem);
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
+    border: 4px solid #7f1d1d;
+    border-radius: 2px;
+    position: relative;
+    
+    /* Paper texture */
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 1px, transparent 1px),
+      radial-gradient(circle at 75% 75%, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 8px 8px, 12px 12px;
+    
+    /* Stamp shadow and depth */
+    box-shadow: 
+      0 8px 16px rgba(220, 38, 38, 0.3),
+      inset 0 1px 0 rgba(255,255,255,0.2),
+      inset 0 -1px 0 rgba(0,0,0,0.2);
+    
+    /* Ink bleed effect */
+    filter: contrast(1.1) saturate(1.2);
+    
+    /* Slight paper curl effect */
+    transform: perspective(100px) rotateX(1deg);
   }
 
-  /* Seamless Lab Notebook - No Perspective */
-  .lab-notebook.enhanced-gyroscopic {
-    @apply relative w-full h-auto flex flex-col items-center justify-center;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    transform: none !important;
-    transition: none;
-    max-width: none;
-    max-height: none;
+  .paper-stamp::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, transparent 30%, rgba(220, 38, 38, 0.1) 50%, transparent 70%);
+    border-radius: 4px;
+    z-index: -1;
   }
 
-  .lab-notebook.enhanced-gyroscopic:hover {
-    transform: none !important;
-    box-shadow: none;
+  .paper-stamp::after {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 2px dashed rgba(255,255,255,0.4);
+    border-radius: 1px;
+    pointer-events: none;
   }
 
-  /* Enhanced Lab Content - Centered Layout */
-  .lab-header-content {
+  /* Combined Lab Header */
+  .lab-header-combined {
     @apply relative w-full max-w-6xl mx-auto text-center;
     padding: clamp(2rem, 6vw, 4rem);
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px dashed #fb923c;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
   }
 
   /* Title Section - Responsive */
   .lab-title-section {
-    @apply text-center mb-6 sm:mb-8;
+    @apply text-center mb-8;
   }
 
   /* Morphing Title Container */
   .morphing-title-container {
-    @apply mb-6 sm:mb-8;
+    @apply mb-6;
     min-height: clamp(4rem, 12vw, 8rem);
   }
 
   /* Enhanced Subtitle with More Emphasis */
-  .animated-subtitle {
-    @apply text-center text-gray-800 mb-6 sm:mb-8;
+  .lab-subtitle-enhanced {
+    @apply text-center text-gray-800 mb-8;
     font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-size: clamp(1rem, 2.8vw, 1.3rem);
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
     text-transform: lowercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
     font-style: italic;
     font-weight: 700;
-    animation: typewriter 2.5s steps(45) 1s forwards;
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 3px solid #fb923c;
-    width: 0;
-    margin: 0 auto;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    background: linear-gradient(135deg, rgba(251,146,60,0.1) 0%, transparent 100%);
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-  }
-
-  /* Enhanced Warning Text */
-  .animated-warning {
-    @apply flex items-center justify-center space-x-4 text-center;
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-size: clamp(0.9rem, 2.2vw, 1rem);
-    color: #555;
-    background: rgba(255,235,59,0.1);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, rgba(251,146,60,0.2) 0%, transparent 100%);
     padding: 1rem 2rem;
     border-radius: 8px;
-    border: 2px dashed #fb923c;
-    margin: 0 auto;
-    max-width: 600px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 1px solid rgba(251,146,60,0.3);
   }
 
-  .warning-text {
-    @apply text-gray-700;
+  /* Integrated Warning Section */
+  .lab-warning-integrated {
+    @apply flex items-center justify-center space-x-6 text-center;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: #444;
+    background: rgba(255,235,59,0.15);
+    padding: 1.5rem 2.5rem;
+    border-radius: 12px;
+    border: 3px dashed #fb923c;
+    margin: 0 auto;
+    max-width: 700px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    backdrop-filter: blur(5px);
+  }
+
+  .warning-triangle-icon {
+    @apply text-yellow-600 text-3xl flex-shrink-0;
+    animation: warning-pulse 2.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.6));
+    font-weight: 900;
+  }
+
+  .warning-message {
+    @apply text-gray-700 leading-relaxed;
     font-weight: 600;
     font-style: italic;
-  }
-
-  .pulse-triangle {
-    @apply text-yellow-600 text-2xl;
-    animation: warning-pulse 2s ease-in-out infinite;
-    filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.5));
-  }
-
-  /* Remove Complex Decorative Elements */
-  .notebook-rings,
-  .ring,
-  .notebook-stains,
-  .animated-stains,
-  .growing-stain,
-  .floating-splatter,
-  .ink-drop,
-  .hover-particles {
-    display: none;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
   }
 
   /* Fixed Experiments Header */
@@ -167,19 +180,11 @@
 }
 
 /* Enhanced Keyframe Animations */
-@keyframes stamp-pulse {
-  0%, 100% { transform: rotate(-12deg) scale(1); }
-  50% { transform: rotate(-10deg) scale(1.08); }
-}
-
-@keyframes typewriter {
-  0% { width: 0; }
-  100% { width: 100%; border-right: none; }
-}
-
 @keyframes warning-pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.3); opacity: 0.7; }
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  25% { transform: scale(1.1) rotate(-2deg); opacity: 0.8; }
+  50% { transform: scale(1.2) rotate(2deg); opacity: 0.6; }
+  75% { transform: scale(1.1) rotate(-1deg); opacity: 0.8; }
 }
 
 /* Responsive Design */
@@ -188,26 +193,27 @@
     @apply min-h-screen;
   }
 
-  .lab-header-content {
+  .lab-header-combined {
     padding: clamp(1.5rem, 4vw, 2rem);
+    margin: 0 1rem;
   }
 
-  .experimental-tag-centered {
-    @apply mb-6 px-4 py-2 text-sm;
+  .paper-stamp {
+    @apply mb-8 px-6 py-3 text-sm;
+    letter-spacing: 2px;
   }
 
-  .animated-subtitle {
-    @apply text-sm;
-    white-space: normal;
-    border-right: none;
-    width: auto;
-    overflow: visible;
-    animation: none;
-    padding: 0.5rem;
+  .lab-subtitle-enhanced {
+    @apply text-sm px-4 py-3;
+    letter-spacing: 1px;
   }
 
-  .animated-warning {
-    @apply text-xs flex-col space-x-0 space-y-2 px-4 py-3;
+  .lab-warning-integrated {
+    @apply text-sm flex-col space-x-0 space-y-4 px-6 py-4;
+  }
+
+  .warning-triangle-icon {
+    @apply text-2xl;
   }
 
   .experiments-header-bar-new {
