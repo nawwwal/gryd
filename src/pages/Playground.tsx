@@ -86,11 +86,6 @@ const Playground = () => {
         </div>
         
         <div className="playground-hero-content">
-          {/* Realistic Paper Stamp */}
-          <div className="experimental-stamp-realistic">
-            <span>EXPERIMENTAL</span>
-          </div>
-          
           <div className="lab-notebook enhanced-gyroscopic">
             <div className="lab-header-content">
               <div className="lab-title-section">
@@ -98,13 +93,8 @@ const Playground = () => {
                   <MorphingText texts={['PLAYGROUND', 'LABORATORY', 'WORKSHOP', 'STUDIO']} className="experimental-title" />
                 </div>
                 
-                {/* Combined Subtitle and Warning */}
-                <div className="lab-combined-content">
+                <div className="lab-subtitle-minimal">
                   <div className="lab-subtitle-text">Research Lab • Experiments & Dead Ends</div>
-                  <div className="lab-warning-box">
-                    <div className="warning-triangle">⚠</div>
-                    <span className="warning-text">Most of this is useless. Some of it changes everything.</span>
-                  </div>
                 </div>
               </div>
             </div>

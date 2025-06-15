@@ -1,4 +1,3 @@
-
 /* Enhanced Magazine Footer Styles */
 
 .magazine-footer-enhanced {
@@ -176,7 +175,7 @@
   line-height: 1.1;
 }
 
-/* Bottom Bar - Updated Theme Colors */
+/* Bottom Bar - Updated Typography */
 .footer-bottom-bar {
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   color: #2c2c2c;
@@ -300,7 +299,7 @@
 }
 
 .subscription-text {
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-family: 'Fraunces', serif;
   font-size: 0.7rem;
   color: #6c757d;
   line-height: 1.4;
@@ -360,29 +359,29 @@
   }
 }
 
-/* ... keep existing code (page-specific footer variations and animations) */
+/* Remove Page-Specific Color Variants - Keep Only Consistent Gold Theme */
 .footer-work-variant .footer-section-header {
-  border-bottom-color: #e74c3c;
+  border-bottom-color: #d4af37;
 }
 
 .footer-work-variant .footer-section-header::after {
-  color: #e74c3c;
+  color: #d4af37;
 }
 
 .footer-about-variant .footer-section-header {
-  border-bottom-color: #3498db;
+  border-bottom-color: #d4af37;
 }
 
 .footer-about-variant .footer-section-header::after {
-  color: #3498db;
+  color: #d4af37;
 }
 
 .footer-playground-variant .footer-section-header {
-  border-bottom-color: #9b59b6;
+  border-bottom-color: #d4af37;
 }
 
 .footer-playground-variant .footer-section-header::after {
-  color: #9b59b6;
+  color: #d4af37;
 }
 
 /* Animation for subscription pattern */

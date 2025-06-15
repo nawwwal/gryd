@@ -25,11 +25,6 @@ const Navigation = () => {
         
         <div className="newspaper-container">
           <div className="newspaper-left">
-            <div className="publication-mark font-mono font-medium">EST. 2024</div>
-            <div className="issue-number font-mono font-normal">No. 01</div>
-          </div>
-          
-          <div className="newspaper-center">
             <Link to="/" className="newspaper-logo">
               <span className="logo-the">THE</span>
               <span className="logo-gryd">GRYD</span>

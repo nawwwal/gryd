@@ -1,4 +1,3 @@
-
 @import './page-headers.css';
 @import './contact.css';
 @import './responsive.css';
@@ -201,19 +200,7 @@
   }
 
   .newspaper-left {
-    @apply flex items-center space-x-4 text-xs font-mono font-medium uppercase tracking-widest text-gray-600;
-  }
-
-  .publication-mark {
-    @apply font-semibold;
-  }
-
-  .issue-number {
-    @apply opacity-70;
-  }
-
-  .newspaper-center {
-    @apply absolute left-1/2 transform -translate-x-1/2;
+    @apply flex items-center;
   }
 
   .newspaper-logo {
