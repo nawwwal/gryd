@@ -83,9 +83,9 @@ const EditorsPicks = () => {
                     <div className="pick-category">{pick.category}</div>
                     <div className="pick-title">{pick.title}</div>
                     <div className="pick-subtitle">{pick.subtitle}</div>
-                  </div>
-                  <div className="pick-note">
-                    {pick.note}
+                    <div className="pick-note">
+                      {pick.note}
+                    </div>
                   </div>
                 </div>
               </TooltipTrigger>
