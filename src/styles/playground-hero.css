@@ -1,3 +1,4 @@
+
 @layer components {
   /* Playground Hero Container - Full Height & Responsive */
   .playground-hero-container {
@@ -74,22 +75,9 @@
     text-shadow: 0 1px 2px rgba(0,0,0,0.1);
   }
 
-  /* Remove Experimental Stamp and Warning Box Styles */
-  .experimental-stamp-realistic,
-  .lab-warning-box,
-  .warning-triangle,
-  .warning-text {
-    display: none;
-  }
-
   /* Experiments Section */
   .experiments-section {
     @apply max-w-7xl mx-auto px-4 sm:px-8 py-12 sm:py-16;
-  }
-
-  /* Remove the old problematic header bar styles */
-  .experiments-header-bar {
-    display: none;
   }
 
   .experiments-title-group {
@@ -201,27 +189,8 @@
   }
 
   .list-item {
-    @apply flex items-start space-x-2;
-  }
-
-  .list-marker {
-    @apply text-orange-600 font-bold text-lg;
-  }
-
-  .editorial-signature {
-    @apply mt-12 text-right;
-  }
-
-  .signature-line {
-    @apply w-24 h-px bg-gray-300 ml-auto mb-2;
-  }
-
-  .signature-text {
-    @apply text-gray-600 font-mono font-medium uppercase tracking-wider text-sm;
-  }
-
-  .signature-name {
-    @apply font-bold;
+    @apply text-gray-700 leading-relaxed font-body;
+    font-size: clamp(1rem, 2vw, 1.125rem);
   }
 }
 

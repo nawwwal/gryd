@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from 'react';
 import ScrollFade from '../components/ScrollFade';
 import MagazineFooter from '../components/MagazineFooter';
@@ -33,6 +34,7 @@ const Playground = () => {
       return () => backgroundElement.removeEventListener('mousemove', handleMouseMove);
     }
   }, []);
+
   useEffect(() => {
     const loadContent = async () => {
       try {
@@ -46,6 +48,7 @@ const Playground = () => {
     };
     loadContent();
   }, []);
+
   useEffect(() => {
     if (!loading && experiments.length > 0) {
       const cards = masonryRef.current?.querySelectorAll('.experiment-card');
@@ -68,6 +71,7 @@ const Playground = () => {
       });
     }
   }, [loading, experiments]);
+
   if (loading) {
     return <div className="magazine-container">
         <div className="editorial-container py-16">
@@ -78,6 +82,7 @@ const Playground = () => {
         </div>
       </div>;
   }
+
   return <div className="magazine-container">
       {/* Enhanced Experimental Hero - Full Viewport Height */}
       <div className="playground-hero-container">
@@ -230,31 +235,19 @@ const Playground = () => {
                 <div className="editorial-body">
                   <div className="editorial-list">
                     <div className="list-item">
-                      <span className="list-marker">•</span>
                       <span>This page updates whenever something breaks in an interesting way</span>
                     </div>
                     <div className="list-item">
-                      <span className="list-marker">•</span>
                       <span>Bookmark it if you enjoy watching creative processes unfold</span>
                     </div>
                     <div className="list-item">
-                      <span className="list-marker">•</span>
                       <span>Most experiments are documented with both successes and failures</span>
                     </div>
                     <div className="list-item">
-                      <span className="list-marker">•</span>
                       <span>Feel free to steal ideas—that's how innovation spreads</span>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            <div className="editorial-signature">
-              <div className="signature-line"></div>
-              <div className="signature-text">
-                <span className="signature-name">A. Nawal</span>
-                <span className="signature-title">Laboratory Director</span>
               </div>
             </div>
           </div>
