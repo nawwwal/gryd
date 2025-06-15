@@ -18,7 +18,7 @@ const EpilogueSection = () => {
               <div className="epilogue-front-content">
                 {/* Page Header */}
                 <div className="text-center mb-12">
-                  <div className="flex items-start items-center space-x-4">
+                  <div className="flex items-center justify-center space-x-4">
                     <div className="w-8 h-px bg-orange-600"></div>
                     <span className="section-category my-0">EPILOGUE</span>
                     <div className="w-8 h-px bg-orange-600"></div>
