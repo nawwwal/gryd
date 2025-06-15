@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { WorkProject } from '../types/content';
 import { loadWorkProjects } from '../utils/contentLoader';
@@ -10,12 +9,15 @@ import MobileTouchFeedback from '../components/MobileTouchFeedback';
 import { useGyroscopic } from '../hooks/useGyroscopic';
 import { useMobileOptimization } from '../hooks/useMobileOptimization';
 import { useSwipeGesture } from '../hooks/useSwipeGesture';
-
 const Work = () => {
   const [projects, setProjects] = useState<WorkProject[]>([]);
   const [loading, setLoading] = useState(true);
   const portfolioRef = useGyroscopic();
-  const { isMobile, isTouch, reducedMotion } = useMobileOptimization();
+  const {
+    isMobile,
+    isTouch,
+    reducedMotion
+  } = useMobileOptimization();
 
   // Enhanced swipe navigation for mobile
   const swipeRef = useSwipeGesture<HTMLDivElement>({
@@ -26,7 +28,6 @@ const Work = () => {
       // Could implement back navigation
     }
   });
-
   useEffect(() => {
     const loadContent = async () => {
       try {
@@ -38,41 +39,31 @@ const Work = () => {
         setLoading(false);
       }
     };
-
     loadContent();
   }, []);
-
   if (loading) {
-    return (
-      <div className="magazine-container">
+    return <div className="magazine-container">
         <div className="editorial-container py-16">
           <div className="text-center">
             <div className={`animate-spin w-8 h-8 border-2 border-gryd-accent border-t-transparent rounded-full mx-auto mb-4 ${reducedMotion ? 'animate-none' : ''}`}></div>
             <p className="body text-gryd-soft">Loading portfolio...</p>
           </div>
         </div>
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <div className="magazine-container" ref={swipeRef}>
+  return <div className="magazine-container" ref={swipeRef}>
       {/* Portfolio Header */}
       <div className="work-portfolio-header">
         <div ref={portfolioRef} className={`portfolio-masthead ${isMobile ? '' : 'gyroscopic-card'}`}>
-          <div className="portfolio-breadcrumb">
-            <span>THE GRYD</span>
-            <span>→</span>
-            <span>WORK</span>
-          </div>
+          
           
           <div className="portfolio-title-section">
             <h1 className="portfolio-main-title">
-              {'WORK'.split('').map((letter, index) => (
-                <span key={index} className="hover-letter ink-bleed" style={{ animationDelay: `${index * 100}ms` }}>
+              {'WORK'.split('').map((letter, index) => <span key={index} className="hover-letter ink-bleed" style={{
+              animationDelay: `${index * 100}ms`
+            }}>
                   {letter}
-                </span>
-              ))}
+                </span>)}
             </h1>
             <p className="portfolio-subtitle">Case Studies & Client Projects</p>
           </div>
@@ -103,19 +94,13 @@ const Work = () => {
               <div className="title-underline"></div>
             </div>
             
-            {projects.map((project, index) => (
-              <ScrollFade key={project.slug} delay={reducedMotion ? 0 : index * 200}>
+            {projects.map((project, index) => <ScrollFade key={project.slug} delay={reducedMotion ? 0 : index * 200}>
                 <Link to={`/work/${project.slug}`} className="block">
-                  {isTouch ? (
-                    <MobileTouchFeedback hapticFeedback>
+                  {isTouch ? <MobileTouchFeedback hapticFeedback>
                       <article className="linear-project-card">
                         <div className="linear-project-content">
                           <div className="linear-project-image">
-                            <MobileOptimizedImage
-                              src={project.metadata.assets.hero || '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png'}
-                              alt={project.title}
-                              priority={index < 2}
-                            />
+                            <MobileOptimizedImage src={project.metadata.assets.hero || '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png'} alt={project.title} priority={index < 2} />
                           </div>
                           
                           <div className="linear-project-info">
@@ -130,16 +115,10 @@ const Work = () => {
                           </div>
                         </div>
                       </article>
-                    </MobileTouchFeedback>
-                  ) : (
-                    <article className="linear-project-card">
+                    </MobileTouchFeedback> : <article className="linear-project-card">
                       <div className="linear-project-content">
                         <div className="linear-project-image">
-                          <MobileOptimizedImage
-                            src={project.metadata.assets.hero || '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png'}
-                            alt={project.title}
-                            priority={index < 2}
-                          />
+                          <MobileOptimizedImage src={project.metadata.assets.hero || '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png'} alt={project.title} priority={index < 2} />
                         </div>
                         
                         <div className="linear-project-info">
@@ -153,19 +132,15 @@ const Work = () => {
                           </div>
                         </div>
                       </div>
-                    </article>
-                  )}
+                    </article>}
                 </Link>
-              </ScrollFade>
-            ))}
+              </ScrollFade>)}
           </div>
         </ScrollFade>
       </div>
 
       {/* Enhanced Magazine Footer - Now Common Component */}
       <MagazineFooter />
-    </div>
-  );
+    </div>;
 };
-
 export default Work;
