@@ -299,15 +299,17 @@
 
   /* Epilogue Section */
   .epilogue-section {
-    @apply max-w-5xl mx-auto px-8;
+    @apply max-w-5xl mx-auto px-8 py-16;
   }
 
   .flip-card-container {
-    @apply relative w-full perspective-1000;
+    @apply relative w-full;
+    perspective: 1000px;
   }
 
   .flip-card {
-    @apply relative w-full h-auto transition-transform duration-700 transform-style-preserve-3d;
+    @apply relative w-full h-auto transition-transform duration-700;
+    transform-style: preserve-3d;
   }
 
   .flip-card.flipped {
@@ -316,7 +318,8 @@
 
   .flip-card-front,
   .flip-card-back {
-    @apply w-full backface-hidden;
+    @apply w-full;
+    backface-visibility: hidden;
     background: 
       linear-gradient(135deg, #ffffff 0%, #fdfcfa 100%),
       radial-gradient(circle at 10% 20%, rgba(139,69,19,0.02) 1px, transparent 1px);
