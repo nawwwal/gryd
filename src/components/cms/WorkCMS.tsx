@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { WorkProject } from '../../types/content';
 import { loadWorkProjects } from '../../utils/contentLoader';
@@ -8,8 +7,9 @@ import { Badge } from '../ui/badge';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
 import { useForm } from 'react-hook-form';
-import { Plus, Edit, Search, Filter } from 'lucide-react';
+import { Plus, Edit, Search, FileText } from 'lucide-react';
 import ScrollFade from '../ScrollFade';
+import MDXEditor from './MDXEditor';
 
 interface WorkFormData {
   title: string;
@@ -29,6 +29,8 @@ const WorkCMS = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [loading, setLoading] = useState(true);
+  const [showContentEditor, setShowContentEditor] = useState(false);
+  const [currentContent, setCurrentContent] = useState('');
 
   const { register, handleSubmit, reset, setValue } = useForm<WorkFormData>();
 
@@ -58,15 +60,16 @@ const WorkCMS = () => {
     switch (status) {
       case 'live': return 'text-gryd-accent bg-gryd-accent/10';
       case 'prototype': return 'text-gryd-text bg-gryd-soft/10';
-      case 'ongoing': return 'text-yellow-600 bg-yellow-50';
+      case 'ongoing': return 'text-gryd-accent bg-gryd-accent/10';
       case 'archived': return 'text-gryd-soft bg-gryd-soft/5';
-      case 'draft': return 'text-orange-600 bg-orange-50';
+      case 'draft': return 'text-gryd-soft bg-gryd-soft/10';
       default: return 'text-gryd-soft bg-gryd-soft/5';
     }
   };
 
   const handleEditProject = (project: WorkProject) => {
     setEditingProject(project);
+    setCurrentContent(project.content);
     setValue('title', project.title);
     setValue('subtitle', project.subtitle);
     setValue('description', project.description);
@@ -80,15 +83,22 @@ const WorkCMS = () => {
   const handleCreateNew = () => {
     setIsCreating(true);
     setEditingProject(null);
+    setCurrentContent('# New Project\n\nStart writing your case study here...');
     reset();
   };
 
   const onSubmit = (data: WorkFormData) => {
-    console.log('Saving project:', data);
+    console.log('Saving project:', { ...data, content: currentContent });
     // TODO: Implement actual save functionality
     setIsCreating(false);
     setEditingProject(null);
+    setShowContentEditor(false);
     reset();
+  };
+
+  const handleContentSave = () => {
+    console.log('Saving content:', currentContent);
+    // TODO: Implement content save
   };
 
   if (loading) {
@@ -166,72 +176,95 @@ const WorkCMS = () => {
       </div>
 
       {(isCreating || editingProject) && (
-        <Card className="border-gryd-soft/20">
-          <CardHeader>
-            <CardTitle className="subhead text-gryd-text">
-              {isCreating ? 'Create New Project' : 'Edit Project'}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="caption text-gryd-soft mb-2 block">Title</label>
-                  <Input {...register('title')} className="border-gryd-soft/20 focus:border-gryd-accent" />
-                </div>
-                <div>
-                  <label className="caption text-gryd-soft mb-2 block">Timeline</label>
-                  <Input {...register('timeline')} className="border-gryd-soft/20 focus:border-gryd-accent" />
-                </div>
-              </div>
-              <div>
-                <label className="caption text-gryd-soft mb-2 block">Subtitle</label>
-                <Input {...register('subtitle')} className="border-gryd-soft/20 focus:border-gryd-accent" />
-              </div>
-              <div>
-                <label className="caption text-gryd-soft mb-2 block">Description</label>
-                <Textarea {...register('description')} className="border-gryd-soft/20 focus:border-gryd-accent" />
-              </div>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="caption text-gryd-soft mb-2 block">Impact</label>
-                  <Input {...register('impact')} className="border-gryd-soft/20 focus:border-gryd-accent" />
-                </div>
-                <div>
-                  <label className="caption text-gryd-soft mb-2 block">Category</label>
-                  <Input {...register('category')} className="border-gryd-soft/20 focus:border-gryd-accent" />
-                </div>
-              </div>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="caption text-gryd-soft mb-2 block">Tools (comma separated)</label>
-                  <Input {...register('tools')} className="border-gryd-soft/20 focus:border-gryd-accent" />
-                </div>
-                <div>
-                  <label className="caption text-gryd-soft mb-2 block">Tags (comma separated)</label>
-                  <Input {...register('tags')} className="border-gryd-soft/20 focus:border-gryd-accent" />
-                </div>
-              </div>
-              <div className="flex gap-2">
-                <Button type="submit" className="bg-gryd-accent hover:bg-gryd-accent/90 text-white">
-                  Save Project
-                </Button>
-                <Button 
-                  type="button" 
-                  variant="outline" 
-                  onClick={() => {
-                    setIsCreating(false);
-                    setEditingProject(null);
-                    reset();
-                  }}
+        <div className="space-y-6">
+          <Card className="border-gryd-soft/20">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="subhead text-gryd-text">
+                  {isCreating ? 'Create New Project' : 'Edit Project'}
+                </CardTitle>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => setShowContentEditor(!showContentEditor)}
                   className="border-gryd-soft/20 text-gryd-text hover:bg-gryd-soft/5"
                 >
-                  Cancel
+                  <FileText className="w-4 h-4 mr-2" />
+                  {showContentEditor ? 'Hide Content Editor' : 'Edit Content'}
                 </Button>
               </div>
-            </form>
-          </CardContent>
-        </Card>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="caption text-gryd-soft mb-2 block">Title</label>
+                    <Input {...register('title')} className="border-gryd-soft/20 focus:border-gryd-accent" />
+                  </div>
+                  <div>
+                    <label className="caption text-gryd-soft mb-2 block">Timeline</label>
+                    <Input {...register('timeline')} className="border-gryd-soft/20 focus:border-gryd-accent" />
+                  </div>
+                </div>
+                <div>
+                  <label className="caption text-gryd-soft mb-2 block">Subtitle</label>
+                  <Input {...register('subtitle')} className="border-gryd-soft/20 focus:border-gryd-accent" />
+                </div>
+                <div>
+                  <label className="caption text-gryd-soft mb-2 block">Description</label>
+                  <Textarea {...register('description')} className="border-gryd-soft/20 focus:border-gryd-accent" />
+                </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="caption text-gryd-soft mb-2 block">Impact</label>
+                    <Input {...register('impact')} className="border-gryd-soft/20 focus:border-gryd-accent" />
+                  </div>
+                  <div>
+                    <label className="caption text-gryd-soft mb-2 block">Category</label>
+                    <Input {...register('category')} className="border-gryd-soft/20 focus:border-gryd-accent" />
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="caption text-gryd-soft mb-2 block">Tools (comma separated)</label>
+                    <Input {...register('tools')} className="border-gryd-soft/20 focus:border-gryd-accent" />
+                  </div>
+                  <div>
+                    <label className="caption text-gryd-soft mb-2 block">Tags (comma separated)</label>
+                    <Input {...register('tags')} className="border-gryd-soft/20 focus:border-gryd-accent" />
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <Button type="submit" className="bg-gryd-accent hover:bg-gryd-accent/90 text-white">
+                    Save Project
+                  </Button>
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    onClick={() => {
+                      setIsCreating(false);
+                      setEditingProject(null);
+                      setShowContentEditor(false);
+                      reset();
+                    }}
+                    className="border-gryd-soft/20 text-gryd-text hover:bg-gryd-soft/5"
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+
+          {showContentEditor && (
+            <MDXEditor
+              content={currentContent}
+              onContentChange={setCurrentContent}
+              onSave={handleContentSave}
+              title="Project Content (MDX)"
+            />
+          )}
+        </div>
       )}
 
       <div className="space-y-4">
@@ -267,6 +300,7 @@ const WorkCMS = () => {
                         </div>
                       )}
                     </div>
+                    
                     <div className="grid md:grid-cols-3 gap-4 text-sm">
                       <div>
                         <span className="caption text-gryd-soft">Timeline:</span>
