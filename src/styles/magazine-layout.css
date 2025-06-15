@@ -6,16 +6,144 @@
   /* Magazine Container - Mobile First */
   .magazine-container {
     @apply min-h-screen;
-    background: #fafafa;
+    background: transparent;
   }
 
-  @media (min-width: 768px) {
-    .magazine-container {
-      background-image: 
-        radial-gradient(circle at 1px 1px, rgba(0,0,0,0.15) 1px, transparent 0),
-        linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
-      background-size: 20px 20px, 100% 100%;
-    }
+  /* Work Page Linear Layout */
+  .work-projects-linear {
+    @apply space-y-12 max-w-6xl mx-auto;
+  }
+
+  .linear-project-card {
+    @apply bg-white shadow-lg overflow-hidden;
+    background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+    border: 1px solid rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .linear-project-card:hover {
+    @apply transform -translate-y-2 shadow-2xl;
+  }
+
+  .linear-project-content {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-0;
+  }
+
+  .linear-project-image {
+    @apply relative overflow-hidden;
+    height: clamp(20rem, 40vh, 28rem);
+  }
+
+  .linear-project-image img {
+    @apply w-full h-full object-cover transition-transform duration-500;
+  }
+
+  .linear-project-card:hover .linear-project-image img {
+    @apply scale-105;
+  }
+
+  .linear-project-info {
+    @apply p-8 lg:p-12 flex flex-col justify-center space-y-6;
+  }
+
+  .linear-project-category {
+    @apply text-sm uppercase tracking-widest text-orange-600 font-bold;
+  }
+
+  .linear-project-title {
+    @apply font-serif text-3xl lg:text-4xl font-bold text-gray-900 leading-tight;
+  }
+
+  .linear-project-subtitle {
+    @apply text-lg text-gray-600 leading-relaxed;
+  }
+
+  .linear-project-meta {
+    @apply flex flex-col sm:flex-row sm:items-center sm:justify-between pt-6 border-t border-gray-100 space-y-4 sm:space-y-0;
+  }
+
+  .linear-project-year {
+    @apply text-sm font-mono uppercase tracking-widest text-gray-500;
+  }
+
+  .linear-project-cta {
+    @apply inline-flex items-center text-orange-600 font-bold uppercase tracking-widest text-sm hover:text-orange-700 transition-colors;
+  }
+
+  /* Enhanced Hero Card Effects */
+  .hero-paper {
+    @apply relative w-full bg-white shadow-2xl;
+    max-width: min(95vw, 1400px);
+    transform: rotateX(0.5deg) rotateY(-0.25deg);
+    background: 
+      linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%),
+      radial-gradient(circle at 50% 50%, rgba(0,0,0,0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 10px 10px;
+    border: 1px solid rgba(0,0,0,0.1);
+    animation: paper-settle 1.2s ease-out;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hero-paper:hover {
+    box-shadow: 
+      0 32px 64px -12px rgba(0, 0, 0, 0.25),
+      0 8px 32px -8px rgba(251, 146, 60, 0.15),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
+  .hero-paper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+      rgba(251,146,60,0.05) 0%, 
+      transparent 30%, 
+      transparent 70%,
+      rgba(251,146,60,0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  .hero-paper:hover::before {
+    opacity: 1;
+  }
+
+  .gyroscopic-card {
+    transition: transform 0.1s ease-out;
+    transform-style: preserve-3d;
+    cursor: pointer;
+  }
+
+  .gyroscopic-card:hover {
+    box-shadow: 
+      0 25px 50px -12px rgba(0, 0, 0, 0.25),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  .gyroscopic-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+      rgba(251,146,60,0.03) 0%, 
+      transparent 50%, 
+      rgba(251,146,60,0.03) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  .gyroscopic-card:hover::before {
+    opacity: 1;
   }
 
   /* Compact Newspaper Header - Desktop Only */
@@ -514,66 +642,22 @@
   100% { background-position: 200% 0; }
 }
 
-/* Newspaper Fold Animations */
-@keyframes unfoldPaper {
-  0% {
-    transform: scaleY(0) rotateX(-90deg);
-    opacity: 0;
-  }
-  50% {
-    transform: scaleY(0.5) rotateX(-45deg);
-    opacity: 0.5;
-  }
-  100% {
-    transform: scaleY(1) rotateX(0deg);
-    opacity: 1;
-  }
-}
-
-@keyframes foldPaper {
-  0% {
-    transform: scaleY(1) rotateX(0deg);
-    opacity: 1;
-  }
-  50% {
-    transform: scaleY(0.5) rotateX(-45deg);
-    opacity: 0.5;
-  }
-  100% {
-    transform: scaleY(0) rotateX(-90deg);
-    opacity: 0;
-  }
-}
-
+/* Enhanced Animations */
 @keyframes paper-settle {
   0% {
-    transform: rotateX(2deg) rotateY(-1deg) translateY(-20px);
+    transform: rotateX(10deg) rotateY(-5deg) translateY(-50px);
     opacity: 0;
+    box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.5);
+  }
+  60% {
+    transform: rotateX(-1deg) rotateY(1deg) translateY(-10px);
+    opacity: 0.8;
   }
   100% {
     transform: rotateX(0.5deg) rotateY(-0.25deg) translateY(0);
     opacity: 1;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   }
-}
-
-@keyframes classified-pop-in {
-  0% {
-    opacity: 0;
-    transform: translateY(30px) rotate(-3deg) scale(0.9);
-  }
-  60% {
-    opacity: 1;
-    transform: translateY(-5px) rotate(1deg) scale(1.02);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) rotate(-0.5deg) scale(1);
-  }
-}
-
-@keyframes line-stretch {
-  0% { width: 0; }
-  100% { width: 8rem; }
 }
 
 /* Mobile-specific optimizations */
@@ -597,5 +681,31 @@
   .gyroscopic-card,
   .hover-letter {
     will-change: transform;
+  }
+  
+  .hero-paper {
+    transform: none;
+    margin: 0.5rem;
+  }
+  
+  .linear-project-content {
+    @apply grid-cols-1;
+  }
+  
+  .linear-project-image {
+    height: clamp(16rem, 30vh, 20rem);
+  }
+  
+  .linear-project-info {
+    @apply p-6;
+  }
+  
+  .gyroscopic-card {
+    transform: none !important;
+  }
+  
+  .gyroscopic-card:hover {
+    transform: scale(1.02) !important;
+    transition: transform 0.2s ease;
   }
 }

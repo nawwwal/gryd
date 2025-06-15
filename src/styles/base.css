@@ -47,9 +47,18 @@
     @apply border-border;
   }
 
+  html {
+    background: #fafafa;
+  }
+
   body {
     @apply bg-gryd-bg text-gryd-text font-body antialiased;
-    background-image: var(--paper-texture);
+    background: 
+      radial-gradient(circle at 1px 1px, rgba(0,0,0,0.15) 1px, transparent 0),
+      linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+    background-size: 20px 20px, 100% 100%;
+    background-attachment: fixed;
+    min-height: 100vh;
   }
 
   h1, h2, h3, h4, h5, h6 {

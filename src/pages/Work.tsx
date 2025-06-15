@@ -2,9 +2,11 @@
 import { useEffect, useState } from 'react';
 import { WorkProject } from '../types/content';
 import { loadWorkProjects } from '../utils/contentLoader';
-import ProjectCard from '../components/ProjectCard';
+import { Link } from 'react-router-dom';
 import ScrollFade from '../components/ScrollFade';
 import MagazineFooter from '../components/MagazineFooter';
+import MobileOptimizedImage from '../components/MobileOptimizedImage';
+import MobileTouchFeedback from '../components/MobileTouchFeedback';
 import { useGyroscopic } from '../hooks/useGyroscopic';
 import { useMobileOptimization } from '../hooks/useMobileOptimization';
 import { useSwipeGesture } from '../hooks/useSwipeGesture';
@@ -92,22 +94,70 @@ const Work = () => {
         </div>
       </div>
 
-      {/* Projects Grid */}
+      {/* Linear Projects Layout */}
       <div className="magazine-spread">
         <ScrollFade>
-          <div className="article-grid">
+          <div className="work-projects-linear">
             <div className="grid-title">
               <h4>Selected Work</h4>
               <div className="title-underline"></div>
             </div>
             
-            <div className="grid-articles">
-              {projects.map((project, index) => (
-                <ScrollFade key={project.slug} delay={reducedMotion ? 0 : index * 200}>
-                  <ProjectCard project={project} index={index} />
-                </ScrollFade>
-              ))}
-            </div>
+            {projects.map((project, index) => (
+              <ScrollFade key={project.slug} delay={reducedMotion ? 0 : index * 200}>
+                <Link to={`/work/${project.slug}`} className="block">
+                  {isTouch ? (
+                    <MobileTouchFeedback hapticFeedback>
+                      <article className="linear-project-card">
+                        <div className="linear-project-content">
+                          <div className="linear-project-image">
+                            <MobileOptimizedImage
+                              src={project.metadata.assets.hero || '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png'}
+                              alt={project.title}
+                              priority={index < 2}
+                            />
+                          </div>
+                          
+                          <div className="linear-project-info">
+                            <div className="linear-project-category">{project.metadata.category}</div>
+                            <h3 className="linear-project-title">{project.title}</h3>
+                            <p className="linear-project-subtitle">{project.subtitle}</p>
+                            
+                            <div className="linear-project-meta">
+                              <span className="linear-project-year">{new Date(project.metadata.publishDate).getFullYear()}</span>
+                              <span className="linear-project-cta">Read Case Study →</span>
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+                    </MobileTouchFeedback>
+                  ) : (
+                    <article className="linear-project-card">
+                      <div className="linear-project-content">
+                        <div className="linear-project-image">
+                          <MobileOptimizedImage
+                            src={project.metadata.assets.hero || '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png'}
+                            alt={project.title}
+                            priority={index < 2}
+                          />
+                        </div>
+                        
+                        <div className="linear-project-info">
+                          <div className="linear-project-category">{project.metadata.category}</div>
+                          <h3 className="linear-project-title">{project.title}</h3>
+                          <p className="linear-project-subtitle">{project.subtitle}</p>
+                          
+                          <div className="linear-project-meta">
+                            <span className="linear-project-year">{new Date(project.metadata.publishDate).getFullYear()}</span>
+                            <span className="linear-project-cta">Read Case Study →</span>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  )}
+                </Link>
+              </ScrollFade>
+            ))}
           </div>
         </ScrollFade>
       </div>

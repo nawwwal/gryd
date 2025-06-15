@@ -1,3 +1,4 @@
+
 import { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ScrollFade from './ScrollFade';
@@ -17,8 +18,8 @@ const MagazineHero = () => {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
       
-      const rotateX = (y - centerY) / centerY * -1.5; // Reduced to 1.5 degrees
-      const rotateY = (x - centerX) / centerX * 1.5;   // Reduced to 1.5 degrees
+      const rotateX = (y - centerY) / centerY * -2.5;
+      const rotateY = (x - centerX) / centerX * 2.5;
       
       card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(0)`;
     };
@@ -27,12 +28,21 @@ const MagazineHero = () => {
       card.style.transform = 'perspective(1000px) rotateX(0.5deg) rotateY(-0.25deg) translateZ(0)';
     };
 
+    const handleMouseEnter = () => {
+      card.style.transition = 'transform 0.1s ease-out';
+    };
+
     card.addEventListener('mousemove', handleMouseMove);
     card.addEventListener('mouseleave', handleMouseLeave);
+    card.addEventListener('mouseenter', handleMouseEnter);
+
+    // Set initial state
+    card.style.transform = 'perspective(1000px) rotateX(0.5deg) rotateY(-0.25deg) translateZ(0)';
 
     return () => {
       card.removeEventListener('mousemove', handleMouseMove);
       card.removeEventListener('mouseleave', handleMouseLeave);
+      card.removeEventListener('mouseenter', handleMouseEnter);
     };
   }, []);
 
