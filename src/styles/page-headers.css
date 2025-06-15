@@ -137,8 +137,9 @@
 
   .portfolio-breadcrumb {
     @apply flex items-center justify-center sm:justify-start space-x-2 sm:space-x-3 text-xs sm:text-sm uppercase tracking-wider text-gray-600 mb-6 sm:mb-8;
-    font-family: 'Schibsted Grotesk', sans-serif;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
     flex-wrap: wrap;
+    font-weight: 500;
   }
 
   .portfolio-title-section {
@@ -155,9 +156,10 @@
 
   .portfolio-subtitle {
     @apply text-gray-600 tracking-wide;
-    font-family: 'Schibsted Grotesk', sans-serif;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
     font-size: clamp(1rem, 3vw, 1.25rem);
     color: #666;
+    font-weight: 500;
   }
 
   .portfolio-stats {
@@ -176,8 +178,9 @@
 
   .stat-label {
     @apply uppercase tracking-wide text-gray-500;
-    font-family: 'Schibsted Grotesk', sans-serif;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
     font-size: clamp(0.75rem, 2vw, 0.875rem);
+    font-weight: 500;
   }
 
   /* ABOUT PAGE STYLES - Mobile Responsive */
@@ -218,9 +221,10 @@
 
   .profile-role {
     @apply tracking-wide;
-    font-family: 'Schibsted Grotesk', sans-serif;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
     font-size: clamp(1rem, 3vw, 1.25rem);
     color: #d97706;
+    font-weight: 500;
   }
 
   .quote-text {
@@ -268,8 +272,9 @@
 
   .lab-subtitle {
     @apply text-gray-600 tracking-wide;
-    font-family: 'Schibsted Grotesk', sans-serif;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
     font-size: clamp(1rem, 3vw, 1.125rem);
+    font-weight: 500;
   }
 
   /* CONTACT PAGE STYLES - Mobile Responsive */

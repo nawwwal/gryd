@@ -66,7 +66,7 @@ const MobileNavigation = () => {
                   key={path}
                   to={path}
                   onClick={closeMenu}
-                  className={`block px-6 py-4 text-lg font-mono uppercase tracking-wider transition-colors ${
+                  className={`block px-6 py-4 text-lg font-mono font-medium uppercase tracking-wider transition-colors ${
                     location.pathname === path 
                       ? 'text-orange-600 bg-orange-50 border-r-2 border-orange-600' 
                       : 'text-gray-600 hover:text-orange-600 hover:bg-gray-50'
@@ -79,7 +79,7 @@ const MobileNavigation = () => {
           </nav>
           
           <div className="p-4 border-t border-gray-200">
-            <div className="text-xs font-mono uppercase tracking-widest text-gray-500">
+            <div className="text-xs font-mono font-medium uppercase tracking-widest text-gray-500">
               <div>Est. 2024</div>
               <div>No. 01</div>
             </div>

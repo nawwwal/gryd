@@ -55,9 +55,9 @@ const MagazineHero = () => {
           <ScrollFade>
             <div className="masthead">
               <div className="issue-details">
-                <span className="issue-number font-sans">No. 01</span>
-                <span className="issue-date font-sans">Winter 2024</span>
-                <span className="price font-sans">Free</span>
+                <span className="issue-number font-mono font-medium">No. 01</span>
+                <span className="issue-date font-mono font-medium">Winter 2024</span>
+                <span className="price font-mono font-medium">Free</span>
               </div>
               
               <h1 className="magazine-logo">

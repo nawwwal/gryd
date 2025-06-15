@@ -35,7 +35,7 @@ const CMSNavigation = () => {
                 <Link
                   key={path}
                   to={path}
-                  className={`flex items-center space-x-2 caption transition-colors ${
+                  className={`flex items-center space-x-2 font-mono font-medium text-xs uppercase tracking-wider transition-colors ${
                     location.pathname === path 
                       ? 'text-gryd-accent' 
                       : 'text-gryd-soft hover:text-gryd-text'
@@ -48,7 +48,7 @@ const CMSNavigation = () => {
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <div className="caption text-gryd-soft">Content Management System</div>
+            <div className="font-mono font-medium text-xs uppercase tracking-wider text-gryd-soft">Content Management System</div>
             <Button 
               size="sm" 
               variant="outline" 
