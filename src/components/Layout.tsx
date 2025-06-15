@@ -10,7 +10,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="min-h-screen bg-gryd-bg">
       <Navigation />
-      <main className="pt-20">
+      <main className="pt-16">
         {children}
       </main>
     </div>
