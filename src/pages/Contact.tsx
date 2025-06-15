@@ -1,4 +1,3 @@
-
 import ScrollFade from '../components/ScrollFade';
 import AuthorInfo from '../components/AuthorInfo';
 import DesignerStatus from '../components/DesignerStatus';
@@ -10,7 +9,7 @@ const Contact = () => {
   const [isFlipped, setIsFlipped] = useState(false);
   const { isMobile, isTouch } = useMobileOptimization();
 
-  const swipeRef = useSwipeGesture({
+  const swipeRef = useSwipeGesture<HTMLDivElement>({
     onSwipeLeft: () => {
       if (!isFlipped) setIsFlipped(true);
     },

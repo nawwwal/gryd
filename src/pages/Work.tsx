@@ -21,7 +21,7 @@ const Work = () => {
     (currentPage + 1) * projectsPerPage
   );
 
-  const swipeRef = useSwipeGesture({
+  const swipeRef = useSwipeGesture<HTMLDivElement>({
     onSwipeLeft: () => {
       if (currentPage < totalPages - 1) {
         setCurrentPage(prev => prev + 1);
