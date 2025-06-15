@@ -54,7 +54,7 @@ const EpilogueSection = () => {
               </div>
 
               {/* Back of the card */}
-              <div className="flip-card-back">
+              <div className="flip-card-back h-fit ">
                 <div className="epilogue-back-content">
                   {/* Back Button */}
                   <button onClick={() => setIsFlipped(false)} className="flip-back-btn mb-8">
