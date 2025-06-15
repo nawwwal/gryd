@@ -12,6 +12,8 @@ import Playground from "./pages/Playground";
 import Contact from "./pages/Contact";
 import ProjectDetail from "./pages/ProjectDetail";
 import CMS from "./pages/CMS";
+import WorkCMSPage from "./pages/WorkCMSPage";
+import PlaygroundCMSPage from "./pages/PlaygroundCMSPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,18 +24,21 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/work" element={<Work />} />
-            <Route path="/work/:slug" element={<ProjectDetail />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/playground" element={<Playground />} />
-            <Route path="/cms" element={<CMS />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
+        <Routes>
+          {/* CMS Routes - No Layout */}
+          <Route path="/cms" element={<CMS />} />
+          <Route path="/cms/work" element={<WorkCMSPage />} />
+          <Route path="/cms/playground" element={<PlaygroundCMSPage />} />
+          
+          {/* Public Routes - With Layout */}
+          <Route path="/" element={<Layout><Index /></Layout>} />
+          <Route path="/work" element={<Layout><Work /></Layout>} />
+          <Route path="/work/:slug" element={<Layout><ProjectDetail /></Layout>} />
+          <Route path="/about" element={<Layout><About /></Layout>} />
+          <Route path="/playground" element={<Layout><Playground /></Layout>} />
+          <Route path="/contact" element={<Layout><Contact /></Layout>} />
+          <Route path="*" element={<Layout><NotFound /></Layout>} />
+        </Routes>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

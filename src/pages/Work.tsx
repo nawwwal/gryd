@@ -1,9 +1,42 @@
 
+import { useState, useEffect } from 'react';
 import ScrollFade from '../components/ScrollFade';
-import { projects } from '../data/projects';
+import { loadWorkProjects } from '../utils/contentLoader';
+import { WorkProject } from '../types/content';
 import ProjectCard from '../components/ProjectCard';
 
 const Work = () => {
+  const [projects, setProjects] = useState<WorkProject[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadContent = async () => {
+      try {
+        const workProjects = await loadWorkProjects();
+        setProjects(workProjects);
+      } catch (error) {
+        console.error('Failed to load work projects:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadContent();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="magazine-container">
+        <div className="editorial-container py-16">
+          <div className="text-center">
+            <div className="animate-spin w-8 h-8 border-2 border-gryd-accent border-t-transparent rounded-full mx-auto mb-4"></div>
+            <p className="body text-gryd-soft">Loading work projects...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="magazine-container">
       {/* Work Portfolio Header */}
@@ -30,12 +63,12 @@ const Work = () => {
           
           <div className="portfolio-stats">
             <div className="stat-item">
-              <span className="stat-number">12+</span>
+              <span className="stat-number">{projects.length}+</span>
               <span className="stat-label">Projects</span>
             </div>
             <div className="stat-item">
-              <span className="stat-number">6mo</span>
-              <span className="stat-label">Full-time</span>
+              <span className="stat-number">{projects.filter(p => p.metadata.status === 'live').length}</span>
+              <span className="stat-label">Live</span>
             </div>
             <div className="stat-item">
               <span className="stat-number">∞</span>
