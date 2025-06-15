@@ -1,53 +1,40 @@
-
 import { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ScrollFade from './ScrollFade';
-
 const MagazineHero = () => {
   const heroCardRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     const card = heroCardRef.current;
     if (!card) return;
-
     const handleMouseMove = (e: MouseEvent) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
-      
       const rotateX = (y - centerY) / centerY * -2.5;
       const rotateY = (x - centerX) / centerX * 2.5;
-      
       card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(0)`;
     };
-
     const handleMouseLeave = () => {
       card.style.transform = 'perspective(1000px) rotateX(0.5deg) rotateY(-0.25deg) translateZ(0)';
     };
-
     const handleMouseEnter = () => {
       card.style.transition = 'transform 0.1s ease-out';
     };
-
     card.addEventListener('mousemove', handleMouseMove);
     card.addEventListener('mouseleave', handleMouseLeave);
     card.addEventListener('mouseenter', handleMouseEnter);
 
     // Set initial state
     card.style.transform = 'perspective(1000px) rotateX(0.5deg) rotateY(-0.25deg) translateZ(0)';
-
     return () => {
       card.removeEventListener('mousemove', handleMouseMove);
       card.removeEventListener('mouseleave', handleMouseLeave);
       card.removeEventListener('mouseenter', handleMouseEnter);
     };
   }, []);
-
-  return (
-    <div className="magazine-hero">
+  return <div className="magazine-hero">
       <div ref={heroCardRef} className="hero-paper gyroscopic-card">
         <div className="paper-binding"></div>
         
@@ -62,7 +49,7 @@ const MagazineHero = () => {
               
               <h1 className="magazine-logo">
                 THE GRYD
-                <span className="subtitle">Design Portfolio & Journal</span>
+                <span className="subtitle">Design  Portfolio  &  Journal</span>
               </h1>
               
               <div className="feature-banner">
@@ -75,7 +62,7 @@ const MagazineHero = () => {
             <div className="hero-story">
               <div className="story-category">COVER STORY</div>
               <h2 className="story-headline">
-                Hello — I'm Adi.<br/>
+                Hello — I'm Adi.<br />
                 <span className="story-subhead">I Fix Messy Products</span>
               </h2>
               
@@ -107,8 +94,6 @@ const MagazineHero = () => {
         <div className="paper-corner"></div>
         <div className="paper-shadow"></div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default MagazineHero;
