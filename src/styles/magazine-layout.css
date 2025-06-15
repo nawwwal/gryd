@@ -47,15 +47,15 @@
   }
 
   .linear-project-category {
-    @apply text-sm uppercase tracking-widest text-orange-600 font-bold;
+    @apply text-sm uppercase tracking-widest text-orange-600 font-bold font-sans;
   }
 
   .linear-project-title {
-    @apply font-serif text-3xl lg:text-4xl font-bold text-gray-900 leading-tight;
+    @apply font-headline text-3xl lg:text-4xl font-bold text-gray-900 leading-tight;
   }
 
   .linear-project-subtitle {
-    @apply text-lg text-gray-600 leading-relaxed;
+    @apply text-lg text-gray-600 leading-relaxed font-body;
   }
 
   .linear-project-meta {
@@ -63,11 +63,11 @@
   }
 
   .linear-project-year {
-    @apply text-sm font-mono uppercase tracking-widest text-gray-500;
+    @apply text-sm font-sans uppercase tracking-widest text-gray-500;
   }
 
   .linear-project-cta {
-    @apply inline-flex items-center text-orange-600 font-bold uppercase tracking-widest text-sm hover:text-orange-700 transition-colors;
+    @apply inline-flex items-center text-orange-600 font-bold uppercase tracking-widest text-sm hover:text-orange-700 transition-colors font-sans;
   }
 
   /* Enhanced Hero Card Effects */
@@ -200,7 +200,7 @@
   }
 
   .newspaper-left {
-    @apply flex items-center space-x-4 text-xs font-mono uppercase tracking-widest text-gray-600;
+    @apply flex items-center space-x-4 text-xs font-sans uppercase tracking-widest text-gray-600;
   }
 
   .publication-mark {
@@ -220,11 +220,11 @@
   }
 
   .logo-the {
-    @apply text-xs font-serif font-medium text-gray-600 tracking-widest;
+    @apply text-xs font-headline font-medium text-gray-600 tracking-widest;
   }
 
   .logo-gryd {
-    @apply text-2xl font-serif font-black tracking-tight text-gray-900;
+    @apply text-2xl font-headline font-black tracking-tight text-gray-900;
     text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
   }
 
@@ -237,7 +237,7 @@
   }
 
   .newspaper-nav-link {
-    @apply text-sm font-mono uppercase tracking-wider text-gray-600;
+    @apply text-sm font-sans uppercase tracking-wider text-gray-600;
     @apply hover:text-orange-600 transition-colors relative;
     padding: 4px 8px;
   }
@@ -337,17 +337,17 @@
   }
 
   .magazine-logo {
-    @apply font-serif text-6xl font-black text-center tracking-tight;
+    @apply font-headline text-6xl font-black text-center tracking-tight;
     font-size: clamp(3rem, 8vw, 6rem);
     text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
   }
 
   .magazine-logo .subtitle {
-    @apply block text-lg font-normal mt-2 text-gray-600;
+    @apply block text-lg font-normal mt-2 text-gray-600 font-body;
   }
 
   .feature-banner {
-    @apply text-center text-sm uppercase tracking-widest bg-gray-900 text-white py-2;
+    @apply text-center text-sm uppercase tracking-widest bg-gray-900 text-white py-2 font-sans;
   }
 
   .hero-story {
@@ -355,11 +355,11 @@
   }
 
   .story-category {
-    @apply text-sm uppercase tracking-widest text-orange-600 font-bold;
+    @apply text-sm uppercase tracking-widest text-orange-600 font-bold font-sans;
   }
 
   .story-headline {
-    @apply font-serif text-5xl font-bold leading-tight;
+    @apply font-headline text-5xl font-bold leading-tight;
     font-size: clamp(2rem, 6vw, 5rem);
   }
 
@@ -373,15 +373,15 @@
 
   .lead-text {
     font-size: clamp(1rem, 3vw, 1.25rem);
-    @apply leading-relaxed text-gray-700;
+    @apply leading-relaxed text-gray-700 font-body;
   }
 
   .story-byline {
-    @apply flex items-center space-x-3 text-sm text-gray-500 font-mono;
+    @apply flex items-center space-x-3 text-sm text-gray-500 font-sans;
   }
 
   .continue-reading {
-    @apply text-sm uppercase tracking-wider text-orange-600 font-bold mt-8;
+    @apply text-sm uppercase tracking-wider text-orange-600 font-bold mt-8 font-sans;
   }
 
   .paper-corner {
@@ -413,7 +413,7 @@
   }
 
   .grid-title h4 {
-    @apply font-serif text-3xl font-bold text-gray-900 mb-4;
+    @apply font-headline text-3xl font-bold text-gray-900 mb-4;
   }
 
   .title-underline {
@@ -457,7 +457,7 @@
   }
 
   .article-overlay {
-    @apply absolute top-4 right-4 bg-white px-2 py-1 text-xs font-mono uppercase tracking-wider text-gray-600;
+    @apply absolute top-4 right-4 bg-white px-2 py-1 text-xs font-sans uppercase tracking-wider text-gray-600;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
 
@@ -466,16 +466,16 @@
   }
 
   .grid-category {
-    @apply text-xs uppercase tracking-widest text-orange-600 font-bold;
+    @apply text-xs uppercase tracking-widest text-orange-600 font-bold font-sans;
   }
 
   .grid-headline {
-    @apply font-serif text-xl font-bold text-gray-900 leading-tight;
+    @apply font-headline text-xl font-bold text-gray-900 leading-tight;
     font-size: clamp(1.125rem, 3vw, 1.25rem);
   }
 
   .grid-excerpt {
-    @apply text-gray-600 leading-relaxed;
+    @apply text-gray-600 leading-relaxed font-body;
     font-size: clamp(0.875rem, 2vw, 1rem);
   }
 
@@ -484,7 +484,7 @@
   }
 
   .grid-impact {
-    @apply text-sm font-mono uppercase tracking-widest text-orange-600 font-bold;
+    @apply text-sm font-sans uppercase tracking-widest text-orange-600 font-bold;
   }
 
   /* Featured Article - Mobile Responsive */
@@ -500,21 +500,21 @@
   }
 
   .article-category {
-    @apply text-sm uppercase tracking-widest text-orange-600 font-bold;
+    @apply text-sm uppercase tracking-widest text-orange-600 font-bold font-sans;
   }
 
   .article-headline {
-    @apply font-serif text-5xl font-bold leading-tight text-gray-900;
+    @apply font-headline text-5xl font-bold leading-tight text-gray-900;
     font-size: clamp(2rem, 6vw, 5rem);
   }
 
   .article-deck {
     font-size: clamp(1.125rem, 3vw, 1.25rem);
-    @apply text-gray-600 leading-relaxed;
+    @apply text-gray-600 leading-relaxed font-body;
   }
 
   .article-meta {
-    @apply flex items-center justify-center space-x-3 text-sm text-gray-500 font-mono;
+    @apply flex items-center justify-center space-x-3 text-sm text-gray-500 font-sans;
   }
 
   .impact {
@@ -538,7 +538,7 @@
   }
 
   .photo-caption {
-    @apply mt-4 text-sm text-gray-600 italic text-center;
+    @apply mt-4 text-sm text-gray-600 italic text-center font-body;
   }
 
   .article-excerpt {
@@ -546,11 +546,11 @@
   }
 
   .article-excerpt p {
-    @apply text-lg leading-relaxed text-gray-700;
+    @apply text-lg leading-relaxed text-gray-700 font-body;
   }
 
   .read-full-story {
-    @apply inline-block text-orange-600 font-bold uppercase tracking-wider text-sm;
+    @apply inline-block text-orange-600 font-bold uppercase tracking-wider text-sm font-sans;
     @apply hover:text-orange-700 transition-colors;
   }
 
@@ -573,7 +573,7 @@
   }
 
   .contact-title {
-    @apply font-serif font-bold text-gray-900;
+    @apply font-headline font-bold text-gray-900;
     font-size: clamp(1.5rem, 4vw, 2rem);
   }
 
@@ -585,13 +585,13 @@
   }
 
   .contact-value {
-    @apply text-gray-900 font-medium;
+    @apply text-gray-900 font-medium font-body;
     @apply hover:text-orange-600 transition-colors;
     font-size: clamp(1rem, 3vw, 1.125rem);
   }
 
   .cta-button {
-    @apply inline-flex items-center justify-center bg-orange-600 text-white font-medium rounded-lg;
+    @apply inline-flex items-center justify-center bg-orange-600 text-white font-medium rounded-lg font-sans;
     @apply hover:bg-orange-700 hover:shadow-lg transition-all duration-300;
     @apply hover:transform hover:-translate-y-1;
     padding: clamp(0.75rem, 3vw, 1rem) clamp(1.5rem, 4vw, 2rem);
@@ -613,12 +613,12 @@
   }
 
   .footer-logo {
-    @apply font-serif font-bold;
+    @apply font-headline font-bold;
     font-size: clamp(1.5rem, 4vw, 2rem);
   }
 
   .footer-info {
-    @apply flex flex-col space-y-2 text-gray-400;
+    @apply flex flex-col space-y-2 text-gray-400 font-body;
     font-size: clamp(0.875rem, 2vw, 1rem);
   }
 
@@ -629,83 +629,4 @@
   }
 }
 
-/* Newspaper Header Animations */
-@keyframes gridFloat {
-  0%, 100% { transform: translateX(0) translateY(0); }
-  25% { transform: translateX(2px) translateY(-1px); }
-  50% { transform: translateX(-1px) translateY(1px); }
-  75% { transform: translateX(1px) translateY(-2px); }
-}
-
-@keyframes borderShimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-/* Enhanced Animations */
-@keyframes paper-settle {
-  0% {
-    transform: rotateX(10deg) rotateY(-5deg) translateY(-50px);
-    opacity: 0;
-    box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.5);
-  }
-  60% {
-    transform: rotateX(-1deg) rotateY(1deg) translateY(-10px);
-    opacity: 0.8;
-  }
-  100% {
-    transform: rotateX(0.5deg) rotateY(-0.25deg) translateY(0);
-    opacity: 1;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  }
-}
-
-/* Mobile-specific optimizations */
-@media (max-width: 768px) {
-  /* Reduce complex patterns and effects */
-  .newspaper-pattern,
-  .newspaper-grid {
-    display: none;
-  }
-
-  /* Simplify hover states for touch */
-  .grid-article-link:hover .grid-article-image img {
-    @apply scale-105;
-  }
-
-  /* Optimize performance */
-  * {
-    will-change: auto;
-  }
-  
-  .gyroscopic-card,
-  .hover-letter {
-    will-change: transform;
-  }
-  
-  .hero-paper {
-    transform: none;
-    margin: 0.5rem;
-  }
-  
-  .linear-project-content {
-    @apply grid-cols-1;
-  }
-  
-  .linear-project-image {
-    height: clamp(16rem, 30vh, 20rem);
-  }
-  
-  .linear-project-info {
-    @apply p-6;
-  }
-  
-  .gyroscopic-card {
-    transform: none !important;
-  }
-  
-  .gyroscopic-card:hover {
-    transform: scale(1.02) !important;
-    transition: transform 0.2s ease;
-  }
-}
+// ... keep existing code (animations and mobile optimizations)

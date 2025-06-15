@@ -14,7 +14,7 @@
   }
 
   .caption {
-    @apply font-body text-caption text-gryd-soft uppercase tracking-wide;
+    @apply font-sans text-caption text-gryd-soft uppercase tracking-wide;
   }
 }
 
@@ -83,7 +83,7 @@
   }
 
   .issue-details {
-    @apply flex items-center justify-center space-x-3 text-xs font-mono uppercase tracking-widest text-gray-500;
+    @apply flex items-center justify-center space-x-3 text-xs font-sans uppercase tracking-widest text-gray-500;
   }
 
   .publication-divider {
@@ -104,11 +104,11 @@
   }
 
   .publication-mark {
-    @apply text-xs font-mono uppercase tracking-widest text-gray-500 font-bold;
+    @apply text-xs font-sans uppercase tracking-widest text-gray-500 font-bold;
   }
 
   .download-issue-btn {
-    @apply flex items-center space-x-2 px-4 py-2 bg-orange-600 text-white font-mono uppercase tracking-wider text-xs;
+    @apply flex items-center space-x-2 px-4 py-2 bg-orange-600 text-white font-sans uppercase tracking-wider text-xs;
     @apply hover:bg-orange-700 transition-colors;
     box-shadow: 
       0 2px 4px rgba(0,0,0,0.1),
@@ -125,16 +125,16 @@
   }
 
   .title-the {
-    @apply block font-serif text-sm font-medium text-gray-600 tracking-widest;
+    @apply block font-headline text-sm font-medium text-gray-600 tracking-widest;
   }
 
   .title-main {
-    @apply block font-serif text-4xl font-black tracking-tight text-gray-900;
+    @apply block font-headline text-4xl font-black tracking-tight text-gray-900;
     text-shadow: 1px 1px 0px rgba(0,0,0,0.05);
   }
 
   .title-subtitle {
-    @apply block text-xs font-mono uppercase tracking-wider text-gray-500 mt-1;
+    @apply block text-xs font-sans uppercase tracking-wider text-gray-500 mt-1;
   }
 
   .masthead-sections {
@@ -159,15 +159,15 @@
   }
 
   .section-number {
-    @apply font-mono text-xs font-bold uppercase tracking-wider;
+    @apply font-sans text-xs font-bold uppercase tracking-wider;
   }
 
   .section-label {
-    @apply font-serif text-sm font-medium uppercase tracking-wide;
+    @apply font-headline text-sm font-medium uppercase tracking-wide;
   }
 
   .publication-date {
-    @apply text-center text-xs font-mono text-gray-500 tracking-wider;
+    @apply text-center text-xs font-sans text-gray-500 tracking-wider;
   }
 
   /* Legacy nav styles for compatibility */

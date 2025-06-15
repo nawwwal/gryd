@@ -72,9 +72,9 @@ export default {
 				}
 			},
 			fontFamily: {
-				'headline': ['Newsreader', 'Georgia', 'serif'],
-				'body': ['IBM Plex Mono', 'monospace'],
-				'sans': ['Space Grotesk', 'sans-serif'],
+				'headline': ['Platypi', 'serif'],
+				'body': ['Fraunces', 'serif'],
+				'sans': ['Schibsted Grotesk', 'sans-serif'],
 			},
 			fontSize: {
 				'headline': ['3.75rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
