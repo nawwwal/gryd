@@ -74,7 +74,7 @@ const MagazineHero = () => {
                 </p>
                 
                 <div className="story-byline">
-                  <span>By Adi Gryd</span>
+                  <span>By Aditya Nawal</span>
                   <span>•</span>
                   <span>Product Designer</span>
                   <span>•</span>
