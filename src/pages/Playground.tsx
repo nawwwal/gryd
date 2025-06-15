@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import ScrollFade from '../components/ScrollFade';
 import MagazineFooter from '../components/MagazineFooter';
+import InteractiveBackground from '../components/InteractiveBackground';
 import { loadPlaygroundExperiments } from '../utils/contentLoader';
 import { PlaygroundExperiment } from '../types/content';
 import { useGyroscopic } from '../hooks/useGyroscopic';
@@ -14,11 +15,13 @@ const Playground = () => {
     x: 0,
     y: 0
   });
+  
+  // Reduced gyroscopic intensity
   const notebookRef = useGyroscopic({
-    maxRotation: 8,
-    intensity: 1.5,
-    restRotationX: 1,
-    restRotationY: -2
+    maxRotation: 3,
+    intensity: 0.4,
+    restRotationX: 0.5,
+    restRotationY: -0.5
   });
 
   // Mouse tracking for interactive background
@@ -38,6 +41,7 @@ const Playground = () => {
       return () => backgroundElement.removeEventListener('mousemove', handleMouseMove);
     }
   }, []);
+
   useEffect(() => {
     const loadContent = async () => {
       try {
@@ -51,6 +55,7 @@ const Playground = () => {
     };
     loadContent();
   }, []);
+
   useEffect(() => {
     if (!loading && experiments.length > 0) {
       const cards = masonryRef.current?.querySelectorAll('.experiment-card');
@@ -73,6 +78,7 @@ const Playground = () => {
       });
     }
   }, [loading, experiments]);
+
   if (loading) {
     return <div className="magazine-container">
         <div className="editorial-container py-16">
@@ -83,22 +89,16 @@ const Playground = () => {
         </div>
       </div>;
   }
+
   return <div className="magazine-container">
       {/* Enhanced Experimental Hero */}
       <div className="playground-hero-container">
-        <div ref={backgroundRef} className="playground-hero-background" style={{
-        '--mouse-x': `${mousePos.x}px`,
-        '--mouse-y': `${mousePos.y}px`
-      } as React.CSSProperties}>
-          <div className="interactive-halftone-pattern"></div>
-          <div className="newsprint-grain"></div>
-          <div className="vintage-texture"></div>
+        <div ref={backgroundRef} className="playground-hero-background">
+          <InteractiveBackground mousePos={mousePos} />
         </div>
         
         <div className="playground-hero-content">
           <div ref={notebookRef} className="lab-notebook enhanced-gyroscopic">
-            
-            
             <div className="lab-header-content">
               <div className="lab-stamp animated-stamp">
                 <span>EXPERIMENTAL</span>
@@ -128,13 +128,6 @@ const Playground = () => {
               <div className="ink-drop drop-1"></div>
               <div className="ink-drop drop-2"></div>
               <div className="ink-drop drop-3"></div>
-            </div>
-
-            <div className="hover-particles">
-              <div className="particle particle-1"></div>
-              <div className="particle particle-2"></div>
-              <div className="particle particle-3"></div>
-              <div className="particle particle-4"></div>
             </div>
           </div>
         </div>
