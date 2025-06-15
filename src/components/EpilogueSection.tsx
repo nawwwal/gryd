@@ -44,7 +44,7 @@ const EpilogueSection = () => {
                   {/* Primary Call to Action - Flip Card */}
                   <div className="pt-8">
                     <button onClick={() => setIsFlipped(true)} className="magazine-cta-button">
-                      <span className="cta-text">Turn the Page</span>
+                      <span className="cta-text text-gryd-bg">Turn the Page</span>
                       <span className="cta-arrow">→</span>
                     </button>
                   </div>
