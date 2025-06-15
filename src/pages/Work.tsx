@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { WorkProject } from '../types/content';
 import { loadWorkProjects } from '../utils/contentLoader';
@@ -89,7 +90,7 @@ const Work = () => {
             <div className="grid-articles">
               {projects.map((project, index) => (
                 <ScrollFade key={project.slug} delay={index * 200}>
-                  <ProjectCard project={project} />
+                  <ProjectCard project={project} index={index} />
                 </ScrollFade>
               ))}
             </div>
