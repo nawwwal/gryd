@@ -1,48 +1,9 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Import our style modules in the correct order */
+/* Import all CSS modules */
 @import './styles/base.css';
 @import './styles/typography.css';
-@import './styles/responsive.css';
-@import './styles/animations.css';
-@import './styles/page-headers.css';
 @import './styles/magazine-layout.css';
 @import './styles/articles.css';
-@import './styles/about-editor.css';
 @import './styles/playground.css';
-@import './styles/contact.css';
-@import './styles/mobile-optimizations.css';
-
-/* Performance optimizations */
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-}
-
-/* Webkit optimizations for mobile */
-@supports (-webkit-touch-callout: none) {
-  .touch-target {
-    -webkit-tap-highlight-color: rgba(217, 119, 6, 0.1);
-  }
-}
-
-/* PWA optimizations */
-@media (display-mode: standalone) {
-  .magazine-container {
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-}
+@import './styles/animations.css';
+@import './styles/about-editor.css';
