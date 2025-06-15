@@ -1,5 +1,6 @@
 
 import { useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import ScrollFade from './ScrollFade';
 
 const MagazineHero = () => {
@@ -17,14 +18,14 @@ const MagazineHero = () => {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
       
-      const rotateX = (y - centerY) / centerY * -10; // Max 10 degrees
-      const rotateY = (x - centerX) / centerX * 10;   // Max 10 degrees
+      const rotateX = (y - centerY) / centerY * -3; // Reduced from -10 to -3
+      const rotateY = (x - centerX) / centerX * 3;   // Reduced from 10 to 3
       
       card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(0)`;
     };
 
     const handleMouseLeave = () => {
-      card.style.transform = 'perspective(1000px) rotateX(2deg) rotateY(-1deg) translateZ(0)';
+      card.style.transform = 'perspective(1000px) rotateX(1deg) rotateY(-0.5deg) translateZ(0)';
     };
 
     card.addEventListener('mousemove', handleMouseMove);
@@ -86,7 +87,9 @@ const MagazineHero = () => {
               </div>
               
               <div className="continue-reading">
-                <span>Continue reading inside →</span>
+                <Link to="/about" className="continue-reading-link">
+                  Continue reading inside →
+                </Link>
               </div>
             </div>
           </ScrollFade>

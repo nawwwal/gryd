@@ -584,11 +584,11 @@
 
 @keyframes paper-settle {
   0% {
-    transform: rotateX(10deg) rotateY(-5deg) translateY(-50px);
+    transform: rotateX(8deg) rotateY(-4deg) translateY(-50px);
     opacity: 0;
   }
   100% {
-    transform: rotateX(2deg) rotateY(-1deg) translateY(0);
+    transform: rotateX(1deg) rotateY(-0.5deg) translateY(0);
     opacity: 1;
   }
 }
