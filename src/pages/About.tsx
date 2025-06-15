@@ -1,67 +1,124 @@
 
 import ScrollFade from '../components/ScrollFade';
+import EditorInterview from '../components/EditorInterview';
+import EditorsPicks from '../components/EditorsPicks';
+import RapidFire from '../components/RapidFire';
 import EpilogueSection from '../components/EpilogueSection';
 
 const About = () => {
   return (
-    <div className="magazine-container">
-      {/* About Profile Header */}
-      <div className="about-profile-header">
-        <div className="profile-paper">
-          <div className="profile-header-content">
-            <div className="profile-byline">
-              <span>DESIGNER PROFILE</span>
-              <span>•</span>
-              <span>EST. 2021</span>
-            </div>
-            
-            <div className="profile-name-section">
-              <h1 className="profile-name">
-                {'HELLO — I\'M ADI'.split('').map((letter, index) => (
-                  <span key={index} className="hover-letter ink-bleed" style={{ animationDelay: `${index * 30}ms` }}>
-                    {letter === ' ' ? '\u00A0' : letter}
-                  </span>
-                ))}
-              </h1>
-              <div className="profile-role">Product Designer & Problem Solver</div>
-            </div>
-            
-            <div className="profile-quote">
-              <div className="quote-mark">"</div>
-              <p className="quote-text">
-                Good design isn't about making things pretty. 
-                It's about making complex things feel inevitable.
-              </p>
-            </div>
+    <div className="magazine-container about-editor-page">
+      {/* Magazine Masthead */}
+      <div className="editor-masthead">
+        <div className="masthead-paper">
+          <div className="paper-binding"></div>
+          <div className="masthead-content">
+            <ScrollFade>
+              <div className="publication-header">
+                <div className="publication-details">
+                  <span>VOL. I</span>
+                  <span>•</span>
+                  <span>ISSUE 001</span>
+                  <span>•</span>
+                  <span>EST. 2021</span>
+                </div>
+                
+                <h1 className="magazine-title">
+                  {'GRYD'.split('').map((letter, index) => (
+                    <span 
+                      key={index} 
+                      className="hover-letter title-letter" 
+                      style={{ animationDelay: `${index * 100}ms` }}
+                    >
+                      {letter}
+                    </span>
+                  ))}
+                </h1>
+                
+                <div className="editor-credit">
+                  <span className="edited-by">EDITED BY</span>
+                  <span className="editor-name">ADITYA NAWAL</span>
+                </div>
+                
+                <div className="publication-subtitle">
+                  A publication of systems, stories & sidequests
+                </div>
+              </div>
+            </ScrollFade>
           </div>
-          
-          <div className="profile-corner-fold"></div>
+          <div className="paper-corner-fold"></div>
         </div>
       </div>
 
-      {/* Article Content */}
+      {/* Editor Interview Section */}
       <div className="magazine-spread">
-        <article className="featured-article">
-          <ScrollFade>
-            <div className="article-header">
-              <div className="article-category">BACKGROUND</div>
-              <h3 className="article-headline">The Journey So Far</h3>
-              <p className="article-deck">From college posters to product design at Quicko</p>
+        <ScrollFade delay={200}>
+          <div className="section-header">
+            <div className="section-category">FEATURE INTERVIEW</div>
+            <h2 className="section-title">About the Editor</h2>
+            <div className="section-divider"></div>
+          </div>
+        </ScrollFade>
+        <EditorInterview />
+      </div>
+
+      {/* Resume Table of Contents */}
+      <div className="magazine-spread">
+        <ScrollFade delay={300}>
+          <div className="resume-section">
+            <div className="section-header">
+              <div className="section-category">TABLE OF CONTENTS</div>
+              <h2 className="section-title">Professional Timeline</h2>
+              <div className="section-divider"></div>
             </div>
-          </ScrollFade>
-          
-          <ScrollFade delay={200}>
-            <div className="article-excerpt">
-              <p>Over a few summer internships, design competitions, freelance gigs, and club work — I did a bit of everything: graphic design, photography, branding, decks.</p>
+            
+            <div className="resume-content">
+              <div className="resume-binding-line"></div>
               
-              <p>In Jan 2024, I joined Quicko as a product design intern. In 6 months, I went full-time. I've been here since — building systems, simplifying financial complexity, and learning by shipping.</p>
+              <div className="resume-entry">
+                <div className="entry-timeline">2024 – PRESENT</div>
+                <div className="entry-company">QUICKO</div>
+                <div className="entry-role">Product Designer</div>
+                <div className="entry-description">
+                  Intern → Full Time. Simplifying finance UX in India.
+                </div>
+              </div>
               
-              <p>I may be early in my career, but I care deeply about what I do. I obsess over spacing, narrative, and micro-decisions. I want my work to feel inevitable.</p>
-              
-              <p className="impact">Currently based in the timezone where good coffee happens. Available for projects that matter.</p>
+              <div className="resume-entry">
+                <div className="entry-timeline">2020 – 2024</div>
+                <div className="entry-company">DAIICT GANDHINAGAR</div>
+                <div className="entry-role">BTech, Computer Science</div>
+                <div className="entry-description">
+                  Where design found me in a CS classroom.
+                </div>
+              </div>
             </div>
-          </ScrollFade>
-        </article>
+          </div>
+        </ScrollFade>
+      </div>
+
+      {/* Editor's Picks */}
+      <div className="magazine-spread">
+        <ScrollFade delay={400}>
+          <div className="section-header">
+            <div className="section-category">EDITOR'S PICKS</div>
+            <h2 className="section-title">Currently on My Desk</h2>
+            <div className="section-divider"></div>
+          </div>
+        </ScrollFade>
+        <EditorsPicks />
+      </div>
+
+      {/* Rapid Fire */}
+      <div className="magazine-spread">
+        <ScrollFade delay={500}>
+          <div className="section-header">
+            <div className="section-category">RAPID FIRE</div>
+            <h2 className="section-title">Quick Takes</h2>
+            <div className="section-divider"></div>
+          </div>
+        </ScrollFade>
+        <RapidFire />
       </div>
 
       {/* Epilogue Section */}
@@ -72,10 +129,10 @@ const About = () => {
       {/* Magazine Footer */}
       <div className="magazine-footer">
         <div className="footer-content">
-          <div className="footer-logo">THE GRYD</div>
+          <div className="footer-logo">GRYD MAGAZINE</div>
           <div className="footer-info">
-            <span>About • Designer Profile</span>
-            <span>Last Updated: December 2024</span>
+            <span>About the Editor • Issue 001 • Page 32</span>
+            <span>First Published: December 2024</span>
           </div>
         </div>
       </div>
