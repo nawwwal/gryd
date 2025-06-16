@@ -16,8 +16,8 @@ import CMS from "./pages/CMS";
 import WorkCMSPage from "./pages/WorkCMSPage";
 import PlaygroundCMSPage from "./pages/PlaygroundCMSPage";
 import NotFound from "./pages/NotFound";
-import { Analytics } from "@vercel/analytics/next"
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 const queryClient = new QueryClient();
 
