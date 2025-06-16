@@ -16,11 +16,15 @@ import CMS from "./pages/CMS";
 import WorkCMSPage from "./pages/WorkCMSPage";
 import PlaygroundCMSPage from "./pages/PlaygroundCMSPage";
 import NotFound from "./pages/NotFound";
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
+    <Analytics/>
+    <SpeedInsights/>
     <TooltipProvider>
       <AuthProvider>
         <Toaster />
@@ -32,7 +36,7 @@ const App = () => (
             <Route path="/cms" element={<CMS />} />
             <Route path="/cms/work" element={<WorkCMSPage />} />
             <Route path="/cms/playground" element={<PlaygroundCMSPage />} />
-            
+
             {/* Public Routes - With Layout */}
             <Route path="/" element={<Layout><Index /></Layout>} />
             <Route path="/work" element={<Layout><Work /></Layout>} />
