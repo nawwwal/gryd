@@ -1,11 +1,15 @@
+
 import { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ScrollFade from './ScrollFade';
+
 const MagazineHero = () => {
   const heroCardRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const card = heroCardRef.current;
     if (!card) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -16,29 +20,35 @@ const MagazineHero = () => {
       const rotateY = (x - centerX) / centerX * 2.5;
       card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(0)`;
     };
+
     const handleMouseLeave = () => {
       card.style.transform = 'perspective(1000px) rotateX(0.5deg) rotateY(-0.25deg) translateZ(0)';
     };
+
     const handleMouseEnter = () => {
       card.style.transition = 'transform 0.1s ease-out';
     };
+
     card.addEventListener('mousemove', handleMouseMove);
     card.addEventListener('mouseleave', handleMouseLeave);
     card.addEventListener('mouseenter', handleMouseEnter);
 
     // Set initial state
     card.style.transform = 'perspective(1000px) rotateX(0.5deg) rotateY(-0.25deg) translateZ(0)';
+    
     return () => {
       card.removeEventListener('mousemove', handleMouseMove);
       card.removeEventListener('mouseleave', handleMouseLeave);
       card.removeEventListener('mouseenter', handleMouseEnter);
     };
   }, []);
-  return <div className="magazine-hero">
+
+  return (
+    <div className="magazine-hero">
       <div ref={heroCardRef} className="hero-paper gyroscopic-card">
         <div className="paper-binding"></div>
         
-        <div className="hero-content">
+        <div className="hero-content pl-8 sm:pl-12 md:pl-16 lg:pl-20">
           <ScrollFade>
             <div className="masthead">
               <div className="issue-details">
@@ -49,7 +59,7 @@ const MagazineHero = () => {
               
               <h1 className="magazine-logo">
                 THE GRYD
-                <span className="subtitle">Design  Portfolio  &  Journal</span>
+                <span className="subtitle">Design  Portfolio  &  Journal</span>
               </h1>
               
               <div className="feature-banner">
@@ -94,6 +104,8 @@ const MagazineHero = () => {
         <div className="paper-corner"></div>
         <div className="paper-shadow"></div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default MagazineHero;
