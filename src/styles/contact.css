@@ -1,135 +1,270 @@
 
 @layer components {
-  /* Epilogue Section Integration */
-  .epilogue-section {
-    @apply py-16;
-    background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
-    border-radius: 12px;
+  /* Letters to Editor Section - Magazine Editorial Style */
+  .letters-editorial-section {
+    @apply section-padding;
+    background: 
+      linear-gradient(135deg, #f8f6f3 0%, #f0ede8 100%),
+      radial-gradient(circle at 20% 30%, rgba(139,69,19,0.03) 1px, transparent 1px),
+      radial-gradient(circle at 80% 70%, rgba(160,82,45,0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 25px 25px, 35px 35px;
+    position: relative;
+  }
+
+  .letters-editorial-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 30px,
+        rgba(139,69,19,0.02) 30px,
+        rgba(139,69,19,0.02) 31px
+      );
+    pointer-events: none;
+  }
+
+  .letters-magazine-page {
+    @apply max-w-6xl mx-auto relative;
+    background: 
+      linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+    border: 1px solid rgba(139,69,19,0.1);
     box-shadow: 
       0 20px 40px rgba(0,0,0,0.1),
-      0 0 0 1px rgba(0,0,0,0.05);
-    margin: 2rem 0;
+      inset 0 1px 0 rgba(255,255,255,0.9);
+    padding: clamp(2rem, 5vw, 4rem);
+    margin: 0 1rem;
   }
 
-  /* Flip Card Container */
-  .flip-card-container {
-    @apply max-w-4xl mx-auto;
-    perspective: 1000px;
-    min-height: 500px;
+  /* Decorative Page Header */
+  .letters-page-header {
+    @apply mb-12 text-center space-y-6;
   }
 
-  .flip-card {
-    @apply relative w-full h-full;
-    transform-style: preserve-3d;
-    transition: transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+  .decorative-border-top,
+  .decorative-border-bottom {
+    @apply h-px bg-gradient-to-r from-transparent via-orange-600 to-transparent mx-auto;
+    width: clamp(200px, 50vw, 400px);
   }
 
-  .flip-card.flipped {
-    transform: rotateY(180deg);
+  .decorative-border-top {
+    @apply mb-6;
   }
 
-  .flip-card-front,
-  .flip-card-back {
-    @apply absolute inset-0 w-full h-full;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    padding: 2rem;
+  .decorative-border-bottom {
+    @apply mt-6;
   }
 
-  .flip-card-back {
-    transform: rotateY(180deg);
+  .letters-masthead {
+    @apply flex items-center justify-center space-x-8;
   }
 
-  .epilogue-front-content {
-    @apply h-full flex flex-col justify-between;
+  .ornamental-left,
+  .ornamental-right {
+    @apply hidden sm:block;
   }
 
-  .epilogue-back-content {
-    @apply h-full;
+  .section-title-group {
+    @apply text-center space-y-2;
   }
 
-  /* Inline Flip Indicator */
-  .flip-indicator-inline {
-    @apply cursor-pointer transition-all duration-300;
-    
-    &:hover {
-      transform: translateX(4px);
-    }
+  .section-label {
+    @apply text-xs font-mono font-medium uppercase tracking-widest text-gray-500;
   }
 
-  /* Back Button */
-  .flip-back-btn {
-    @apply flex items-center space-x-2 text-gryd-soft hover:text-gryd-accent transition-colors cursor-pointer;
+  .section-title {
+    @apply font-headline text-4xl md:text-5xl font-bold text-gray-900;
+    font-variant: small-caps;
+    letter-spacing: 0.05em;
   }
 
-  /* Social Links */
-  .social-link-item {
-    @apply flex items-center justify-between p-3 border border-gryd-soft/20 rounded hover:border-gryd-accent hover:bg-gryd-accent/5 transition-all duration-300;
+  .title-flourish {
+    @apply w-16 h-px bg-orange-600 mx-auto;
+  }
+
+  /* Editorial Introduction */
+  .editorial-introduction {
+    @apply text-center mb-12 max-w-2xl mx-auto space-y-4;
+  }
+
+  .intro-ornament {
+    @apply text-2xl text-orange-600 font-serif;
+  }
+
+  .intro-text {
+    @apply text-lg italic leading-relaxed text-gray-700 font-serif;
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+  }
+
+  .intro-attribution {
+    @apply text-sm font-mono uppercase tracking-widest text-gray-500;
+  }
+
+  /* Magazine Contact Spread */
+  .magazine-contact-spread {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12;
+  }
+
+  .contact-column-left {
+    @apply space-y-6;
+  }
+
+  .contact-story-header {
+    @apply space-y-4;
+  }
+
+  .story-category {
+    @apply text-xs uppercase tracking-widest text-orange-600 font-mono font-semibold;
+  }
+
+  .story-headline {
+    @apply font-headline text-3xl md:text-4xl font-bold leading-tight text-gray-900;
+  }
+
+  .story-dateline {
+    @apply text-sm font-mono text-gray-500 uppercase tracking-wide;
+  }
+
+  .contact-story-body {
+    @apply space-y-6;
+  }
+
+  .story-paragraph {
+    @apply text-lg leading-relaxed text-gray-700 font-body;
+  }
+
+  .story-highlight {
+    @apply p-4 bg-orange-50 border-l-4 border-orange-600 text-gray-800 font-body;
+    background: 
+      linear-gradient(135deg, rgba(251,146,60,0.05) 0%, rgba(251,146,60,0.02) 100%);
+  }
+
+  /* Contact Details Box */
+  .contact-details-box {
+    @apply bg-gray-50 p-6 md:p-8 space-y-6;
+    background: 
+      linear-gradient(135deg, #f9f9f9 0%, #f5f5f5 100%),
+      radial-gradient(circle at 25% 25%, rgba(139,69,19,0.01) 1px, transparent 1px);
+    background-size: 100% 100%, 15px 15px;
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+  }
+
+  .contact-box-header {
+    @apply text-center space-y-2;
+  }
+
+  .contact-box-header h4 {
+    @apply font-headline text-xl font-bold text-gray-900;
+  }
+
+  .header-underline {
+    @apply w-12 h-px bg-orange-600 mx-auto;
+  }
+
+  /* Contact Methods */
+  .contact-methods-list {
+    @apply space-y-4;
+  }
+
+  .contact-method-item {
+    @apply flex items-start space-x-4 p-4 bg-white rounded-lg transition-all duration-300;
+    @apply hover:shadow-md hover:bg-orange-50;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .method-icon {
+    @apply w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0;
+    @apply text-orange-600;
+  }
+
+  .method-content {
+    @apply flex-1 space-y-1;
+  }
+
+  .method-label {
+    @apply block text-sm font-mono font-medium uppercase tracking-wide text-gray-500;
+  }
+
+  .method-link {
+    @apply block text-gray-900 font-medium font-body hover:text-orange-600 transition-colors;
+    font-size: clamp(0.875rem, 2vw, 1rem);
+  }
+
+  .method-value {
+    @apply block text-gray-700 font-body;
+    font-size: clamp(0.875rem, 2vw, 1rem);
+  }
+
+  /* Magazine CTA Button */
+  .magazine-cta-button {
+    @apply inline-flex items-center justify-center space-x-2 w-full;
+    @apply bg-orange-600 text-white font-mono font-medium uppercase tracking-wide;
+    @apply hover:bg-orange-700 hover:shadow-lg transition-all duration-300;
+    @apply hover:transform hover:-translate-y-1;
+    padding: clamp(0.75rem, 3vw, 1rem) clamp(1.5rem, 4vw, 2rem);
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    min-height: 48px;
     text-decoration: none;
-    
-    &:hover {
-      transform: translateX(4px);
-    }
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
   }
 
-  .social-arrow {
-    @apply text-gryd-soft transition-all duration-300;
+  .magazine-cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
   }
 
-  .social-link-item:hover .social-arrow {
-    @apply text-gryd-accent;
-    transform: translateX(4px);
+  .magazine-cta-button:hover::before {
+    left: 100%;
   }
 
-  /* Status Elements */
-  .status-dot-green {
-    @apply w-3 h-3 bg-green-500 rounded-full;
-    box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
-    animation: pulse-green 2s infinite;
+  .cta-text {
+    @apply relative z-10;
   }
 
-  @keyframes pulse-green {
-    0%, 100% { 
-      opacity: 1; 
-      box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
-    }
-    50% { 
-      opacity: 0.6; 
-      box-shadow: 0 0 20px rgba(34, 197, 94, 0.8);
-    }
+  /* Footer Note */
+  .letters-footer-note {
+    @apply text-center space-y-4 pt-8 border-t border-gray-200;
   }
 
-  /* Availability Card */
-  .availability-card {
-    @apply p-4 border border-gryd-soft/20 rounded hover:border-gryd-accent/50 transition-all duration-300;
+  .note-ornament {
+    @apply text-orange-600 text-lg font-serif;
   }
 
-  .schedule-link {
-    @apply block text-gryd-text hover:text-gryd-accent transition-colors duration-300;
-    text-decoration: none;
-    
-    &:hover {
-      transform: scale(1.02);
-    }
+  .note-text {
+    @apply text-sm text-gray-600 font-body italic max-w-lg mx-auto;
   }
 
-  /* Responsive Design */
+  /* Responsive Adjustments */
   @media (max-width: 768px) {
-    .epilogue-section {
-      @apply py-8 mx-4;
-    }
-    
-    .flip-card-container {
-      min-height: 400px;
-    }
-    
-    .flip-card-front,
-    .flip-card-back {
+    .letters-magazine-page {
+      margin: 0 0.5rem;
       padding: 1.5rem;
     }
-    
-    .epilogue-back-content .grid {
-      @apply grid-cols-1 gap-6;
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .magazine-contact-spread {
+      gap: 2rem;
+    }
+
+    .contact-details-box {
+      padding: 1.5rem;
     }
   }
 }
