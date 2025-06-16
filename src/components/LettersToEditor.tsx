@@ -1,10 +1,7 @@
-
 import ScrollFade from './ScrollFade';
 import { Mail, Clock, ArrowRight, Feather, Star } from 'lucide-react';
-
 const LettersToEditor = () => {
-  return (
-    <section className="letters-editorial-section">
+  return <section className="letters-editorial-section">
       <div className="letters-magazine-page">
         {/* Decorative Header */}
         <div className="letters-page-header">
@@ -104,7 +101,7 @@ const LettersToEditor = () => {
 
                   <div className="contact-cta-section">
                     <a href="mailto:work@thegryd.com?subject=Project Inquiry" className="magazine-cta-button">
-                      <span className="cta-text">Start a Conversation</span>
+                      <span className="cta-text text-gryd-bg">Start a Conversation</span>
                       <ArrowRight size={16} />
                     </a>
                   </div>
@@ -123,8 +120,6 @@ const LettersToEditor = () => {
           </div>
         </ScrollFade>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default LettersToEditor;
