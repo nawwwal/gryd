@@ -4,6 +4,11 @@ import { Button } from '../ui/button';
 import { Textarea } from '../ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Eye, EyeOff, Save } from 'lucide-react';
+import { evaluate } from '@mdx-js/mdx';
+import * as runtime from 'react/jsx-runtime';
+import DOMPurify from 'dompurify';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { mdxComponents } from '../mdx/MDXComponents';
 
 interface MDXEditorProps {
   content: string;
@@ -25,18 +30,28 @@ const MDXEditor = ({ content, onContentChange, onSave, title = "Content Editor" 
     onContentChange(newContent);
   };
 
-  const renderMDXPreview = (mdxContent: string) => {
-    // Simple MDX to HTML conversion for preview
-    return mdxContent
-      .replace(/^# (.*$)/gim, '<h1 class="headline text-gryd-text mb-4">$1</h1>')
-      .replace(/^## (.*$)/gim, '<h2 class="subhead text-gryd-text mb-3">$1</h2>')
-      .replace(/^### (.*$)/gim, '<h3 class="body font-medium text-gryd-text mb-2">$1</h3>')
-      .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
-      .replace(/\*(.*)\*/gim, '<em>$1</em>')
-      .replace(/\n\n/gim, '</p><p class="body text-gryd-text mb-4">')
-      .replace(/^(?!<[h\d|p])(.+)$/gim, '<p class="body text-gryd-text mb-4">$1</p>')
-      .replace(/```(\w+)?\n([\s\S]*?)```/gim, '<pre class="bg-gryd-soft/5 p-4 rounded-lg overflow-x-auto mb-4"><code class="text-sm font-mono">$2</code></pre>');
-  };
+  const [previewHTML, setPreviewHTML] = useState('');
+
+  useEffect(() => {
+    if (!showPreview) return;
+
+    const generatePreview = async () => {
+      try {
+        const { default: MDXContent } = await evaluate(localContent, {
+          Fragment: runtime.Fragment,
+          jsx: runtime.jsx,
+          jsxs: runtime.jsxs,
+          useMDXComponents: () => mdxComponents
+        });
+        const html = renderToStaticMarkup(<MDXContent />);
+        setPreviewHTML(DOMPurify.sanitize(html));
+      } catch (error) {
+        setPreviewHTML(`<pre class="text-red-500">${(error as Error).message}</pre>`);
+      }
+    };
+
+    generatePreview();
+  }, [localContent, showPreview]);
 
   return (
     <Card className="border-gryd-soft/20">
@@ -67,11 +82,7 @@ const MDXEditor = ({ content, onContentChange, onSave, title = "Content Editor" 
       <CardContent>
         {showPreview ? (
           <div className="min-h-[400px] prose prose-gryd max-w-none">
-            <div 
-              dangerouslySetInnerHTML={{ 
-                __html: renderMDXPreview(localContent) 
-              }} 
-            />
+            <div dangerouslySetInnerHTML={{ __html: previewHTML }} />
           </div>
         ) : (
           <Textarea
