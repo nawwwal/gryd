@@ -1,87 +1,38 @@
-# Welcome to your Lovable project
+# The GRYD Magazine Portfolio
 
-## Project info
+**The GRYD** is a digital magazine that doubles as Aditya Nawal's design portfolio. Every page is an interactive spread—part case study, part playbook, part playground.
 
-**URL**: https://lovable.dev/projects/038efdd5-78d3-4091-a1b0-affa4da0a05d
+## Features
 
-## How can I edit this code?
+- Gyroscopic hero section and magazine-style spreads
+- Featured articles, rapid-fire interviews and editor picks
+- "Letters to the Editor" contact area for project inquiries
+- Custom footer with fun stats and editorial credits
+- Built with React, TypeScript, Tailwind CSS and shadcn-ui
 
-There are several ways of editing your application.
+## Development
 
-**Use Lovable**
+Install dependencies and start the local server:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/038efdd5-78d3-4091-a1b0-affa4da0a05d) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Open `http://localhost:5173` in your browser to explore the magazine.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Production build
 
-**Use GitHub Codespaces**
+Generate an optimized build with:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## Building for production
-
-Before building, install dependencies:
-
-```sh
-npm install
-```
-
-Then generate the optimized output with:
-
-```sh
+```bash
 npm run build
 ```
 
-## How can I deploy this project?
+The output in `dist/` is ready to be deployed to any static host. A simple `vercel.json` is provided for Vercel deployments.
 
-Simply open [Lovable](https://lovable.dev/projects/038efdd5-78d3-4091-a1b0-affa4da0a05d) and click on Share -> Publish.
+## About the Editor
 
-## Can I connect a custom domain to my Lovable project?
+Aditya—"Adi" to friends—created The GRYD to share systems, stories and sidequests. If you're building something interesting and need thoughtful design, reach out at [work@thegryd.com](mailto:work@thegryd.com).
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Enjoy the issue!
