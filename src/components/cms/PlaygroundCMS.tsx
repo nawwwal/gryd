@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PlaygroundExperiment } from '../../types/content';
 import { loadPlaygroundExperiments } from '../../utils/contentLoader';
+import { savePlaygroundExperiment } from '../../data/contentStore';
 import { Button } from '../ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
@@ -91,8 +92,48 @@ const PlaygroundCMS = () => {
     reset();
   };
 
-  const onSubmit = (data: ExperimentFormData) => {
-    console.log('Saving experiment:', data);
+  const onSubmit = async (data: ExperimentFormData) => {
+    const base: PlaygroundExperiment = editingExperiment || {
+      slug: data.title.toLowerCase().replace(/\s+/g, '-'),
+      title: data.title,
+      subtitle: data.subtitle,
+      description: data.description,
+      intensity: data.intensity,
+      visual: data.visual,
+      content: '',
+      metadata: {
+        type: data.category,
+        category: data.category,
+        status: 'draft',
+        featured: false,
+        publishDate: new Date().toISOString(),
+        lastUpdated: new Date().toISOString(),
+        tools: data.tools.split(',').map(t => t.trim()).filter(Boolean),
+        tags: data.tags.split(',').map(t => t.trim()).filter(Boolean),
+        assets: {},
+        interactive: { hasDemo: false }
+      }
+    };
+
+    const experiment: PlaygroundExperiment = {
+      ...base,
+      title: data.title,
+      subtitle: data.subtitle,
+      description: data.description,
+      intensity: data.intensity,
+      visual: data.visual,
+      metadata: {
+        ...base.metadata,
+        type: data.category,
+        category: data.category,
+        tools: data.tools.split(',').map(t => t.trim()).filter(Boolean),
+        tags: data.tags.split(',').map(t => t.trim()).filter(Boolean)
+      }
+    };
+
+    await savePlaygroundExperiment(experiment);
+    const updated = await loadPlaygroundExperiments();
+    setExperiments(updated);
     setIsCreating(false);
     setEditingExperiment(null);
     reset();

@@ -4,16 +4,24 @@ import FeaturedArticle from '../components/FeaturedArticle';
 import ArticleGrid from '../components/ArticleGrid';
 import LettersToEditor from '../components/LettersToEditor';
 import MagazineFooter from '../components/MagazineFooter';
-import { projects } from '../data/projects';
+import { useEffect, useState } from 'react';
+import { getProjects, Project } from '../data/projects';
 import { useMobileOptimization } from '../hooks/useMobileOptimization';
 import { useSwipeGesture } from '../hooks/useSwipeGesture';
-import { useState } from 'react';
 
 const Index = () => {
-  const featuredProject = projects.find(p => p.featured) || projects[0];
-  const otherProjects = projects.filter(p => p.slug !== featuredProject.slug).slice(0, 6);
+  const [projects, setProjects] = useState<Project[]>([]);
   const { isMobile, isTouch } = useMobileOptimization();
   const [currentSection, setCurrentSection] = useState(0);
+
+  useEffect(() => {
+    getProjects().then(setProjects).catch(console.error);
+  }, []);
+
+  const featuredProject = projects.find(p => p.featured) || projects[0];
+  const otherProjects = featuredProject
+    ? projects.filter(p => p.slug !== featuredProject.slug).slice(0, 6)
+    : [];
   
   const sections = ['hero', 'featured', 'grid', 'letters'];
   

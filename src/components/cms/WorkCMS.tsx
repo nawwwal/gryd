@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { WorkProject } from '../../types/content';
 import { loadWorkProjects } from '../../utils/contentLoader';
+import { saveWorkProject } from '../../data/contentStore';
 import { Button } from '../ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
@@ -87,18 +88,59 @@ const WorkCMS = () => {
     reset();
   };
 
-  const onSubmit = (data: WorkFormData) => {
-    console.log('Saving project:', { ...data, content: currentContent });
-    // TODO: Implement actual save functionality
+  const onSubmit = async (data: WorkFormData) => {
+    const base: WorkProject = editingProject || {
+      slug: data.title.toLowerCase().replace(/\s+/g, '-'),
+      title: data.title,
+      subtitle: data.subtitle,
+      description: data.description,
+      timeline: data.timeline,
+      impact: data.impact,
+      content: currentContent,
+      metadata: {
+        type: 'prototype',
+        category: data.category,
+        status: 'draft',
+        featured: false,
+        publishDate: new Date().toISOString(),
+        lastUpdated: new Date().toISOString(),
+        tools: data.tools.split(',').map(t => t.trim()).filter(Boolean),
+        tags: data.tags.split(',').map(t => t.trim()).filter(Boolean),
+        assets: {},
+        interactive: { hasDemo: false }
+      }
+    };
+
+    const project: WorkProject = {
+      ...base,
+      title: data.title,
+      subtitle: data.subtitle,
+      description: data.description,
+      timeline: data.timeline,
+      impact: data.impact,
+      content: currentContent,
+      metadata: {
+        ...base.metadata,
+        category: data.category,
+        tools: data.tools.split(',').map(t => t.trim()).filter(Boolean),
+        tags: data.tags.split(',').map(t => t.trim()).filter(Boolean)
+      }
+    };
+
+    await saveWorkProject(project);
+    const updated = await loadWorkProjects();
+    setProjects(updated);
     setIsCreating(false);
     setEditingProject(null);
     setShowContentEditor(false);
     reset();
   };
 
-  const handleContentSave = () => {
-    console.log('Saving content:', currentContent);
-    // TODO: Implement content save
+  const handleContentSave = async () => {
+    if (!editingProject) return;
+    await saveWorkProject({ ...editingProject, content: currentContent });
+    const updated = await loadWorkProjects();
+    setProjects(updated);
   };
 
   if (loading) {

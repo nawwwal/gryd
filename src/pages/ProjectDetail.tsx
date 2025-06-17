@@ -2,11 +2,20 @@
 import { useParams, Link } from 'react-router-dom';
 import ScrollFade from '../components/ScrollFade';
 import MagazineFooter from '../components/MagazineFooter';
-import { projects } from '../data/projects';
+import { useEffect, useState } from 'react';
+import { getProjects, Project } from '../data/projects';
 
 const ProjectDetail = () => {
   const { slug } = useParams();
-  const project = projects.find(p => p.slug === slug);
+  const [project, setProject] = useState<Project | null>(null);
+
+  useEffect(() => {
+    getProjects()
+      .then(ps => {
+        setProject(ps.find(p => p.slug === slug) || null);
+      })
+      .catch(console.error);
+  }, [slug]);
 
   if (!project) {
     return (
