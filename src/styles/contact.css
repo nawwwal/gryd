@@ -105,13 +105,13 @@
     @apply text-sm font-mono uppercase tracking-widest text-gray-500;
   }
 
-  /* Magazine Contact Spread */
-  .magazine-contact-spread {
-    @apply grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12;
+  /* Centered Single Column Contact Layout */
+  .magazine-contact-centered {
+    @apply max-w-2xl mx-auto mb-12 space-y-8;
   }
 
-  .contact-column-left {
-    @apply space-y-6;
+  .contact-story-section {
+    @apply space-y-6 text-center;
   }
 
   .contact-story-header {
@@ -139,7 +139,7 @@
   }
 
   .story-highlight {
-    @apply p-4 bg-orange-50 border-l-4 border-orange-600 text-gray-800 font-body;
+    @apply p-4 bg-orange-50 border-l-4 border-orange-600 text-gray-800 font-body text-left;
     background: 
       linear-gradient(135deg, rgba(251,146,60,0.05) 0%, rgba(251,146,60,0.02) 100%);
   }
@@ -259,7 +259,7 @@
       font-size: 2rem;
     }
 
-    .magazine-contact-spread {
+    .magazine-contact-centered {
       gap: 2rem;
     }
 

@@ -1,7 +1,11 @@
+
 import ScrollFade from './ScrollFade';
-import { Mail, Clock, ArrowRight, Feather, Star } from 'lucide-react';
+import { ArrowRight, Feather, Star, MessageCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
 const LettersToEditor = () => {
-  return <section className="letters-editorial-section">
+  return (
+    <section className="letters-editorial-section">
       <div className="letters-magazine-page">
         {/* Decorative Header */}
         <div className="letters-page-header">
@@ -34,9 +38,9 @@ const LettersToEditor = () => {
               <div className="intro-attribution">— The Editorial Board</div>
             </div>
 
-            {/* Main Contact Card */}
-            <div className="magazine-contact-spread">
-              <div className="contact-column-left">
+            {/* Centered Single Column Contact Card */}
+            <div className="magazine-contact-centered">
+              <div className="contact-story-section">
                 <div className="contact-story-header">
                   <div className="story-category">CORRESPONDENCE</div>
                   <h3 className="story-headline">Ready to Create Something Extraordinary?</h3>
@@ -56,55 +60,29 @@ const LettersToEditor = () => {
                 </div>
               </div>
 
-              <div className="contact-column-right">
-                <div className="contact-details-box">
-                  <div className="contact-box-header">
-                    <h4>Get in Touch</h4>
-                    <div className="header-underline"></div>
-                  </div>
+              <div className="contact-details-box">
+                <div className="contact-box-header">
+                  <h4>Get in Touch</h4>
+                  <div className="header-underline"></div>
+                </div>
 
-                  <div className="contact-methods-list">
-                    <div className="contact-method-item">
-                      <div className="method-icon">
-                        <Mail size={18} />
-                      </div>
-                      <div className="method-content">
-                        <span className="method-label">Project Inquiries</span>
-                        <a href="mailto:work@thegryd.com" className="method-link">
-                          work@thegryd.com
-                        </a>
-                      </div>
+                <div className="contact-methods-list">
+                  <div className="contact-method-item">
+                    <div className="method-icon">
+                      <MessageCircle size={18} />
                     </div>
-
-                    <div className="contact-method-item">
-                      <div className="method-icon">
-                        <Mail size={18} />
-                      </div>
-                      <div className="method-content">
-                        <span className="method-label">General Correspondence</span>
-                        <a href="mailto:hello@thegryd.com" className="method-link">
-                          hello@thegryd.com
-                        </a>
-                      </div>
-                    </div>
-
-                    <div className="contact-method-item">
-                      <div className="method-icon">
-                        <Clock size={18} />
-                      </div>
-                      <div className="method-content">
-                        <span className="method-label">Response Time</span>
-                        <span className="method-value">Within 24 hours</span>
-                      </div>
+                    <div className="method-content">
+                      <span className="method-label">Let's Talk</span>
+                      <span className="method-value">Visit our dedicated contact page for all the ways to reach out</span>
                     </div>
                   </div>
+                </div>
 
-                  <div className="contact-cta-section">
-                    <a href="mailto:work@thegryd.com?subject=Project Inquiry" className="magazine-cta-button">
-                      <span className="cta-text text-gryd-bg">Start a Conversation</span>
-                      <ArrowRight size={16} />
-                    </a>
-                  </div>
+                <div className="contact-cta-section">
+                  <Link to="/contact" className="magazine-cta-button">
+                    <span className="cta-text text-gryd-bg">Visit Contact Page</span>
+                    <ArrowRight size={16} />
+                  </Link>
                 </div>
               </div>
             </div>
@@ -120,6 +98,8 @@ const LettersToEditor = () => {
           </div>
         </ScrollFade>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default LettersToEditor;
