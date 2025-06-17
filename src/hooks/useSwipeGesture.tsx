@@ -66,12 +66,12 @@ export const useSwipeGesture = <T extends HTMLElement>(
       }
     };
 
-    element.addEventListener('touchstart', handleTouchStart as any);
-    element.addEventListener('touchend', handleTouchEnd as any);
+    element.addEventListener('touchstart', handleTouchStart as unknown as EventListener);
+    element.addEventListener('touchend', handleTouchEnd as unknown as EventListener);
 
     return () => {
-      element.removeEventListener('touchstart', handleTouchStart as any);
-      element.removeEventListener('touchend', handleTouchEnd as any);
+      element.removeEventListener('touchstart', handleTouchStart as unknown as EventListener);
+      element.removeEventListener('touchend', handleTouchEnd as unknown as EventListener);
     };
   }, [handlers, threshold, preventDefault]);
 

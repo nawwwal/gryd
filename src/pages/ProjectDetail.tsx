@@ -44,10 +44,10 @@ const ProjectDetail = () => {
         </ScrollFade>
 
         <div className="space-y-paragraph">
-          {project.content.map((section: any, index: number) => (
+          {project.content.split('. ').map((paragraph: string, index: number) => (
             <ScrollFade key={index} delay={index * 100}>
               <div className="body">
-                <p>{section.content}</p>
+                <p>{paragraph.trim()}.</p>
               </div>
             </ScrollFade>
           ))}
