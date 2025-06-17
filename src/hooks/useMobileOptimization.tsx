@@ -29,8 +29,13 @@ export const useMobileOptimization = (): MobileOptimization => {
       const orientation = window.innerHeight > window.innerWidth ? 'portrait' : 'landscape';
       
       // Simple connection detection
-      const connection = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
-      const connectionType = connection?.effectiveType === '4g' || connection?.effectiveType === 'wifi' ? 'fast' : 
+      const nav = navigator as Navigator & {
+        connection?: { effectiveType?: string }
+        mozConnection?: { effectiveType?: string }
+        webkitConnection?: { effectiveType?: string }
+      };
+      const connection = nav.connection || nav.mozConnection || nav.webkitConnection;
+      const connectionType = connection?.effectiveType === '4g' || connection?.effectiveType === 'wifi' ? 'fast' :
                            connection?.effectiveType === '3g' || connection?.effectiveType === '2g' ? 'slow' : 'unknown';
 
       setOptimization({
