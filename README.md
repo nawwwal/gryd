@@ -1,38 +1,46 @@
-# The GRYD Magazine Portfolio
+# GRYD Echo Forge
 
-**The GRYD** is a digital magazine that doubles as Aditya Nawal's design portfolio. Every page is an interactive spread—part case study, part playbook, part playground.
+**GRYD Echo Forge** is a design-focused magazine site built with React and Vite. The source mixes interactive articles with a lightweight CMS and is ready to deploy on Vercel.
 
-## Features
+## Techniques
 
-- Gyroscopic hero section and magazine-style spreads
-- Featured articles, rapid-fire interviews and editor picks
-- "Letters to the Editor" contact area for project inquiries
-- Custom footer with fun stats and editorial credits
-- Built with React, TypeScript, Tailwind CSS and shadcn-ui
+- **Intersection Observer** is used in [`ScrollFade`](src/components/ScrollFade.tsx) for element reveal on scroll ([MDN](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)).
+- **requestAnimationFrame** drives the animated dots in [`InteractiveBackground`](src/components/InteractiveBackground.tsx) ([MDN](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame)).
+- **Gyroscope-like pointer tracking** in [`useGyroscopic`](src/hooks/useGyroscopic.tsx) tilts elements in response to mouse movement.
+- **Swipe gesture hooks** provide touch navigation in [`useSwipeGesture`](src/hooks/useSwipeGesture.tsx).
+- **MDX support** via [`MDXComponents`](src/components/mdx/MDXComponents.tsx) enables rich article formatting.
 
-## Development
+## Libraries of Note
 
-Install dependencies and start the local server:
+- [shadcn/ui](https://ui.shadcn.com/) components, built on Radix primitives
+- [React Query](https://tanstack.com/query/latest) for data fetching
+- [Embla Carousel](https://www.embla-carousel.com/) for lightweight carousels
+- [clsx](https://github.com/lukeed/clsx) and [class-variance-authority](https://github.com/joe-bell/cva) for conditional class handling
+- [Lucide React](https://lucide.dev/) icon set
 
-```bash
-npm install
-npm run dev
+Fonts come from [Google Fonts](https://fonts.google.com/): [Platypi](https://fonts.google.com/specimen/Platypi), [Fraunces](https://fonts.google.com/specimen/Fraunces), and [Schibsted Grotesk](https://fonts.google.com/specimen/Schibsted+Grotesk). Code blocks use [JetBrains Mono](https://fontsource.org/fonts/jetbrains-mono).
+
+## Project Structure
+
+```text
+api/
+public/
+  lovable-uploads/
+src/
+  components/
+  data/
+  hooks/
+  lib/
+  pages/
+  styles/
+  types/
+  utils/
+index.html
+vite.config.ts
+tailwind.config.ts
+vercel.json
 ```
+- `api/` contains serverless functions such as [`login.ts`](api/login.ts).
+- `public/` holds static assets, including images under `lovable-uploads/`.
+- `src/` is the React app with components, pages, hooks and styling.
 
-Open `http://localhost:5173` in your browser to explore the magazine.
-
-## Production build
-
-Generate an optimized build with:
-
-```bash
-npm run build
-```
-
-The output in `dist/` is ready to be deployed to any static host. A simple `vercel.json` is provided for Vercel deployments.
-
-## About the Editor
-
-Aditya—"Adi" to friends—created The GRYD to share systems, stories and sidequests. If you're building something interesting and need thoughtful design, reach out at [work@thegryd.com](mailto:work@thegryd.com).
-
-Enjoy the issue!
