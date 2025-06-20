@@ -1,19 +1,16 @@
 
 import { ReactNode } from 'react';
-import UnifiedNavigation from './UnifiedNavigation';
-import { useMobileOptimization } from '../hooks/useMobileOptimization';
+import Navigation from './Navigation';
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const { isMobile } = useMobileOptimization();
-
   return (
-    <div className="min-h-screen bg-gryd-bg w-full">
-      <UnifiedNavigation />
-      <main className={`${isMobile ? 'pt-16 pb-20' : 'pt-16'} w-full`}>
+    <div className="min-h-screen bg-gryd-bg">
+      <Navigation />
+      <main className="pt-[60px] md:pt-[60px]">
         {children}
       </main>
     </div>
