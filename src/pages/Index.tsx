@@ -34,23 +34,19 @@ const Index = () => {
     fetchData();
   }, []);
 
-  const sections = ['hero', 'featured', 'grid', 'letters'];
 
-  const swipeRef = useSwipeGesture<HTMLDivElement>({
-    onSwipeUp: () => {
-      if (isTouch && currentSection < sections.length - 1) {
-        setCurrentSection(prev => prev + 1);
-        document.getElementById(sections[currentSection + 1])?.scrollIntoView({
-          behavior: 'smooth'
-        });
-      }
-    },
-    onSwipeDown: () => {
-      if (isTouch && currentSection > 0) {
-        setCurrentSection(prev => prev - 1);
-        document.getElementById(sections[currentSection - 1])?.scrollIntoView({
-          behavior: 'smooth'
-        });
+        {loading ? (
+          <HomeSkeleton />
+        ) : featuredProject ? (
+          <>
+            <FeaturedArticle project={featuredProject} />
+            <div id="grid">
+              <ArticleGrid projects={otherProjects} />
+            </div>
+          </>
+        ) : (
+          <p className="body text-center py-16">no projects found</p>
+        )}
       }
     }
   });
