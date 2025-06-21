@@ -38,13 +38,13 @@ const Index = () => {
         {loading ? (
           <HomeSkeleton />
         ) : featuredProject ? (
-          <>
-            <FeaturedArticle project={featuredProject} />
-            <div id="grid">
+        {loading && <HomeSkeleton />}
+        {!loading && featuredProject && (
               <ArticleGrid projects={otherProjects} />
             </div>
           </>
-        ) : (
+        )}
+        {!loading && !featuredProject && (
           <p className="body text-center py-16">no projects found</p>
         )}
       }
