@@ -160,9 +160,11 @@ export default defineType({
         }),
         defineField({
           name: 'featured',
-          title: 'Featured',
+          title: '⭐ Featured Project',
           type: 'boolean',
-          initialValue: false
+          initialValue: false,
+          description: 'Mark this project as featured - will appear on the homepage',
+          validation: Rule => Rule.required()
         }),
         defineField({
           name: 'publishDate',

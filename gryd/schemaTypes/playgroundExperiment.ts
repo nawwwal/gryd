@@ -179,9 +179,11 @@ export default defineType({
         }),
         defineField({
           name: 'featured',
-          title: 'Featured',
+          title: '⭐ Featured Experiment',
           type: 'boolean',
-          initialValue: false
+          initialValue: false,
+          description: 'Mark this experiment as featured - will appear prominently',
+          validation: Rule => Rule.required()
         }),
         defineField({
           name: 'publishDate',

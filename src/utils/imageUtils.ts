@@ -20,6 +20,11 @@ export function getOptimizedImageUrl(
 ) {
   if (!image) return null
 
+  // Handle both direct asset references and full image objects
+  const imageRef = image.asset || image
+
+  if (!imageRef) return null
+
   const {
     width = 800,
     height,
@@ -28,16 +33,21 @@ export function getOptimizedImageUrl(
     crop = 'center'
   } = options
 
-  let imageBuilder = urlFor(image)
-    .width(width)
-    .format(format)
-    .quality(quality)
+  try {
+    let imageBuilder = urlFor(imageRef)
+      .width(width)
+      .format(format)
+      .quality(quality)
 
-  if (height) {
-    imageBuilder = imageBuilder.height(height).crop(crop)
+    if (height) {
+      imageBuilder = imageBuilder.height(height).crop(crop)
+    }
+
+    return imageBuilder.url()
+  } catch (error) {
+    console.warn('Failed to generate image URL:', error)
+    return null
   }
-
-  return imageBuilder.url()
 }
 
 // Alias for consistency with component usage

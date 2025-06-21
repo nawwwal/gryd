@@ -9,7 +9,9 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "seed:sanity": "node scripts/seedSanity.js"
+    "test:sanity": "node scripts/final-sanity-test.mjs",
+    "seed:sanity": "node scripts/final-sanity-test.mjs --seed",
+    "fix:images": "node scripts/final-sanity-test.mjs --fix-images"
   },
   "dependencies": {
     "@fontsource/jetbrains-mono": "^5.2.6",
