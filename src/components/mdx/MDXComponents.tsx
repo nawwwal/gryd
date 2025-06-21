@@ -34,8 +34,8 @@ export const PhotoGallery = ({ images, caption }: PhotoGalleryProps) => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {images.map((image, index) => (
           <div key={index} className="aspect-square overflow-hidden rounded-lg">
-            <img 
-              src={image} 
+            <img
+              src={image}
               alt={`Gallery image ${index + 1}`}
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
             />
@@ -83,7 +83,7 @@ export const ColorPalette = ({ colors }: ColorPaletteProps) => {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {colors.map((color, index) => (
           <div key={index} className="color-swatch">
-            <div 
+            <div
               className="w-full h-20 rounded-lg mb-2"
               style={{ backgroundColor: color.hex }}
             />
@@ -132,6 +132,7 @@ export const BeforeAfter = ({ before, after }: BeforeAfterProps) => {
 };
 
 // Export all components for MDX
+// eslint-disable-next-line react-refresh/only-export-components
 export const mdxComponents = {
   CodeDemo,
   PhotoGallery,

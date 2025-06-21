@@ -1,4 +1,3 @@
-
 @layer components {
   /* Experiments Section */
   .experiments-section {
@@ -78,9 +77,9 @@
     transform: translateY(40px) scale(0.95);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
-    
+
     /* Paper texture */
-    background-image: 
+    background-image:
       radial-gradient(circle at 25% 25%, rgba(0,0,0,0.01) 1px, transparent 1px),
       radial-gradient(circle at 75% 75%, rgba(0,0,0,0.015) 1px, transparent 1px);
     background-size: 30px 30px, 40px 40px;
@@ -99,7 +98,7 @@
 
   .experiment-card:hover {
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 
+    box-shadow:
       0 20px 40px rgba(0,0,0,0.12),
       0 8px 16px rgba(0,0,0,0.08);
     border-color: #999;
@@ -111,6 +110,52 @@
     pointer-events: none;
   }
 
+  /* Experiment Hero Image Styles */
+  .experiment-image {
+    @apply absolute inset-0 overflow-hidden;
+    border-radius: inherit;
+  }
+
+  .experiment-hero-image {
+    @apply w-full h-full object-cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .experiment-card:hover .experiment-hero-image {
+    transform: scale(1.05);
+  }
+
+  .image-overlay {
+    @apply absolute inset-0;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
+    backdrop-filter: blur(0.5px);
+    transition: opacity 0.3s ease;
+  }
+
+  .experiment-card:hover .image-overlay {
+    opacity: 0.7;
+  }
+
+  /* Ensure content is above image */
+  .experiment-content {
+    @apply relative z-10;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.9) 100%
+    );
+    backdrop-filter: blur(10px);
+    border-radius: 0 0 inherit inherit;
+    margin-top: auto;
+    min-height: 60%;
+  }
+
+  /* Fallback visual patterns for experiments without images */
   .visual-pattern {
     @apply absolute inset-0;
   }
@@ -121,7 +166,7 @@
   }
 
   .experiment-geometric .visual-pattern {
-    background-image: 
+    background-image:
       linear-gradient(45deg, rgba(0,0,0,0.05) 25%, transparent 25%),
       linear-gradient(-45deg, rgba(0,0,0,0.05) 25%, transparent 25%),
       linear-gradient(45deg, transparent 75%, rgba(0,0,0,0.05) 75%),
@@ -131,7 +176,7 @@
   }
 
   .experiment-photographic .visual-pattern {
-    background-image: 
+    background-image:
       radial-gradient(circle at 20% 80%, rgba(0,0,0,0.08) 15%, transparent 15%),
       radial-gradient(circle at 80% 20%, rgba(0,0,0,0.06) 15%, transparent 15%),
       radial-gradient(circle at 40% 40%, rgba(0,0,0,0.04) 15%, transparent 15%);
@@ -144,14 +189,14 @@
   }
 
   .experiment-colorful .visual-pattern {
-    background: 
+    background:
       linear-gradient(90deg, rgba(255,0,0,0.05) 0%, rgba(255,255,0,0.05) 25%, rgba(0,255,0,0.05) 50%, rgba(0,255,255,0.05) 75%, rgba(0,0,255,0.05) 100%);
     background-size: 200px 100%;
     animation: color-shift 10s ease-in-out infinite;
   }
 
   .experiment-technical .visual-pattern {
-    background-image: 
+    background-image:
       linear-gradient(0deg, rgba(0,0,0,0.02) 50%, transparent 50%),
       linear-gradient(90deg, rgba(0,0,0,0.02) 50%, transparent 50%);
     background-size: 8px 8px;
@@ -163,7 +208,7 @@
   }
 
   .experiment-typographic .visual-pattern {
-    background-image: 
+    background-image:
       repeating-linear-gradient(
         0deg,
         transparent,
@@ -174,7 +219,7 @@
   }
 
   .experiment-analytical .visual-pattern {
-    background-image: 
+    background-image:
       linear-gradient(45deg, rgba(0,0,0,0.01) 12.5%, transparent 12.5%, transparent 87.5%, rgba(0,0,0,0.01) 87.5%),
       linear-gradient(-45deg, rgba(0,0,0,0.01) 12.5%, transparent 12.5%, transparent 87.5%, rgba(0,0,0,0.01) 87.5%);
     background-size: 16px 16px;
@@ -359,7 +404,7 @@
 
   .noise-overlay {
     @apply absolute inset-0;
-    background-image: 
+    background-image:
       radial-gradient(circle at 20% 30%, rgba(0,0,0,0.02) 1px, transparent 1px),
       radial-gradient(circle at 80% 70%, rgba(0,0,0,0.015) 1px, transparent 1px),
       radial-gradient(circle at 40% 80%, rgba(0,0,0,0.01) 1px, transparent 1px);
