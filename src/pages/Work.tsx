@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
-import { WorkProject } from '../types/content';
-import { loadWorkProjects } from '../utils/contentLoader';
+import { useWorkProjects } from '../hooks/useContentQuery';
 import { getSanityImageUrl } from '../utils/imageUtils';
 import { Link } from 'react-router-dom';
 import ScrollFade from '../components/ScrollFade';
@@ -12,8 +10,13 @@ import { useMobileOptimization } from '../hooks/useMobileOptimization';
 import { useSwipeGesture } from '../hooks/useSwipeGesture';
 import ProjectsSkeleton from '../components/skeletons/ProjectsSkeleton';
 const Work = () => {
-  const [projects, setProjects] = useState<WorkProject[]>([]);
-  const [loading, setLoading] = useState(true);
+  const {
+    data: projects = [],
+    isLoading: loading,
+    error,
+    isError
+  } = useWorkProjects();
+
   const portfolioRef = useGyroscopic();
   const {
     isMobile,
@@ -31,24 +34,29 @@ const Work = () => {
     }
   });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const items = await loadWorkProjects();
-        setProjects(items);
-      } catch (err) {
-        console.error('Failed to load projects', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
   if (loading) {
     return (
       <div className="magazine-container">
         <ProjectsSkeleton count={3} className="py-16" />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="magazine-container">
+        <div className="text-center py-16">
+          <h2 className="text-2xl font-bold text-red-600 mb-4">Error Loading Projects</h2>
+          <p className="body text-gryd-soft mb-4">
+            {error?.message || 'Failed to load projects. Please try refreshing the page.'}
+          </p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700 transition-colors"
+          >
+            Retry
+          </button>
+        </div>
       </div>
     );
   }

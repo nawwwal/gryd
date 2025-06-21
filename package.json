@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -11,7 +14,8 @@
     "preview": "vite preview",
     "test:sanity": "node scripts/final-sanity-test.mjs",
     "seed:sanity": "node scripts/final-sanity-test.mjs --seed",
-    "fix:images": "node scripts/final-sanity-test.mjs --fix-images"
+    "fix:images": "node scripts/final-sanity-test.mjs --fix-images",
+    "vercel-build": "npm install --include=optional && npm run build"
   },
   "dependencies": {
     "@fontsource/jetbrains-mono": "^5.2.6",
@@ -19,6 +23,7 @@
     "@mdx-js/mdx": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@mdx-js/rollup": "^3.1.0",
+    "@portabletext/react": "^3.2.1",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-aspect-ratio": "^1.1.0",
@@ -79,11 +84,12 @@
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "@tailwindcss/typography": "^0.5.15",
+    "@tanstack/react-query-devtools": "^5.81.0",
     "@types/bun": "^1.2.17",
     "@types/node": "^22.5.5",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react-swc": "^3.5.0",
+    "@vitejs/plugin-react": "^4.5.2",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.9.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
@@ -91,9 +97,16 @@
     "globals": "^15.9.0",
     "lovable-tagger": "^1.1.7",
     "postcss": "^8.4.47",
+    "rollup": "^4.24.0",
     "tailwindcss": "^3.4.11",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-darwin-arm64": "^4.24.0",
+    "@rollup/rollup-darwin-x64": "^4.24.0",
+    "@rollup/rollup-linux-x64-gnu": "^4.24.0",
+    "@rollup/rollup-win32-x64-msvc": "^4.24.0"
   }
 }
