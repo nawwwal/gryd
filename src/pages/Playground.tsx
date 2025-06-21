@@ -82,27 +82,15 @@ const Playground = () => {
         </div>
 
         <div className="playground-hero-content">
-          <div className="hero-main-section">
-            <div className="hero-text-container">
-              <div className="hero-meta">
-                <span className="hero-category">Laboratory</span>
-                <span className="hero-version">V3.7</span>
-              </div>
-
-              <h1 className="hero-title">
-                {'PLAYGROUND'.split('').map((letter, index) => (
-                  <span key={index} className="hero-letter" style={{
-                    animationDelay: `${index * 100}ms`
-                  }}>
-                    {letter}
-                  </span>
-                ))}
-              </h1>
-
-              <div className="hero-subtitle-container">
-                <div className="hero-subtitle-primary">
-                  <div className="subtitle-line">Creative Research Lab</div>
-                  <div className="subtitle-line">& Experimental Archives</div>
+          <div className="lab-notebook enhanced-gyroscopic">
+            <div className="lab-header-content">
+              <div className="lab-title-section">
+                <div className="morphing-title-container">
+                  <MorphingText
+                    texts={['PLAYGROUND', 'LABORATORY', 'EXPERIMENTS', 'RESEARCH']}
+                    className="morphing-title"
+                    interval={3000}
+                  />
                 </div>
 
                 <div className="lab-subtitle-minimal">
