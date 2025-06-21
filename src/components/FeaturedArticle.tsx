@@ -40,7 +40,7 @@ const FeaturedArticle = ({ project }: FeaturedArticleProps) => {
 
       <ScrollFade delay={400}>
         <div className="article-excerpt">
-          <p>{project.content}</p>
+          <p>{project.description}</p>
 
           <Link to={`/work/${project.slug}`} className="read-full-story">
             Read Full Story →

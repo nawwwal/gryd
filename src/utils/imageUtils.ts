@@ -81,7 +81,8 @@ export function getOptimizedImageUrl(
   if (!image) return null
 
   // Handle both direct asset references and full image objects
-  const imageRef = image.asset || image
+  // SanityImage has .asset property, SanityImageAsset is the asset itself
+  const imageRef = 'asset' in image ? image.asset : image
 
   if (!imageRef) return null
 
@@ -98,22 +99,30 @@ export function getOptimizedImageUrl(
   try {
     let imageBuilder = urlFor(imageRef)
 
-    // Apply basic dimensions - simplified approach
-    if (width) {
-      imageBuilder = imageBuilder.width(width)
+    // Determine actual values based on adaptive mode
+    const actualFormat = adaptive ? getOptimalFormat() : format
+    const actualQuality = adaptive ? getAdaptiveQuality() : quality
+    const actualDpr = adaptive && dpr === 1 ? getDevicePixelRatio() : dpr
+
+    // Apply dimensions with device pixel ratio scaling
+    const scaledWidth = Math.round(width * actualDpr)
+    const scaledHeight = height ? Math.round(height * actualDpr) : undefined
+
+    if (scaledWidth) {
+      imageBuilder = imageBuilder.width(scaledWidth)
     }
 
-    if (height) {
-      imageBuilder = imageBuilder.height(height)
+    if (scaledHeight) {
+      imageBuilder = imageBuilder.height(scaledHeight)
       if (crop) {
         imageBuilder = imageBuilder.crop(crop)
       }
     }
 
-    // Apply format and quality - simplified approach
+    // Apply format and quality with adaptive optimization
     imageBuilder = imageBuilder
-      .format(format)
-      .quality(quality)
+      .format(actualFormat)
+      .quality(actualQuality)
 
     return imageBuilder.url()
   } catch (error) {
@@ -139,14 +148,19 @@ export function getFileUrl(file: SanityFile | null | undefined): string | null {
 }
 
 // Get responsive image URLs for different screen sizes
-export function getResponsiveImageUrls(image: SanityImage | SanityImageAsset | null | undefined) {
+export function getResponsiveImageUrls(
+  image: SanityImage | SanityImageAsset | null | undefined,
+  options: { adaptive?: boolean } = {}
+) {
   if (!image) return {}
 
+  const { adaptive = true } = options
+
   return {
-    mobile: getOptimizedImageUrl(image, { width: 480, format: 'webp' }),
-    tablet: getOptimizedImageUrl(image, { width: 768, format: 'webp' }),
-    desktop: getOptimizedImageUrl(image, { width: 1200, format: 'webp' }),
-    large: getOptimizedImageUrl(image, { width: 1920, format: 'webp' })
+    mobile: getOptimizedImageUrl(image, { width: 480, adaptive }),
+    tablet: getOptimizedImageUrl(image, { width: 768, adaptive }),
+    desktop: getOptimizedImageUrl(image, { width: 1200, adaptive }),
+    large: getOptimizedImageUrl(image, { width: 1920, adaptive })
   }
 }
 
@@ -166,9 +180,14 @@ export function getImageMetadata(image: SanityImage | null | undefined) {
 // Generate image srcset for responsive images with adaptive optimization
 export function generateSrcSet(
   image: SanityImage | SanityImageAsset | null | undefined,
-  baseWidth?: number
+  options: {
+    baseWidth?: number
+    adaptive?: boolean
+  } = {}
 ): string {
   if (!image) return ''
+
+  const { baseWidth, adaptive = true } = options
 
   const widths = baseWidth
     ? [
@@ -180,16 +199,11 @@ export function generateSrcSet(
     : [320, 480, 768, 1024, 1200, 1920]
 
   try {
-    const format = getOptimalFormat()
-    const quality = getAdaptiveQuality()
-
     return widths
       .map(width => {
         const url = getOptimizedImageUrl(image, {
           width,
-          format,
-          quality,
-          adaptive: false // Use safe mode for srcset generation
+          adaptive // Use adaptive optimization when enabled
         })
         return url ? `${url} ${width}w` : null
       })
@@ -218,7 +232,8 @@ export function generateSrcSet(
 export function getLQIP(image: SanityImage | SanityImageAsset | null | undefined): string | null {
   if (!image) return null
 
-  const imageRef = image.asset || image
+  // Handle both direct asset references and full image objects
+  const imageRef = 'asset' in image ? image.asset : image
   if (!imageRef) return null
 
   try {
