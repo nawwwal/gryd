@@ -21,8 +21,14 @@ const Work = () => {
     reducedMotion
   } = useMobileOptimization();
 
-  const swipeRef = useSwipeGesture((direction) => {
-    // Handle swipe gestures if needed
+  const swipeRef = useSwipeGesture<HTMLDivElement>({
+    // Handle swipe gestures if needed for work page
+    onSwipeLeft: () => {
+      // Could implement navigation between projects
+    },
+    onSwipeRight: () => {
+      // Could implement navigation between projects
+    }
   });
 
   useEffect(() => {
