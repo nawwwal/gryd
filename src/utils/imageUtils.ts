@@ -55,13 +55,13 @@ export function getOptimizedImageUrl(
 export const getSanityImageUrl = getOptimizedImageUrl
 
 // Get file URL for attachments
-export function getFileUrl(file: any) {
+export function getFileUrl(file: SanityFile | null | undefined): string | null {
   if (!file?.asset?.url) return null
   return file.asset.url
 }
 
 // Get responsive image URLs for different screen sizes
-export function getResponsiveImageUrls(image: any) {
+export function getResponsiveImageUrls(image: SanityImage | SanityImageAsset | null | undefined) {
   if (!image) return {}
 
   return {
@@ -73,7 +73,7 @@ export function getResponsiveImageUrls(image: any) {
 }
 
 // Get image metadata
-export function getImageMetadata(image: any) {
+export function getImageMetadata(image: SanityImage | null | undefined) {
   if (!image?.asset) return null
 
   return {
@@ -86,7 +86,7 @@ export function getImageMetadata(image: any) {
 }
 
 // Generate image srcset for responsive images
-export function generateSrcSet(image: any) {
+export function generateSrcSet(image: SanityImage | SanityImageAsset | null | undefined): string {
   if (!image) return ''
 
   const widths = [320, 480, 768, 1024, 1200, 1920]
