@@ -73,10 +73,6 @@ const Playground = () => {
     }
   }, [loading, experiments]);
 
-  if (loading) {
-    return <ExperimentsSkeleton count={4} />;
-  }
-
   return <div className="magazine-container">
       {/* Enhanced Experimental Hero - Full Viewport Height */}
       <div className="playground-hero-container">
@@ -84,12 +80,20 @@ const Playground = () => {
           <InteractiveBackground mousePos={mousePos} />
         </div>
 
-        <div className="playground-hero-content">
-          <div className="lab-notebook enhanced-gyroscopic">
-            <div className="lab-header-content">
-              <div className="lab-title-section">
-                <div className="morphing-title-container">
-                  <MorphingText texts={['PLAYGROUND', 'LABORATORY', 'WORKSHOP', 'STUDIO']} className="experimental-title" />
+            {loading ? (
+              <ExperimentsSkeleton count={4} />
+            ) : experiments.length > 0 ? (
+              experiments.map((experiment, index) => (
+                <div
+                  key={experiment.slug}
+                  className={`experiment-card experiment-${experiment.visual} intensity-${experiment.intensity}`}
+                  data-type={experiment.metadata.type}
+                >
+                  {/* Visual Background Element */}
+                  <div className="experiment-visual">
+                    <div className="visual-pattern"></div>
+                    <div className="visual-overlay"></div>
+                  </div>
                 </div>
 
                 <div className="lab-subtitle-minimal">
@@ -156,7 +160,11 @@ const Playground = () => {
                         }}>
                           {char === ' ' ? '\u00A0' : char}
                         </span>
-                      ))}
+                </div>
+              ))
+            ) : (
+              <p className="body text-center py-16 w-full col-span-2">no experiments found</p>
+            )}
                     </h3>
 
                     <p className="experiment-description">{experiment.description}</p>

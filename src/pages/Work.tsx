@@ -17,35 +17,44 @@ const Work = () => {
   const portfolioRef = useGyroscopic();
   const {
     isMobile,
-    isTouch,
-    reducedMotion
-  } = useMobileOptimization();
 
-  // Enhanced swipe navigation for mobile
-  const swipeRef = useSwipeGesture<HTMLDivElement>({
-    onSwipeLeft: () => {
-      // Could implement project filtering or navigation
-    },
-    onSwipeRight: () => {
-      // Could implement back navigation
-    }
-  });
-  useEffect(() => {
-    const loadContent = async () => {
-      try {
-        const workProjects = await loadWorkProjects();
-        setProjects(workProjects);
-      } catch (error) {
-        console.error('Failed to load work projects:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadContent();
-  }, []);
-  if (loading) {
-    return <ProjectsSkeleton count={3} />;
-  }
+            {loading ? (
+              <ProjectsSkeleton count={3} className="py-16" />
+            ) : projects.length > 0 ? (
+              projects.map((project, index) => (
+                <ScrollFade key={project.slug} delay={reducedMotion ? 0 : index * 200}>
+                  <Link to={`/work/${project.slug}`} className="block">
+                    {isTouch ? (
+                      <MobileTouchFeedback hapticFeedback>
+                        <article className="linear-project-card">
+                          <div className="linear-project-content">
+                            <div className="linear-project-image">
+                              <MobileOptimizedImage src={project.metadata.assets.hero || '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png'} alt={project.title} priority={index < 2} />
+                            </div>
+
+                            <div className="linear-project-info">
+                              <div className="linear-project-category">{project.metadata.category}</div>
+                              <h3 className="linear-project-title">{project.title}</h3>
+                              <p className="linear-project-subtitle">{project.subtitle}</p>
+
+                              <div className="linear-project-meta">
+                                <span className="linear-project-year">{new Date(project.metadata.publishDate).getFullYear()}</span>
+                                <span className="linear-project-cta">Read Case Study →</span>
+                              </div>
+                            </div>
+                          </div>
+                        </article>
+                      </MobileTouchFeedback>
+                    ) : (
+
+
+                    )}
+                  </Link>
+                </ScrollFade>
+              ))
+            ) : (
+              <p className="body text-center py-16">no projects found</p>
+            )}
   return <div className="magazine-container" ref={swipeRef}>
       {/* Portfolio Header */}
       <div className="work-portfolio-header">
