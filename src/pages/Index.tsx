@@ -20,6 +20,9 @@ const Index = () => {
   const { isMobile, isTouch } = useMobileOptimization();
   const [currentSection, setCurrentSection] = useState(0);
 
+  // Move sections array declaration before useSwipeGesture
+  const sections = ['hero', 'featured', 'letters'];
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,17 +37,27 @@ const Index = () => {
     fetchData();
   }, []);
 
-  const swipeRef = useSwipeGesture((direction) => {
-    if (direction === 'up' && currentSection < sections.length - 1) {
-      setCurrentSection(currentSection + 1);
-      document.getElementById(sections[currentSection + 1])?.scrollIntoView({ behavior: 'smooth' });
-    } else if (direction === 'down' && currentSection > 0) {
-      setCurrentSection(currentSection - 1);
-      document.getElementById(sections[currentSection - 1])?.scrollIntoView({ behavior: 'smooth' });
+  // Fix useSwipeGesture usage to match expected interface and use functional updates
+  const swipeRef = useSwipeGesture<HTMLDivElement>({
+    onSwipeUp: () => {
+      setCurrentSection(prev => {
+        const nextSection = Math.min(prev + 1, sections.length - 1);
+        if (nextSection !== prev) {
+          document.getElementById(sections[nextSection])?.scrollIntoView({ behavior: 'smooth' });
+        }
+        return nextSection;
+      });
+    },
+    onSwipeDown: () => {
+      setCurrentSection(prev => {
+        const prevSection = Math.max(prev - 1, 0);
+        if (prevSection !== prev) {
+          document.getElementById(sections[prevSection])?.scrollIntoView({ behavior: 'smooth' });
+        }
+        return prevSection;
+      });
     }
   });
-
-  const sections = ['hero', 'featured', 'letters'];
 
   if (loading) {
     return <HomeSkeleton />;
