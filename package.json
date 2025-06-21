@@ -8,7 +8,10 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:sanity": "node scripts/final-sanity-test.mjs",
+    "seed:sanity": "node scripts/final-sanity-test.mjs --seed",
+    "fix:images": "node scripts/final-sanity-test.mjs --fix-images"
   },
   "dependencies": {
     "@fontsource/jetbrains-mono": "^5.2.6",
@@ -44,6 +47,7 @@
     "@radix-ui/react-toggle-group": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.4",
     "@sanity/client": "^7.6.0",
+    "@sanity/image-url": "^1.1.0",
     "@tanstack/react-query": "^5.56.2",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",

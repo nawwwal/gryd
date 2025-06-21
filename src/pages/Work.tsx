@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { WorkProject } from '../types/content';
 import { loadWorkProjects } from '../utils/contentLoader';
+import { getSanityImageUrl } from '../utils/imageUtils';
 import { Link } from 'react-router-dom';
 import ScrollFade from '../components/ScrollFade';
 import MagazineFooter from '../components/MagazineFooter';
@@ -9,6 +10,7 @@ import MobileTouchFeedback from '../components/MobileTouchFeedback';
 import { useGyroscopic } from '../hooks/useGyroscopic';
 import { useMobileOptimization } from '../hooks/useMobileOptimization';
 import { useSwipeGesture } from '../hooks/useSwipeGesture';
+import ProjectsSkeleton from '../components/skeletons/ProjectsSkeleton';
 const Work = () => {
   const [projects, setProjects] = useState<WorkProject[]>([]);
   const [loading, setLoading] = useState(true);
@@ -19,44 +21,42 @@ const Work = () => {
     reducedMotion
   } = useMobileOptimization();
 
-  // Enhanced swipe navigation for mobile
   const swipeRef = useSwipeGesture<HTMLDivElement>({
+    // Handle swipe gestures if needed for work page
     onSwipeLeft: () => {
-      // Could implement project filtering or navigation
+      // Could implement navigation between projects
     },
     onSwipeRight: () => {
-      // Could implement back navigation
+      // Could implement navigation between projects
     }
   });
+
   useEffect(() => {
-    const loadContent = async () => {
+    const fetchData = async () => {
       try {
-        const workProjects = await loadWorkProjects();
-        setProjects(workProjects);
-      } catch (error) {
-        console.error('Failed to load work projects:', error);
+        const items = await loadWorkProjects();
+        setProjects(items);
+      } catch (err) {
+        console.error('Failed to load projects', err);
       } finally {
         setLoading(false);
       }
     };
-    loadContent();
+    fetchData();
   }, []);
+
   if (loading) {
-    return <div className="magazine-container">
-        <div className="editorial-container py-16">
-          <div className="text-center">
-            <div className={`animate-spin w-8 h-8 border-2 border-gryd-accent border-t-transparent rounded-full mx-auto mb-4 ${reducedMotion ? 'animate-none' : ''}`}></div>
-            <p className="body text-gryd-soft">Loading portfolio...</p>
-          </div>
-        </div>
-      </div>;
+    return (
+      <div className="magazine-container">
+        <ProjectsSkeleton count={3} className="py-16" />
+      </div>
+    );
   }
+
   return <div className="magazine-container" ref={swipeRef}>
       {/* Portfolio Header */}
       <div className="work-portfolio-header">
         <div ref={portfolioRef} className={`portfolio-masthead ${isMobile ? '' : 'gyroscopic-card'}`}>
-          
-          
           <div className="portfolio-title-section">
             <h1 className="portfolio-main-title">
               {'WORK'.split('').map((letter, index) => <span key={index} className="hover-letter ink-bleed" style={{
@@ -67,18 +67,18 @@ const Work = () => {
             </h1>
             <p className="portfolio-subtitle">Case Studies & Client Projects</p>
           </div>
-          
+
           <div className="portfolio-stats">
             <div className="stat-item">
               <span className="stat-number">{projects.length}</span>
               <span className="stat-label">Projects</span>
             </div>
             <div className="stat-item">
-              <span className="stat-number">{projects.filter(p => p.metadata.featured).length}</span>
+              <span className="stat-number">{projects.filter(p => p.metadata?.featured).length}</span>
               <span className="stat-label">Featured</span>
             </div>
             <div className="stat-item">
-              <span className="stat-number">{new Set(projects.map(p => p.metadata.category)).size}</span>
+              <span className="stat-number">{new Set(projects.map(p => p.metadata?.category).filter(Boolean)).size}</span>
               <span className="stat-label">Categories</span>
             </div>
           </div>
@@ -93,48 +93,69 @@ const Work = () => {
               <h4>Selected Work</h4>
               <div className="title-underline"></div>
             </div>
-            
-            {projects.map((project, index) => <ScrollFade key={project.slug} delay={reducedMotion ? 0 : index * 200}>
-                <Link to={`/work/${project.slug}`} className="block">
-                  {isTouch ? <MobileTouchFeedback hapticFeedback>
+
+            {projects.length > 0 ? (
+              projects.map((project, index) => (
+                <ScrollFade key={project.slug} delay={reducedMotion ? 0 : index * 200}>
+                  <Link to={`/work/${project.slug}`} className="block">
+                    {isTouch ? (
+                      <MobileTouchFeedback hapticFeedback>
+                        <article className="linear-project-card">
+                          <div className="linear-project-content">
+                            <div className="linear-project-image">
+                              <MobileOptimizedImage
+                                src={getSanityImageUrl(project.heroImage, { width: 400, height: 300 }) || '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png'}
+                                alt={project.heroImage?.alt || project.title}
+                                priority={index < 2}
+                              />
+                            </div>
+
+                            <div className="linear-project-info">
+                              <div className="linear-project-category">{project.metadata?.category}</div>
+                              <h3 className="linear-project-title">{project.title}</h3>
+                              <p className="linear-project-subtitle">{project.subtitle}</p>
+
+                              <div className="linear-project-meta">
+                                <span className="linear-project-year">{new Date(project.metadata?.publishDate || Date.now()).getFullYear()}</span>
+                                <span className="linear-project-cta">Read Case Study →</span>
+                              </div>
+                            </div>
+                          </div>
+                        </article>
+                      </MobileTouchFeedback>
+                    ) : (
                       <article className="linear-project-card">
                         <div className="linear-project-content">
                           <div className="linear-project-image">
-                            <MobileOptimizedImage src={project.metadata.assets.hero || '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png'} alt={project.title} priority={index < 2} />
+                            <MobileOptimizedImage
+                              src={getSanityImageUrl(project.heroImage, { width: 400, height: 300 }) || '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png'}
+                              alt={project.heroImage?.alt || project.title}
+                              priority={index < 2}
+                            />
                           </div>
-                          
+
                           <div className="linear-project-info">
-                            <div className="linear-project-category">{project.metadata.category}</div>
+                            <div className="linear-project-category">{project.metadata?.category}</div>
                             <h3 className="linear-project-title">{project.title}</h3>
                             <p className="linear-project-subtitle">{project.subtitle}</p>
-                            
+
                             <div className="linear-project-meta">
-                              <span className="linear-project-year">{new Date(project.metadata.publishDate).getFullYear()}</span>
+                              <span className="linear-project-year">{new Date(project.metadata?.publishDate || Date.now()).getFullYear()}</span>
                               <span className="linear-project-cta">Read Case Study →</span>
                             </div>
                           </div>
                         </div>
                       </article>
-                    </MobileTouchFeedback> : <article className="linear-project-card">
-                      <div className="linear-project-content">
-                        <div className="linear-project-image">
-                          <MobileOptimizedImage src={project.metadata.assets.hero || '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png'} alt={project.title} priority={index < 2} />
-                        </div>
-                        
-                        <div className="linear-project-info">
-                          <div className="linear-project-category">{project.metadata.category}</div>
-                          <h3 className="linear-project-title">{project.title}</h3>
-                          <p className="linear-project-subtitle">{project.subtitle}</p>
-                          
-                          <div className="linear-project-meta">
-                            <span className="linear-project-year">{new Date(project.metadata.publishDate).getFullYear()}</span>
-                            <span className="linear-project-cta">Read Case Study →</span>
-                          </div>
-                        </div>
-                      </div>
-                    </article>}
-                </Link>
-              </ScrollFade>)}
+                    )}
+                  </Link>
+                </ScrollFade>
+              ))
+            ) : (
+              <div className="text-center py-16">
+                <p className="body text-gryd-soft mb-4">No projects found in the portfolio.</p>
+                <p className="caption text-gryd-soft">Content may still be loading or not yet published.</p>
+              </div>
+            )}
           </div>
         </ScrollFade>
       </div>
