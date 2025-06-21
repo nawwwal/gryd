@@ -12,7 +12,12 @@ const ProjectDetail = () => {
 
   useEffect(() => {
     if (!slug) return;
-    getContentBySlug(slug, 'work').then((res) => setProject(res as WorkProject | null));
+    getContentBySlug(slug, 'work')
+      .then((res) => setProject(res as WorkProject | null))
+      .catch((error) => {
+        console.error('Failed to load project:', error);
+        setProject(null);
+      });
   }, [slug]);
 
   if (!project) {
