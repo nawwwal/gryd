@@ -40,7 +40,11 @@ const Work = () => {
   }, []);
 
   if (loading) {
-    return <ProjectsSkeleton count={3} className="py-16" />;
+    return (
+      <div className="magazine-container">
+        <ProjectsSkeleton count={3} className="py-16" />
+      </div>
+    );
   }
 
   return <div className="magazine-container" ref={swipeRef}>
