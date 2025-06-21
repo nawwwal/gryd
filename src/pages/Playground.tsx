@@ -232,7 +232,7 @@ const Playground = () => {
 
             <div className="lab-notes-content">
               <div className="editorial-column">
-                <div className="editorial-header">
+    </div>
                   <h3 className="editorial-title">From the Laboratory</h3>
                   <div className="editorial-subtitle">Research Director's Notes</div>
                 </div>

@@ -119,7 +119,7 @@ const Work = () => {
 
                               <div className="linear-project-meta">
                                 <span className="linear-project-year">{new Date(project.metadata?.publishDate || Date.now()).getFullYear()}</span>
-                                <span className="linear-project-cta">Read Case Study →</span>
+    </div>
                               </div>
                             </div>
                           </div>
