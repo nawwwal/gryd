@@ -9,9 +9,11 @@ import { loadWorkProjects } from '../utils/contentLoader';
 import type { WorkProject } from '../types/content';
 import { useMobileOptimization } from '../hooks/useMobileOptimization';
 import { useSwipeGesture } from '../hooks/useSwipeGesture';
+import HomeSkeleton from '../components/skeletons/HomeSkeleton';
 
 const Index = () => {
   const [projects, setProjects] = useState<WorkProject[]>([]);
+  const [loading, setLoading] = useState(true);
   const featuredProject = projects.find(p => p.metadata.featured) || projects[0];
   const otherProjects = featuredProject
     ? projects.filter(p => p.slug !== featuredProject.slug).slice(0, 6)
@@ -26,6 +28,8 @@ const Index = () => {
         setProjects(items);
       } catch (err) {
         console.error('Failed to load projects', err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
@@ -52,8 +56,16 @@ const Index = () => {
     }
   });
 
+  if (loading) {
+    return <HomeSkeleton />;
+  }
+
   if (!featuredProject) {
-    return null;
+    return (
+      <div className="magazine-container py-16">
+        <p className="body text-center">no projects found</p>
+      </div>
+    );
   }
 
   return (
