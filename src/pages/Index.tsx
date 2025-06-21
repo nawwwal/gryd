@@ -1,4 +1,3 @@
-
 import MagazineHero from '../components/MagazineHero';
 import FeaturedArticle from '../components/FeaturedArticle';
 import ArticleGrid from '../components/ArticleGrid';
@@ -34,23 +33,23 @@ const Index = () => {
     };
     fetchData();
   }, []);
-  
+
   const sections = ['hero', 'featured', 'grid', 'letters'];
-  
+
   const swipeRef = useSwipeGesture<HTMLDivElement>({
     onSwipeUp: () => {
       if (isTouch && currentSection < sections.length - 1) {
         setCurrentSection(prev => prev + 1);
-        document.getElementById(sections[currentSection + 1])?.scrollIntoView({ 
-          behavior: 'smooth' 
+        document.getElementById(sections[currentSection + 1])?.scrollIntoView({
+          behavior: 'smooth'
         });
       }
     },
     onSwipeDown: () => {
       if (isTouch && currentSection > 0) {
         setCurrentSection(prev => prev - 1);
-        document.getElementById(sections[currentSection - 1])?.scrollIntoView({ 
-          behavior: 'smooth' 
+        document.getElementById(sections[currentSection - 1])?.scrollIntoView({
+          behavior: 'smooth'
         });
       }
     }
@@ -60,32 +59,44 @@ const Index = () => {
     return <HomeSkeleton />;
   }
 
-  if (!featuredProject) {
-    return (
-      <div className="magazine-container py-16">
-        <p className="body text-center">no projects found</p>
-      </div>
-    );
-  }
-
+  // Show the main layout even if no projects, but handle featured project gracefully
   return (
     <div className="magazine-container" ref={swipeRef}>
       <div id="hero">
         <MagazineHero />
       </div>
-      
+
       <div className="magazine-spread" id="featured">
-        <FeaturedArticle project={featuredProject} />
-        <div id="grid">
-          <ArticleGrid projects={otherProjects} />
-        </div>
+        {featuredProject ? (
+          <>
+            <FeaturedArticle project={featuredProject} />
+            <div id="grid">
+              <ArticleGrid projects={otherProjects} />
+            </div>
+          </>
+        ) : (
+          <div className="featured-article">
+            <div className="article-header">
+              <div className="article-category">Coming Soon</div>
+              <h3 className="article-headline">Projects Loading</h3>
+              <p className="article-deck">Featured work will appear here once content is available.</p>
+            </div>
+            <div className="article-visual">
+              <div className="photo-frame">
+                <div className="placeholder-content">
+                  <p>🎨 Portfolio content coming soon...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-      
+
       <div id="letters">
         <LettersToEditor />
       </div>
       <MagazineFooter />
-      
+
       {/* Mobile Section Indicator */}
       {isMobile && isTouch && (
         <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-40 space-y-2">

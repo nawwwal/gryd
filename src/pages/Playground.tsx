@@ -116,83 +116,96 @@ const Playground = () => {
           </div>
 
           <div ref={masonryRef} className="experiments-grid">
-            {experiments.map((experiment, index) => <div key={experiment.slug} className={`experiment-card experiment-${experiment.visual} intensity-${experiment.intensity}`} data-type={experiment.metadata.type}>
-                {/* Visual Background Element or Hero Image */}
-                {experiment.heroImage ? (
-                  <div className="experiment-image">
-                    <img
-                      src={getSanityImageUrl(experiment.heroImage, { width: 400, height: 300 }) || '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png'}
-                      alt={experiment.heroImage?.alt || experiment.title}
-                      className="experiment-hero-image"
-                    />
-                    <div className="image-overlay"></div>
-                  </div>
-                ) : (
-                  <div className="experiment-visual">
-                    <div className="visual-pattern"></div>
-                    <div className="visual-overlay"></div>
-                  </div>
-                )}
-
-                {/* Content Layer */}
-                <div className="experiment-content">
-                  <div className="experiment-header">
-                    <div className="experiment-meta">
-                      <span className="experiment-number">#{String(index + 1).padStart(2, '0')}</span>
-                      <span className="experiment-type">{experiment.metadata.type}</span>
+            {experiments.length > 0 ? (
+              experiments.map((experiment, index) => (
+                <div key={experiment.slug} className={`experiment-card experiment-${experiment.visual} intensity-${experiment.intensity}`} data-type={experiment.metadata?.type}>
+                  {/* Visual Background Element or Hero Image */}
+                  {experiment.heroImage ? (
+                    <div className="experiment-image">
+                      <img
+                        src={getSanityImageUrl(experiment.heroImage, { width: 400, height: 300 }) || '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png'}
+                        alt={experiment.heroImage?.alt || experiment.title}
+                        className="experiment-hero-image"
+                      />
+                      <div className="image-overlay"></div>
                     </div>
-                    <div className="experiment-status">
-                      <div className="status-dot"></div>
-                      <span className="status-text">{experiment.metadata.status}</span>
+                  ) : (
+                    <div className="experiment-visual">
+                      <div className="visual-pattern"></div>
+                      <div className="visual-overlay"></div>
                     </div>
-                  </div>
+                  )}
 
-                  <h3 className="experiment-title">
-                    {experiment.title.split('').map((char, i) => <span key={i} className="title-char" style={{
-                  animationDelay: `${i * 50}ms`
-                }}>
-                        {char === ' ' ? '\u00A0' : char}
-                      </span>)}
-                  </h3>
-
-                  <p className="experiment-description">{experiment.description}</p>
-
-                  <div className="experiment-details">
-                    <div className="detail-grid">
-                      <div className="detail-item">
-                        <span className="detail-label">Category</span>
-                        <span className="detail-value">{experiment.metadata.category}</span>
+                  {/* Content Layer */}
+                  <div className="experiment-content">
+                    <div className="experiment-header">
+                      <div className="experiment-meta">
+                        <span className="experiment-number">#{String(index + 1).padStart(2, '0')}</span>
+                        <span className="experiment-type">{experiment.metadata?.type}</span>
                       </div>
-                      <div className="detail-item">
-                        <span className="detail-label">Level</span>
-                        <span className="detail-value">{experiment.metadata.difficulty || 'N/A'}</span>
+                      <div className="experiment-status">
+                        <div className="status-dot"></div>
+                        <span className="status-text">{experiment.metadata?.status}</span>
                       </div>
                     </div>
-                    <div className="tools-list">
-                      {experiment.metadata.tools.map((tool, i) => <span key={i} className="tool-tag">{tool}</span>)}
+
+                    <h3 className="experiment-title">
+                      {experiment.title.split('').map((char, i) => (
+                        <span key={i} className="title-char" style={{
+                          animationDelay: `${i * 50}ms`
+                        }}>
+                          {char === ' ' ? '\u00A0' : char}
+                        </span>
+                      ))}
+                    </h3>
+
+                    <p className="experiment-description">{experiment.description}</p>
+
+                    <div className="experiment-details">
+                      <div className="detail-grid">
+                        <div className="detail-item">
+                          <span className="detail-label">Category</span>
+                          <span className="detail-value">{experiment.metadata?.category}</span>
+                        </div>
+                        <div className="detail-item">
+                          <span className="detail-label">Level</span>
+                          <span className="detail-value">{experiment.metadata?.difficulty || 'N/A'}</span>
+                        </div>
+                      </div>
+                      <div className="tools-list">
+                        {experiment.metadata?.tools?.map((tool, i) => (
+                          <span key={i} className="tool-tag">{tool}</span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="experiment-footer">
+                      <span className="experiment-date">
+                        {new Date(experiment.metadata?.publishDate || Date.now()).toLocaleDateString('en-US', {
+                          month: 'short',
+                          year: 'numeric'
+                        })}
+                      </span>
+                      <div className="interaction-hint">
+                        <span>hover to investigate</span>
+                        <div className="hint-arrow">→</div>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="experiment-footer">
-                    <span className="experiment-date">
-                      {new Date(experiment.metadata.publishDate).toLocaleDateString('en-US', {
-                    month: 'short',
-                    year: 'numeric'
-                  })}
-                    </span>
-                    <div className="interaction-hint">
-                      <span>hover to investigate</span>
-                      <div className="hint-arrow">→</div>
-                    </div>
+                  {/* Hover Effects Layer */}
+                  <div className="experiment-effects">
+                    <div className="noise-overlay"></div>
+                    <div className="scan-line"></div>
                   </div>
                 </div>
-
-                {/* Hover Effects Layer */}
-                <div className="experiment-effects">
-                  <div className="noise-overlay"></div>
-                  <div className="scan-line"></div>
-                </div>
-              </div>)}
+              ))
+            ) : (
+              <div className="text-center py-16 col-span-full">
+                <p className="body text-gryd-soft mb-4">No experiments found in the laboratory.</p>
+                <p className="caption text-gryd-soft">Research content may still be loading or not yet published.</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
