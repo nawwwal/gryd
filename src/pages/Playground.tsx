@@ -6,6 +6,7 @@ import { MorphingText } from '../components/MorphingText';
 import { loadPlaygroundExperiments } from '../utils/contentLoader';
 import { getSanityImageUrl } from '../utils/imageUtils';
 import { PlaygroundExperiment } from '../types/content';
+import ExperimentsSkeleton from '../components/skeletons/ExperimentsSkeleton';
 
 const Playground = () => {
   const masonryRef = useRef<HTMLDivElement>(null);
@@ -73,14 +74,7 @@ const Playground = () => {
   }, [loading, experiments]);
 
   if (loading) {
-    return <div className="magazine-container">
-        <div className="editorial-container py-16">
-          <div className="text-center">
-            <div className="animate-spin w-8 h-8 border-2 border-gryd-accent border-t-transparent rounded-full mx-auto mb-4"></div>
-            <p className="body text-gryd-soft">Loading playground experiments...</p>
-          </div>
-        </div>
-      </div>;
+    return <ExperimentsSkeleton count={4} />;
   }
 
   return <div className="magazine-container">

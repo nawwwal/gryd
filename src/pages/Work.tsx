@@ -10,6 +10,7 @@ import MobileTouchFeedback from '../components/MobileTouchFeedback';
 import { useGyroscopic } from '../hooks/useGyroscopic';
 import { useMobileOptimization } from '../hooks/useMobileOptimization';
 import { useSwipeGesture } from '../hooks/useSwipeGesture';
+import ProjectsSkeleton from '../components/skeletons/ProjectsSkeleton';
 const Work = () => {
   const [projects, setProjects] = useState<WorkProject[]>([]);
   const [loading, setLoading] = useState(true);
@@ -43,14 +44,7 @@ const Work = () => {
     loadContent();
   }, []);
   if (loading) {
-    return <div className="magazine-container">
-        <div className="editorial-container py-16">
-          <div className="text-center">
-            <div className={`animate-spin w-8 h-8 border-2 border-gryd-accent border-t-transparent rounded-full mx-auto mb-4 ${reducedMotion ? 'animate-none' : ''}`}></div>
-            <p className="body text-gryd-soft">Loading portfolio...</p>
-          </div>
-        </div>
-      </div>;
+    return <ProjectsSkeleton count={3} />;
   }
   return <div className="magazine-container" ref={swipeRef}>
       {/* Portfolio Header */}
