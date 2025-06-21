@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { WorkProject } from '../types/content';
 import { loadWorkProjects } from '../utils/contentLoader';
+import { getSanityImageUrl } from '../utils/imageUtils';
 import { Link } from 'react-router-dom';
 import ScrollFade from '../components/ScrollFade';
 import MagazineFooter from '../components/MagazineFooter';
@@ -55,8 +56,8 @@ const Work = () => {
       {/* Portfolio Header */}
       <div className="work-portfolio-header">
         <div ref={portfolioRef} className={`portfolio-masthead ${isMobile ? '' : 'gyroscopic-card'}`}>
-          
-          
+
+
           <div className="portfolio-title-section">
             <h1 className="portfolio-main-title">
               {'WORK'.split('').map((letter, index) => <span key={index} className="hover-letter ink-bleed" style={{
@@ -67,7 +68,7 @@ const Work = () => {
             </h1>
             <p className="portfolio-subtitle">Case Studies & Client Projects</p>
           </div>
-          
+
           <div className="portfolio-stats">
             <div className="stat-item">
               <span className="stat-number">{projects.length}</span>
@@ -93,21 +94,25 @@ const Work = () => {
               <h4>Selected Work</h4>
               <div className="title-underline"></div>
             </div>
-            
+
             {projects.map((project, index) => <ScrollFade key={project.slug} delay={reducedMotion ? 0 : index * 200}>
                 <Link to={`/work/${project.slug}`} className="block">
                   {isTouch ? <MobileTouchFeedback hapticFeedback>
                       <article className="linear-project-card">
                         <div className="linear-project-content">
                           <div className="linear-project-image">
-                            <MobileOptimizedImage src={project.metadata.assets.hero || '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png'} alt={project.title} priority={index < 2} />
+                            <MobileOptimizedImage
+                              src={getSanityImageUrl(project.heroImage, { width: 400, height: 300 }) || '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png'}
+                              alt={project.heroImage?.alt || project.title}
+                              priority={index < 2}
+                            />
                           </div>
-                          
+
                           <div className="linear-project-info">
                             <div className="linear-project-category">{project.metadata.category}</div>
                             <h3 className="linear-project-title">{project.title}</h3>
                             <p className="linear-project-subtitle">{project.subtitle}</p>
-                            
+
                             <div className="linear-project-meta">
                               <span className="linear-project-year">{new Date(project.metadata.publishDate).getFullYear()}</span>
                               <span className="linear-project-cta">Read Case Study →</span>
@@ -118,14 +123,18 @@ const Work = () => {
                     </MobileTouchFeedback> : <article className="linear-project-card">
                       <div className="linear-project-content">
                         <div className="linear-project-image">
-                          <MobileOptimizedImage src={project.metadata.assets.hero || '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png'} alt={project.title} priority={index < 2} />
+                          <MobileOptimizedImage
+                            src={getSanityImageUrl(project.heroImage, { width: 400, height: 300 }) || '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png'}
+                            alt={project.heroImage?.alt || project.title}
+                            priority={index < 2}
+                          />
                         </div>
-                        
+
                         <div className="linear-project-info">
                           <div className="linear-project-category">{project.metadata.category}</div>
                           <h3 className="linear-project-title">{project.title}</h3>
                           <p className="linear-project-subtitle">{project.subtitle}</p>
-                          
+
                           <div className="linear-project-meta">
                             <span className="linear-project-year">{new Date(project.metadata.publishDate).getFullYear()}</span>
                             <span className="linear-project-cta">Read Case Study →</span>

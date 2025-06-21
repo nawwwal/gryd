@@ -10,6 +10,35 @@ export const loadWorkProjects = async (): Promise<WorkProject[]> => {
     timeline,
     impact,
     content,
+    heroImage{
+      asset->{
+        _id,
+        url,
+        metadata
+      },
+      alt,
+      hotspot
+    },
+    gallery[]{
+      asset->{
+        _id,
+        url,
+        metadata
+      },
+      alt,
+      caption,
+      hotspot
+    },
+    attachments[]{
+      asset->{
+        _id,
+        url,
+        originalFilename,
+        size
+      },
+      title,
+      description
+    },
     metadata
   }`
   return await client.fetch(query)
@@ -24,6 +53,35 @@ export const loadPlaygroundExperiments = async (): Promise<PlaygroundExperiment[
     intensity,
     visual,
     content,
+    heroImage{
+      asset->{
+        _id,
+        url,
+        metadata
+      },
+      alt,
+      hotspot
+    },
+    gallery[]{
+      asset->{
+        _id,
+        url,
+        metadata
+      },
+      alt,
+      caption,
+      hotspot
+    },
+    attachments[]{
+      asset->{
+        _id,
+        url,
+        originalFilename,
+        size
+      },
+      title,
+      description
+    },
     metadata
   }`
   return await client.fetch(query)
@@ -39,6 +97,35 @@ export const getContentBySlug = async (slug: string, type: 'work' | 'playground'
       timeline,
       impact,
       content,
+      heroImage{
+        asset->{
+          _id,
+          url,
+          metadata
+        },
+        alt,
+        hotspot
+      },
+      gallery[]{
+        asset->{
+          _id,
+          url,
+          metadata
+        },
+        alt,
+        caption,
+        hotspot
+      },
+      attachments[]{
+        asset->{
+          _id,
+          url,
+          originalFilename,
+          size
+        },
+        title,
+        description
+      },
       metadata
     }`
     const result = await client.fetch(query, { slug })
@@ -52,6 +139,35 @@ export const getContentBySlug = async (slug: string, type: 'work' | 'playground'
       intensity,
       visual,
       content,
+      heroImage{
+        asset->{
+          _id,
+          url,
+          metadata
+        },
+        alt,
+        hotspot
+      },
+      gallery[]{
+        asset->{
+          _id,
+          url,
+          metadata
+        },
+        alt,
+        caption,
+        hotspot
+      },
+      attachments[]{
+        asset->{
+          _id,
+          url,
+          originalFilename,
+          size
+        },
+        title,
+        description
+      },
       metadata
     }`
     const result = await client.fetch(query, { slug })
@@ -69,6 +185,35 @@ export const getAllContentByType = async (contentType: ContentMetadata['type']):
     timeline,
     impact,
     content,
+    heroImage{
+      asset->{
+        _id,
+        url,
+        metadata
+      },
+      alt,
+      hotspot
+    },
+    gallery[]{
+      asset->{
+        _id,
+        url,
+        metadata
+      },
+      alt,
+      caption,
+      hotspot
+    },
+    attachments[]{
+      asset->{
+        _id,
+        url,
+        originalFilename,
+        size
+      },
+      title,
+      description
+    },
     metadata
   }`
 
@@ -81,6 +226,35 @@ export const getAllContentByType = async (contentType: ContentMetadata['type']):
     intensity,
     visual,
     content,
+    heroImage{
+      asset->{
+        _id,
+        url,
+        metadata
+      },
+      alt,
+      hotspot
+    },
+    gallery[]{
+      asset->{
+        _id,
+        url,
+        metadata
+      },
+      alt,
+      caption,
+      hotspot
+    },
+    attachments[]{
+      asset->{
+        _id,
+        url,
+        originalFilename,
+        size
+      },
+      title,
+      description
+    },
     metadata
   }`
 

@@ -1,10 +1,10 @@
-
 import { useEffect, useRef, useState } from 'react';
 import ScrollFade from '../components/ScrollFade';
 import MagazineFooter from '../components/MagazineFooter';
 import InteractiveBackground from '../components/InteractiveBackground';
 import { MorphingText } from '../components/MorphingText';
 import { loadPlaygroundExperiments } from '../utils/contentLoader';
+import { getSanityImageUrl } from '../utils/imageUtils';
 import { PlaygroundExperiment } from '../types/content';
 
 const Playground = () => {
@@ -89,7 +89,7 @@ const Playground = () => {
         <div ref={backgroundRef} className="playground-hero-background">
           <InteractiveBackground mousePos={mousePos} />
         </div>
-        
+
         <div className="playground-hero-content">
           <div className="lab-notebook enhanced-gyroscopic">
             <div className="lab-header-content">
@@ -97,7 +97,7 @@ const Playground = () => {
                 <div className="morphing-title-container">
                   <MorphingText texts={['PLAYGROUND', 'LABORATORY', 'WORKSHOP', 'STUDIO']} className="experimental-title" />
                 </div>
-                
+
                 <div className="lab-subtitle-minimal">
                   <div className="lab-subtitle-text">Research Lab • Experiments & Dead Ends</div>
                 </div>
@@ -120,14 +120,25 @@ const Playground = () => {
               <span className="experiment-count">{experiments.length} active studies</span>
             </div>
           </div>
-          
+
           <div ref={masonryRef} className="experiments-grid">
             {experiments.map((experiment, index) => <div key={experiment.slug} className={`experiment-card experiment-${experiment.visual} intensity-${experiment.intensity}`} data-type={experiment.metadata.type}>
-                {/* Visual Background Element */}
-                <div className="experiment-visual">
-                  <div className="visual-pattern"></div>
-                  <div className="visual-overlay"></div>
-                </div>
+                {/* Visual Background Element or Hero Image */}
+                {experiment.heroImage ? (
+                  <div className="experiment-image">
+                    <img
+                      src={getSanityImageUrl(experiment.heroImage, { width: 400, height: 300 }) || '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png'}
+                      alt={experiment.heroImage?.alt || experiment.title}
+                      className="experiment-hero-image"
+                    />
+                    <div className="image-overlay"></div>
+                  </div>
+                ) : (
+                  <div className="experiment-visual">
+                    <div className="visual-pattern"></div>
+                    <div className="visual-overlay"></div>
+                  </div>
+                )}
 
                 {/* Content Layer */}
                 <div className="experiment-content">
@@ -203,24 +214,24 @@ const Playground = () => {
               <div className="divider-line"></div>
               <div className="divider-ornament">◆</div>
             </div>
-            
+
             <div className="lab-notes-content">
               <div className="editorial-column">
                 <div className="editorial-header">
                   <h3 className="editorial-title">From the Laboratory</h3>
                   <div className="editorial-subtitle">Research Director's Notes</div>
                 </div>
-                
+
                 <div className="editorial-body">
                   <p className="editorial-note">
-                    <span className="dropcap">T</span>his laboratory exists at the intersection of curiosity and chaos. 
-                    Each experiment documented here represents a question asked, a hypothesis tested, 
+                    <span className="dropcap">T</span>his laboratory exists at the intersection of curiosity and chaos.
+                    Each experiment documented here represents a question asked, a hypothesis tested,
                     or simply the delightful pursuit of "what if?"
                   </p>
-                  
+
                   <p className="editorial-note">
                     Some discoveries here have shaped entire projects. Others remain beautiful failures—
-                    the kind that teach you more than success ever could. All are preserved in the spirit 
+                    the kind that teach you more than success ever could. All are preserved in the spirit
                     of scientific transparency.
                   </p>
                 </div>
@@ -231,7 +242,7 @@ const Playground = () => {
                   <h3 className="editorial-title">Reader's Guide</h3>
                   <div className="editorial-subtitle">How to Navigate</div>
                 </div>
-                
+
                 <div className="editorial-body">
                   <div className="editorial-list">
                     <div className="list-item">

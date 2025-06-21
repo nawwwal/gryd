@@ -1,3 +1,43 @@
+// Sanity Image Types
+export interface SanityImageAsset {
+  _id: string
+  url: string
+  metadata?: {
+    dimensions?: {
+      width: number
+      height: number
+      aspectRatio: number
+    }
+    palette?: any
+    lqip?: string
+    blurHash?: string
+  }
+}
+
+export interface SanityImage {
+  asset: SanityImageAsset
+  alt?: string
+  caption?: string
+  hotspot?: {
+    x: number
+    y: number
+    height: number
+    width: number
+  }
+}
+
+export interface SanityFileAsset {
+  _id: string
+  url: string
+  originalFilename?: string
+  size?: number
+}
+
+export interface SanityFile {
+  asset: SanityFileAsset
+  title?: string
+  description?: string
+}
 
 export interface ContentMetadata {
   type: 'photography' | 'code' | 'blog' | 'prototype' | 'research' | 'visual' | 'note';
@@ -9,11 +49,6 @@ export interface ContentMetadata {
   tools: string[];
   tags: string[];
   difficulty?: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
-  assets: {
-    hero?: string;
-    gallery?: string[];
-    downloads?: string[];
-  };
   interactive?: {
     hasDemo: boolean;
     demoUrl?: string;
@@ -28,6 +63,9 @@ export interface ContentItem {
   description: string;
   metadata: ContentMetadata;
   content: string;
+  heroImage?: SanityImage;
+  gallery?: SanityImage[];
+  attachments?: SanityFile[];
 }
 
 export interface WorkProject extends ContentItem {
