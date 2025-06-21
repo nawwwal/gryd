@@ -1,0 +1,277 @@
+@layer components {
+  /* Mobile Native Container */
+  .mobile-native-container {
+    @apply relative;
+    height: 100vh;
+    height: -webkit-fill-available;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Mobile Native Root Styles */
+  html.mobile-native {
+    height: 100%;
+    height: -webkit-fill-available;
+    overflow: hidden;
+  }
+
+  html.mobile-native body {
+    height: 100%;
+    height: -webkit-fill-available;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* Smooth scrolling container */
+  .mobile-scroll-container {
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
+  }
+
+  .mobile-scroll-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Magazine-inspired floating bottom nav */
+  .mobile-bottom-nav {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow:
+      0 -4px 20px rgba(0, 0, 0, 0.1),
+      0 -1px 4px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* Editorial touch interactions */
+  .editorial-touch-target {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .editorial-touch-target:active {
+    transform: scale(0.98);
+  }
+
+  .editorial-touch-target::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: inherit;
+    background: radial-gradient(circle, rgba(251, 146, 60, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+
+  .editorial-touch-target:active::before {
+    opacity: 1;
+  }
+
+  /* Mobile card transitions */
+  .mobile-card-enter {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+
+  .mobile-card-enter-active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mobile-card-exit {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .mobile-card-exit-active {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Mobile typography adjustments */
+  @media (max-width: 768px) {
+    .mobile-headline {
+      font-size: 2rem;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .mobile-subhead {
+      font-size: 1.25rem;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+
+    .mobile-body {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .mobile-caption {
+      font-size: 0.75rem;
+      line-height: 1.4;
+      letter-spacing: 0.025em;
+    }
+  }
+
+  /* Magazine-style pull to refresh */
+  .pull-refresh-indicator {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+    border-bottom: 1px solid rgba(217, 119, 6, 0.2);
+  }
+
+  .pull-refresh-spinner {
+    border: 2px solid rgba(217, 119, 6, 0.1);
+    border-top: 2px solid #d97706;
+    animation: editorial-spin 1s linear infinite;
+  }
+
+  /* Mobile navigation transitions */
+  .mobile-nav-slide-up {
+    animation: mobile-nav-slide-up 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mobile-nav-slide-down {
+    animation: mobile-nav-slide-down 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Mobile modal behaviors */
+  .mobile-modal-backdrop {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .mobile-modal-content {
+    background: #ffffff;
+    border-radius: 16px 16px 0 0;
+    box-shadow:
+      0 -4px 20px rgba(0, 0, 0, 0.15),
+      0 -1px 4px rgba(0, 0, 0, 0.1);
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mobile-modal-content.open {
+    transform: translateY(0);
+  }
+
+  /* Magazine paper texture for mobile */
+  .mobile-paper-bg {
+    background:
+      linear-gradient(135deg, #ffffff 0%, #fafafa 100%),
+      radial-gradient(circle at 50% 50%, rgba(139,69,19,0.01) 1px, transparent 1px);
+    background-size: 100% 100%, 8px 8px;
+  }
+
+  /* Enhanced touch feedback for editorial elements */
+  .editorial-link-touch {
+    position: relative;
+    transition: all 0.2s ease;
+  }
+
+  .editorial-link-touch:active {
+    transform: translateY(1px);
+    filter: brightness(0.95);
+  }
+
+  .editorial-link-touch::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #d97706, #f59e0b);
+    transition: width 0.3s ease;
+  }
+
+  .editorial-link-touch:active::after {
+    width: 100%;
+  }
+
+  /* Mobile performance optimizations */
+  .mobile-optimized-img {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  /* Reduced motion preferences for mobile */
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-card-enter-active,
+    .mobile-card-exit-active,
+    .mobile-nav-slide-up,
+    .mobile-nav-slide-down,
+    .editorial-touch-target {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+}
+
+/* Mobile-specific animations */
+@keyframes mobile-nav-slide-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes mobile-nav-slide-down {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes editorial-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* iOS-specific optimizations */
+@supports (-webkit-touch-callout: none) {
+  .mobile-native-container {
+    height: -webkit-fill-available;
+  }
+
+  .mobile-scroll-container {
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Android-specific optimizations */
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  .mobile-native-container {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+  }
+}
