@@ -9,10 +9,17 @@ const client = createClient({
 })
 
 // Test client with write capabilities for seeding data
+const writeToken = process.env.SANITY_WRITE_TOKEN
+if (!writeToken) {
+  console.error('❌ SANITY_WRITE_TOKEN environment variable is required for write operations')
+  console.log('   Set it with: export SANITY_WRITE_TOKEN=your_token_here')
+  process.exit(1)
+}
+
 const writeClient = createClient({
   projectId: 'c0rjrvm3',
   dataset: 'production',
-  token: 'skChPZPvdvDJZXfRQfHEKg6v8igqnMnxCUjtZtT3e1yWlxNTXijpzfileJykHhZVgReR456WPnQQ9FAiqeFGKtgWANYUNyHhaamMXNxJC550tQa38VEX4qyKnZ6orcMwmrDIbKW2dHfF5A8tuliRwYo0Bun0yZFx0tZHKvBR9TROSkptFQ3O',
+  token: writeToken,
   apiVersion: '2024-01-01',
   useCdn: false,
 })
@@ -495,9 +502,12 @@ async function runTests() {
   // Show usage help
   if (args.length === 0) {
     console.log('\n📖 Usage Options:')
-    console.log('   node final-sanity-test.mjs --seed       # Seed sample data')
-    console.log('   node final-sanity-test.mjs --fix-images # Add hero images to existing projects')
-    console.log('   node final-sanity-test.mjs              # Run test only')
+    console.log('   node final-sanity-test.mjs --seed       # Seed sample data (requires SANITY_WRITE_TOKEN)')
+    console.log('   node final-sanity-test.mjs --fix-images # Add hero images to existing projects (requires SANITY_WRITE_TOKEN)')
+    console.log('   node final-sanity-test.mjs              # Run test only (read-only)')
+    console.log('\n🔐 Environment Variables:')
+    console.log('   SANITY_WRITE_TOKEN - Required for --seed and --fix-images operations')
+    console.log('   Example: export SANITY_WRITE_TOKEN=your_token_here')
   }
 }
 
