@@ -17,44 +17,32 @@ const Work = () => {
   const portfolioRef = useGyroscopic();
   const {
     isMobile,
+    isTouch,
+    reducedMotion
+  } = useMobileOptimization();
 
-            {loading ? (
-              <ProjectsSkeleton count={3} className="py-16" />
-            ) : projects.length > 0 ? (
-              projects.map((project, index) => (
-                <ScrollFade key={project.slug} delay={reducedMotion ? 0 : index * 200}>
-                  <Link to={`/work/${project.slug}`} className="block">
-                    {isTouch ? (
-                      <MobileTouchFeedback hapticFeedback>
-                        <article className="linear-project-card">
-                          <div className="linear-project-content">
-                            <div className="linear-project-image">
-                              <MobileOptimizedImage src={project.metadata.assets.hero || '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png'} alt={project.title} priority={index < 2} />
-                            </div>
+  const swipeRef = useSwipeGesture((direction) => {
+    // Handle swipe gestures if needed
+  });
 
-                            <div className="linear-project-info">
-                              <div className="linear-project-category">{project.metadata.category}</div>
-                              <h3 className="linear-project-title">{project.title}</h3>
-                              <p className="linear-project-subtitle">{project.subtitle}</p>
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const items = await loadWorkProjects();
+        setProjects(items);
+      } catch (err) {
+        console.error('Failed to load projects', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
-                              <div className="linear-project-meta">
-                                <span className="linear-project-year">{new Date(project.metadata.publishDate).getFullYear()}</span>
-                                <span className="linear-project-cta">Read Case Study →</span>
-                              </div>
-                            </div>
-                          </div>
-                        </article>
-                      </MobileTouchFeedback>
-                    ) : (
+  if (loading) {
+    return <ProjectsSkeleton count={3} className="py-16" />;
+  }
 
-
-                    )}
-                  </Link>
-                </ScrollFade>
-              ))
-            ) : (
-              <p className="body text-center py-16">no projects found</p>
-            )}
   return <div className="magazine-container" ref={swipeRef}>
       {/* Portfolio Header */}
       <div className="work-portfolio-header">
@@ -119,7 +107,7 @@ const Work = () => {
 
                               <div className="linear-project-meta">
                                 <span className="linear-project-year">{new Date(project.metadata?.publishDate || Date.now()).getFullYear()}</span>
-    </div>
+                                <span className="linear-project-cta">Read Case Study →</span>
                               </div>
                             </div>
                           </div>

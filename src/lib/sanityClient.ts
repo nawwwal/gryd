@@ -7,11 +7,6 @@ const dataset =
 const token =
   import.meta.env.VITE_SANITY_READ_TOKEN || import.meta.env.SANITY_API_READ_TOKEN
 
-  projectId,
-  dataset,
-  useCdn: !token,
-  token,
-
 if (!projectId) {
   throw new Error('Missing required environment variable: VITE_SANITY_PROJECT_ID')
 }

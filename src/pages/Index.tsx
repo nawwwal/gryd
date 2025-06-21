@@ -34,22 +34,17 @@ const Index = () => {
     fetchData();
   }, []);
 
-
-        {loading ? (
-          <HomeSkeleton />
-        ) : featuredProject ? (
-        {loading && <HomeSkeleton />}
-        {!loading && featuredProject && (
-              <ArticleGrid projects={otherProjects} />
-            </div>
-          </>
-        )}
-        {!loading && !featuredProject && (
-          <p className="body text-center py-16">no projects found</p>
-        )}
-      }
+  const swipeRef = useSwipeGesture((direction) => {
+    if (direction === 'up' && currentSection < sections.length - 1) {
+      setCurrentSection(currentSection + 1);
+      document.getElementById(sections[currentSection + 1])?.scrollIntoView({ behavior: 'smooth' });
+    } else if (direction === 'down' && currentSection > 0) {
+      setCurrentSection(currentSection - 1);
+      document.getElementById(sections[currentSection - 1])?.scrollIntoView({ behavior: 'smooth' });
     }
   });
+
+  const sections = ['hero', 'featured', 'letters'];
 
   if (loading) {
     return <HomeSkeleton />;

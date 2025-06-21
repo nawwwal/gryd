@@ -73,27 +73,36 @@ const Playground = () => {
     }
   }, [loading, experiments]);
 
-  return <div className="magazine-container">
+  return (
+    <div className="magazine-container">
       {/* Enhanced Experimental Hero - Full Viewport Height */}
       <div className="playground-hero-container">
         <div ref={backgroundRef} className="playground-hero-background">
           <InteractiveBackground mousePos={mousePos} />
         </div>
 
-            {loading ? (
-              <ExperimentsSkeleton count={4} />
-            ) : experiments.length > 0 ? (
-              experiments.map((experiment, index) => (
-                <div
-                  key={experiment.slug}
-                  className={`experiment-card experiment-${experiment.visual} intensity-${experiment.intensity}`}
-                  data-type={experiment.metadata.type}
-                >
-                  {/* Visual Background Element */}
-                  <div className="experiment-visual">
-                    <div className="visual-pattern"></div>
-                    <div className="visual-overlay"></div>
-                  </div>
+        <div className="playground-hero-content">
+          <div className="hero-main-section">
+            <div className="hero-text-container">
+              <div className="hero-meta">
+                <span className="hero-category">Laboratory</span>
+                <span className="hero-version">V3.7</span>
+              </div>
+
+              <h1 className="hero-title">
+                {'PLAYGROUND'.split('').map((letter, index) => (
+                  <span key={index} className="hero-letter" style={{
+                    animationDelay: `${index * 100}ms`
+                  }}>
+                    {letter}
+                  </span>
+                ))}
+              </h1>
+
+              <div className="hero-subtitle-container">
+                <div className="hero-subtitle-primary">
+                  <div className="subtitle-line">Creative Research Lab</div>
+                  <div className="subtitle-line">& Experimental Archives</div>
                 </div>
 
                 <div className="lab-subtitle-minimal">
@@ -120,7 +129,11 @@ const Playground = () => {
           </div>
 
           <div ref={masonryRef} className="experiments-grid">
-            {experiments.length > 0 ? (
+            {loading ? (
+              <div className="text-center py-16 col-span-full">
+                <p className="body text-gryd-soft">Loading experiments...</p>
+              </div>
+            ) : experiments.length > 0 ? (
               experiments.map((experiment, index) => (
                 <div key={experiment.slug} className={`experiment-card experiment-${experiment.visual} intensity-${experiment.intensity}`} data-type={experiment.metadata?.type}>
                   {/* Visual Background Element or Hero Image */}
@@ -160,11 +173,7 @@ const Playground = () => {
                         }}>
                           {char === ' ' ? '\u00A0' : char}
                         </span>
-                </div>
-              ))
-            ) : (
-              <p className="body text-center py-16 w-full col-span-2">no experiments found</p>
-            )}
+                      ))}
                     </h3>
 
                     <p className="experiment-description">{experiment.description}</p>
@@ -232,7 +241,7 @@ const Playground = () => {
 
             <div className="lab-notes-content">
               <div className="editorial-column">
-    </div>
+                <div className="editorial-header">
                   <h3 className="editorial-title">From the Laboratory</h3>
                   <div className="editorial-subtitle">Research Director's Notes</div>
                 </div>
@@ -281,7 +290,8 @@ const Playground = () => {
       </div>
 
       <MagazineFooter />
-    </div>;
+    </div>
+  );
 };
 
 export default Playground;
