@@ -8,7 +8,32 @@ export interface SanityImageAsset {
       height: number
       aspectRatio: number
     }
-    palette?: any
+    palette?: {
+      dominant?: {
+        background?: string
+        foreground?: string
+      }
+      darkMuted?: {
+        background?: string
+        foreground?: string
+      }
+      lightVibrant?: {
+        background?: string
+        foreground?: string
+      }
+      darkVibrant?: {
+        background?: string
+        foreground?: string
+      }
+      vibrant?: {
+        background?: string
+        foreground?: string
+      }
+      muted?: {
+        background?: string
+        foreground?: string
+      }
+    }
     lqip?: string
     blurHash?: string
   }

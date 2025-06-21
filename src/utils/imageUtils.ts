@@ -1,15 +1,16 @@
 import imageUrlBuilder from '@sanity/image-url'
 import client from '../lib/sanityClient'
+import type { SanityImage, SanityImageAsset, SanityFile } from '../types/content'
 
 const builder = imageUrlBuilder(client)
 
-export function urlFor(source: any) {
+export function urlFor(source: SanityImage | SanityImageAsset | string) {
   return builder.image(source)
 }
 
 // Helper function to get optimized image URLs
 export function getOptimizedImageUrl(
-  image: any,
+  image: SanityImage | SanityImageAsset | null | undefined,
   options: {
     width?: number
     height?: number
@@ -17,7 +18,7 @@ export function getOptimizedImageUrl(
     quality?: number
     crop?: 'center' | 'top' | 'bottom' | 'left' | 'right'
   } = {}
-) {
+): string | null {
   if (!image) return null
 
   // Handle both direct asset references and full image objects
