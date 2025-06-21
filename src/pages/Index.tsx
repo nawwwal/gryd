@@ -1,19 +1,24 @@
+import { useState } from 'react';
 import MagazineHero from '../components/MagazineHero';
 import FeaturedArticle from '../components/FeaturedArticle';
 import ArticleGrid from '../components/ArticleGrid';
 import LettersToEditor from '../components/LettersToEditor';
 import MagazineFooter from '../components/MagazineFooter';
-import { useEffect, useState } from 'react';
-import { loadWorkProjects } from '../utils/contentLoader';
+import { useWorkProjects } from '../hooks/useContentQuery';
 import type { WorkProject } from '../types/content';
 import { useMobileOptimization } from '../hooks/useMobileOptimization';
 import { useSwipeGesture } from '../hooks/useSwipeGesture';
 import HomeSkeleton from '../components/skeletons/HomeSkeleton';
 
 const Index = () => {
-  const [projects, setProjects] = useState<WorkProject[]>([]);
-  const [loading, setLoading] = useState(true);
-  const featuredProject = projects.find(p => p.metadata.featured) || projects[0];
+  const {
+    data: projects = [],
+    isLoading: loading,
+    error,
+    isError
+  } = useWorkProjects();
+
+  const featuredProject = projects.find(p => p.metadata?.featured) || projects[0];
   const otherProjects = featuredProject
     ? projects.filter(p => p.slug !== featuredProject.slug).slice(0, 6)
     : [];
@@ -22,20 +27,6 @@ const Index = () => {
 
   // Move sections array declaration before useSwipeGesture
   const sections = ['hero', 'featured', 'letters'];
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const items = await loadWorkProjects();
-        setProjects(items);
-      } catch (err) {
-        console.error('Failed to load projects', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
 
   // Fix useSwipeGesture usage to match expected interface and use functional updates
   const swipeRef = useSwipeGesture<HTMLDivElement>({
