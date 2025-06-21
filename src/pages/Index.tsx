@@ -4,16 +4,32 @@ import FeaturedArticle from '../components/FeaturedArticle';
 import ArticleGrid from '../components/ArticleGrid';
 import LettersToEditor from '../components/LettersToEditor';
 import MagazineFooter from '../components/MagazineFooter';
-import { projects } from '../data/projects';
+import { useEffect, useState } from 'react';
+import { loadWorkProjects } from '../utils/contentLoader';
+import type { WorkProject } from '../types/content';
 import { useMobileOptimization } from '../hooks/useMobileOptimization';
 import { useSwipeGesture } from '../hooks/useSwipeGesture';
-import { useState } from 'react';
 
 const Index = () => {
+  const [projects, setProjects] = useState<WorkProject[]>([]);
   const featuredProject = projects.find(p => p.metadata.featured) || projects[0];
-  const otherProjects = projects.filter(p => p.slug !== featuredProject.slug).slice(0, 6);
+  const otherProjects = featuredProject
+    ? projects.filter(p => p.slug !== featuredProject.slug).slice(0, 6)
+    : [];
   const { isMobile, isTouch } = useMobileOptimization();
   const [currentSection, setCurrentSection] = useState(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const items = await loadWorkProjects();
+        setProjects(items);
+      } catch (err) {
+        console.error('Failed to load projects', err);
+      }
+    };
+    fetchData();
+  }, []);
   
   const sections = ['hero', 'featured', 'grid', 'letters'];
   
@@ -35,6 +51,10 @@ const Index = () => {
       }
     }
   });
+
+  if (!featuredProject) {
+    return null;
+  }
 
   return (
     <div className="magazine-container" ref={swipeRef}>

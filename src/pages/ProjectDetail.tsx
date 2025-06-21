@@ -1,12 +1,19 @@
 
 import { useParams, Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import ScrollFade from '../components/ScrollFade';
 import MagazineFooter from '../components/MagazineFooter';
-import { projects } from '../data/projects';
+import { getContentBySlug } from '../utils/contentLoader';
+import type { WorkProject } from '../types/content';
 
 const ProjectDetail = () => {
   const { slug } = useParams();
-  const project = projects.find(p => p.slug === slug);
+  const [project, setProject] = useState<WorkProject | null>(null);
+
+  useEffect(() => {
+    if (!slug) return;
+    getContentBySlug(slug, 'work').then((res) => setProject(res as WorkProject | null));
+  }, [slug]);
 
   if (!project) {
     return (
