@@ -1,73 +1,46 @@
-# Welcome to your Lovable project
+# GRYD Echo Forge
 
-## Project info
+**GRYD Echo Forge** is a design-focused magazine site built with React and Vite. The source mixes interactive articles with a lightweight CMS and is ready to deploy on Vercel.
 
-**URL**: https://lovable.dev/projects/038efdd5-78d3-4091-a1b0-affa4da0a05d
+## Techniques
 
-## How can I edit this code?
+- **Intersection Observer** is used in [`ScrollFade`](src/components/ScrollFade.tsx) for element reveal on scroll ([MDN](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)).
+- **requestAnimationFrame** drives the animated dots in [`InteractiveBackground`](src/components/InteractiveBackground.tsx) ([MDN](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame)).
+- **Gyroscope-like pointer tracking** in [`useGyroscopic`](src/hooks/useGyroscopic.tsx) tilts elements in response to mouse movement.
+- **Swipe gesture hooks** provide touch navigation in [`useSwipeGesture`](src/hooks/useSwipeGesture.tsx).
+- **MDX support** via [`MDXComponents`](src/components/mdx/MDXComponents.tsx) enables rich article formatting.
 
-There are several ways of editing your application.
+## Libraries of Note
 
-**Use Lovable**
+- [shadcn/ui](https://ui.shadcn.com/) components, built on Radix primitives
+- [React Query](https://tanstack.com/query/latest) for data fetching
+- [Embla Carousel](https://www.embla-carousel.com/) for lightweight carousels
+- [clsx](https://github.com/lukeed/clsx) and [class-variance-authority](https://github.com/joe-bell/cva) for conditional class handling
+- [Lucide React](https://lucide.dev/) icon set
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/038efdd5-78d3-4091-a1b0-affa4da0a05d) and start prompting.
+Fonts come from [Google Fonts](https://fonts.google.com/): [Platypi](https://fonts.google.com/specimen/Platypi), [Fraunces](https://fonts.google.com/specimen/Fraunces), and [Schibsted Grotesk](https://fonts.google.com/specimen/Schibsted+Grotesk). Code blocks use [JetBrains Mono](https://fontsource.org/fonts/jetbrains-mono).
 
-Changes made via Lovable will be committed automatically to this repo.
+## Project Structure
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```text
+api/
+public/
+  lovable-uploads/
+src/
+  components/
+  data/
+  hooks/
+  lib/
+  pages/
+  styles/
+  types/
+  utils/
+index.html
+vite.config.ts
+tailwind.config.ts
+vercel.json
 ```
+- `api/` contains serverless functions such as [`login.ts`](api/login.ts).
+- `public/` holds static assets, including images under `lovable-uploads/`.
+- `src/` is the React app with components, pages, hooks and styling.
 
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/038efdd5-78d3-4091-a1b0-affa4da0a05d) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)

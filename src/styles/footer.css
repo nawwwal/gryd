@@ -3,11 +3,10 @@
 
 .magazine-footer-enhanced {
   background: linear-gradient(135deg, #fefefe 0%, #f8f8f8 100%);
-  /* Removed the black border-top */
   position: relative;
   margin-top: 4rem;
   overflow: hidden;
-  width: 100%; /* Ensure full width */
+  width: 100%;
 }
 
 .footer-paper {
@@ -24,8 +23,7 @@
   box-shadow: 
     inset 0 1px 0 rgba(255,255,255,0.8),
     0 2px 8px rgba(0,0,0,0.05);
-  width: 100%; /* Ensure full width */
-  /* Removed max-width constraint */
+  width: 100%;
 }
 
 .footer-binding {
@@ -71,10 +69,10 @@
 }
 
 .footer-main-title {
-  font-family: 'Platypi', serif; /* Updated to match style guide */
-  font-size: 2.5rem;
+  font-family: 'Platypi', serif;
+  font-size: clamp(2rem, 5vw, 2.5rem);
   font-weight: 700;
-  letter-spacing: 6px;
+  letter-spacing: clamp(4px, 2vw, 6px);
   text-transform: uppercase;
   color: #2c2c2c;
   margin: 0.5rem 0;
@@ -82,8 +80,8 @@
 }
 
 .footer-subtitle {
-  font-family: 'Fraunces', serif; /* Updated to match style guide */
-  font-size: 0.9rem;
+  font-family: 'Fraunces', serif;
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
   color: #666;
   text-transform: lowercase;
   letter-spacing: 1px;
@@ -91,17 +89,18 @@
   font-weight: 500;
 }
 
+/* Fully Responsive Content Grid */
 .footer-content-grid {
-  max-width: 1200px;
+  max-width: min(95vw, 1400px);
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 clamp(1rem, 3vw, 2rem);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 3rem 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: clamp(2rem, 4vw, 3rem) clamp(1rem, 2vw, 2rem);
   position: relative;
 }
 
-/* Editorial Column Dividers - Only for larger screens */
+/* Responsive Column Dividers */
 @media (min-width: 1024px) {
   .footer-content-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -143,11 +142,12 @@
 .footer-section {
   position: relative;
   z-index: 1;
+  min-width: 0; /* Prevent grid overflow */
 }
 
 .footer-section-header {
-  font-family: 'Fraunces', serif; /* Updated to match style guide */
-  font-size: 0.75rem;
+  font-family: 'Fraunces', serif;
+  font-size: clamp(0.7rem, 2vw, 0.75rem);
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -168,8 +168,8 @@
 }
 
 .footer-details {
-  font-family: 'Fraunces', serif; /* Updated to match style guide */
-  font-size: 0.85rem;
+  font-family: 'Fraunces', serif;
+  font-size: clamp(0.8rem, 2vw, 0.85rem);
   line-height: 1.6;
   color: #4a4a4a;
   font-weight: 500;
@@ -179,6 +179,7 @@
   margin-bottom: 0.5rem;
   padding-left: 1rem;
   position: relative;
+  word-wrap: break-word;
 }
 
 .footer-details > div::before {
@@ -189,24 +190,77 @@
   font-weight: bold;
 }
 
-.live-time {
+/* Playful Time Display */
+.time-display-playful {
+  background: rgba(212, 175, 55, 0.05);
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  margin: 1rem 0;
+}
+
+.time-component {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.75rem;
+  padding-left: 0 !important;
+}
+
+.time-component::before {
+  display: none !important;
+}
+
+.time-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.time-value {
+  font-family: 'JetBrains Mono', monospace;
   font-weight: 600;
   color: #2c2c2c;
-  font-family: 'JetBrains Mono', monospace; /* Keep monospace for time display */
-  font-size: 0.8rem;
+}
+
+.day-value {
+  font-size: 1.1rem;
+  color: #d4af37;
+}
+
+.time-value-main {
+  font-size: 1.2rem;
+  color: #2c2c2c;
   background: rgba(212, 175, 55, 0.1);
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  display: inline-block;
+}
+
+.date-zone {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.weather-display {
+  font-weight: 600;
+  color: #d4af37;
+  background: rgba(212, 175, 55, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  display: inline-block;
+  font-family: 'Fraunces', serif;
 }
 
 /* Editorial Stamps */
 .footer-editorial-stamp {
   position: absolute;
-  right: 2rem;
+  right: clamp(1rem, 3vw, 2rem);
   top: 1rem;
-  width: 80px;
-  height: 80px;
+  width: clamp(60px, 10vw, 80px);
+  height: clamp(60px, 10vw, 80px);
   border: 3px solid #d4af37;
   border-radius: 50%;
   display: flex;
@@ -220,8 +274,8 @@
 }
 
 .footer-editorial-stamp .stamp-text {
-  font-family: 'JetBrains Mono', monospace; /* Keep monospace for stamp */
-  font-size: 0.6rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(0.5rem, 1.5vw, 0.6rem);
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -230,15 +284,20 @@
   line-height: 1.1;
 }
 
-/* Bottom Bar - Updated Typography */
+/* Responsive Bottom Bar */
 .footer-bottom-bar {
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   color: #2c2c2c;
-  padding: 1.5rem 0;
+  padding: clamp(1rem, 3vw, 1.5rem) 0;
   margin-top: 3rem;
   border-top: 2px solid #d4af37;
   position: relative;
-  width: 100%; /* Ensure full width */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .footer-bottom-bar::before {
@@ -252,22 +311,22 @@
 }
 
 .footer-imprint {
-  font-family: 'Fraunces', serif; /* Updated to match style guide */
-  font-size: 0.75rem;
+  font-family: 'Fraunces', serif;
+  font-size: clamp(0.7rem, 2vw, 0.75rem);
   font-weight: 600;
   letter-spacing: 0.05em;
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding-left: 2rem;
+  padding-left: clamp(1rem, 3vw, 2rem);
   flex-wrap: wrap;
-  justify-content: center;
+  flex: 1;
 }
 
 .footer-page-marker {
-  padding-right: 2rem;
-  font-family: 'Fraunces', serif; /* Updated to match style guide */
-  font-size: 0.75rem;
+  padding-right: clamp(1rem, 3vw, 2rem);
+  font-family: 'Fraunces', serif;
+  font-size: clamp(0.7rem, 2vw, 0.75rem);
   font-weight: 700;
   letter-spacing: 0.1em;
   color: #d4af37;
@@ -296,8 +355,8 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: 'Fraunces', serif; /* Updated to match style guide */
-  font-size: 0.75rem;
+  font-family: 'Fraunces', serif;
+  font-size: clamp(0.7rem, 2vw, 0.75rem);
   color: #4a4a4a;
   text-decoration: none;
   transition: all 0.2s ease;
@@ -315,7 +374,7 @@
   transform: translateY(-1px);
 }
 
-/* Subscription Box Mockup */
+/* Interactive Subscription Box */
 .footer-subscription-box {
   background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
   border: 2px dashed #d4af37;
@@ -325,6 +384,14 @@
   margin-top: 1.5rem;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.footer-subscription-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+  border-color: #b8860b;
 }
 
 .footer-subscription-box::before {
@@ -345,8 +412,8 @@
 }
 
 .subscription-title {
-  font-family: 'Fraunces', serif; /* Updated to match style guide */
-  font-size: 0.8rem;
+  font-family: 'Fraunces', serif;
+  font-size: clamp(0.75rem, 2vw, 0.8rem);
   font-weight: bold;
   color: #2c2c2c;
   margin-bottom: 0.5rem;
@@ -356,12 +423,24 @@
 
 .subscription-text {
   font-family: 'Fraunces', serif;
-  font-size: 0.7rem;
+  font-size: clamp(0.65rem, 1.8vw, 0.7rem);
   color: #6c757d;
   line-height: 1.4;
   position: relative;
   z-index: 1;
   font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.subscription-cta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(0.6rem, 1.5vw, 0.65rem);
+  color: #d4af37;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+  z-index: 1;
 }
 
 /* Mobile Responsiveness */
@@ -414,13 +493,34 @@
     display: none;
   }
 
-  .footer-main-title {
-    font-size: 2rem;
-    letter-spacing: 4px;
-  }
-
   .footer-magazine-title {
     padding: 1.5rem 0 2rem;
+  }
+
+  .time-display-playful {
+    margin: 0.5rem 0;
+  }
+}
+
+/* Extra Small Screens */
+@media (max-width: 480px) {
+  .footer-content-grid {
+    gap: 2rem;
+  }
+  
+  .footer-subscription-box {
+    padding: 1rem;
+  }
+  
+  .footer-social-links {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .footer-social-link {
+    width: 100%;
+    justify-content: center;
+    max-width: 200px;
   }
 }
 

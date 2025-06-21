@@ -10,38 +10,21 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-// Secure credential validation - these should ideally come from environment variables
-// or be validated server-side in a real application
-const validateCredentials = async (username: string, password: string): Promise<boolean> => {
-  // Simulate API call delay
-  await new Promise(resolve => setTimeout(resolve, 500));
-  
-  // In a real application, this would be a server-side API call
-  // For now, we'll use a more secure approach than hardcoded values
-  const validUsername = import.meta.env.VITE_CMS_USERNAME || 'admin';
-  const validPassword = import.meta.env.VITE_CMS_PASSWORD || 'admin123';
-  
-  return username === validUsername && password === validPassword;
-};
-
-// Generate a simple JWT-like token (in production, use a proper JWT library)
-const generateSecureToken = (): string => {
-  const timestamp = Date.now();
-  const randomPart = Math.random().toString(36).substring(2);
-  return btoa(`${timestamp}.${randomPart}`);
-};
-
-// Validate if token is still fresh (expires after 24 hours)
-const isTokenValid = (token: string): boolean => {
+// Parse the JWT payload
+const parseJwt = (token: string) => {
   try {
-    const decoded = atob(token);
-    const [timestamp] = decoded.split('.');
-    const tokenAge = Date.now() - parseInt(timestamp);
-    const maxAge = 24 * 60 * 60 * 1000; // 24 hours
-    return tokenAge < maxAge;
+    const base64 = token.split('.')[1];
+    return JSON.parse(atob(base64));
   } catch {
-    return false;
+    return null;
   }
+};
+
+// Validate token expiration
+const isTokenValid = (token: string): boolean => {
+  const payload = parseJwt(token);
+  if (!payload || !payload.exp) return false;
+  return Date.now() / 1000 < payload.exp;
 };
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -82,10 +65,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
       localStorage.setItem('last-login-attempt', now.toString());
       
-      const isValid = await validateCredentials(username, password);
-      
-      if (isValid) {
-        const token = generateSecureToken();
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const token = data.token;
         setIsAuthenticated(true);
         localStorage.setItem('cms-auth-token', token);
         // Clear failed attempt counter on successful login
@@ -95,11 +85,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         // Track failed attempts (basic brute force protection)
         const failedAttempts = parseInt(localStorage.getItem('failed-login-attempts') || '0') + 1;
         localStorage.setItem('failed-login-attempts', failedAttempts.toString());
-        
+
         if (failedAttempts >= 5) {
           console.warn('Multiple failed login attempts detected');
         }
-        
+
         return false;
       }
     } catch (error) {

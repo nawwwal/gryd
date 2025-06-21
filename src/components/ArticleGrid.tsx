@@ -1,10 +1,10 @@
 
 import { Link } from 'react-router-dom';
 import ScrollFade from './ScrollFade';
-import { Project } from '../data/projects';
+import { WorkProject } from '../types/content';
 
 interface ArticleGridProps {
-  projects: Project[];
+  projects: WorkProject[];
 }
 
 const ArticleGrid = ({ projects }: ArticleGridProps) => {
@@ -21,14 +21,14 @@ const ArticleGrid = ({ projects }: ArticleGridProps) => {
             <Link to={`/work/${project.slug}`} className="grid-article-link">
               <article className="grid-article">
                 <div className="grid-article-image">
-                  <img src={project.image} alt={project.title} />
+                  <img src={project.metadata.assets.hero ?? ''} alt={project.title} />
                   <div className="article-overlay">
                     <span className="read-time">3 min read</span>
                   </div>
                 </div>
                 
                 <div className="grid-article-content">
-                  <div className="grid-category">{project.category}</div>
+                  <div className="grid-category">{project.metadata.category}</div>
                   <h5 className="grid-headline">{project.title}</h5>
                   <p className="grid-excerpt">{project.subtitle}</p>
                   

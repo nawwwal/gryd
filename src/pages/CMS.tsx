@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import CMSNavigation from '../components/cms/CMSNavigation';
 import ProtectedRoute from '../components/auth/ProtectedRoute';
 import { loadWorkProjects, loadPlaygroundExperiments } from '../utils/contentLoader';
-import { WorkProject, PlaygroundExperiment } from '../types/content';
+import { WorkProject, PlaygroundExperiment, ContentItem } from '../types/content';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
@@ -34,7 +34,7 @@ const CMS = () => {
     loadData();
   }, []);
 
-  const getStatusStats = (items: any[]) => {
+  const getStatusStats = (items: ContentItem[]) => {
     return {
       total: items.length,
       live: items.filter(item => item.metadata.status === 'live').length,

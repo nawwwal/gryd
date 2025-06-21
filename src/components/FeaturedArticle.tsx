@@ -1,10 +1,10 @@
 
 import { Link } from 'react-router-dom';
 import ScrollFade from './ScrollFade';
-import { Project } from '../data/projects';
+import { WorkProject } from '../types/content';
 
 interface FeaturedArticleProps {
-  project: Project;
+  project: WorkProject;
 }
 
 const FeaturedArticle = ({ project }: FeaturedArticleProps) => {
@@ -12,7 +12,7 @@ const FeaturedArticle = ({ project }: FeaturedArticleProps) => {
     <article className="featured-article">
       <ScrollFade>
         <div className="article-header">
-          <div className="article-category">{project.category}</div>
+          <div className="article-category">{project.metadata.category}</div>
           <h3 className="article-headline">{project.title}</h3>
           <p className="article-deck">{project.subtitle}</p>
           
@@ -27,7 +27,7 @@ const FeaturedArticle = ({ project }: FeaturedArticleProps) => {
       <ScrollFade delay={200}>
         <div className="article-visual">
           <div className="photo-frame">
-            <img src={project.image} alt={project.title} />
+            <img src={project.metadata.assets.hero ?? ''} alt={project.title} />
             <div className="photo-caption">
               <span>{project.description}</span>
             </div>
@@ -37,7 +37,7 @@ const FeaturedArticle = ({ project }: FeaturedArticleProps) => {
       
       <ScrollFade delay={400}>
         <div className="article-excerpt">
-          <p>{project.content[0]?.content}</p>
+          <p>{project.content}</p>
           
           <Link to={`/work/${project.slug}`} className="read-full-story">
             Read Full Story →

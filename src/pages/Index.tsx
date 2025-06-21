@@ -10,7 +10,7 @@ import { useSwipeGesture } from '../hooks/useSwipeGesture';
 import { useState } from 'react';
 
 const Index = () => {
-  const featuredProject = projects.find(p => p.featured) || projects[0];
+  const featuredProject = projects.find(p => p.metadata.featured) || projects[0];
   const otherProjects = projects.filter(p => p.slug !== featuredProject.slug).slice(0, 6);
   const { isMobile, isTouch } = useMobileOptimization();
   const [currentSection, setCurrentSection] = useState(0);
