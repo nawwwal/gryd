@@ -22,7 +22,6 @@ const client = createClient({
   apiVersion: '2024-01-01',
   useCdn: true, // Use CDN for production
   perspective: 'published', // Only fetch published content for better caching
-  studioUrl: '/studio', // Optional: for edit intent
   ignoreBrowserTokenWarning: true,
   // Configure request timeout and retry logic
   timeout: 30000, // 30 seconds timeout
@@ -53,18 +52,24 @@ class OptimizedSanityClient {
     // Check cache first (unless forced fresh)
     if (!forceFresh && this.isValidCacheEntry(cacheKey)) {
       const cached = this.resultCache.get(cacheKey)!
-      console.log(`[Cache HIT] ${cacheKey.substring(0, 50)}...`)
+      if (import.meta.env.DEV) {
+        console.log(`[Cache HIT] ${cacheKey.substring(0, 50)}...`)
+      }
       return cached.data as T
     }
 
     // Check if request is already in flight (request coalescing)
     if (this.requestCache.has(cacheKey)) {
-      console.log(`[Request COALESCE] ${cacheKey.substring(0, 50)}...`)
+      if (import.meta.env.DEV) {
+        console.log(`[Request COALESCE] ${cacheKey.substring(0, 50)}...`)
+      }
       return this.requestCache.get(cacheKey) as Promise<T>
     }
 
     // Make new request
-    console.log(`[Cache MISS] ${cacheKey.substring(0, 50)}...`)
+    if (import.meta.env.DEV) {
+      console.log(`[Cache MISS] ${cacheKey.substring(0, 50)}...`)
+    }
     const requestPromise = this.client.fetch(query, params).then((data) => {
       // Cache the result
       this.resultCache.set(cacheKey, {
@@ -93,7 +98,9 @@ class OptimizedSanityClient {
   invalidateCache(pattern?: string): void {
     if (!pattern) {
       this.resultCache.clear()
-      console.log('[Cache] Cleared all cache entries')
+      if (import.meta.env.DEV) {
+        console.log('[Cache] Cleared all cache entries')
+      }
       return
     }
 
@@ -102,7 +109,9 @@ class OptimizedSanityClient {
     )
 
     keysToDelete.forEach(key => this.resultCache.delete(key))
-    console.log(`[Cache] Invalidated ${keysToDelete.length} entries matching: ${pattern}`)
+    if (import.meta.env.DEV) {
+      console.log(`[Cache] Invalidated ${keysToDelete.length} entries matching: ${pattern}`)
+    }
   }
 
   // Method to get cache statistics
@@ -132,7 +141,7 @@ class OptimizedSanityClient {
       }
     }
 
-    if (cleaned > 0) {
+    if (cleaned > 0 && import.meta.env.DEV) {
       console.log(`[Cache] Cleaned up ${cleaned} expired entries`)
     }
   }
