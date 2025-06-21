@@ -1,13 +1,21 @@
 import imageUrlBuilder from '@sanity/image-url'
 import { createClient } from '@sanity/client'
 import type { SanityImage, SanityImageAsset, SanityFile } from '../types/content'
-// Temporarily commented out to fix image loading issues
-// import { CONNECTION_QUALITY } from './serviceWorker'
+
+// Validate required environment variables
+const projectId = import.meta.env.VITE_SANITY_PROJECT_ID || import.meta.env.SANITY_API_PROJECT_ID
+const dataset = import.meta.env.VITE_SANITY_DATASET || import.meta.env.SANITY_API_DATASET || 'production'
+
+if (!projectId) {
+  throw new Error(
+    'Missing required Sanity project ID. Please set VITE_SANITY_PROJECT_ID or SANITY_API_PROJECT_ID environment variable.'
+  )
+}
 
 // Create a basic client specifically for image URL building
 const imageClient = createClient({
-  projectId: import.meta.env.VITE_SANITY_PROJECT_ID || import.meta.env.SANITY_API_PROJECT_ID || '',
-  dataset: import.meta.env.VITE_SANITY_DATASET || import.meta.env.SANITY_API_DATASET || 'production',
+  projectId,
+  dataset,
   apiVersion: '2024-01-01',
   useCdn: true,
 })
