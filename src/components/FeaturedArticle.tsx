@@ -7,7 +7,34 @@ interface FeaturedArticleProps {
   project: WorkProject;
 }
 
+// Helper function to extract plain text from rich content for excerpt
+const getContentExcerpt = (project: WorkProject, maxLength: number = 200): string => {
+  // Try to get content from rich content blocks first
+  if (project.content && project.content.length > 0) {
+    // Find first text block
+    const firstTextBlock = project.content.find(block => block._type === 'block');
+    if (firstTextBlock && 'children' in firstTextBlock && Array.isArray(firstTextBlock.children)) {
+      const text = firstTextBlock.children
+        .filter(child => child._type === 'span' && child.text)
+        .map(child => child.text)
+        .join(' ');
+      return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+    }
+  }
+
+  // Fall back to legacy content
+  if (project.contentLegacy) {
+    const text = project.contentLegacy.replace(/\n+/g, ' ').trim();
+    return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+  }
+
+  // Final fallback to description
+  return project.description;
+};
+
 const FeaturedArticle = ({ project }: FeaturedArticleProps) => {
+  const excerpt = getContentExcerpt(project);
+
   return (
     <article className="featured-article">
       <ScrollFade>
@@ -40,7 +67,7 @@ const FeaturedArticle = ({ project }: FeaturedArticleProps) => {
 
       <ScrollFade delay={400}>
         <div className="article-excerpt">
-          <p>{project.description}</p>
+          <p>{excerpt}</p>
 
           <Link to={`/work/${project.slug}`} className="read-full-story">
             Read Full Story →
