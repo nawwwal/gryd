@@ -1,0 +1,419 @@
+# Project Context & Quick Reference
+
+## Project Overview
+- **Name**: Gryd Echo Forge / THE GRYD — permanent issue 01
+- **Type**: Living Magazine Portfolio (not a traditional website)
+- **Concept**: "A maximalist portfolio-magazine-thing built like a haunted print zine"
+- **Editor**: Aditya Nawal - Product Designer with engineer's mind and artist's eye
+- **Tech Stack**: React + TypeScript + Vite + Sanity CMS + Tailwind CSS
+- **Status**: Production Ready with MDX Content System ✅
+- **Branch**: feature-cms-connectivity
+
+## Creative Vision
+```yaml
+core_philosophy:
+  - "the gryd is not a website. it is a living magazine"
+  - "typeset in old ink, warped by scroll, textured by light"
+  - "built like an archive, dressed like a relic, coded like a contraption"
+  - "maximalism with purpose — if it moves, it should feel hand-built"
+
+design_principles:
+  - tactile_ui: "every element has surface, shadow, or slip"
+  - slow_reading: "let people read, not just scroll"
+  - layout_as_voice: "use whitespace and weight to speak"
+  - forgotten_archive: "feel like you stumbled into a design relic"
+
+success_metrics:
+  - "someone reading a whole project page, then DMing about a footnote"
+  - "a recruiter saying 'wait, this is a real magazine?'"
+  - "someone printing a PDF and pinning it on their wall"
+  - "someone remembering how it felt to scroll"
+```
+
+## URLs & Access Points
+```yaml
+development:
+  frontend: "http://localhost:8080/"
+  sanity_studio: "http://localhost:3333"
+
+production:
+  sanity_studio: "https://gryd.sanity.studio/"
+  frontend: "https://naw.al (via Vercel)"
+
+note: "Development server runs on port 8080 via Vite"
+```
+
+## Key Features Implemented
+```yaml
+content_management:
+  - rich_mdx_content: "7 interactive content blocks ✅"
+  - sanity_cms: "Native image uploads, block editor ✅"
+  - backward_compatibility: "Legacy markdown support ✅"
+
+performance:
+  - multi_layer_caching: "40-90% faster loading ✅"
+  - adaptive_images: "Connection-aware optimization ✅"
+  - service_worker: "Offline support and caching ✅"
+  - react_query: "Smart data fetching and caching ✅"
+
+user_experience:
+  - mobile_first: "Responsive design across all devices ✅"
+  - accessibility: "WCAG compliant, screen reader support ✅"
+  - interactive_components: "Code demos, galleries, timelines ✅"
+  - performance_monitoring: "Real-time metrics in development ✅"
+```
+
+## Magazine Sections
+```yaml
+site_structure:
+  home: "entry point with paper-folded animation, static hiss, editor's cut"
+  work: "detailed project teardowns (not case studies) with footnotes, pullquotes"
+  about_editor: "part résumé, part biography, part wandering letter"
+  experiments: "live CSS toys, half-finished sketches, broken code playgrounds"
+
+content_approach:
+  - "all lowercase, except intentional all-uppercase/sentence case"
+  - "write like a printed essay: slow, intentional, no filler"
+  - "every project title starts with a verb"
+  - "end every article with a 'last word' — one-line reflection"
+  - "all buttons: lowercase verbs → 'read this' / 'view experiment'"
+```
+
+## Visual Language & Design System
+```yaml
+surface_textures:
+  - paper_grain_overlays: "SVG filters or canvas shaders"
+  - folded_corner_animations: "on hover interactions"
+  - layering_blend_modes: "multiply, overlay effects"
+  - faux_crease_lines: "radial gradients for paper feel"
+
+typography_hierarchy:
+  headlines: "Platypi SC 700 — uppercase serif with bleed & serif caps"
+  subheads: "Fraunces — airy, romantic, old-zine vibes"
+  code_snippets: "JetBrains Mono — annotations, timestamps, footnotes"
+
+typography_system:
+  fonts:
+    - headline: "Platypi (serif) - for headlines and emphasis"
+    - body: "Fraunces (serif) - for body text and subheadings"
+    - sans: "Schibsted Grotesk (sans-serif) - for UI elements"
+  sizes:
+    - headline: "3.75rem with tight line-height"
+    - subhead: "1.5rem with balanced spacing"
+    - body: "1.125rem with comfortable reading line-height"
+    - caption: "0.875rem for annotations"
+  colors:
+    - gryd-bg: "#fafafa (paper white)"
+    - gryd-text: "#111111 (ink black)"
+    - gryd-soft: "#666666 (faded text)"
+    - gryd-accent: "#d97706 (editorial orange)"
+
+layout_principles:
+  - print_column_grid: "magazine-style layout"
+  - generous_gutter_spacing: "breathing room"
+  - vertical_rhythm: "consistent spacing"
+  - drop_caps: "every section starts with typographic emphasis"
+  - animated_page_numbers: "margins shift subtly on scroll"
+
+maximalist_interactions:
+  - scroll_linked_animations: "via scroll-timeline"
+  - dynamic_smudge_trails: "on hover effects"
+  - parallax_inkblot_backgrounds: "depth and texture"
+  - typewriter_reveal: "manual typing effect on headings"
+  - noise_layer_glitch: "background effects + external link treatments"
+  - opacity_flicker: "faded ink effect on unread sections"
+```
+
+## Experimental Features Planned
+```yaml
+interactive_effects:
+  - live_fold_effect: "transform-origin: bottom left, scroll-triggered"
+  - ink_aging_timer: "sections fade over time unless updated"
+  - zine_noise_mode: "toggle jittery spacing, misaligned letters"
+  - drag_to_tilt: "paper angle interaction on desktop"
+  - printable_mode: "auto-generate PDF layout"
+  - reading_meter: "ink fill progress bar as user scrolls"
+```
+
+## Project Structure
+```yaml
+root/
+├── .cursor/rules/                 # AI Agent Documentation
+│   ├── mdx-content-system.mdc    # Complete MDX system docs
+│   ├── sanity-cms-setup.mdc      # CMS configuration and usage
+│   └── project-context.mdc       # This file - quick reference
+├── gryd/                          # Sanity Studio
+│   ├── schemaTypes/              # CMS content schemas
+│   ├── sanity.config.ts          # Studio configuration
+│   └── package.json              # Studio dependencies
+├── src/                          # React Application
+│   ├── components/               # React components
+│   │   ├── mdx/                 # MDX-specific components
+│   │   ├── ui/                  # Shadcn/ui components
+│   │   └── skeletons/           # Loading states
+│   ├── hooks/                   # Custom React hooks
+│   ├── lib/                     # Utilities and clients
+│   ├── pages/                   # Route components
+│   ├── styles/                  # CSS files
+│   ├── types/                   # TypeScript definitions
+│   └── utils/                   # Helper functions
+├── public/                      # Static assets
+└── [config files]              # Vite, TypeScript, Tailwind configs
+```
+
+## Content Types & Schemas
+```yaml
+work_projects:
+  schema: gryd/schemaTypes/workProject.ts
+  features: [rich_content_blocks, native_images, metadata]
+  status: "Production ready with MDX support ✅"
+
+playground_experiments:
+  schema: gryd/schemaTypes/playgroundExperiment.ts
+  features: [simple_markdown, native_images, metadata]
+  status: "Production ready, can be upgraded to MDX ⚡"
+```
+
+## Development Commands
+```yaml
+frontend:
+  dev: "npm run dev"
+  build: "npm run build"
+  preview: "npm run preview"
+
+sanity_studio:
+  dev: "cd gryd && npm run dev"
+  build: "cd gryd && npm run build"
+  deploy: "cd gryd && npx sanity deploy"
+  schema_deploy: "cd gryd && npx sanity schema deploy"
+
+linting:
+  check: "npm run lint"
+  fix: "npm run lint:fix"
+```
+
+## Key Files for AI Context
+```yaml
+schemas:
+  - gryd/schemaTypes/workProject.ts      # Work project content structure
+  - gryd/schemaTypes/playgroundExperiment.ts # Experiment content structure
+
+components:
+  - src/components/RichContentRenderer.tsx # Main MDX renderer
+  - src/components/mdx/RichContentComponents.tsx # Interactive blocks
+  - src/pages/ProjectDetail.tsx           # Project detail page
+  - src/pages/Work.tsx                   # Projects listing page
+
+utilities:
+  - src/lib/sanityClient.ts              # Optimized Sanity client
+  - src/hooks/useContentQuery.tsx        # React Query hooks
+  - src/utils/imageUtils.ts              # Image optimization
+  - src/types/content.ts                 # TypeScript definitions
+
+styling:
+  - src/styles/rich-content.css          # MDX component styles
+  - src/index.css                        # Global styles
+  - tailwind.config.ts                   # Tailwind configuration
+```
+
+## Performance Optimizations Active
+```yaml
+caching_layers:
+  - browser_cache: "HTTP headers for static assets"
+  - service_worker: "Programmable cache (public/sw.js)"
+  - react_query: "Application state management"
+  - sanity_client: "Request deduplication and caching"
+
+image_optimization:
+  - adaptive_quality: "Connection-aware (40-85% quality)"
+  - format_optimization: "Automatic WebP conversion"
+  - responsive_images: "srcset generation"
+  - lazy_loading: "Intersection Observer API"
+  - lqip: "Low Quality Image Placeholders"
+
+network_optimization:
+  - request_coalescing: "Prevent duplicate API calls"
+  - background_sync: "Update cache without blocking UI"
+  - preloading: "Critical resource prefetching"
+  - connection_awareness: "Adapt to network conditions"
+```
+
+## Content Creation Workflow
+```yaml
+quick_start:
+  1. access: "https://gryd.sanity.studio/"
+  2. create: "Work Project → Create new"
+  3. basic_info: [title, subtitle, description, timeline, impact]
+  4. metadata: [type, category, status, tags]
+  5. rich_content: "Add blocks with + button"
+  6. publish: "Make live for public viewing"
+
+content_blocks_available:
+  - rich_text: "Formatted paragraphs, headings, lists"
+  - code_demo: "Syntax highlighted code with copy button"
+  - image_gallery: "4 layouts with lightbox"
+  - video_embed: "YouTube/Vimeo/direct video support"
+  - project_timeline: "Interactive milestones"
+  - tech_stack: "Technology showcase with icons"
+  - callout: "Info/warning/success/error/note boxes"
+```
+
+## Troubleshooting Quick Reference
+```yaml
+common_issues:
+  content_not_showing:
+    - check_status: "Ensure project status is 'live'"
+    - verify_published: "Content must be published, not draft"
+    - clear_cache: "Browser and application cache"
+
+  images_not_loading:
+    - check_size: "< 5MB recommended"
+    - verify_format: "JPG, PNG, WebP supported"
+    - add_alt_text: "Required for accessibility"
+
+  performance_issues:
+    - enable_devtools: "React Query DevTools in development"
+    - check_network: "Browser DevTools Network tab"
+    - monitor_cache: "Use PerformanceMonitor component"
+
+debug_tools:
+  - react_query_devtools: "Query inspection (development only)"
+  - sanity_vision: "Content query testing"
+  - browser_devtools: "Network, Performance, Console tabs"
+  - performance_monitor: "Real-time cache stats (development)"
+```
+
+## Dependencies & Versions
+```yaml
+core_dependencies:
+  - react: "^18.x"
+  - typescript: "^5.x"
+  - vite: "^5.x"
+  - "@sanity/client": "^6.x"
+  - "@portabletext/react": "^3.x"
+  - "@tanstack/react-query": "^5.x"
+  - "tailwindcss": "^3.x"
+
+development_tools:
+  - "@tanstack/react-query-devtools": "Development debugging"
+  - "eslint": "Code quality"
+  - "typescript": "Type checking"
+  - "@types/*": "TypeScript definitions"
+```
+
+## Migration & Compatibility
+```yaml
+backward_compatibility:
+  - legacy_markdown: "Automatic fallback for old content ✅"
+  - existing_projects: "No data loss during migration ✅"
+  - gradual_upgrade: "Update projects individually ✅"
+
+migration_path:
+  - work_projects: "Rich content blocks available ✅"
+  - playground_experiments: "Can be upgraded to rich content"
+  - other_content: "Unaffected by changes ✅"
+```
+
+## Security & Best Practices
+```yaml
+security:
+  - sanity_authentication: "Required for content management"
+  - cors_configuration: "Automatically configured"
+  - input_validation: "Schema-based validation"
+  - xss_protection: "React built-in protection"
+
+best_practices:
+  - type_safety: "Full TypeScript coverage"
+  - error_boundaries: "Graceful error handling"
+  - accessibility: "WCAG 2.1 AA compliance"
+  - performance: "Core Web Vitals optimization"
+  - seo: "Structured content and meta tags"
+```
+
+## Future Roadmap
+```yaml
+immediate_next:
+  - playground_experiments_upgrade: "Rich content blocks"
+  - custom_content_blocks: "Project-specific components"
+  - analytics_integration: "Content engagement tracking"
+
+planned_features:
+  - advanced_search: "Full-text content search"
+  - workflow_automation: "Content approval processes"
+  - real_time_collaboration: "Live editing features"
+  - advanced_caching: "Edge computing integration"
+```
+
+## Editorial Philosophy & Target Audience
+```yaml
+editor_profile:
+  name: "Aditya Nawal"
+  approach: "Product designer with engineer's mind and artist's eye"
+  philosophy: "Don't chase design trends. Study why things fail when money's on the line"
+  interests: [system_edges, broken_flows, forgotten_rules]
+  inspiration: [buses, chai_stalls, late_night_tab_hoarding]
+
+design_lens:
+  - history_behavior_attention: "Understanding user patterns and context"
+  - code_typography_friction: "Technical craft meets visual design"
+  - memory_intuition_beauty: "Emotional resonance in functional things"
+
+work_philosophy:
+  - "Don't want to impress. Want to make things that hold up"
+  - "In dark rooms, bad networks, outdated devices, awkward human moments"
+  - "Seeking deep, messy, weird work — strange constraints, long timelines"
+  - "Teams that make things with care, not just ship fast"
+  - "Talk honestly about failure, respect quiet design wins"
+```
+
+## Content Strategy & Voice
+```yaml
+writing_style:
+  - lowercase_default: "all lowercase, except intentional emphasis"
+  - essay_pacing: "slow, intentional, no filler words"
+  - verb_driven_titles: "every project starts with action"
+  - reflective_endings: "last word — one-line reflection"
+  - tactile_language: "describe texture, weight, movement"
+
+content_types:
+  work_projects: "detailed teardowns with footnotes and pullquotes"
+  experiments: "live toys, broken sketches, archive prototypes"
+  editor_notes: "wandering letters, biographical fragments"
+  annotations: "timestamps, technical notes, design decisions"
+
+interaction_copy:
+  buttons: "lowercase verbs → 'read this', 'view experiment', 'open issue'"
+  navigation: "magazine-style section headers"
+  metadata: "issue numbers, publication dates, reading time"
+```
+
+## AI Agent Guidelines
+```yaml
+when_helping_with_content:
+  - always_check_schema: "Verify content structure in schemaTypes/"
+  - use_type_definitions: "Reference src/types/content.ts"
+  - test_in_studio: "Verify changes in Sanity Studio"
+  - check_frontend: "Ensure rendering works correctly"
+  - maintain_magazine_voice: "Follow editorial style and lowercase conventions"
+
+when_adding_features:
+  - follow_existing_patterns: "Match current component structure"
+  - maintain_type_safety: "Add proper TypeScript types"
+  - update_documentation: "Keep .mdc files current"
+  - test_performance: "Verify caching and optimization"
+  - consider_tactile_ui: "Every element should feel hand-built"
+  - maximize_with_purpose: "If it moves, it should enhance reading"
+
+when_debugging:
+  - check_console_errors: "Browser and server console"
+  - verify_network_requests: "API calls and responses"
+  - test_cache_behavior: "Ensure caching works correctly"
+  - validate_content_structure: "Schema matches frontend expectations"
+  - preserve_magazine_feel: "Don't break the editorial experience"
+
+design_considerations:
+  - prioritize_readability: "Slow reading over fast scrolling"
+  - maintain_texture: "Paper grain, ink effects, tactile elements"
+  - respect_typography: "Proper hierarchy with Platypi, Fraunces, JetBrains"
+  - enhance_narrative: "Support storytelling through layout and interaction"
+```
