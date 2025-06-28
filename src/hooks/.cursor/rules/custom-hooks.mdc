@@ -1,0 +1,88 @@
+---
+description: Custom React hooks development patterns, magazine-specific functionality, and performance optimization for THE GRYD. Request when creating custom hooks, React state management, magazine-specific functionality, or hook architecture decisions.
+globs:
+alwaysApply: false
+---
+---
+description: Custom React hooks development patterns, magazine-specific functionality, and performance optimization for THE GRYD
+alwaysApply: false
+---
+
+# Custom Hooks for THE GRYD
+
+## Hook Naming Convention
+- Start with `use` prefix
+- Descriptive and specific: `useMobileOptimization`, `useScrollDirection`
+- Return object with named properties for multiple values
+
+## Hook Template
+```typescript
+import { useState, useEffect } from 'react'
+
+interface UseCustomHookOptions {
+  // Options interface
+  enabled?: boolean
+  threshold?: number
+}
+
+interface UseCustomHookReturn {
+  // Return type interface
+  data: any
+  loading: boolean
+  error: Error | null
+}
+
+export const useCustomHook = ({
+  enabled = true,
+  threshold = 0
+}: UseCustomHookOptions = {}): UseCustomHookReturn => {
+  const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<Error | null>(null)
+
+  useEffect(() => {
+    if (!enabled) return
+
+    // Hook logic here
+
+  }, [enabled, threshold])
+
+  return { data, loading, error }
+}
+```
+
+## Magazine-Specific Hooks
+
+### Mobile Experience
+```typescript
+// Touch gestures for magazine navigation
+export const useSwipeGesture = () => {
+  // Implementation for magazine-style swiping
+}
+
+// Connection-aware image loading
+export const useMobileOptimization = () => {
+  // Adapt quality based on network conditions
+}
+```
+
+### Reading Experience
+```typescript
+// Scroll direction for navigation hiding
+export const useScrollDirection = () => {
+  // Hide/show navigation based on scroll
+}
+
+// Reading progress for articles
+export const useReadingProgress = () => {
+  // Track how much of article has been read
+}
+```
+
+## Performance Guidelines
+- Use `useCallback` for event handlers
+- Use `useMemo` for expensive calculations
+- Implement cleanup in `useEffect` returns
+- Consider debouncing for scroll/resize events
+
+@hook-template.tsx

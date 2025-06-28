@@ -1,0 +1,65 @@
+---
+description: Page component architecture, SEO optimization, magazine layout principles, and content strategy implementation for THE GRYD. Request when creating page components, SEO implementation, page structure, magazine layout, or routing decisions.
+globs:
+alwaysApply: false
+---
+---
+description: Page component architecture, SEO optimization, magazine layout principles, and content strategy implementation for THE GRYD
+alwaysApply: false
+---
+
+# Page Development for THE GRYD
+
+## Page Structure
+Each page should follow the magazine's editorial layout:
+
+```typescript
+import { Helmet } from 'react-helmet-async'
+import { MagazineSection } from '@/components/MagazineSection'
+
+export const PageName = () => {
+  return (
+    <>
+      <Helmet>
+        <title>Page Title — THE GRYD</title>
+        <meta name="description" content="Page description" />
+      </Helmet>
+
+      <MagazineSection className="min-h-screen">
+        {/* Page content */}
+      </MagazineSection>
+    </>
+  )
+}
+```
+
+## Magazine Layout Principles
+- **Drop Caps**: Start sections with typographic emphasis
+- **Generous Gutters**: Use `space-y-8` or `space-y-12` for breathing room
+- **Reading Width**: Limit text to `max-w-prose` (65ch)
+- **Vertical Rhythm**: Consistent spacing between elements
+
+## SEO & Meta Tags
+```typescript
+// Always include proper meta tags
+<Helmet>
+  <title>Page Title — THE GRYD permanent issue 01</title>
+  <meta name="description" content="Brief, compelling description" />
+  <meta property="og:title" content="Page Title" />
+  <meta property="og:description" content="Social media description" />
+  <meta property="og:type" content="article" />
+</Helmet>
+```
+
+## Loading States
+- Use skeleton components from `@/components/skeletons/`
+- Implement proper error boundaries
+- Show loading indicators for data fetching
+
+## Content Strategy
+- **All lowercase**: except intentional emphasis
+- **Verb-driven titles**: every project starts with action
+- **Last word**: end articles with one-line reflection
+- **Button copy**: lowercase verbs → 'read this', 'view experiment'
+
+@page-template.tsx

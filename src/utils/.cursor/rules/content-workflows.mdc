@@ -1,0 +1,169 @@
+---
+description: Content management workflows, optimization strategies, and performance patterns for THE GRYD. Request for content management processes, workflow optimization, content quality validation, backup strategies, or content migration.
+globs:
+alwaysApply: false
+---
+# Content Management Workflows
+
+## Content Creation Workflow
+
+### Quick Start Process
+1. **Access Studio**: https://gryd.sanity.studio/
+2. **Create Content**: Work Project → Create new
+3. **Basic Info**: title, subtitle, description, timeline, impact
+4. **Metadata**: type, category, status, tags, featured flag
+5. **Visual Assets**: hero image, attachments with proper alt text
+6. **Rich Content**: Add interactive blocks using + button
+7. **Publish**: Make content live for public viewing
+
+### Content Organization
+```yaml
+categorization_strategy:
+  use_consistent_categories: true
+  tag_strategically: true
+  status_management: [live, prototype, archived, ongoing, draft]
+  featured_projects: "limit to 3-5 most impressive pieces"
+
+quality_checklist:
+  - consistent_voice: "follow editorial guidelines"
+  - visual_standards: "1200px+ width images"
+  - code_examples: "tested and functional"
+  - accessibility: "alt text and captions required"
+  - performance: "optimized for mobile and slow connections"
+```
+
+## Performance Optimization
+
+### Multi-Layer Caching Strategy
+```typescript
+// Cache duration configuration
+const CACHE_DURATIONS = {
+  workProjects: 10 * 60 * 1000,      // 10 minutes
+  playgroundExperiments: 10 * 60 * 1000,
+  contentBySlug: 15 * 60 * 1000,     // 15 minutes
+  sanityClient: 5 * 60 * 1000        // 5 minutes
+}
+
+// React Query default options
+const DEFAULT_QUERY_OPTIONS = {
+  staleTime: 5 * 60 * 1000,          // 5 minutes
+  gcTime: 30 * 60 * 1000,            // 30 minutes
+  refetchOnWindowFocus: false,
+  refetchOnMount: false
+}
+```
+
+### Image Optimization
+Connection-aware loading for magazine-quality images:
+```typescript
+// Adaptive quality based on network conditions
+export const getOptimalImageQuality = () => {
+  const connection = (navigator as any).connection
+  if (!connection) return 75
+
+  const { effectiveType, downlink } = connection
+
+  if (effectiveType === '4g' && downlink > 5) return 85
+  if (effectiveType === '4g') return 75
+  if (effectiveType === '3g') return 60
+  return 40
+}
+
+// Image URL builder with optimization
+export const buildOptimizedImageUrl = (source: any, width: number) => {
+  const quality = getOptimalImageQuality()
+  return urlFor(source)
+    .width(width)
+    .format('webp')
+    .quality(quality)
+    .url()
+}
+```
+
+### Content Loading Strategies
+```typescript
+// Lazy loading with intersection observer
+export const useContentLazyLoading = (threshold = 0.1) => {
+  const [isVisible, setIsVisible] = useState(false)
+  const ref = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          if (ref.current) observer.unobserve(ref.current)
+        }
+      },
+      { threshold, rootMargin: '50px' }
+    )
+
+    if (ref.current) observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [threshold])
+
+  return { ref, isVisible }
+}
+```
+
+## Content Quality Standards
+
+### Editorial Review Process
+```yaml
+pre_publish_checklist:
+  content_review:
+    - voice_consistency: "matches magazine editorial style"
+    - technical_accuracy: "code examples work and are relevant"
+    - visual_quality: "images are high-resolution and properly formatted"
+    - accessibility: "alt text, captions, and semantic structure"
+
+  performance_check:
+    - image_optimization: "all images under 5MB, properly formatted"
+    - load_testing: "pages load under 3 seconds on slow connections"
+    - mobile_experience: "touch targets and responsive design"
+    - cache_validation: "proper cache headers and service worker support"
+```
+
+### Content Maintenance
+```yaml
+regular_tasks:
+  monthly_review:
+    - update_outdated_information: "check links, code examples, technology references"
+    - performance_audit: "run Lighthouse, check Core Web Vitals"
+    - content_gaps: "identify missing content or incomplete projects"
+
+  quarterly_optimization:
+    - image_compression: "re-optimize images with latest tools"
+    - content_pruning: "archive or update stale content"
+    - schema_updates: "evolve content structure based on needs"
+```
+
+## Backup & Recovery
+
+### Content Backup Strategy
+```yaml
+automated_backups:
+  sanity_dataset: "daily exports via Sanity CLI"
+  git_repository: "version control for all schema changes"
+  image_assets: "Sanity CDN with redundancy"
+
+recovery_procedures:
+  content_restoration: "use Sanity dataset imports"
+  schema_rollback: "git revert for schema changes"
+  emergency_contacts: "Sanity support for critical issues"
+```
+
+### Migration Strategies
+```yaml
+content_migration:
+  backward_compatibility: "maintain support for legacy markdown"
+  gradual_upgrade: "update projects to rich content individually"
+  data_validation: "ensure no content loss during transitions"
+
+schema_evolution:
+  version_control: "track all schema changes in git"
+  testing_pipeline: "validate schema changes in development"
+  rollback_plan: "maintain ability to revert problematic changes"
+```
+
+@workflow-examples.ts

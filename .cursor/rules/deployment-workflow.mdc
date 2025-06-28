@@ -1,0 +1,114 @@
+---
+description: Deployment workflow for THE GRYD magazine including deployment procedures, production setup, environment variables, rollback procedures, or publishing workflows. **Note**: Manual rule - use `@deployment-workflow` to explicitly invoke.
+globs:
+alwaysApply: false
+---
+# Deployment Workflow for THE GRYD
+
+## Pre-Deployment Checklist
+Before deploying, ensure:
+
+### Frontend Checks
+- [ ] `npm run build` completes without errors
+- [ ] `npm run lint` passes with no issues
+- [ ] All images have proper alt text
+- [ ] Typography renders correctly across devices
+- [ ] Performance metrics are acceptable (Lighthouse > 90)
+
+### Content Checks
+- [ ] All projects have proper metadata
+- [ ] Images are optimized (< 5MB each)
+- [ ] Content follows magazine voice guidelines
+- [ ] No broken internal/external links
+
+### Sanity Studio Checks
+- [ ] Schema changes deployed: `cd gryd && npx sanity schema deploy`
+- [ ] Studio builds successfully: `cd gryd && npm run build`
+- [ ] Content is published (not in draft state)
+
+## Deployment Commands
+
+### Frontend Deployment (Vercel)
+```bash
+# Automatic via Git push to main branch
+git add .
+git commit -m "deploy: magazine update - [brief description]"
+git push origin main
+
+# Manual deployment
+npx vercel --prod
+```
+
+### Sanity Studio Deployment
+```bash
+cd gryd
+npm run build
+npx sanity deploy
+
+# Verify deployment
+open https://gryd.sanity.studio/
+```
+
+## Environment Variables
+Ensure these are set in production:
+
+### Frontend (Vercel)
+```env
+VITE_SANITY_PROJECT_ID=c0rjrvm3
+VITE_SANITY_DATASET=production
+VITE_SANITY_API_VERSION=2024-06-21
+```
+
+### Sanity Studio
+```env
+SANITY_PROJECT_ID=c0rjrvm3
+SANITY_DATASET=production
+```
+
+## Post-Deployment Verification
+
+### Performance Checks
+1. **Core Web Vitals**: LCP < 2.5s, FID < 100ms, CLS < 0.1
+2. **Image Loading**: WebP format, appropriate quality
+3. **Cache Headers**: Proper TTL for static assets
+4. **Service Worker**: Offline functionality working
+
+### Content Verification
+1. **Typography**: Platypi, Fraunces, JetBrains Mono loading
+2. **Magazine Effects**: Paper texture, tactile interactions
+3. **Mobile Experience**: Touch targets, swipe gestures
+4. **Accessibility**: Screen reader compatibility
+
+### URLs to Test
+- **Frontend**: https://naw.al
+- **Studio**: https://gryd.sanity.studio/
+- **API Health**: Check Sanity API responses
+
+## Rollback Procedure
+If issues arise:
+
+### Frontend Rollback
+```bash
+# Revert last commit
+git revert HEAD
+git push origin main
+
+# Or redeploy previous version
+npx vercel --prod [previous-deployment-url]
+```
+
+### Studio Rollback
+```bash
+# Revert schema changes
+cd gryd
+git revert [commit-hash]
+npx sanity schema deploy
+```
+
+## Emergency Contacts
+- **Hosting**: Vercel Dashboard
+- **CMS**: Sanity Console
+- **Domain**: DNS provider settings
+- **CDN**: Sanity CDN status
+
+@deployment-checklist.md

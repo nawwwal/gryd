@@ -1,0 +1,207 @@
+---
+description: MDX content blocks implementation and usage for THE GRYD magazine. Request when implementing MDX content blocks, rich content features, interactive components, or content block customization.
+globs:
+alwaysApply: false
+---
+# MDX Content Blocks
+
+## System Overview
+THE GRYD uses rich MDX content blocks for interactive magazine experiences:
+- **Status**: Production Ready ✅
+- **Implementation**: React + TypeScript + Sanity CMS + PortableText
+- **Performance**: 40-90% faster loading with multi-layer caching
+
+## Available Content Blocks
+
+### 1. Rich Text Block
+Standard formatted text with magazine styling:
+```typescript
+{
+  type: 'block',
+  styles: [
+    { title: 'Normal', value: 'normal' },
+    { title: 'H2', value: 'h2' },
+    { title: 'H3', value: 'h3' },
+    { title: 'Quote', value: 'blockquote' }
+  ],
+  marks: {
+    decorators: [
+      { title: 'Bold', value: 'strong' },
+      { title: 'Italic', value: 'em' },
+      { title: 'Code', value: 'code' }
+    ]
+  }
+}
+```
+
+### 2. Code Demo
+Syntax-highlighted code with copy functionality:
+```typescript
+interface CodeDemoProps {
+  title?: string
+  language: 'javascript' | 'typescript' | 'python' | 'css' | 'html' | 'json' | 'bash'
+  code: string
+  description?: string
+}
+
+// Usage in Sanity schema
+{
+  type: 'object',
+  name: 'codeDemo',
+  title: 'Code Demo',
+  fields: [
+    { name: 'title', type: 'string', title: 'Title' },
+    { name: 'language', type: 'string', title: 'Language' },
+    { name: 'code', type: 'text', title: 'Code' },
+    { name: 'description', type: 'text', title: 'Description' }
+  ]
+}
+```
+
+### 3. Image Gallery
+Responsive image galleries with multiple layouts:
+```typescript
+interface ImageGalleryProps {
+  title?: string
+  layout: 'grid' | 'masonry' | 'carousel' | 'before-after'
+  images: SanityImage[]
+  caption?: string
+}
+
+// Implementation features
+features: [
+  'lightbox_viewing',
+  'lazy_loading',
+  'responsive_srcset',
+  'keyboard_navigation',
+  'swipe_gestures'
+]
+```
+
+### 4. Video Embed
+Responsive video embeds with magazine styling:
+```typescript
+interface VideoEmbedProps {
+  title?: string
+  url: string // YouTube, Vimeo, or direct video
+  caption?: string
+  autoplay?: boolean
+}
+
+// Supported platforms
+platforms: ['youtube', 'vimeo', 'direct_video']
+```
+
+### 5. Project Timeline
+Interactive milestone tracking:
+```typescript
+interface ProjectTimelineProps {
+  title?: string
+  events: TimelineEvent[]
+}
+
+interface TimelineEvent {
+  title: string
+  date: string
+  status: 'completed' | 'in-progress' | 'planned' | 'cancelled'
+  description?: string
+}
+```
+
+### 6. Tech Stack
+Technology showcase with icons and descriptions:
+```typescript
+interface TechStackProps {
+  title?: string
+  categories: TechCategory[]
+}
+
+interface TechCategory {
+  category: string
+  technologies: Technology[]
+}
+
+interface Technology {
+  name: string
+  icon?: string
+  description?: string
+  url?: string
+}
+```
+
+### 7. Callout
+Styled information boxes:
+```typescript
+interface CalloutProps {
+  type: 'info' | 'warning' | 'success' | 'error' | 'note'
+  title?: string
+  content: string
+}
+
+// Auto-styled with appropriate colors and icons
+```
+
+## Implementation Guide
+
+### Adding New Content Block
+
+1. **Define Sanity Schema** in `gryd/schemaTypes/workProject.ts`:
+```typescript
+{
+  type: 'object',
+  name: 'customBlock',
+  title: 'Custom Block',
+  fields: [
+    { name: 'title', type: 'string', title: 'Title' },
+    { name: 'content', type: 'text', title: 'Content' }
+  ],
+  preview: {
+    select: { title: 'title' },
+    prepare: ({ title }) => ({ title: `Custom: ${title}` })
+  }
+}
+```
+
+2. **Create React Component** in `RichContentComponents.tsx`:
+```typescript
+export const CustomBlock = ({ title, content }: CustomBlockProps) => {
+  return (
+    <div className="custom-block magazine-element">
+      {title && <h3 className="font-platypi uppercase">{title}</h3>}
+      <div className="font-fraunces leading-relaxed">{content}</div>
+    </div>
+  )
+}
+```
+
+3. **Register in Renderer** in `RichContentRenderer.tsx`:
+```typescript
+const contentTypes = {
+  // ... existing types
+  customBlock: ({ value }: { value: CustomBlockProps }) => (
+    <CustomBlock {...value} />
+  )
+}
+```
+
+## Content Block Guidelines
+
+### Design Consistency
+- Use magazine typography (Platypi, Fraunces, JetBrains Mono)
+- Apply tactile hover effects where appropriate
+- Maintain consistent spacing and rhythm
+- Include proper loading states
+
+### Performance
+- Implement lazy loading for heavy content
+- Use intersection observers for animations
+- Optimize images with proper srcSet
+- Consider connection quality for adaptive loading
+
+### Accessibility
+- Include proper ARIA labels
+- Ensure keyboard navigation works
+- Provide alt text for all images
+- Use semantic HTML structure
+
+@content-block-examples.tsx

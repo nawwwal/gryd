@@ -1,0 +1,272 @@
+---
+description: Mobile optimization strategies, touch interactions, connection-aware loading, and magazine mobile experience for THE GRYD. Request for mobile development, touch interactions, responsive design, performance optimization for mobile, or mobile-specific magazine features.
+globs:
+alwaysApply: false
+---
+---
+description: Mobile optimization strategies, touch interactions, connection-aware loading, and magazine mobile experience for THE GRYD
+alwaysApply: false
+---
+
+# Mobile Optimization for THE GRYD
+
+## Magazine Mobile Philosophy
+THE GRYD on mobile should feel like holding a real magazine:
+- **Tactile Feedback**: Every touch should feel responsive
+- **Reading Flow**: Optimize for slow, intentional reading
+- **Connection Aware**: Adapt to network conditions
+- **Touch Natural**: Gestures should feel magazine-like
+
+## Touch Experience Guidelines
+
+### Touch Target Requirements
+```typescript
+// Minimum touch target sizes
+const TOUCH_TARGETS = {
+  minimum: '44px',     // Accessibility standard
+  comfortable: '48px', // Preferred for magazine reading
+  primary: '56px'      // Main navigation elements
+}
+
+// Touch feedback classes
+const TOUCH_FEEDBACK = `
+  active:scale-95
+  active:bg-gryd-soft/10
+  transition-transform duration-75
+`
+```
+
+### Swipe Gestures for Magazine Navigation
+```typescript
+export const useSwipeGesture = (options: SwipeOptions) => {
+  const [swipeState, setSwipeState] = useState<SwipeState>('idle')
+
+  const handleSwipe = useCallback((direction: 'left' | 'right' | 'up' | 'down') => {
+    switch (direction) {
+      case 'left':
+        // Next article/section
+        break
+      case 'right':
+        // Previous article/section
+        break
+      case 'up':
+        // Hide navigation (reading mode)
+        break
+      case 'down':
+        // Show navigation
+        break
+    }
+  }, [])
+
+  return { swipeState, handleSwipe }
+}
+```
+
+## Connection-Aware Optimization
+
+### Adaptive Image Quality
+```typescript
+export const useMobileOptimization = () => {
+  const [connectionQuality, setConnectionQuality] = useState<'high' | 'medium' | 'low'>('medium')
+
+  useEffect(() => {
+    const connection = (navigator as any).connection
+    if (!connection) return
+
+    const updateQuality = () => {
+      const { effectiveType, downlink } = connection
+
+      if (effectiveType === '4g' && downlink > 5) {
+        setConnectionQuality('high')
+      } else if (effectiveType === '4g' || effectiveType === '3g') {
+        setConnectionQuality('medium')
+      } else {
+        setConnectionQuality('low')
+      }
+    }
+
+    updateQuality()
+    connection.addEventListener('change', updateQuality)
+
+    return () => connection.removeEventListener('change', updateQuality)
+  }, [])
+
+  const getImageQuality = () => {
+    switch (connectionQuality) {
+      case 'high': return 85
+      case 'medium': return 70
+      case 'low': return 45
+      default: return 70
+    }
+  }
+
+  return { connectionQuality, getImageQuality }
+}
+```
+
+## Mobile Navigation Patterns
+
+### Bottom Navigation for Magazine Sections
+```typescript
+export const useMobileNavigationState = () => {
+  const [isVisible, setIsVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = debounce(() => {
+      const currentScrollY = window.scrollY
+
+      // Hide nav when scrolling down (reading mode)
+      // Show nav when scrolling up or at top
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false)
+      } else {
+        setIsVisible(true)
+      }
+
+      setLastScrollY(currentScrollY)
+    }, 16) // 60fps
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lastScrollY])
+
+  return { isVisible, setIsVisible }
+}
+```
+
+## Performance Optimization
+
+### Lazy Loading with Intersection Observer
+```typescript
+export const useMobileLazyLoading = (threshold = 0.1) => {
+  const [isVisible, setIsVisible] = useState(false)
+  const ref = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          // Unobserve after loading to prevent re-triggers
+          if (ref.current) observer.unobserve(ref.current)
+        }
+      },
+      { threshold, rootMargin: '50px' }
+    )
+
+    if (ref.current) observer.observe(ref.current)
+
+    return () => observer.disconnect()
+  }, [threshold])
+
+  return { ref, isVisible }
+}
+```
+
+## Magazine-Specific Mobile Features
+
+### Reading Progress Indicator
+```typescript
+export const useReadingProgress = () => {
+  const [progress, setProgress] = useState(0)
+
+  useEffect(() => {
+    const updateProgress = debounce(() => {
+      const scrollTop = window.scrollY
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight
+      const progress = Math.min((scrollTop / docHeight) * 100, 100)
+      setProgress(progress)
+    }, 16)
+
+    window.addEventListener('scroll', updateProgress, { passive: true })
+    return () => window.removeEventListener('scroll', updateProgress)
+  }, [])
+
+  return progress
+}
+```
+
+### Mobile Typography Scaling
+```typescript
+export const useMobileTypography = () => {
+  const [scale, setScale] = useState(1)
+
+  useEffect(() => {
+    const updateScale = () => {
+      const viewport = window.innerWidth
+
+      if (viewport < 375) {
+        setScale(0.9)  // Small phones
+      } else if (viewport < 768) {
+        setScale(1)    // Regular phones
+      } else {
+        setScale(1.1)  // Tablets in portrait
+      }
+    }
+
+    updateScale()
+    window.addEventListener('resize', debounce(updateScale, 100))
+    return () => window.removeEventListener('resize', updateScale)
+  }, [])
+
+  return scale
+}
+```
+
+## Accessibility on Mobile
+
+### Focus Management for Touch
+```typescript
+export const useTouchFocus = () => {
+  useEffect(() => {
+    // Remove focus outline on touch, restore on keyboard
+    const handleTouchStart = () => {
+      document.body.classList.add('touch-mode')
+    }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Tab') {
+        document.body.classList.remove('touch-mode')
+      }
+    }
+
+    document.addEventListener('touchstart', handleTouchStart, { passive: true })
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('touchstart', handleTouchStart)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
+}
+```
+
+## Mobile CSS Utilities
+```css
+/* Touch-friendly magazine elements */
+.touch-magazine-element {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 12px;
+  border-radius: 8px;
+
+  /* Touch feedback */
+  transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+.touch-magazine-element:active {
+  transform: scale(0.98);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Safe area support for notched devices */
+.safe-area-inset {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+```
+
+@mobile-template.tsx

@@ -1,0 +1,104 @@
+---
+description: THE GRYD magazine's design philosophy, creative vision, and aesthetic principles. Request for questions about design decisions, visual language, magazine aesthetics, interaction patterns, typography choices, or creative direction.
+globs:
+alwaysApply: false
+---
+# THE GRYD Design Philosophy
+
+## Core Philosophy
+THE GRYD is not a website. It is a living magazine:
+- "typeset in old ink, warped by scroll, textured by light"
+- "built like an archive, dressed like a relic, coded like a contraption"
+- "maximalism with purpose — if it moves, it should feel hand-built"
+
+## Design Principles
+
+### Tactile UI
+Every element should have surface, shadow, or slip:
+```css
+/* Example tactile interaction */
+.magazine-element {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+.magazine-element:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+```
+
+### Slow Reading
+Let people read, not just scroll:
+- Use generous spacing and comfortable line-height
+- Limit text width to 65ch for optimal reading
+- Implement reading progress indicators
+- Hide navigation during scroll to reduce distractions
+
+### Layout as Voice
+Use whitespace and weight to speak:
+- Drop caps for section beginnings
+- Generous gutters for breathing room
+- Vertical rhythm with consistent spacing
+- Magazine-style grid with proper column proportions
+
+### Forgotten Archive
+Feel like you stumbled into a design relic:
+- Paper grain overlays and texture effects
+- Ink aging and sepia filters on hover
+- Folded corner animations
+- Blend modes for authentic print feel
+
+## Visual Language
+
+### Typography System
+```css
+/* Headlines - Platypi SC 700 */
+font-family: 'Platypi', serif;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: -0.02em;
+
+/* Body - Fraunces */
+font-family: 'Fraunces', serif;
+font-size: 1.125rem;
+line-height: 1.7;
+
+/* Code - JetBrains Mono */
+font-family: 'JetBrains Mono', monospace;
+font-size: 0.875rem;
+```
+
+### Color Palette
+```css
+:root {
+  --gryd-bg: #fafafa;      /* Paper white */
+  --gryd-text: #111111;    /* Ink black */
+  --gryd-soft: #666666;    /* Faded text */
+  --gryd-accent: #d97706;  /* Editorial orange */
+}
+```
+
+### Surface Textures
+- **Paper grain overlays**: SVG filters or canvas shaders
+- **Layering blend modes**: multiply, overlay effects for depth
+- **Faux crease lines**: radial gradients for paper feel
+- **Folded corner animations**: on hover interactions
+
+## Success Metrics
+The magazine is successful when:
+- Someone reads a whole project page, then DMs about a footnote
+- A recruiter says "wait, this is a real magazine?"
+- Someone prints a PDF and pins it on their wall
+- Someone remembers how it felt to scroll
+
+## Interactive Effects
+Maximalist but purposeful animations:
+- Scroll-linked animations via scroll-timeline
+- Dynamic smudge trails on hover
+- Parallax inkblot backgrounds for depth
+- Typewriter reveal for headings
+- Noise layer glitch for external links
+- Opacity flicker for faded ink effect
+
+@magazine-examples.css

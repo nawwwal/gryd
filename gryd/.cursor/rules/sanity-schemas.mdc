@@ -1,0 +1,147 @@
+---
+description: Sanity schema development, content type definition, rich content blocks, and validation patterns for THE GRYD. Request when creating Sanity schemas, content type definitions, validation rules, studio configuration, or backend content structure.
+globs:
+alwaysApply: false
+---
+---
+description: Sanity schema development, content type definition, rich content blocks, and validation patterns for THE GRYD
+alwaysApply: false
+---
+
+# Sanity Schema Development for THE GRYD
+
+## Schema Structure
+Follow this pattern for all content types:
+
+```typescript
+import { defineType, defineField } from 'sanity'
+
+export const contentType = defineType({
+  name: 'contentType',
+  title: 'Content Type',
+  type: 'document',
+  fields: [
+    // Basic info section
+    defineField({
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+      validation: Rule => Rule.required().min(3).max(100)
+    }),
+
+    // Content section
+    defineField({
+      name: 'content',
+      title: 'Rich Content',
+      type: 'array',
+      of: [
+        // Rich content blocks
+        { type: 'block' },
+        { type: 'codeDemo' },
+        { type: 'imageGallery' },
+        // ... other blocks
+      ]
+    }),
+
+    // Metadata section
+    defineField({
+      name: 'publishDate',
+      title: 'Publish Date',
+      type: 'date',
+      validation: Rule => Rule.required()
+    })
+  ],
+
+  preview: {
+    select: {
+      title: 'title',
+      subtitle: 'subtitle',
+      media: 'heroImage'
+    }
+  }
+})
+```
+
+## Rich Content Blocks
+Available blocks for work projects:
+
+### Text Block
+```typescript
+{
+  type: 'block',
+  styles: [
+    { title: 'Normal', value: 'normal' },
+    { title: 'H2', value: 'h2' },
+    { title: 'H3', value: 'h3' },
+    { title: 'Quote', value: 'blockquote' }
+  ],
+  marks: {
+    decorators: [
+      { title: 'Bold', value: 'strong' },
+      { title: 'Italic', value: 'em' },
+      { title: 'Code', value: 'code' }
+    ],
+    annotations: [
+      {
+        title: 'Link',
+        name: 'link',
+        type: 'object',
+        fields: [
+          { name: 'href', type: 'url', title: 'URL' }
+        ]
+      }
+    ]
+  }
+}
+```
+
+### Code Demo Block
+```typescript
+{
+  type: 'object',
+  name: 'codeDemo',
+  title: 'Code Demo',
+  fields: [
+    { name: 'title', type: 'string', title: 'Title' },
+    {
+      name: 'language',
+      type: 'string',
+      title: 'Language',
+      options: {
+        list: ['javascript', 'typescript', 'python', 'css', 'html', 'json', 'bash']
+      }
+    },
+    { name: 'code', type: 'text', title: 'Code' },
+    { name: 'description', type: 'text', title: 'Description' }
+  ]
+}
+```
+
+## Validation Rules
+- **Required fields**: title, slug, publishDate
+- **String lengths**: title (3-100), subtitle (10-200)
+- **Slug validation**: auto-generate from title, ensure uniqueness
+- **Image requirements**: alt text mandatory, file size < 5MB
+
+## Studio Configuration
+```typescript
+// sanity.config.ts
+export default defineConfig({
+  name: 'gryd-studio',
+  title: 'THE GRYD Studio',
+  projectId: 'c0rjrvm3',
+  dataset: 'production',
+
+  plugins: [
+    deskTool(),
+    visionTool(),
+    // Add content management plugins
+  ],
+
+  schema: {
+    types: schemaTypes
+  }
+})
+```
+
+@schema-template.ts

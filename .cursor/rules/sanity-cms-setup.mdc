@@ -1,8 +1,13 @@
 ---
-description: Anything related to Sanity, CMS or data source. it is wehre i store all hte data related to my projects and experiments.
+description: Sanity CMS infrastructure, studio configuration, and operational setup for THE GRYD. Request for CMS configuration, studio deployment, GROQ queries, API integration, security settings, or backend infrastructure operations.
 globs:
 alwaysApply: false
 ---
+---
+description: Sanity CMS configuration, studio setup, and content management for THE GRYD
+alwaysApply: false
+---
+
 # Sanity CMS Setup & Configuration
 
 ## System Status
@@ -87,46 +92,13 @@ fields:
     - same as workProject metadata structure
 ```
 
-## Rich Content Blocks (Work Projects Only)
+## Rich Content Integration
 
-### Available Block Types
-```yaml
-rich_text_block:
-  type: block
-  styles: [normal, h2, h3, h4, blockquote]
-  lists: [bullet, number]
-  marks: [strong, em, code, strike-through, link]
-
-code_demo:
-  type: object
-  fields: [title, language, code, description]
-  languages: [javascript, typescript, python, css, html, json, bash]
-
-image_gallery:
-  type: object
-  fields: [title, layout, images, caption]
-  layouts: [grid, masonry, carousel, before-after]
-
-video_embed:
-  type: object
-  fields: [title, url, caption, autoplay]
-  platforms: [youtube, vimeo, direct_video]
-
-project_timeline:
-  type: object
-  fields: [title, events]
-  event_status: [completed, in-progress, planned, cancelled]
-
-tech_stack:
-  type: object
-  fields: [title, categories]
-  category_fields: [category, technologies]
-
-callout:
-  type: object
-  fields: [type, title, content]
-  types: [info, warning, success, error, note]
-```
+### Content Block Architecture
+Work projects support rich content blocks for interactive magazine experiences. For implementation details, see:
+- **Block Types**: `@content-blocks` - Complete block implementations
+- **Schema Patterns**: `@sanity-schemas` - Development patterns and validation
+- **Frontend Integration**: `@mdx-content-system` - React component architecture
 
 ## Image Management
 
@@ -192,26 +164,27 @@ schema_deployment:
   purpose: "Deploy schema changes"
 ```
 
-### Content Management
+### Studio Operations
 ```yaml
-create_content:
-  - access_studio: "https://gryd.sanity.studio/"
-  - navigate: "Content type → Create new"
-  - fill_fields: "Required and optional fields"
-  - publish: "Make content live"
+studio_access:
+  - production: "https://gryd.sanity.studio/"
+  - local_dev: "http://localhost:3333"
+  - authentication: "Sanity account required"
 
-update_content:
-  - open_document: "Click on existing content"
-  - edit_fields: "Modify any field"
-  - save_changes: "Auto-saved as draft"
-  - publish: "Make changes live"
+studio_features:
+  - content_creation: "WYSIWYG editor for rich content"
+  - real_time_collaboration: "Multi-user editing support"
+  - version_history: "Built-in content versioning"
+  - search_filtering: "Advanced content discovery"
 
-content_organization:
-  - search: "Use search bar for specific content"
-  - filter: "Filter by status, type, featured"
-  - sort: "Sort by date, title, status"
-  - bulk_operations: "Select multiple for bulk actions"
+content_operations:
+  - draft_auto_save: "Changes saved automatically"
+  - publish_workflow: "One-click publishing"
+  - bulk_operations: "Multi-select content management"
+  - content_validation: "Schema-based field validation"
 ```
+
+For detailed content workflows and optimization strategies, see `@content-workflows`.
 
 ## Configuration Files
 
@@ -406,20 +379,21 @@ disaster_recovery:
 
 ## Future Enhancements
 
-### Planned Improvements
+### Planned CMS Improvements
 ```yaml
-content_types:
-  - playground_rich_content: "Upgrade experiments to rich content"
-  - custom_blocks: "Project-specific content blocks"
-  - workflow_automation: "Content approval workflows"
+infrastructure:
+  - multi_environment: "Staging and production dataset separation"
+  - advanced_permissions: "Role-based content access control"
+  - webhook_automation: "Content change deployment triggers"
+  - backup_automation: "Scheduled content exports"
 
-performance:
-  - edge_functions: "Serverless content processing"
-  - advanced_caching: "Multi-layer cache strategies"
-  - real_time_collaboration: "Live editing features"
+content_types:
+  - playground_upgrade: "Rich content support for experiments"
+  - localization: "Multi-language content management"
+  - workflow_approval: "Editorial review processes"
 
 integrations:
-  - webhook_automation: "Deployment triggers"
-  - analytics_integration: "Content performance tracking"
-  - search_optimization: "Advanced content search"
+  - analytics_dashboard: "Content performance insights"
+  - search_enhancement: "Full-text search with filters"
+  - api_extensions: "Custom GROQ query endpoints"
 ```

@@ -1,0 +1,205 @@
+/*
+ * CSS Template for THE GRYD Magazine
+ * Copy this structure for new stylesheets
+ */
+
+/* ==========================================================================
+   BASE STYLES
+   ========================================================================== */
+
+.magazine-element {
+  /* Color foundation */
+  background-color: var(--gryd-bg);
+  color: var(--gryd-text);
+
+  /* Typography */
+  font-family: 'Fraunces', serif;
+  font-size: 1.125rem;
+  line-height: 1.7;
+
+  /* Reading optimization */
+  max-width: 65ch;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   TYPOGRAPHY CLASSES
+   ========================================================================== */
+
+.headline {
+  font-family: 'Platypi', serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.subhead {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.body-text {
+  font-family: 'Fraunces', serif;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  max-width: 65ch;
+}
+
+.code-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+}
+
+/* ==========================================================================
+   MAGAZINE EFFECTS
+   ========================================================================== */
+
+.paper-texture {
+  background-blend-mode: multiply;
+  position: relative;
+}
+
+.paper-texture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 30% 70%,
+    rgba(0,0,0,0.02) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+.tactile-hover {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+.tactile-hover:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.1),
+    0 0 0 1px rgba(0,0,0,0.05);
+}
+
+.ink-aged {
+  opacity: 0.8;
+  filter: sepia(10%) contrast(1.1);
+  transition: opacity 0.3s ease;
+}
+
+.ink-aged:hover {
+  opacity: 1;
+  filter: none;
+}
+
+/* ==========================================================================
+   LAYOUT UTILITIES
+   ========================================================================== */
+
+.magazine-grid {
+  display: grid;
+  grid-template-columns:
+    minmax(1rem, 1fr)
+    minmax(0, 70ch)
+    minmax(1rem, 1fr);
+  gap: 2rem;
+}
+
+.reading-flow > * + * {
+  margin-top: 1.5rem;
+}
+
+.drop-cap::first-letter {
+  float: left;
+  font-size: 4rem;
+  line-height: 3rem;
+  margin: 0.2rem 0.5rem 0 0;
+  font-weight: 700;
+  font-family: 'Platypi', serif;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+/* Mobile First (320px+) */
+.responsive-element {
+  font-size: 1rem;
+  padding: 1rem;
+}
+
+/* Tablet (768px+) */
+@media (min-width: 48rem) {
+  .responsive-element {
+    font-size: 1.125rem;
+    padding: 1.5rem;
+  }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 64rem) {
+  .responsive-element {
+    font-size: 1.25rem;
+    padding: 2rem;
+  }
+}
+
+/* Large Desktop (1440px+) */
+@media (min-width: 90rem) {
+  .responsive-element {
+    font-size: 1.375rem;
+    padding: 3rem;
+  }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY
+   ========================================================================== */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.focus-visible {
+  outline: 2px solid var(--gryd-accent);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   PRINT STYLES
+   ========================================================================== */
+
+@media print {
+  .magazine-page {
+    background: white;
+    color: black;
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  .no-print {
+    display: none;
+  }
+
+  .print-break {
+    page-break-before: always;
+  }
+}

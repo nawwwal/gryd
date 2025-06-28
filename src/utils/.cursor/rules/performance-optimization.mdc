@@ -1,0 +1,114 @@
+---
+description: Performance optimization utilities, caching strategies, image optimization, and service worker implementation for THE GRYD. Request for performance optimization, caching implementation, image handling, service workers, or utility function development.
+globs:
+alwaysApply: false
+---
+---
+description: Performance optimization utilities, caching strategies, image optimization, and service worker implementation for THE GRYD
+alwaysApply: false
+---
+
+# Performance Optimization for THE GRYD
+
+## Caching Strategy
+THE GRYD uses multi-layer caching for 40-90% performance improvement:
+
+```typescript
+// React Query cache configuration
+const CACHE_DURATIONS = {
+  workProjects: 10 * 60 * 1000,      // 10 minutes
+  playgroundExperiments: 10 * 60 * 1000,
+  contentBySlug: 15 * 60 * 1000,     // 15 minutes
+  sanityClient: 5 * 60 * 1000        // 5 minutes
+}
+
+const DEFAULT_QUERY_OPTIONS = {
+  staleTime: 5 * 60 * 1000,          // 5 minutes
+  gcTime: 30 * 60 * 1000,            // 30 minutes
+  refetchOnWindowFocus: false,
+  refetchOnMount: false
+}
+```
+
+## Image Optimization
+Connection-aware image loading for magazine quality:
+
+```typescript
+// Adaptive quality based on network conditions
+export const getOptimalImageQuality = () => {
+  const connection = (navigator as any).connection
+  if (!connection) return 75
+
+  const { effectiveType, downlink } = connection
+
+  if (effectiveType === '4g' && downlink > 5) return 85
+  if (effectiveType === '4g') return 75
+  if (effectiveType === '3g') return 60
+  return 40
+}
+
+// Image URL builder with optimization
+export const optimizeImageUrl = (url: string, width: number, height?: number) => {
+  const quality = getOptimalImageQuality()
+  return urlFor(url)
+    .width(width)
+    .height(height || Math.round(width * 0.6))
+    .format('webp')
+    .quality(quality)
+    .url()
+}
+```
+
+## Service Worker Implementation
+```typescript
+// Register service worker for offline support
+export const registerServiceWorker = () => {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('SW registered:', registration)
+      })
+      .catch(error => {
+        console.log('SW registration failed:', error)
+      })
+  }
+}
+```
+
+## Performance Monitoring
+```typescript
+// Development-only performance monitoring
+export const measurePerformance = (name: string, fn: () => void) => {
+  if (process.env.NODE_ENV !== 'development') return fn()
+
+  const start = performance.now()
+  const result = fn()
+  const end = performance.now()
+
+  console.log(`${name}: ${end - start}ms`)
+  return result
+}
+```
+
+## Debouncing for Magazine UI
+```typescript
+// Debounce scroll events for smooth magazine experience
+export const debounce = <T extends (...args: any[]) => any>(
+  func: T,
+  wait: number
+): ((...args: Parameters<T>) => void) => {
+  let timeout: NodeJS.Timeout
+
+  return (...args: Parameters<T>) => {
+    clearTimeout(timeout)
+    timeout = setTimeout(() => func(...args), wait)
+  }
+}
+
+// Usage for scroll events
+const debouncedScrollHandler = debounce((event) => {
+  // Handle scroll for magazine effects
+}, 16) // 60fps
+```
+
+@performance-utils.ts

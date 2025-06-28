@@ -1,0 +1,99 @@
+---
+description: CSS styling system, magazine typography, paper texture effects, and responsive design patterns for THE GRYD. Request for CSS development, styling decisions, typography implementation, responsive design, magazine visual effects, or layout questions.
+globs:
+alwaysApply: false
+---
+---
+description: CSS styling system, magazine typography, paper texture effects, and responsive design patterns for THE GRYD
+alwaysApply: false
+---
+
+# THE GRYD Styling System
+
+## Color Palette
+```css
+:root {
+  --gryd-bg: #fafafa;      /* Paper white */
+  --gryd-text: #111111;    /* Ink black */
+  --gryd-soft: #666666;    /* Faded text */
+  --gryd-accent: #d97706;  /* Editorial orange */
+}
+```
+
+## Typography Scale
+```css
+/* Headlines - Platypi SC 700 */
+.headline {
+  font-family: 'Platypi', serif;
+  font-weight: 700;
+  font-size: 3.75rem;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+/* Body - Fraunces */
+.body {
+  font-family: 'Fraunces', serif;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  max-width: 65ch;
+}
+
+/* Code - JetBrains Mono */
+.code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+```
+
+## Paper Texture Effects
+```css
+.paper-surface {
+  background-blend-mode: multiply;
+  position: relative;
+}
+
+.paper-surface::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 70%,
+    rgba(0,0,0,0.02) 0%,
+    transparent 50%);
+  pointer-events: none;
+}
+```
+
+## Tactile Interactions
+```css
+.tactile-element {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+.tactile-element:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.1),
+    0 0 0 1px rgba(0,0,0,0.05);
+}
+```
+
+## Mobile-First Breakpoints
+```css
+/* Base: Mobile */
+.responsive { font-size: 1rem; padding: 1rem; }
+
+/* Tablet: 768px+ */
+@media (min-width: 48rem) {
+  .responsive { font-size: 1.125rem; padding: 1.5rem; }
+}
+
+/* Desktop: 1024px+ */
+@media (min-width: 64rem) {
+  .responsive { font-size: 1.25rem; padding: 2rem; }
+}
+```
+
+@style-template.css

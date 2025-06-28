@@ -1,0 +1,74 @@
+---
+description: React component development standards, magazine design patterns, and performance guidelines for THE GRYD. Request when creating React components, component architecture, magazine design patterns, performance optimization, or component best practices.
+globs:
+alwaysApply: false
+---
+---
+description: React component development standards, magazine design patterns, and performance guidelines for THE GRYD
+alwaysApply: false
+---
+
+# Component Standards for THE GRYD
+
+## Magazine Design Philosophy
+When creating components, remember THE GRYD is "a living magazine":
+- **Tactile UI**: Every element should have surface, shadow, or slip
+- **Slow Reading**: Let people read, not just scroll
+- **Layout as Voice**: Use whitespace and weight to speak
+- **Hand-Built Feel**: If it moves, it should feel intentional
+
+## Component Architecture
+```typescript
+// Props interface at the top
+interface ComponentProps {
+  title?: string
+  children?: React.ReactNode
+  className?: string
+}
+
+// Component as named export
+export const ComponentName = ({ title, children, className = "" }: ComponentProps) => {
+  return (
+    <div className={`
+      // Base magazine styling
+      bg-gryd-bg text-gryd-text
+      // Tactile interaction
+      transition-all duration-200 hover:shadow-lg hover:scale-[1.02]
+      ${className}
+    `}>
+      {title && (
+        <h2 className="font-platypi text-2xl font-bold uppercase tracking-tight">
+          {title}
+        </h2>
+      )}
+      {children}
+    </div>
+  )
+}
+```
+
+## Typography Classes
+- **Headlines**: `font-platypi text-3xl font-bold uppercase tracking-tight`
+- **Subheads**: `font-fraunces text-xl font-medium leading-relaxed`
+- **Body**: `font-fraunces text-lg leading-relaxed max-w-prose`
+- **Code**: `font-jetbrains text-sm font-mono`
+
+## Interaction Patterns
+```typescript
+// Tactile hover effects
+"transition-all duration-200 hover:shadow-lg hover:scale-[1.02] hover:bg-opacity-90"
+
+// Magazine-style buttons
+"lowercase text-sm tracking-wide hover:tracking-wider transition-all"
+
+// Reading-focused spacing
+"leading-relaxed space-y-6 max-w-prose"
+```
+
+## Performance Requirements
+- Use React.memo for expensive renders
+- Implement proper loading states
+- Optimize images with srcSet
+- Ensure 44px minimum touch targets
+
+@component-template.tsx

@@ -1,0 +1,112 @@
+---
+description: Editorial voice, content strategy, and writing guidelines for THE GRYD magazine. Request for content creation, editorial decisions, writing style, magazine sections, button copy, SEO strategies, or brand voice questions.
+globs:
+alwaysApply: false
+---
+# Content Strategy & Editorial Voice
+
+## Editorial Philosophy
+THE GRYD is edited by Aditya Nawal - Product Designer with engineer's mind and artist's eye:
+- "Don't chase design trends. Study why things fail when money's on the line"
+- Focus on system edges, broken flows, forgotten rules
+- Talk honestly about failure, respect quiet design wins
+
+## Writing Style Guidelines
+
+### Voice & Tone
+- **All lowercase**: except intentional all-uppercase/sentence case
+- **Essay pacing**: slow, intentional, no filler words
+- **Verb-driven titles**: every project starts with action
+- **Reflective endings**: end every article with a 'last word' — one-line reflection
+
+### Content Structure
+```yaml
+project_teardowns:
+  format: "detailed teardowns (not case studies)"
+  elements: [footnotes, pullquotes, technical deep-dives]
+  approach: "write like a printed essay"
+
+experiments:
+  format: "live CSS toys, half-finished sketches, broken code playgrounds"
+  voice: "honest about what's working and what's broken"
+
+about_editor:
+  format: "part résumé, part biography, part wandering letter"
+  tone: "personal but professional, introspective"
+```
+
+## Magazine Sections
+
+### Homepage
+- Entry point with paper-folded animation
+- Static hiss and editorial cut
+- Featured project with compelling pull
+
+### Work Section
+- Detailed project teardowns with footnotes
+- Technical implementation details
+- Pullquotes for key insights
+- "Last word" reflection at the end
+
+### About Editor
+- Personal story mixed with professional background
+- Design philosophy and approach
+- Current availability and interests
+
+### Experiments
+- Live CSS toys and interactive demos
+- Half-finished sketches with honest commentary
+- Broken code playgrounds with learning notes
+
+## Button & Interaction Copy
+Always use lowercase verbs for actions:
+- "read this" instead of "Read More"
+- "view experiment" instead of "View Project"
+- "open issue" instead of "Contact"
+- "explore work" instead of "Portfolio"
+
+## Content Quality Standards
+
+### Technical Content
+- All code examples must be tested and functional
+- Include context about why, not just how
+- Explain failure modes and edge cases
+- Provide links to working demos when possible
+
+### Visual Content
+- Images must be 1200px+ width minimum
+- Always include descriptive alt text
+- Use captions to provide additional context
+- Optimize for both desktop and mobile viewing
+
+### Editorial Standards
+- Consistent voice across all content
+- No filler content or placeholder text
+- Every piece should teach something specific
+- Maintain magazine's tactile, authentic feel
+
+## Content Categories
+```yaml
+project_types:
+  - photography: "visual exploration and technique"
+  - code: "technical implementation and learning"
+  - prototype: "experimental interfaces and interactions"
+  - research: "deep dives into design problems"
+  - visual: "aesthetic exploration and critique"
+  - note: "quick thoughts and observations"
+
+difficulty_levels:
+  - beginner: "accessible to newcomers"
+  - intermediate: "assumes some experience"
+  - advanced: "requires domain expertise"
+  - expert: "highly specialized knowledge"
+```
+
+## SEO & Discoverability
+- Write compelling descriptions for each piece
+- Use descriptive, action-oriented titles
+- Include relevant tags without keyword stuffing
+- Focus on quality over quantity
+- Build content that people want to share
+
+@content-examples.md

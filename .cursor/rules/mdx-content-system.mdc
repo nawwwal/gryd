@@ -1,8 +1,13 @@
 ---
-description: Has contents related to MDX Rendering engine, how to add new compnents, MDX rendering pipeline from Sanity CMS to Rendering Engine to Frontend
+description: MDX system architecture, data flow, and frontend integration for THE GRYD magazine. Request for system architecture questions, React-Sanity integration, performance optimization systems, caching strategies, or content rendering pipeline.
 globs:
 alwaysApply: false
 ---
+---
+description: MDX content system architecture and component integration for THE GRYD magazine
+alwaysApply: false
+---
+
 # MDX Content System Documentation
 
 ## System Overview
@@ -26,136 +31,52 @@ Sanity CMS → Rich Content Renderer → React App
 - **Content Types**: `src/types/content.ts`
 - **Styling**: `src/styles/rich-content.css`
 
-## Available Content Blocks
+## Content Block System
 
-### 1. Rich Text Block
+### Architecture Overview
+The MDX system supports 7 interactive content block types for magazine-quality experiences:
+- **Rich Text**: Formatted content with magazine typography
+- **Code Demo**: Syntax-highlighted code with copy functionality
+- **Image Gallery**: Multi-layout responsive galleries
+- **Video Embed**: Platform-agnostic video integration
+- **Project Timeline**: Interactive milestone tracking
+- **Tech Stack**: Technology showcase with branding
+- **Callout**: Styled information and alert boxes
+
+For complete implementation details and usage examples, see `@content-blocks`.
+
+## System Integration
+
+### Component Architecture
+The MDX system integrates three main layers:
+1. **Sanity Schema Layer**: Content type definitions and validation
+2. **React Component Layer**: Interactive block implementations
+3. **Rendering Layer**: PortableText processing and component mapping
+
+### Integration Points
+- **Schema Definition**: See `@sanity-schemas` for development patterns
+- **Component Implementation**: See `@content-blocks` for detailed examples
+- **Performance Optimization**: See `@performance-optimization` for caching strategies
+
+## Content Management Integration
+
+### System Workflow
+The MDX system supports end-to-end content management from creation to publication:
+- **Content Creation**: Rich block editor in Sanity Studio
+- **Real-time Preview**: Live content rendering during editing
+- **Performance Optimization**: Automatic caching and optimization
+- **Publication Pipeline**: One-click publishing with cache invalidation
+
+### Data Flow Architecture
 ```yaml
-type: block
-features: [headings, lists, formatting, links, code_snippets]
-use_cases: [paragraphs, main_content, structured_text]
+content_pipeline:
+  creation: "Sanity Studio → Rich Content Blocks"
+  processing: "PortableText → React Components"
+  optimization: "Multi-layer Caching → Performance"
+  delivery: "CDN → User Experience"
 ```
 
-### 2. Code Demo
-```yaml
-type: codeDemo
-features: [syntax_highlighting, copy_button, language_support]
-languages: [javascript, typescript, python, css, html, json, bash]
-props:
-  - title: string (optional)
-  - language: string (default: javascript)
-  - code: string (required)
-  - description: string (optional)
-```
-
-### 3. Image Gallery
-```yaml
-type: imageGallery
-layouts: [grid, masonry, carousel, before-after]
-features: [lightbox, lazy_loading, captions, responsive]
-props:
-  - title: string (optional)
-  - layout: enum [grid, masonry, carousel, before-after]
-  - images: SanityImage[]
-  - caption: string (optional)
-```
-
-### 4. Video Embed
-```yaml
-type: videoEmbed
-platforms: [youtube, vimeo, direct_video]
-features: [autoplay_options, responsive_sizing]
-props:
-  - title: string (optional)
-  - url: string (required)
-  - caption: string (optional)
-  - autoplay: boolean (default: false)
-```
-
-### 5. Project Timeline
-```yaml
-type: projectTimeline
-features: [status_indicators, interactive_milestones]
-status_types: [completed, in-progress, planned, cancelled]
-props:
-  - title: string (optional)
-  - events: TimelineEvent[]
-```
-
-### 6. Tech Stack
-```yaml
-type: techStack
-features: [icons, brand_colors, categories, hover_effects]
-props:
-  - title: string (optional)
-  - categories: TechCategory[]
-```
-
-### 7. Callout
-```yaml
-type: callout
-types: [info, warning, success, error, note]
-features: [automatic_icons, color_coding]
-props:
-  - type: enum [info, warning, success, error, note]
-  - title: string (optional)
-  - content: string (required)
-```
-
-## Implementation Guide
-
-### Adding New Content Block
-1. **Define Schema** in `gryd/schemaTypes/workProject.ts`:
-```javascript
-{
-  type: 'object',
-  name: 'customComponent',
-  title: 'Custom Component',
-  fields: [/* field definitions */]
-}
-```
-
-2. **Create React Component** in `RichContentComponents.tsx`:
-```typescript
-export const CustomComponent = ({ ...props }) => {
-  return <div className="custom-component">{/* implementation */}</div>
-}
-```
-
-3. **Register in Renderer** in `RichContentRenderer.tsx`:
-```typescript
-types: {
-  customComponent: ({ value }) => <CustomComponent {...value} />
-}
-```
-
-## Content Management Workflows
-
-### Creating Projects
-```yaml
-steps:
-  1. access_studio: "https://gryd.sanity.studio/"
-  2. navigate: "Work Project → Create new"
-  3. basic_info: [title, subtitle, description, timeline, impact]
-  4. metadata: [type, category, status, tags, featured]
-  5. visual_assets: [hero_image, attachments]
-  6. rich_content: [add_blocks, configure_settings]
-  7. publish: "Make live for public viewing"
-```
-
-### Content Organization
-```yaml
-categorization:
-  - use_consistent_categories: true
-  - tag_strategically: true
-  - status_management: [live, prototype, archived, ongoing, draft]
-  - featured_projects: "limit to 3-5 most impressive"
-
-quality_standards:
-  - consistent_voice: true
-  - visual_standards: "1200px+ width images"
-  - code_examples: "tested and functional"
-  - accessibility: "alt text and captions required"
-```
+For detailed workflow processes and content strategies, see `@content-workflows`.
 
 ## Performance Optimizations
 
@@ -310,16 +231,22 @@ optional:
 
 ## Future Enhancements
 
-### Planned Features
+### Planned System Improvements
 ```yaml
-short_term:
-  - playground_experiments_upgrade: "Rich content support"
-  - custom_blocks: "Project-specific components"
-  - analytics_integration: "Content engagement metrics"
+architecture:
+  - component_lazy_loading: "Dynamic block imports"
+  - server_side_rendering: "Static generation with rich content"
+  - edge_rendering: "CDN-level content processing"
+  - real_time_collaboration: "Live multi-user editing"
 
-long_term:
-  - http3_support: "When available in browsers"
-  - ml_prefetching: "Content prediction"
-  - edge_caching: "CDN-level optimizations"
-  - real_user_monitoring: "Performance analytics"
+performance:
+  - ml_prefetching: "Predictive content loading"
+  - adaptive_quality: "AI-powered image optimization"
+  - connection_awareness: "Network-adaptive experiences"
+  - progressive_enhancement: "Graceful feature degradation"
+
+integration:
+  - headless_cms_abstraction: "Multi-CMS compatibility layer"
+  - content_versioning: "Advanced diff and rollback"
+  - analytics_pipeline: "Content engagement tracking"
 ```

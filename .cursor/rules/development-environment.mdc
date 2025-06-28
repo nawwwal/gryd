@@ -1,0 +1,140 @@
+---
+description: Development environment setup, commands, and project structure for THE GRYD. Request when setting up the project, development workflows, build processes, troubleshooting, project architecture questions, or environment configuration.
+globs:
+alwaysApply: false
+---
+# Development Environment
+
+## Project Overview
+- **Name**: Gryd Echo Forge / THE GRYD — permanent issue 01
+- **Tech Stack**: React + TypeScript + Vite + Sanity CMS + Tailwind CSS
+- **Status**: Production Ready with MDX Content System ✅
+
+## Environment URLs
+```yaml
+development:
+  frontend: "http://localhost:8080/"
+  sanity_studio: "http://localhost:3333"
+
+production:
+  frontend: "https://naw.al"
+  sanity_studio: "https://gryd.sanity.studio/"
+```
+
+## Development Commands
+
+### Frontend Development
+```bash
+# Start development server (runs on port 8080)
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+
+# Lint and fix code
+npm run lint
+npm run lint:fix
+```
+
+### Sanity Studio
+```bash
+# Start studio development
+cd gryd && npm run dev
+
+# Build studio
+cd gryd && npm run build
+
+# Deploy studio
+cd gryd && npx sanity deploy
+
+# Deploy schema changes
+cd gryd && npx sanity schema deploy
+```
+
+## Project Structure
+```
+gryd-echo-forge/
+├── .cursor/rules/           # AI Agent Documentation
+├── gryd/                    # Sanity Studio
+│   ├── schemaTypes/        # CMS content schemas
+│   │   ├── sanity.config.ts    # Studio configuration
+│   │   └── package.json        # Studio dependencies
+│   ├── src/                     # React Application
+│   │   ├── components/         # React components
+│   │   │   ├── mdx/           # MDX-specific components
+│   │   │   ├── ui/            # Shadcn/ui components
+│   │   │   └── skeletons/     # Loading states
+│   │   ├── hooks/             # Custom React hooks
+│   │   ├── lib/               # Utilities and clients
+│   │   ├── pages/             # Route components
+│   │   ├── styles/            # CSS files
+│   │   ├── types/             # TypeScript definitions
+│   │   └── utils/             # Helper functions
+│   ├── public/                # Static assets
+│   └── [config files]        # Vite, TypeScript, Tailwind configs
+```
+
+## Key File Locations
+```yaml
+content_schemas:
+  - "gryd/schemaTypes/workProject.ts"
+  - "gryd/schemaTypes/playgroundExperiment.ts"
+
+core_components:
+  - "src/components/RichContentRenderer.tsx"
+  - "src/components/mdx/RichContentComponents.tsx"
+  - "src/pages/ProjectDetail.tsx"
+  - "src/pages/Work.tsx"
+
+utilities:
+  - "src/lib/sanityClient.ts"
+  - "src/hooks/useContentQuery.tsx"
+  - "src/utils/imageUtils.ts"
+  - "src/types/content.ts"
+
+styling:
+  - "src/styles/rich-content.css"
+  - "src/index.css"
+  - "tailwind.config.ts"
+```
+
+## Content Types Status
+```yaml
+work_projects:
+  schema: "gryd/schemaTypes/workProject.ts"
+  features: [rich_content_blocks, native_images, metadata]
+  status: "Production ready with MDX support ✅"
+
+playground_experiments:
+  schema: "gryd/schemaTypes/playgroundExperiment.ts"
+  features: [simple_markdown, native_images, metadata]
+  status: "Production ready, can be upgraded to MDX ⚡"
+```
+
+## Environment Variables
+```env
+# Frontend (.env)
+VITE_SANITY_PROJECT_ID=c0rjrvm3
+VITE_SANITY_DATASET=production
+VITE_SANITY_API_VERSION=2024-06-21
+
+# Sanity Studio (.env.local)
+SANITY_PROJECT_ID=c0rjrvm3
+SANITY_DATASET=production
+```
+
+## Performance Features
+```yaml
+implemented:
+  - multi_layer_caching: "40-90% faster loading"
+  - adaptive_images: "Connection-aware optimization"
+  - service_worker: "Offline support and caching"
+  - react_query: "Smart data fetching and caching"
+  - mobile_first: "Responsive design across all devices"
+  - accessibility: "WCAG compliant, screen reader support"
+```
+
+@development-setup.md
