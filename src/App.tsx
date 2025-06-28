@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -10,12 +9,15 @@ import Layout from "./components/Layout";
 import Index from "./pages/Index";
 import Work from "./pages/Work";
 import About from "./pages/About";
+import Contact from "./pages/Contact";
 import Playground from "./pages/Playground";
 import ProjectDetail from "./pages/ProjectDetail";
 import NotFound from "./pages/NotFound";
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/react"
-import { PerformanceMonitor } from "./components/PerformanceMonitor"
+
+import { Suspense, useEffect } from 'react';
+import './App.css';
 
 // Enhanced QueryClient configuration for optimal performance
 const queryClient = new QueryClient({
@@ -49,37 +51,93 @@ const queryClient = new QueryClient({
   },
 });
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <Analytics/>
-    <SpeedInsights/>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
+function App() {
+  // Initialize service worker and performance optimizations
+  useEffect(() => {
+    // Register service worker for caching
+    if ('serviceWorker' in navigator && import.meta.env.PROD) {
+      navigator.serviceWorker.register('/sw.js')
+        .then(registration => {
+          console.log('[SW] Registered successfully:', registration);
+        })
+        .catch(error => {
+          console.warn('[SW] Registration failed:', error);
+        });
+    }
 
-            {/* Public Routes - With Layout */}
-            <Route path="/" element={<Layout><Index /></Layout>} />
-            <Route path="/work" element={<Layout><Work /></Layout>} />
-            <Route path="/work/:slug" element={<Layout><ProjectDetail /></Layout>} />
-            <Route path="/about" element={<Layout><About /></Layout>} />
-            <Route path="/playground" element={<Layout><Playground /></Layout>} />
-            {/* Redirect contact to about page */}
-            <Route path="/contact" element={<Navigate to="/about" replace />} />
-            <Route path="*" element={<Layout><NotFound /></Layout>} />
-          </Routes>
+    // Initialize performance monitoring
+    if ('performance' in window && 'measure' in performance) {
+      // Mark app start time
+      performance.mark('app-start');
+
+      // Measure app initialization time
+      window.addEventListener('load', () => {
+        performance.mark('app-loaded');
+        try {
+          performance.measure('app-load-time', 'app-start', 'app-loaded');
+          const measure = performance.getEntriesByName('app-load-time')[0];
+          console.log(`[Performance] App loaded in ${measure.duration.toFixed(2)}ms`);
+        } catch (error) {
+          console.warn('[Performance] Could not measure app load time:', error);
+        }
+      });
+    }
+
+    // Prefetch DNS for external resources
+    const prefetchDomains = [
+      'cdn.sanity.io',
+      'fonts.googleapis.com',
+      'fonts.gstatic.com'
+    ];
+
+    prefetchDomains.forEach(domain => {
+      const link = document.createElement('link');
+      link.rel = 'dns-prefetch';
+      link.href = `//${domain}`;
+      document.head.appendChild(link);
+    });
+  }, []);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Analytics/>
+      <SpeedInsights/>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <ScrollToTop />
+          <Suspense
+            fallback={
+              <div className="route-loading">
+                <div className="loading-spinner" />
+                <p>Loading page...</p>
+              </div>
+            }
+          >
+            <Routes>
+              {/* Public Routes - With Layout */}
+              <Route path="/" element={<Layout><Index /></Layout>} />
+              <Route path="/work" element={<Layout><Work /></Layout>} />
+              <Route path="/work/:slug" element={<Layout><ProjectDetail /></Layout>} />
+              <Route path="/about" element={<Layout><About /></Layout>} />
+              <Route path="/playground" element={<Layout><Playground /></Layout>} />
+              <Route path="/contact" element={<Layout><Contact /></Layout>} />
+              <Route path="*" element={<Layout><NotFound /></Layout>} />
+            </Routes>
+          </Suspense>
         </BrowserRouter>
-    </TooltipProvider>
-    {/* Development Tools - only in development */}
-    {import.meta.env.DEV && (
-      <>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <PerformanceMonitor />
-      </>
-    )}
-  </QueryClientProvider>
-);
+      </TooltipProvider>
+
+      {/* Development Tools - only in development */}
+      {import.meta.env.DEV && (
+        <>
+          <ReactQueryDevtools initialIsOpen={false} />
+
+        </>
+      )}
+    </QueryClientProvider>
+  );
+}
 
 export default App;

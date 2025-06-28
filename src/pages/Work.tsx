@@ -9,6 +9,7 @@ import { useGyroscopic } from '../hooks/useGyroscopic';
 import { useMobileOptimization } from '../hooks/useMobileOptimization';
 import { useSwipeGesture } from '../hooks/useSwipeGesture';
 import ProjectsSkeleton from '../components/skeletons/ProjectsSkeleton';
+
 const Work = () => {
   const {
     data: projects = [],

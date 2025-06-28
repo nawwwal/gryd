@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import ScrollFade from './ScrollFade';
-import { WorkProject } from '../types/content';
 import { getSanityImageUrl } from '../utils/imageUtils';
+import { WorkProject } from '../types/content';
 
 interface ArticleGridProps {
   projects: WorkProject[];
@@ -31,7 +31,7 @@ const ArticleGrid = ({ projects }: ArticleGridProps) => {
                 </div>
 
                 <div className="grid-article-content">
-                  <div className="grid-category">{project.metadata.category}</div>
+                  <div className="grid-category">{project.metadata?.category}</div>
                   <h5 className="grid-headline">{project.title}</h5>
                   <p className="grid-excerpt">{project.subtitle}</p>
 

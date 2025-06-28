@@ -1,16 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('./styles/base.css');
+@import url('./styles/typography.css');
+@import url('./styles/animations.css');
+@import url('./styles/magazine-layout.css');
+@import url('./styles/articles.css');
+@import url('./styles/editors-picks.css');
+@import url('./styles/footer.css');
+@import url('./styles/about-editor.css');
+@import url('./styles/page-headers.css');
+@import url('./styles/contact.css');
+@import url('./styles/rich-content.css');
+@import url('./styles/responsive.css');
+@import url('./styles/mobile-native.css');
+@import url('./styles/mobile-enhancements.css');
+@import url('./styles/playground.css');
+@import url('./styles/playground-hero.css');
 
-/* Import all CSS modules */
-@import './styles/base.css';
-@import './styles/typography.css';
-@import './styles/magazine-layout.css';
-@import './styles/articles.css';
-@import './styles/playground.css';
-@import './styles/playground-hero.css';
-@import './styles/animations.css';
-@import './styles/about-editor.css';
-@import './styles/mobile-enhancements.css';
-@import './styles/mobile-native.css';
-@import './styles/footer.css';
-@import './styles/page-headers.css';
-@import './styles/editors-picks.css';
-@import './styles/rich-content.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

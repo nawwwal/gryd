@@ -141,7 +141,7 @@ images_not_loading:
   solutions: [compress_images, use_supported_formats, add_alt_text]
 
 performance_issues:
-  tools: [react_query_devtools, performance_monitor, browser_devtools]
+  tools: [react_query_devtools, browser_devtools]
   metrics: [cache_hit_rate, loading_times, network_requests]
 ```
 
@@ -171,8 +171,7 @@ useContentBySlug(slug: string, type: string)
 useCacheManager()
 usePrefetchContent()
 
-// Performance monitoring
-usePerformanceMonitor()
+
 ```
 
 ### Utilities

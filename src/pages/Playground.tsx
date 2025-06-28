@@ -215,68 +215,7 @@ const Playground = () => {
         </div>
       </div>
 
-      {/* Editorial Lab Notes Section */}
-      <div className="lab-notes-section">
-        <ScrollFade>
-          <div className="lab-notes-container">
-            <div className="editorial-divider">
-              <div className="divider-ornament">◆</div>
-              <div className="divider-line"></div>
-              <div className="divider-text">LAB NOTES</div>
-              <div className="divider-line"></div>
-              <div className="divider-ornament">◆</div>
-            </div>
-
-            <div className="lab-notes-content">
-              <div className="editorial-column">
-                <div className="editorial-header">
-                  <h3 className="editorial-title">From the Laboratory</h3>
-                  <div className="editorial-subtitle">Research Director's Notes</div>
-                </div>
-
-                <div className="editorial-body">
-                  <p className="editorial-note">
-                    <span className="dropcap">T</span>his laboratory exists at the intersection of curiosity and chaos.
-                    Each experiment documented here represents a question asked, a hypothesis tested,
-                    or simply the delightful pursuit of "what if?"
-                  </p>
-
-                  <p className="editorial-note">
-                    Some discoveries here have shaped entire projects. Others remain beautiful failures—
-                    the kind that teach you more than success ever could. All are preserved in the spirit
-                    of scientific transparency.
-                  </p>
-                </div>
-              </div>
-
-              <div className="editorial-column">
-                <div className="editorial-header">
-                  <h3 className="editorial-title">Reader's Guide</h3>
-                  <div className="editorial-subtitle">How to Navigate</div>
-                </div>
-
-                <div className="editorial-body">
-                  <div className="editorial-list">
-                    <div className="list-item">
-                      <span>This page updates whenever something breaks in an interesting way</span>
-                    </div>
-                    <div className="list-item">
-                      <span>Bookmark it if you enjoy watching creative processes unfold</span>
-                    </div>
-                    <div className="list-item">
-                      <span>Most experiments are documented with both successes and failures</span>
-                    </div>
-                    <div className="list-item">
-                      <span>Feel free to steal ideas—that's how innovation spreads</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </ScrollFade>
-      </div>
-
+      {/* Enhanced Magazine Footer - Now Common Component */}
       <MagazineFooter />
     </div>
   );
