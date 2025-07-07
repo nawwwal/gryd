@@ -87,7 +87,7 @@ export const loadPlaygroundExperiments = async (): Promise<PlaygroundExperiment[
   return await client.fetch(query)
 }
 
-export const getContentBySlug = async (slug: string, type: 'work' | 'playground'): Promise<ContentItem | null> => {
+export const getContentBySlug = async (slug: string, type: 'work' | 'playground'): Promise<WorkProject | PlaygroundExperiment | null> => {
   if (type === 'work') {
     const query = `*[_type == "workProject" && slug.current == $slug][0]{
       "slug": slug.current,
@@ -129,7 +129,24 @@ export const getContentBySlug = async (slug: string, type: 'work' | 'playground'
       metadata
     }`
     const result = await client.fetch(query, { slug })
-    return result || null
+    return (result as WorkProject) || {
+      slug: slug || '',
+      title: '',
+      subtitle: '',
+      description: '',
+      timeline: '',
+      impact: '',
+      metadata: {
+        type: 'blog' as const,
+        category: '',
+        status: 'draft' as const,
+        featured: false,
+        publishDate: '',
+        lastUpdated: '',
+        tags: [],
+        tools: []
+      }
+    } as WorkProject
   } else {
     const query = `*[_type == "playgroundExperiment" && slug.current == $slug][0]{
       "slug": slug.current,
@@ -171,7 +188,24 @@ export const getContentBySlug = async (slug: string, type: 'work' | 'playground'
       metadata
     }`
     const result = await client.fetch(query, { slug })
-    return result || null
+    return (result as PlaygroundExperiment) || {
+      slug: slug || '',
+      title: '',
+      subtitle: '',
+      description: '',
+      intensity: 'low' as const,
+      visual: 'geometric' as const,
+      metadata: {
+        type: 'prototype' as const,
+        category: '',
+        status: 'draft' as const,
+        featured: false,
+        publishDate: '',
+        lastUpdated: '',
+        tags: [],
+        tools: []
+      }
+    } as PlaygroundExperiment
   }
 }
 
@@ -263,5 +297,7 @@ export const getAllContentByType = async (contentType: ContentMetadata['type']):
     client.fetch(playgroundQuery, { contentType })
   ])
 
-  return [...workResults, ...playgroundResults]
+  const workArray = Array.isArray(workResults) ? workResults : [];
+  const playgroundArray = Array.isArray(playgroundResults) ? playgroundResults : [];
+  return [...workArray, ...playgroundArray]
 }

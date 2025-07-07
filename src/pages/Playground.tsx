@@ -89,7 +89,6 @@ const Playground = () => {
                   <MorphingText
                     texts={['PLAYGROUND', 'LABORATORY', 'EXPERIMENTS', 'RESEARCH']}
                     className="morphing-title"
-                    interval={3000}
                   />
                 </div>
 
