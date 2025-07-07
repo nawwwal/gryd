@@ -7,7 +7,7 @@ import { useMobileNavigationState } from '../hooks/useMobileNavigationState';
 interface NavItem {
   path: string;
   label: string;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
+  icon: React.ComponentType<any>;
   shortLabel: string;
 }
 
