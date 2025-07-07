@@ -75,7 +75,7 @@
     @apply relative w-full bg-white shadow-2xl;
     max-width: min(95vw, 1400px);
     transform: rotateX(0.5deg) rotateY(-0.25deg);
-    background: 
+    background:
       linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%),
       radial-gradient(circle at 50% 50%, rgba(0,0,0,0.02) 1px, transparent 1px);
     background-size: 100% 100%, 10px 10px;
@@ -85,7 +85,7 @@
   }
 
   .hero-paper:hover {
-    box-shadow: 
+    box-shadow:
       0 32px 64px -12px rgba(0, 0, 0, 0.25),
       0 8px 32px -8px rgba(251, 146, 60, 0.15),
       0 0 0 1px rgba(255, 255, 255, 0.1);
@@ -98,9 +98,9 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, 
-      rgba(251,146,60,0.05) 0%, 
-      transparent 30%, 
+    background: linear-gradient(135deg,
+      rgba(251,146,60,0.05) 0%,
+      transparent 30%,
       transparent 70%,
       rgba(251,146,60,0.05) 100%);
     opacity: 0;
@@ -120,7 +120,7 @@
   }
 
   .gyroscopic-card:hover {
-    box-shadow: 
+    box-shadow:
       0 25px 50px -12px rgba(0, 0, 0, 0.25),
       0 0 0 1px rgba(255, 255, 255, 0.05);
   }
@@ -132,9 +132,9 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, 
-      rgba(251,146,60,0.03) 0%, 
-      transparent 50%, 
+    background: linear-gradient(135deg,
+      rgba(251,146,60,0.03) 0%,
+      transparent 50%,
       rgba(251,146,60,0.03) 100%);
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -150,7 +150,7 @@
   .newspaper-header {
     @apply fixed top-0 left-0 right-0 z-50 bg-white shadow-lg hidden md:block;
     height: 60px;
-    background: 
+    background:
       linear-gradient(135deg, #ffffff 0%, #fafafa 100%),
       radial-gradient(circle at 25% 25%, rgba(139,69,19,0.02) 1px, transparent 1px),
       radial-gradient(circle at 75% 75%, rgba(139,69,19,0.02) 1px, transparent 1px);
@@ -170,7 +170,7 @@
 
   .newspaper-pattern {
     @apply absolute top-0 left-0 w-full h-full opacity-20;
-    background-image: 
+    background-image:
       repeating-linear-gradient(
         0deg,
         transparent,
@@ -189,7 +189,7 @@
 
   .newspaper-grid {
     @apply absolute top-0 left-0 w-full h-full opacity-10;
-    background-image: 
+    background-image:
       radial-gradient(circle at 2px 2px, rgba(139,69,19,0.3) 1px, transparent 1px);
     background-size: 12px 12px;
     animation: gridFloat 8s ease-in-out infinite;
@@ -267,7 +267,7 @@
     @apply relative w-full bg-white shadow-2xl;
     max-width: min(95vw, 1400px);
     transform: rotateX(0.5deg) rotateY(-0.25deg);
-    background: 
+    background:
       linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%),
       radial-gradient(circle at 50% 50%, rgba(0,0,0,0.02) 1px, transparent 1px);
     background-size: 100% 100%, 10px 10px;
@@ -392,7 +392,7 @@
 
   .grid-article {
     @apply bg-white shadow-lg overflow-hidden;
-    background: 
+    background:
       linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
     border: 1px solid rgba(0,0,0,0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -483,7 +483,7 @@
   .photo-frame {
     @apply relative bg-white p-4 shadow-xl;
     padding: clamp(0.75rem, 3vw, 1rem);
-    background: 
+    background:
       linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
     border: 1px solid rgba(0,0,0,0.1);
   }
@@ -512,7 +512,7 @@
   /* Editorial Contact Section - Mobile Responsive */
   .editorial-contact-section {
     @apply section-padding;
-    background: 
+    background:
       linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%),
       radial-gradient(circle at 20% 80%, rgba(251,146,60,0.02) 1px, transparent 1px),
       radial-gradient(circle at 80% 20%, rgba(251,146,60,0.02) 1px, transparent 1px);
@@ -546,13 +546,7 @@
   }
 
   .cta-button {
-    @apply inline-flex items-center justify-center bg-orange-600 text-white font-medium rounded-lg font-mono;
-    @apply hover:bg-orange-700 hover:shadow-lg transition-all duration-300;
-    @apply hover:transform hover:-translate-y-1;
-    padding: clamp(0.75rem, 3vw, 1rem) clamp(1.5rem, 4vw, 2rem);
-    font-size: clamp(0.875rem, 2.5vw, 1rem);
-    min-height: 48px;
-    text-decoration: none;
+    @apply shimmer-button;
   }
 
   /* Magazine Footer - Mobile Responsive */

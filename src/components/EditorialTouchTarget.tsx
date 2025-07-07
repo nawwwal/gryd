@@ -33,7 +33,7 @@ const EditorialTouchTarget = ({
       case 'link':
         return `${baseClasses} editorial-link-touch text-gray-900 hover:text-orange-600`;
       case 'button':
-        return `${baseClasses} bg-orange-600 text-white rounded-lg font-mono font-medium uppercase tracking-wider hover:bg-orange-700 active:bg-orange-800`;
+        return `${baseClasses} shimmer-button`;
       default:
         return baseClasses;
     }

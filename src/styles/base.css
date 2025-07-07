@@ -84,3 +84,39 @@
     @apply text-body leading-relaxed;
   }
 }
+
+/* Global Shimmer Button Effect for Primary Orange Buttons */
+@layer components {
+  .shimmer-button {
+    @apply inline-flex items-center justify-center space-x-2;
+    @apply bg-orange-600 text-white font-mono font-medium uppercase tracking-wide;
+    @apply hover:bg-orange-700 hover:shadow-lg transition-all duration-300;
+    @apply hover:transform hover:-translate-y-1;
+    padding: clamp(0.75rem, 3vw, 1rem) clamp(1.5rem, 4vw, 2rem);
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    min-height: 48px;
+    text-decoration: none;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .shimmer-button:hover::before {
+    left: 100%;
+  }
+
+  .shimmer-button > * {
+    @apply relative z-10;
+  }
+}
