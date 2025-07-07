@@ -90,6 +90,7 @@ const Index = () => {
       <div id="letters">
         <LettersToEditor />
       </div>
+
       <MagazineFooter />
 
       {/* Mobile Section Indicator */}

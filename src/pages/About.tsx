@@ -23,28 +23,28 @@ const About = () => {
                   <span>•</span>
                   <span>EST. 2021</span>
                 </div>
-                
+
                 <h1 className="magazine-title">
                   {'GRYD'.split('').map((letter, index) => (
-                    <span 
-                      key={index} 
-                      className="hover-letter title-letter" 
+                    <span
+                      key={index}
+                      className="hover-letter title-letter"
                       style={{ animationDelay: `${index * 100}ms` }}
                     >
                       {letter}
                     </span>
                   ))}
                 </h1>
-                
+
                 <div className="editor-credit">
                   <span className="edited-by">EDITED BY</span>
                   <span className="editor-name">ADITYA NAWAL</span>
                 </div>
-                
+
                 <div className="publication-subtitle">
                   A publication of systems, stories & sidequests
                 </div>
-                
+
                 {/* PDF Download Button */}
                 <div className="masthead-actions mt-8">
                   <button className="print-issue-btn">
@@ -80,10 +80,10 @@ const About = () => {
               <h2 className="section-title">Professional Timeline</h2>
               <div className="section-divider"></div>
             </div>
-            
+
             <div className="resume-content">
               <div className="resume-binding-line"></div>
-              
+
               <div className="resume-entry">
                 <div className="entry-timeline">2024 – PRESENT</div>
                 <div className="entry-company">QUICKO</div>
@@ -92,7 +92,7 @@ const About = () => {
                   Intern → Full Time. Simplifying finance UX in India.
                 </div>
               </div>
-              
+
               <div className="resume-entry">
                 <div className="entry-timeline">2020 – 2024</div>
                 <div className="entry-company">DAIICT GANDHINAGAR</div>
@@ -133,10 +133,9 @@ const About = () => {
       {/* Epilogue Section */}
       <EpilogueSection />
 
-      {/* Enhanced Magazine Footer - Now Common Component */}
-      <MagazineFooter />
-    </div>
-  );
+              <MagazineFooter />
+      </div>
+    );
 };
 
 export default About;

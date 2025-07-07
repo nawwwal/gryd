@@ -252,10 +252,9 @@ const ProjectDetail = () => {
         </ScrollFade>
       </div>
 
-      {/* Enhanced Magazine Footer - Now Common Component */}
-      <MagazineFooter />
-    </div>
-  );
+              <MagazineFooter />
+      </div>
+    );
 };
 
 export default ProjectDetail;
