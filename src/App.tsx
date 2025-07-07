@@ -9,7 +9,6 @@ import Layout from "./components/Layout";
 import Index from "./pages/Index";
 import Work from "./pages/Work";
 import About from "./pages/About";
-import Contact from "./pages/Contact";
 import Playground from "./pages/Playground";
 import ProjectDetail from "./pages/ProjectDetail";
 import NotFound from "./pages/NotFound";
@@ -122,7 +121,6 @@ function App() {
               <Route path="/work/:slug" element={<Layout><ProjectDetail /></Layout>} />
               <Route path="/about" element={<Layout><About /></Layout>} />
               <Route path="/playground" element={<Layout><Playground /></Layout>} />
-              <Route path="/contact" element={<Layout><Contact /></Layout>} />
               <Route path="*" element={<Layout><NotFound /></Layout>} />
             </Routes>
           </Suspense>

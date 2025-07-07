@@ -81,26 +81,91 @@ const About = () => {
               <div className="section-divider"></div>
             </div>
 
-            <div className="resume-content">
-              <div className="resume-binding-line"></div>
+                        <div className="editorial-timeline">
 
-              <div className="resume-entry">
-                <div className="entry-timeline">2024 – PRESENT</div>
-                <div className="entry-company">QUICKO</div>
-                <div className="entry-role">Product Designer</div>
-                <div className="entry-description">
-                  Intern → Full Time. Simplifying finance UX in India.
-                </div>
-              </div>
+              {/* Current Experience */}
+              <ScrollFade delay={350}>
+                <article className="timeline-entry">
+                  <div className="entry-marker">
+                    <div className="marker-dot current"></div>
+                    <div className="marker-line"></div>
+                  </div>
+                  <div className="entry-content">
+                    <header className="entry-header">
+                      <time className="entry-date">Jan 2024 – Present</time>
+                      <div className="entry-category">Experience</div>
+                    </header>
+                    <h3 className="entry-title">Product Designer</h3>
+                    <div className="entry-organization">Quicko, Ahmedabad</div>
+                    <div className="entry-description">
+                      Worked across Quicko's Income Tax platform, mobile app (glyde), and Pro product to design key workflows for File, Save and Investments module. Built the Pay module and Home from the ground up. Led design for Dashboard, Earnings, Bookings, and core entities in Quicko Pro. Designed glyde with a mobile-native approach & design system, standardizing tokens, type scales, and interaction patterns, while aligning behavior with Material Design in close collaboration with engineering.
+                    </div>
+                  </div>
+                </article>
+              </ScrollFade>
 
-              <div className="resume-entry">
-                <div className="entry-timeline">2020 – 2024</div>
-                <div className="entry-company">DAIICT GANDHINAGAR</div>
-                <div className="entry-role">BTech, Computer Science</div>
-                <div className="entry-description">
-                  Where design found me in a CS classroom.
-                </div>
-              </div>
+              {/* Parallel Experience */}
+              <ScrollFade delay={400}>
+                <article className="timeline-entry">
+                  <div className="entry-marker">
+                    <div className="marker-dot experience"></div>
+                    <div className="marker-line"></div>
+                  </div>
+                  <div className="entry-content">
+                    <header className="entry-header">
+                      <time className="entry-date">Jan 2024 – Jul 2024</time>
+                      <div className="entry-category">Parallel Experience</div>
+                    </header>
+                    <h3 className="entry-title">Product Design Intern</h3>
+                    <div className="entry-organization">Sandbox, Ahmedabad</div>
+                    <div className="entry-description">
+                      In parallel with Quicko, shaped the Console home for Sandbox's developer platform. Defined interface patterns for quota limits, subscriptions and billing flows.
+                    </div>
+                  </div>
+                </article>
+              </ScrollFade>
+
+              {/* Previous Experience */}
+              <ScrollFade delay={450}>
+                <article className="timeline-entry">
+                  <div className="entry-marker">
+                    <div className="marker-dot experience"></div>
+                    <div className="marker-line"></div>
+                  </div>
+                  <div className="entry-content">
+                    <header className="entry-header">
+                      <time className="entry-date">May 2023 – Jul 2023</time>
+                      <div className="entry-category">Experience</div>
+                    </header>
+                    <h3 className="entry-title">Product Design Intern</h3>
+                    <div className="entry-organization">Flits, Ahmedabad</div>
+                    <div className="entry-description">
+                      Designed and shipped core features and marketing pages for Flits, some of which are now live on getflits.com. Built a structured onboarding flow that guided new users through wallet setup, rewards, and key actions—helping them get started with clarity.
+                    </div>
+                  </div>
+                </article>
+              </ScrollFade>
+
+              {/* Education */}
+              <ScrollFade delay={500}>
+                <article className="timeline-entry">
+                  <div className="entry-marker">
+                    <div className="marker-dot education"></div>
+                    <div className="marker-line last"></div>
+                  </div>
+                  <div className="entry-content">
+                    <header className="entry-header">
+                      <time className="entry-date">Aug 2020 – Jun 2024</time>
+                      <div className="entry-category">Education</div>
+                    </header>
+                    <h3 className="entry-title">Dhirubhai Ambani Institute of Information and Communication Technology</h3>
+                    <div className="entry-organization">B.Tech, Information & Communication Technology with minor in Computational Science</div>
+                    <div className="entry-description">
+                      Convenor at Muse (Design Club), led design initiatives across campus and mentored juniors. Actively contributed to tech and cultural spaces through DCEI, TechSupport, i.Fest, IEEE SB, and Music Club.
+                    </div>
+                  </div>
+                </article>
+              </ScrollFade>
             </div>
           </div>
         </ScrollFade>

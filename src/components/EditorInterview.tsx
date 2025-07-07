@@ -1,4 +1,3 @@
-
 import ScrollFade from './ScrollFade';
 
 const EditorInterview = () => {
@@ -27,9 +26,24 @@ const EditorInterview = () => {
 
   return (
     <div className="interview-section">
+      {/* Editor Introduction */}
+      <ScrollFade delay={0}>
+        <div className="editor-intro">
+          <p className="intro-text">
+            ever-curious designer with an engineer's mind and an artist's eye. i care about how things feel, but also how they fail, especially when money's involved. design, for me, isn't just visual polish; it's control, behavior, memory. i love mixing history, math, and code to figure out why people hesitate, click, or trust.
+          </p>
+          <p className="intro-text">
+            don't like to chase clicks or obsess over A/B tests – my best design leaps come from gut-level intuition, plain logic, and watching real people move through messy, unpredictable lives. inspiration finds me in crowded buses, street corners, and the unlikeliest moments.
+          </p>
+          <p className="intro-text">
+            not here to make things trendy. here to make them make sense, and last.
+          </p>
+        </div>
+      </ScrollFade>
+
       <div className="interview-layout">
         {questions.map((item, index) => (
-          <ScrollFade key={index} delay={index * 150}>
+          <ScrollFade key={index} delay={(index + 1) * 150}>
             <div className="qa-block">
               <div className="question">
                 <span className="q-marker">Q:</span>
@@ -43,7 +57,7 @@ const EditorInterview = () => {
           </ScrollFade>
         ))}
       </div>
-      
+
       <ScrollFade delay={800}>
         <div className="interview-signature">
           <div className="signature-line">

@@ -1,4 +1,3 @@
-
 import ScrollFade from './ScrollFade';
 import { ArrowRight, Feather, Star, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -32,7 +31,7 @@ const LettersToEditor = () => {
             <div className="editorial-introduction">
               <div className="intro-ornament">❖</div>
               <p className="intro-text">
-                "The conversation doesn't end here. Every great design begins with dialogue, 
+                "The conversation doesn't end here. Every great design begins with dialogue,
                 and every meaningful project starts with understanding."
               </p>
               <div className="intro-attribution">— The Editorial Board</div>
@@ -49,12 +48,12 @@ const LettersToEditor = () => {
 
                 <div className="contact-story-body">
                   <p className="story-paragraph">
-                    Whether you're building the next breakthrough product or fixing something that's broken, 
+                    Whether you're building the next breakthrough product or fixing something that's broken,
                     let's explore how thoughtful design can transform your vision into reality.
                   </p>
-                  
+
                   <div className="story-highlight">
-                    <strong>Currently accepting:</strong> Product design projects, design system work, 
+                    <strong>Currently accepting:</strong> Product design projects, design system work,
                     and strategic design consultations for forward-thinking teams.
                   </div>
                 </div>
@@ -91,7 +90,7 @@ const LettersToEditor = () => {
             <div className="letters-footer-note">
               <div className="note-ornament">◆ ◇ ◆</div>
               <p className="note-text">
-                All correspondence is personally reviewed and responded to. 
+                All correspondence is personally reviewed and responded to.
                 Please allow 24-48 hours for detailed project discussions.
               </p>
             </div>

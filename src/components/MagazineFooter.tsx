@@ -4,96 +4,101 @@ import { Link } from 'react-router-dom';
 const MagazineFooter = () => {
   const tickerRef = useRef<HTMLDivElement>(null);
 
-  // Ticker messages that will cycle through
+  // Ticker messages that will cycle through - clever and relevant
   const tickerMessages = [
-    "Design thinking meets editorial excellence in THE GRYD magazine",
-    "New experiments in digital storytelling now live in the playground",
-    "Portfolio projects showcase innovative product design solutions",
-    "Editorial approach to user experience design continues to evolve",
-    "The intersection of journalism and design creates compelling narratives",
-    "Magazine-style layouts influence modern web design patterns",
-    "How editorial design principles enhance digital product experiences",
-    "Design systems that prioritize reading and comprehension",
-    "Experimental interfaces that challenge conventional web patterns",
-    "Bridging the gap between print journalism and digital interaction"
+    "BREAKING: Designer discovers that good typography is just fancy spacing",
+    "LATEST: User research reveals people actually read the content (shocking)",
+    "UPDATE: CSS Grid finally makes sense after 47 attempts",
+    "FEATURE: Why every button needs a hover state and a backstory",
+    "INSIGHT: The best designs are the ones you don't notice",
+    "TRENDING: Designers everywhere are questioning their life choices",
+    "ANALYSIS: How to explain design decisions without crying",
+    "REPORT: The correlation between coffee consumption and pixel perfection",
+    "DEVELOPMENT: New study shows users prefer interfaces that work",
+    "INNOVATION: Revolutionary discovery: white space is not empty space",
+    "EXCLUSIVE: The secret to good design? Start with the content",
+    "FLASH: Designer successfully explains design thinking to stakeholders",
+    "URGENT: Someone finally figured out what 'responsive' actually means",
+    "SPECIAL: The untold story of why designers love dark mode",
+    "LIVE: Breaking news - good design is invisible, bad design is everywhere"
   ];
 
   return (
     <footer className="newspaper-footer">
-      {/* Main Footer Content */}
       <div className="footer-content">
-        {/* Center Heading */}
-        <div className="footer-masthead">
-          <div className="masthead-divider-top"></div>
-          <h2 className="footer-title">THE GRYD</h2>
-          <p className="footer-subtitle">permanent issue 01 • design journalism</p>
-          <div className="masthead-divider-bottom"></div>
-        </div>
-
-        {/* Grid Layout */}
-        <div className="footer-grid">
-          {/* Navigation Column */}
-          <div className="footer-column">
-            <h3 className="column-title">Navigation</h3>
-            <div className="column-content">
-              <Link to="/" className="footer-link">home</Link>
-              <Link to="/work" className="footer-link">work</Link>
-              <Link to="/playground" className="footer-link">playground</Link>
-              <Link to="/about" className="footer-link">about</Link>
-              <Link to="/contact" className="footer-link">contact</Link>
+        <div className="footer-classified-grid">
+          {/* Section 1: Index */}
+          <div className="classified-section">
+            <h3 className="classified-title">Index</h3>
+            <div className="nav-list">
+              <Link to="/" className="nav-item">
+                <span className="nav-text">Home</span>
+                <span className="nav-number">p.01</span>
+              </Link>
+              <Link to="/work" className="nav-item">
+                <span className="nav-text">Work</span>
+                <span className="nav-number">p.02</span>
+              </Link>
+              <Link to="/playground" className="nav-item">
+                <span className="nav-text">Playground</span>
+                <span className="nav-number">p.03</span>
+              </Link>
+              <Link to="/about" className="nav-item">
+                <span className="nav-text">About</span>
+                <span className="nav-number">p.04</span>
+              </Link>
             </div>
           </div>
 
-          {/* Editorial Column */}
-          <div className="footer-column">
-            <h3 className="column-title">Editorial</h3>
-            <div className="column-content">
-              <div className="editorial-item">
-                <span className="item-label">Editor:</span>
-                <span className="item-value">Aditya Nawal</span>
+          {/* Section 2: Colophon */}
+          <div className="classified-section">
+            <h3 className="classified-title">Colophon</h3>
+            <div className="classified-list">
+              <div className="classified-item">
+                <span className="label">Editor:</span>
+                <span>Aditya Nawal</span>
               </div>
-              <div className="editorial-item">
-                <span className="item-label">Design:</span>
-                <span className="item-value">Product & Editorial</span>
+              <div className="classified-item">
+                <span className="label">Published:</span>
+                <span>MMXXIV</span>
               </div>
-              <div className="editorial-item">
-                <span className="item-label">Published:</span>
-                <span className="item-value">2024</span>
+              <div className="classified-item">
+                <span className="label">Fonts:</span>
+                <span>Platypi, Fraunces, JetBrains Mono</span>
               </div>
-              <div className="editorial-item">
-                <span className="item-label">Location:</span>
-                <span className="item-value">Mumbai, India</span>
+              <div className="classified-item">
+                <span className="label">Built with:</span>
+                <span>React, Sanity, Tailwind</span>
               </div>
             </div>
           </div>
 
-          {/* Connect Column */}
-          <div className="footer-column">
-            <h3 className="column-title">Connect</h3>
-            <div className="column-content">
-              <a href="mailto:hello@gryd.dev" className="footer-link">hello@gryd.dev</a>
-              <a href="https://linkedin.com/in/adityanawal" className="footer-link">LinkedIn</a>
-              <a href="https://twitter.com/adityanawal" className="footer-link">Twitter</a>
-              <a href="https://github.com/adityanawal" className="footer-link">GitHub</a>
+          {/* Section 3: Inquiries */}
+          <div className="classified-section">
+            <h3 className="classified-title">Inquiries</h3>
+            <div className="classified-list">
+                <div className="classified-item">
+                    <span>For projects, collaborations, or just to say hello:</span>
+                </div>
+                <div className="classified-item">
+                    <a href="mailto:hello@gryd.dev">hello@gryd.dev</a>
+                </div>
             </div>
           </div>
 
-          {/* Status Column */}
-          <div className="footer-column">
-            <h3 className="column-title">Status</h3>
-            <div className="column-content">
-              <div className="status-item">
-                <span className="status-dot active"></span>
-                <span className="status-text">Available for projects</span>
-              </div>
-              <div className="status-item">
-                <span className="status-dot active"></span>
-                <span className="status-text">Designing & writing</span>
-              </div>
-              <div className="status-item">
-                <span className="status-dot active"></span>
-                <span className="status-text">Experimental mode</span>
-              </div>
+          {/* Section 4: Socials */}
+          <div className="classified-section">
+            <h3 className="classified-title">Socials</h3>
+            <div className="classified-list">
+                <div className="classified-item">
+                    <a href="https://linkedin.com/in/adityanawal" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                </div>
+                <div className="classified-item">
+                    <a href="https://twitter.com/adityanawal" target="_blank" rel="noopener noreferrer">Twitter</a>
+                </div>
+                <div className="classified-item">
+                    <a href="https://github.com/adityanawal" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
             </div>
           </div>
         </div>
@@ -111,39 +116,27 @@ const MagazineFooter = () => {
       <div className="news-ticker" ref={tickerRef}>
         <div className="ticker-container">
           <div className="ticker-track">
-            {tickerMessages.map((message, index) => (
-              <div key={index} className="ticker-item">
-                <span className="ticker-label">
-                  {index === 0 ? 'BREAKING:' :
-                   index === 1 ? 'LATEST:' :
-                   index === 2 ? 'UPDATE:' :
-                   index === 3 ? 'FEATURE:' :
-                   index === 4 ? 'INSIGHT:' :
-                   index === 5 ? 'TRENDING:' :
-                   index === 6 ? 'ANALYSIS:' :
-                   index === 7 ? 'REPORT:' :
-                   index === 8 ? 'DEVELOPMENT:' : 'INNOVATION:'}
-                </span>
-                <span className="ticker-message">{message}</span>
-              </div>
-            ))}
+            {tickerMessages.map((message, index) => {
+              const label = message.split(':')[0];
+              const content = message.split(': ').slice(1).join(': ');
+              return (
+                <div key={index} className="ticker-item">
+                  <span className="ticker-label">{label}:</span>
+                  <span className="ticker-message">{content}</span>
+                </div>
+              );
+            })}
             {/* Duplicate for seamless loop */}
-            {tickerMessages.map((message, index) => (
-              <div key={`duplicate-${index}`} className="ticker-item">
-                <span className="ticker-label">
-                  {index === 0 ? 'BREAKING:' :
-                   index === 1 ? 'LATEST:' :
-                   index === 2 ? 'UPDATE:' :
-                   index === 3 ? 'FEATURE:' :
-                   index === 4 ? 'INSIGHT:' :
-                   index === 5 ? 'TRENDING:' :
-                   index === 6 ? 'ANALYSIS:' :
-                   index === 7 ? 'REPORT:' :
-                   index === 8 ? 'DEVELOPMENT:' : 'INNOVATION:'}
-                </span>
-                <span className="ticker-message">{message}</span>
-              </div>
-            ))}
+            {tickerMessages.map((message, index) => {
+              const label = message.split(':')[0];
+              const content = message.split(': ').slice(1).join(': ');
+              return (
+                <div key={`duplicate-${index}`} className="ticker-item">
+                  <span className="ticker-label">{label}:</span>
+                  <span className="ticker-message">{content}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
