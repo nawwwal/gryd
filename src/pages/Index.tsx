@@ -8,7 +8,7 @@ import { useWorkProjects } from '../hooks/useContentQuery';
 import type { WorkProject } from '../types/content';
 import { useMobileOptimization } from '../hooks/useMobileOptimization';
 import { useSwipeGesture } from '../hooks/useSwipeGesture';
-import HomeSkeleton from '../components/skeletons/HomeSkeleton';
+
 
 const Index = () => {
   const {
@@ -50,9 +50,6 @@ const Index = () => {
     }
   });
 
-  if (loading) {
-    return <HomeSkeleton />;
-  }
 
   // Show the main layout even if no projects, but handle featured project gracefully
   return (
