@@ -276,10 +276,34 @@
     animation: paper-settle 1s ease-out;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
+    .magazine-hero {
+      /* Center and scale the entire hero section */
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      width: 1200px; /* base design width */
+      margin: 0 auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      transform-origin: top center;
+      transform: scale(calc((100vw - 2rem) / 1200));
+    }
+
+    /* Keep the hero-paper at its design width so scaling is uniform */
     .hero-paper {
-      transform: none;
-      margin: 0.5rem;
+      max-width: none !important;
+      width: 1200px;
+      transform: rotateX(0.5deg) rotateY(-0.25deg);
+      flex-shrink: 0;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .magazine-hero {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      transform: scale(calc((100vw - 1rem) / 1200));
     }
   }
 

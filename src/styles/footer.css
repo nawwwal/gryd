@@ -1,6 +1,6 @@
 /* Classifieds-Style Footer */
 .newspaper-footer {
-  @apply bg-gryd-bg text-gryd-text relative overflow-hidden;
+  @apply bg-gryd-bg text-gryd-text relative;
   background:
     var(--gryd-bg),
     linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
@@ -15,7 +15,7 @@
 .newspaper-footer::before {
   content: '• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •';
   position: absolute;
-  top: -1.5rem;
+  top: -3.5rem;
   left: 0;
   right: 0;
   text-align: center;
@@ -30,7 +30,7 @@
 .newspaper-footer::after {
   content: '◈ CLASSIFIEDS ◈';
   position: absolute;
-  top: -2.5rem;
+  top: -4.2rem;
   left: 50%;
   transform: translateX(-50%);
   background: var(--gryd-bg);
