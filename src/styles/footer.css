@@ -111,6 +111,135 @@
   @apply font-bold text-gryd-text mr-2 font-mono text-xs uppercase tracking-wider;
 }
 
+/* Enhanced Colophon Styles */
+.colophon-enhanced {
+  @apply relative;
+}
+
+.colophon-left-aligned {
+  @apply text-left space-y-4;
+}
+
+.colophon-masthead {
+  @apply mb-4 pb-3 border-b border-gryd-soft/20;
+}
+
+.publication-name {
+  @apply font-headline text-lg font-black uppercase tracking-wide text-gryd-text;
+  font-family: 'Platypi', serif;
+  letter-spacing: 0.1em;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.05);
+}
+
+.publication-subtitle {
+  @apply font-mono text-xs uppercase tracking-widest text-gryd-soft mt-1;
+  letter-spacing: 0.15em;
+}
+
+.colophon-details {
+  @apply space-y-2 mb-4;
+}
+
+.colophon-item {
+  @apply flex items-start text-left;
+  line-height: 1.4;
+}
+
+.colophon-item .label {
+  @apply min-w-[80px] flex-shrink-0;
+}
+
+/* Live Status Section */
+.live-status-section {
+  @apply mt-6 pt-4 border-t border-gryd-accent/30;
+  background: linear-gradient(135deg, rgba(217,119,6,0.02) 0%, transparent 100%);
+  padding: 1rem;
+  margin: 0 -1rem;
+  border-radius: 2px;
+}
+
+.live-indicator {
+  @apply flex items-center space-x-2 mb-3;
+}
+
+.live-dot {
+  @apply w-2 h-2 rounded-full bg-gryd-accent;
+  animation: pulse-dot 2s infinite;
+  box-shadow: 0 0 0 0 rgba(217,119,6,0.7);
+}
+
+.live-label {
+  @apply font-mono text-xs font-bold uppercase tracking-widest text-gryd-accent;
+  letter-spacing: 0.2em;
+}
+
+.printing-time {
+  @apply mb-3;
+}
+
+.time-label {
+  @apply font-mono text-xs uppercase tracking-wide text-gryd-soft mb-1;
+  letter-spacing: 0.1em;
+}
+
+.time-display {
+  @apply flex items-baseline space-x-2;
+}
+
+.time-main {
+  @apply font-mono text-base font-bold text-gryd-text tracking-wider;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.time-meta {
+  @apply font-mono text-xs text-gryd-soft;
+  font-size: 0.65rem;
+}
+
+.date-display {
+  @apply font-mono text-xs text-gryd-soft mt-1;
+  letter-spacing: 0.05em;
+}
+
+.press-info {
+  @apply space-y-1 text-xs text-gryd-soft;
+}
+
+.press-run,
+.binding-style {
+  @apply font-mono;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+}
+
+/* Pulse animation for live indicator */
+@keyframes pulse-dot {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(217,119,6,0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(217,119,6,0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(217,119,6,0);
+  }
+}
+
+/* Typography enhancement for colophon */
+.colophon-enhanced .classified-item {
+  @apply text-left;
+}
+
+.colophon-enhanced .label {
+  @apply text-left justify-start;
+}
+
 /* Navigation becomes an "Index" */
 .nav-list {
   @apply space-y-3;

@@ -1,20 +1,22 @@
 import { useState, useEffect } from 'react';
 import ScrollFade from './ScrollFade';
-import AuthorInfo from './AuthorInfo';
-import DesignerStatus from './DesignerStatus';
+
 const EpilogueSection = () => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
+
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
-  return <div className="magazine-spread">
+
+  return (
+    <div className="magazine-spread">
       <ScrollFade>
         <div className="flip-card-container">
           <div className={`flip-card ${isFlipped ? 'flipped' : ''}`}>
             {/* Front of the card */}
-            <div className="flip-card-front h-fit ">
+            <div className="flip-card-front h-fit">
               <div className="epilogue-front-content">
                 {/* Page Header */}
                 <div className="text-center mb-12">
@@ -30,12 +32,12 @@ const EpilogueSection = () => {
                   <h2 className="font-serif text-4xl md:text-5xl font-bold leading-tight text-gray-900">
                     every story needs an ending.
                   </h2>
-                  
+
                   <div className="space-y-6 text-lg leading-relaxed text-gray-700 max-w-2xl mx-auto">
                     <p>
                       But the best endings feel like beginnings. Behind every pixel in this magazine is a simple truth: design is about making life better.
                     </p>
-                    
+
                     <p>
                       I'm Aditya Nawal, the product designer behind GRYD. This magazine is my story, told through systems and sidequests.
                     </p>
@@ -52,24 +54,55 @@ const EpilogueSection = () => {
               </div>
             </div>
 
-            {/* Back of the card */}
-            <div className="flip-card-back h-fit ">
-              <div className="epilogue-back-content">
-                {/* Back Button */}
-                <button onClick={() => setIsFlipped(false)} className="flip-back-btn mb-8">
-                  <span>←</span>
-                  <span className="text-sm uppercase tracking-wider">back to story</span>
-                </button>
+            {/* Back of the card - Streamlined */}
+            <div className="flip-card-back h-fit">
+              <div className="epilogue-back-content-redesigned">
+                {/* Back Navigation */}
+                <div className="back-navigation">
+                  <button onClick={() => setIsFlipped(false)} className="back-button-magazine">
+                    <span className="back-arrow">←</span>
+                    <span className="back-label">back to story</span>
+                  </button>
+                </div>
 
-                <div className="grid md:grid-cols-2 gap-12">
-                  <div>
-                    <AuthorInfo />
+                {/* Centered Magazine-Style Bio - Streamlined */}
+                <div className="magazine-bio-section">
+                  {/* Author Portrait Section */}
+                  <div className="author-portrait-section">
+                    <div className="author-name-display">
+                      <h2 className="contributor-name">ADITYA NAWAL</h2>
+                      <div className="contributor-title">Editor-in-Chief & Product Designer</div>
+                    </div>
                   </div>
-                  <div>
-                    <DesignerStatus />
-                    
-                    {/* Contact CTA on back */}
-                    
+
+                  {/* Status & Availability */}
+                  <div className="bio-content">
+                    <div className="status-section">
+                      <div className="status-indicator">
+                        <div className="status-dot-live"></div>
+                        <span className="status-text">Available for new opportunities</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Essential Contact */}
+                  <div className="contact-section-compact">
+                    <div className="primary-contact">
+                      <a href="mailto:hello@gryd.dev" className="contact-email">
+                        hello@gryd.dev
+                      </a>
+                    </div>
+
+                    <div className="social-connections-compact">
+                      <a href="https://linkedin.com/in/adityanawal" target="_blank" rel="noopener noreferrer" className="social-link-magazine">
+                        <span className="platform-name">LinkedIn</span>
+                        <span className="external-arrow">↗</span>
+                      </a>
+                      <a href="https://github.com/adityanawal" target="_blank" rel="noopener noreferrer" className="social-link-magazine">
+                        <span className="platform-name">GitHub</span>
+                        <span className="external-arrow">↗</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -77,6 +110,8 @@ const EpilogueSection = () => {
           </div>
         </div>
       </ScrollFade>
-    </div>;
+    </div>
+  );
 };
+
 export default EpilogueSection;

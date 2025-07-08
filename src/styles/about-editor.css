@@ -400,6 +400,136 @@
     @apply p-12;
   }
 
+  /* Redesigned Back Content */
+  .epilogue-back-content-redesigned {
+    @apply p-12 h-full flex flex-col;
+    min-height: auto;
+  }
+
+  /* Back Navigation */
+  .back-navigation {
+    @apply mb-8;
+  }
+
+  .back-button-magazine {
+    @apply flex items-center space-x-3 transition-all duration-200;
+    @apply text-gryd-soft hover:text-gryd-accent;
+    @apply transform hover:translate-x-1;
+  }
+
+  .back-arrow {
+    @apply text-lg font-mono;
+  }
+
+  .back-label {
+    @apply font-mono text-xs uppercase tracking-widest;
+    letter-spacing: 0.15em;
+  }
+
+  /* Magazine Bio Section - Streamlined */
+  .magazine-bio-section {
+    @apply flex-1 flex flex-col items-center text-center space-y-6 max-w-2xl mx-auto;
+  }
+
+  /* Author Portrait Section */
+  .author-portrait-section {
+    @apply mb-6;
+  }
+
+  .author-name-display {
+    @apply space-y-2;
+  }
+
+  .contributor-name {
+    @apply font-headline text-3xl md:text-4xl font-black uppercase tracking-tight text-gryd-text;
+    font-family: 'Platypi', serif;
+    letter-spacing: -0.02em;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.05);
+  }
+
+  .contributor-title {
+    @apply font-mono text-sm uppercase tracking-wide text-gryd-soft;
+    letter-spacing: 0.1em;
+  }
+
+  /* Bio Content - Streamlined */
+  .bio-content {
+    @apply space-y-4 mb-6;
+  }
+
+  .bio-paragraph {
+    @apply max-w-prose mx-auto;
+  }
+
+  .bio-text {
+    @apply font-body text-lg leading-relaxed text-gryd-text;
+    font-family: 'Fraunces', serif;
+    line-height: 1.7;
+  }
+
+  /* Status Section */
+  .status-section {
+    @apply flex items-center justify-center space-x-3;
+  }
+
+  .status-indicator {
+    @apply flex items-center space-x-2;
+  }
+
+  .status-dot-live {
+    @apply w-2 h-2 rounded-full bg-gryd-accent;
+    animation: pulse-dot 2s infinite;
+    box-shadow: 0 0 0 0 rgba(217,119,6,0.7);
+  }
+
+  .status-text {
+    @apply font-mono text-sm text-gryd-soft;
+    letter-spacing: 0.05em;
+  }
+
+  /* Compact Contact Section */
+  .contact-section-compact {
+    @apply space-y-4;
+  }
+
+  .primary-contact {
+    @apply text-center;
+  }
+
+  .contact-email {
+    @apply font-mono text-lg font-medium text-gryd-accent hover:text-gryd-text;
+    @apply transition-all duration-200 hover:scale-105;
+    @apply border-b-2 border-transparent hover:border-gryd-accent;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+
+  /* Compact Social Connections */
+  .social-connections-compact {
+    @apply flex items-center justify-center space-x-6;
+  }
+
+  .social-link-magazine {
+    @apply flex items-center space-x-2 transition-all duration-200;
+    @apply text-gryd-soft hover:text-gryd-accent;
+    @apply transform hover:translate-y-1 hover:scale-105;
+    text-decoration: none;
+  }
+
+  .platform-name {
+    @apply font-mono text-sm font-medium;
+    letter-spacing: 0.05em;
+  }
+
+  .external-arrow {
+    @apply text-sm transition-transform duration-200;
+  }
+
+  .social-link-magazine:hover .external-arrow {
+    transform: translate(2px, -2px);
+  }
+
+  /* Magazine CTA Button */
   .magazine-cta-button {
     @apply shimmer-button;
   }
@@ -410,10 +540,6 @@
 
   .cta-arrow {
     @apply text-2xl;
-  }
-
-  .flip-back-btn {
-    @apply flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors;
   }
 
   .editorial-link {
@@ -548,6 +674,19 @@
     .epilogue-front-content,
     .epilogue-back-content {
       @apply p-6;
+    }
+
+    .epilogue-back-content-redesigned {
+      @apply p-6;
+      min-height: auto;
+    }
+
+    .contributor-name {
+      @apply text-2xl md:text-3xl;
+    }
+
+    .social-connections-compact {
+      @apply flex-col space-y-3 space-x-0;
     }
 
     .footer-content-grid {

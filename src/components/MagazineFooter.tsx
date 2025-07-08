@@ -1,8 +1,35 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const MagazineFooter = () => {
   const tickerRef = useRef<HTMLDivElement>(null);
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  // Live time updates
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Format time in a magazine-style way
+  const formatMagazineTime = (date: Date) => {
+    const timeString = date.toLocaleTimeString('en-US', {
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+    const dateString = date.toLocaleDateString('en-US', {
+      month: 'short',
+      day: '2-digit',
+      year: 'numeric'
+    });
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+    return { timeString, dateString, timezone };
+  };
+
+  const { timeString, dateString, timezone } = formatMagazineTime(currentTime);
 
   // Ticker messages that will cycle through - clever and relevant
   const tickerMessages = [
@@ -50,30 +77,41 @@ const MagazineFooter = () => {
             </div>
           </div>
 
-          {/* Section 2: Colophon */}
-          <div className="classified-section">
+          {/* Section 2: Streamlined Colophon */}
+          <div className="classified-section colophon-enhanced">
             <h3 className="classified-title">Colophon</h3>
-            <div className="classified-list">
-              <div className="classified-item">
-                <span className="label">Editor:</span>
-                <span>Aditya Nawal</span>
+            <div className="classified-list colophon-left-aligned">
+              <div className="colophon-masthead">
+                <div className="publication-name">THE GRYD</div>
+                <div className="publication-subtitle">Vol. I, Issue 001</div>
               </div>
-              <div className="classified-item">
-                <span className="label">Published:</span>
-                <span>MMXXIV</span>
-              </div>
-              <div className="classified-item">
-                <span className="label">Fonts:</span>
-                <span>Platypi, Fraunces, JetBrains Mono</span>
-              </div>
-              <div className="classified-item">
-                <span className="label">Built with:</span>
-                <span>React, Sanity, Tailwind</span>
+
+              <div className="colophon-details">
+                <div className="classified-item colophon-item">
+                  <span className="label">Editor:</span>
+                  <span>Aditya Nawal</span>
+                </div>
+                <div className="classified-item colophon-item">
+                  <span className="label">Published:</span>
+                  <span>Winter MMXXIV</span>
+                </div>
+                <div className="classified-item colophon-item">
+                  <span className="label">Typography:</span>
+                  <span>Platypi SC, Fraunces, JetBrains Mono</span>
+                </div>
+                <div className="classified-item colophon-item">
+                  <span className="label">Technology:</span>
+                  <span>React, Sanity CMS, Tailwind CSS</span>
+                </div>
+                <div className="classified-item colophon-item">
+                  <span className="label">Hosting:</span>
+                  <span>Vercel Edge Network</span>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Section 3: Inquiries */}
+          {/* Section 3: Inquiries with Live Widget */}
           <div className="classified-section">
             <h3 className="classified-title">Inquiries</h3>
             <div className="classified-list">
@@ -82,6 +120,26 @@ const MagazineFooter = () => {
                 </div>
                 <div className="classified-item">
                     <a href="mailto:hello@gryd.dev">hello@gryd.dev</a>
+                </div>
+
+                {/* Live Publishing Status - Moved from Colophon */}
+                <div className="live-status-section">
+                  <div className="live-indicator">
+                    <span className="live-dot"></span>
+                    <span className="live-label">LIVE</span>
+                  </div>
+                  <div className="printing-time">
+                    <div className="time-label">Current Print Time:</div>
+                    <div className="time-display">
+                      <span className="time-main">{timeString}</span>
+                      <span className="time-meta">{timezone}</span>
+                    </div>
+                    <div className="date-display">{dateString}</div>
+                  </div>
+                  <div className="press-info">
+                    <div className="press-run">Press run: ∞ digital copies</div>
+                    <div className="binding-style">Binding: Perfect web</div>
+                  </div>
                 </div>
             </div>
           </div>
@@ -106,7 +164,7 @@ const MagazineFooter = () => {
         {/* Footer Bottom */}
         <div className="footer-bottom">
           <div className="footer-info">
-            <span className="copyright">© 2024 THE GRYD. All rights reserved.</span>
+            <span className="copyright">© 2025 THE GRYD. All rights reserved.</span>
             <span className="motto">"Making complex things feel inevitable"</span>
           </div>
         </div>
