@@ -14,6 +14,8 @@ import ProjectDetail from "./pages/ProjectDetail";
 import NotFound from "./pages/NotFound";
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/react"
+import clarityService from "./utils/clarityService";
+import MagazineTracking from "./utils/clarityMagazineTracking";
 
 import { Suspense, useEffect } from 'react';
 import './App.css';
@@ -51,8 +53,34 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  // Initialize service worker and performance optimizations
+  // Initialize service worker, performance optimizations, and Clarity analytics
   useEffect(() => {
+    // Initialize Microsoft Clarity
+    const initializeClarity = async () => {
+      const clarityProjectId = import.meta.env.VITE_CLARITY_PROJECT_ID;
+
+      if (clarityProjectId) {
+        try {
+          clarityService.init({
+            projectId: clarityProjectId,
+            enableConsent: false, // Set to true if you need cookie consent
+            autoInit: true
+          });
+
+                    // Initialize magazine-specific tracking
+          MagazineTracking.initialize();
+
+          console.log('[Clarity] Initialized successfully');
+        } catch (error) {
+          console.error('[Clarity] Failed to initialize:', error);
+        }
+      } else {
+        console.warn('[Clarity] Project ID not found in environment variables. Add VITE_CLARITY_PROJECT_ID to your .env file.');
+      }
+    };
+
+    initializeClarity();
+
     // Register service worker for caching
     if ('serviceWorker' in navigator && import.meta.env.PROD) {
       navigator.serviceWorker.register('/sw.js')
@@ -76,6 +104,11 @@ function App() {
           performance.measure('app-load-time', 'app-start', 'app-loaded');
           const measure = performance.getEntriesByName('app-load-time')[0];
           console.log(`[Performance] App loaded in ${measure.duration.toFixed(2)}ms`);
+
+          // Track performance metrics with Clarity
+          if (clarityService.isInitialized()) {
+            clarityService.trackPerformance('app_load_time', measure.duration, 'ms');
+          }
         } catch (error) {
           console.warn('[Performance] Could not measure app load time:', error);
         }
