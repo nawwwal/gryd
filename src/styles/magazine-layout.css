@@ -74,7 +74,7 @@
   /* Enhanced Hero Card Effects */
   .hero-paper {
     @apply relative w-full bg-white shadow-2xl;
-    max-width: min(95vw, 1400px);
+    max-width: min(95vw, 1200px);
     transform: rotateX(0.5deg) rotateY(-0.25deg);
     background:
       linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%),
@@ -266,7 +266,7 @@
 
   .hero-paper {
     @apply relative w-full bg-white shadow-2xl;
-    max-width: min(95vw, 1400px);
+    max-width: min(95vw, 1200px);
     transform: rotateX(0.5deg) rotateY(-0.25deg);
     background:
       linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%),
