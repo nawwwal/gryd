@@ -9,8 +9,8 @@ const AuthorInfo = () => {
           </div>
           <div className="space-y-1 mx-0">
             <span className="caption text-gryd-soft">Email</span>
-            <a href="mailto:aditya@example.com" className="editorial-link body mx-[40px]">
-              aditya@example.com
+            <a href="mailto:hey@naw.al" className="editorial-link body mx-[40px]">
+              hey@naw.al
             </a>
           </div>
           <div className="caption text-gryd-soft text-sm">
@@ -18,20 +18,20 @@ const AuthorInfo = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="space-y-4">
         <h3 className="subhead text-lg">Connect</h3>
         <div className="space-y-2">
-          <a href="#" className="social-link-item">
+          <a href="https://www.linkedin.com/in/adityanawal/" target="_blank" rel="noopener noreferrer" className="social-link-item">
             <span className="body text-sm">LinkedIn</span>
             <span className="social-arrow">↗</span>
           </a>
-          <a href="#" className="social-link-item">
+          <a href="https://twitter.com/adityanawal" target="_blank" rel="noopener noreferrer" className="social-link-item">
             <span className="body text-sm">Twitter</span>
             <span className="social-arrow">↗</span>
           </a>
-          <a href="#" className="social-link-item">
-            <span className="body text-sm">Dribbble</span>
+          <a href="https://github.com/nawwwal" target="_blank" rel="noopener noreferrer" className="social-link-item">
+            <span className="body text-sm">GitHub</span>
             <span className="social-arrow">↗</span>
           </a>
         </div>

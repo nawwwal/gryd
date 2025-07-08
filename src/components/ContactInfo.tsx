@@ -1,4 +1,3 @@
-
 const ContactInfo = () => {
   return (
     <div className="author-colophon">
@@ -7,8 +6,8 @@ const ContactInfo = () => {
         <div className="contact-details">
           <div className="contact-item interactive-contact-item">
             <span className="contact-label">Email</span>
-            <a href="mailto:hello@gryd.dev" className="contact-value interactive-contact-value">
-              hello@gryd.dev
+            <a href="mailto:hey@naw.al" className="contact-value interactive-contact-value">
+              hey@naw.al
             </a>
             <div className="contact-underline"></div>
           </div>
@@ -17,19 +16,19 @@ const ContactInfo = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="social-section">
         <h3 className="section-title">Connect</h3>
         <div className="social-links">
-          <a href="#" className="social-link interactive-social">
+          <a href="https://www.linkedin.com/in/adityanawal/" target="_blank" rel="noopener noreferrer" className="social-link interactive-social">
             <span className="social-label">LinkedIn</span>
             <span className="social-arrow">↗</span>
           </a>
-          <a href="#" className="social-link interactive-social">
+          <a href="https://twitter.com/adityanawal" target="_blank" rel="noopener noreferrer" className="social-link interactive-social">
             <span className="social-label">Twitter</span>
             <span className="social-arrow">↗</span>
           </a>
-          <a href="#" className="social-link interactive-social">
+          <a href="https://github.com/nawwwal" target="_blank" rel="noopener noreferrer" className="social-link interactive-social">
             <span className="social-label">GitHub</span>
             <span className="social-arrow">↗</span>
           </a>

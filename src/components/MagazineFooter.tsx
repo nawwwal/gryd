@@ -119,7 +119,7 @@ const MagazineFooter = () => {
                     <span>For projects, collaborations, or just to say hello:</span>
                 </div>
                 <div className="classified-item">
-                    <a href="mailto:hello@gryd.dev">hello@gryd.dev</a>
+                    <a href="mailto:hey@naw.al">hey@naw.al</a>
                 </div>
 
                 {/* Live Publishing Status - Moved from Colophon */}
@@ -149,13 +149,13 @@ const MagazineFooter = () => {
             <h3 className="classified-title">Socials</h3>
             <div className="classified-list">
                 <div className="classified-item">
-                    <a href="https://linkedin.com/in/adityanawal" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="https://www.linkedin.com/in/adityanawal/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                 </div>
                 <div className="classified-item">
                     <a href="https://twitter.com/adityanawal" target="_blank" rel="noopener noreferrer">Twitter</a>
                 </div>
                 <div className="classified-item">
-                    <a href="https://github.com/adityanawal" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://github.com/nawwwal" target="_blank" rel="noopener noreferrer">GitHub</a>
                 </div>
             </div>
           </div>

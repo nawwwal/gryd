@@ -88,17 +88,17 @@ const EpilogueSection = () => {
                   {/* Essential Contact */}
                   <div className="contact-section-compact">
                     <div className="primary-contact">
-                      <a href="mailto:hello@gryd.dev" className="contact-email">
-                        hello@gryd.dev
+                      <a href="mailto:hey@naw.al" className="contact-email">
+                        hey@naw.al
                       </a>
                     </div>
 
                     <div className="social-connections-compact">
-                      <a href="https://linkedin.com/in/adityanawal" target="_blank" rel="noopener noreferrer" className="social-link-magazine">
+                      <a href="https://www.linkedin.com/in/adityanawal/" target="_blank" rel="noopener noreferrer" className="social-link-magazine">
                         <span className="platform-name">LinkedIn</span>
                         <span className="external-arrow">↗</span>
                       </a>
-                      <a href="https://github.com/adityanawal" target="_blank" rel="noopener noreferrer" className="social-link-magazine">
+                      <a href="https://github.com/nawwwal" target="_blank" rel="noopener noreferrer" className="social-link-magazine">
                         <span className="platform-name">GitHub</span>
                         <span className="external-arrow">↗</span>
                       </a>

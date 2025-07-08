@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -17,7 +16,7 @@ const MagazineFooter = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
-      
+
       // Update stats in real-time with small increments
       setStats(prev => ({
         pixelsObsessed: prev.pixelsObsessed + Math.floor(Math.random() * 10),
@@ -26,7 +25,7 @@ const MagazineFooter = () => {
         linesOfCode: prev.linesOfCode + Math.floor(Math.random() * 50)
       }));
     }, 1000);
-    
+
     return () => clearInterval(timer);
   }, []);
 
@@ -37,21 +36,21 @@ const MagazineFooter = () => {
         // Simple IP-based location detection
         const ipResponse = await fetch('https://ipapi.co/json/');
         const ipData = await ipResponse.json();
-        
+
         if (ipData.city && ipData.country) {
           setLocation(`${ipData.city}, ${ipData.country}`);
-          
+
           // Simple weather estimation based on coordinates and season
           const month = new Date().getMonth();
           const isWinter = month === 11 || month === 0 || month === 1;
           const isSummer = month >= 5 && month <= 8;
-          
-          const weatherOptions = isWinter 
+
+          const weatherOptions = isWinter
             ? ['Crisp & Clear', 'Cozy Clouds', 'Winter Vibes', 'Chill Mode']
             : isSummer
             ? ['Sunny Delight', 'Perfect Weather', 'Golden Hour', 'Bright & Beautiful']
             : ['Spring Fresh', 'Mild & Pleasant', 'Nature\'s Best', 'Refreshing'];
-            
+
           setWeather(weatherOptions[Math.floor(Math.random() * weatherOptions.length)]);
         }
       } catch (error) {
@@ -67,18 +66,18 @@ const MagazineFooter = () => {
 
   const formatTimePlayful = (date: Date) => {
     const day = date.toLocaleDateString('en-US', { weekday: 'long' });
-    const time = date.toLocaleTimeString('en-US', { 
-      hour: '2-digit', 
+    const time = date.toLocaleTimeString('en-US', {
+      hour: '2-digit',
       minute: '2-digit',
-      hour12: true 
+      hour12: true
     });
-    const dateStr = date.toLocaleDateString('en-US', { 
-      month: 'short', 
+    const dateStr = date.toLocaleDateString('en-US', {
+      month: 'short',
       day: 'numeric',
-      year: 'numeric' 
+      year: 'numeric'
     });
     const timezone = date.toLocaleTimeString('en-US', { timeZoneName: 'short' }).split(' ')[2];
-    
+
     return { day, time, dateStr, timezone };
   };
 
@@ -156,7 +155,7 @@ const MagazineFooter = () => {
     <div className={`magazine-footer-enhanced ${getPageVariant()}`}>
       <div className="footer-paper">
         <div className="footer-binding"></div>
-        
+
         {/* Magazine Footer Title */}
         <div className="footer-magazine-title">
           <div className="footer-title-ornaments">
@@ -170,7 +169,7 @@ const MagazineFooter = () => {
           </div>
           <div className="footer-subtitle">Reference Materials & Further Reading</div>
         </div>
-        
+
         {/* Editorial Stamp */}
         <div className="footer-editorial-stamp">
           <div className="stamp-text">
@@ -179,7 +178,7 @@ const MagazineFooter = () => {
             <div>2024</div>
           </div>
         </div>
-        
+
         <div className="footer-content-grid">
           {/* Page-Specific Content */}
           <div className="footer-section">
@@ -201,11 +200,11 @@ const MagazineFooter = () => {
               <div>Previously: Quicko HQ</div>
             </div>
             <div className="footer-social-links">
-              <a href="mailto:hello@adityanawal.com" className="footer-social-link">
+              <a href="mailto:hey@naw.al" className="footer-social-link">
                 <span>✉</span>
                 <span>Correspondence</span>
               </a>
-              <a href="https://linkedin.com/in/adityanawal" className="footer-social-link" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.linkedin.com/in/adityanawal/" className="footer-social-link" target="_blank" rel="noopener noreferrer">
                 <span>🔗</span>
                 <span>Professional</span>
               </a>
@@ -267,7 +266,7 @@ const MagazineFooter = () => {
               <div>No AI Training Data</div>
               <div>Made with ♥ & ☕</div>
             </div>
-            
+
             {/* Subscription Box with Action */}
             <div className="footer-subscription-box" onClick={handleSubscriptionClick}>
               <div className="subscription-title">STAY UPDATED</div>
@@ -288,7 +287,7 @@ const MagazineFooter = () => {
             <span>•</span>
             <span>PRINTED ON THE INTERNET</span>
           </div>
-          
+
           <div className="footer-page-marker">
             <div className="page-corner-fold"></div>
             <span>END OF ISSUE</span>
