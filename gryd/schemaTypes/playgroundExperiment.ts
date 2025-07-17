@@ -14,8 +14,7 @@ export default defineType({
     defineField({
       name: 'subtitle',
       title: 'Subtitle',
-      type: 'string',
-      validation: Rule => Rule.required()
+      type: 'string'
     }),
     defineField({
       name: 'slug',
@@ -30,8 +29,7 @@ export default defineType({
     defineField({
       name: 'description',
       title: 'Description',
-      type: 'text',
-      validation: Rule => Rule.required()
+      type: 'text'
     }),
     defineField({
       name: 'intensity',
@@ -43,8 +41,7 @@ export default defineType({
           {title: 'Medium', value: 'medium'},
           {title: 'High', value: 'high'},
         ]
-      },
-      validation: Rule => Rule.required()
+      }
     }),
     defineField({
       name: 'visual',
@@ -61,8 +58,7 @@ export default defineType({
           {title: 'Motion', value: 'motion'},
           {title: 'Typographic', value: 'typographic'},
         ]
-      },
-      validation: Rule => Rule.required()
+      }
     }),
     defineField({
       name: 'content',
@@ -140,27 +136,22 @@ export default defineType({
       type: 'object',
       fields: [
         defineField({
-          name: 'type',
-          title: 'Type',
-          type: 'string',
-          options: {
-            list: [
-              {title: 'Photography', value: 'photography'},
-              {title: 'Code', value: 'code'},
-              {title: 'Blog', value: 'blog'},
-              {title: 'Prototype', value: 'prototype'},
-              {title: 'Research', value: 'research'},
-              {title: 'Visual', value: 'visual'},
-              {title: 'Note', value: 'note'},
-            ]
-          },
-          validation: Rule => Rule.required()
-        }),
-        defineField({
           name: 'category',
           title: 'Category',
           type: 'string',
-          validation: Rule => Rule.required()
+          options: {
+            list: [
+              {title: 'Code Experiment', value: 'code-experiment'},
+              {title: 'Visual Research', value: 'visual-research'},
+              {title: 'Interactive Demo', value: 'interactive-demo'},
+              {title: 'Design System', value: 'design-system'},
+              {title: 'Animation Study', value: 'animation-study'},
+              {title: 'Typography', value: 'typography'},
+              {title: 'Color Theory', value: 'color-theory'},
+              {title: 'Prototype', value: 'prototype'},
+              {title: 'Technical Research', value: 'technical-research'},
+            ]
+          }
         }),
         defineField({
           name: 'status',
@@ -174,53 +165,38 @@ export default defineType({
               {title: 'Ongoing', value: 'ongoing'},
               {title: 'Draft', value: 'draft'},
             ]
-          },
-          validation: Rule => Rule.required()
+          }
         }),
         defineField({
           name: 'featured',
           title: '⭐ Featured Experiment',
           type: 'boolean',
           initialValue: false,
-          description: 'Mark this experiment as featured - will appear prominently',
-          validation: Rule => Rule.required()
+          description: 'Mark this experiment as featured - will appear prominently'
         }),
         defineField({
           name: 'publishDate',
           title: 'Publish Date',
-          type: 'date',
-          validation: Rule => Rule.required()
+          type: 'date'
         }),
         defineField({
           name: 'lastUpdated',
           title: 'Last Updated',
-          type: 'date',
-          validation: Rule => Rule.required()
+          type: 'date'
         }),
         defineField({
           name: 'tools',
           title: 'Tools',
           type: 'array',
-          of: [{type: 'string'}]
+          of: [{type: 'string'}],
+          description: 'Tools and technologies used in this experiment'
         }),
         defineField({
           name: 'tags',
           title: 'Tags',
           type: 'array',
-          of: [{type: 'string'}]
-        }),
-        defineField({
-          name: 'difficulty',
-          title: 'Difficulty',
-          type: 'string',
-          options: {
-            list: [
-              {title: 'Beginner', value: 'Beginner'},
-              {title: 'Intermediate', value: 'Intermediate'},
-              {title: 'Advanced', value: 'Advanced'},
-              {title: 'Expert', value: 'Expert'},
-            ]
-          }
+          of: [{type: 'string'}],
+          description: 'Relevant tags for filtering and discovery'
         }),
         defineField({
           name: 'interactive',
@@ -228,20 +204,17 @@ export default defineType({
           type: 'object',
           fields: [
             defineField({
-              name: 'hasDemo',
-              title: 'Has Demo',
+              name: 'hasLiveVersion',
+              title: 'Has Live Version',
               type: 'boolean',
-              initialValue: false
+              initialValue: false,
+              description: 'Does this experiment have a live/interactive version?'
             }),
             defineField({
-              name: 'demoUrl',
-              title: 'Demo URL',
-              type: 'url'
-            }),
-            defineField({
-              name: 'codeUrl',
-              title: 'Code URL',
-              type: 'url'
+              name: 'liveUrl',
+              title: 'Live URL',
+              type: 'url',
+              description: 'Link to the live experiment or demo'
             }),
           ]
         }),

@@ -122,7 +122,7 @@ const Playground = () => {
               </div>
             ) : experiments.length > 0 ? (
               experiments.map((experiment, index) => (
-                <div key={experiment.slug} className={`experiment-card experiment-${experiment.visual} intensity-${experiment.intensity}`} data-type={experiment.metadata?.type}>
+                <div key={experiment.slug} className={`experiment-card experiment-${experiment.visual} intensity-${experiment.intensity}`} data-category={experiment.metadata?.category}>
                   {/* Visual Background Element or Hero Image */}
                   {experiment.heroImage ? (
                     <div className="experiment-image">
@@ -145,7 +145,7 @@ const Playground = () => {
                     <div className="experiment-header">
                       <div className="experiment-meta">
                         <span className="experiment-number">#{String(index + 1).padStart(2, '0')}</span>
-                        <span className="experiment-type">{experiment.metadata?.type}</span>
+                        <span className="experiment-type">{experiment.metadata?.category}</span>
                       </div>
                       <div className="experiment-status">
                         <div className="status-dot"></div>
@@ -172,8 +172,8 @@ const Playground = () => {
                           <span className="detail-value">{experiment.metadata?.category}</span>
                         </div>
                         <div className="detail-item">
-                          <span className="detail-label">Level</span>
-                          <span className="detail-value">{experiment.metadata?.difficulty || 'N/A'}</span>
+                          <span className="detail-label">Intensity</span>
+                          <span className="detail-value">{experiment.intensity}</span>
                         </div>
                       </div>
                       <div className="tools-list">
