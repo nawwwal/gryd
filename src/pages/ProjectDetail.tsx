@@ -3,6 +3,7 @@ import { getSanityImageUrl } from '../utils/imageUtils';
 import RichContentRenderer from '../components/RichContentRenderer';
 import { useContentBySlug } from '../hooks/useContentQuery';
 import ScrollFade from '../components/ScrollFade';
+import { useGyroscopic } from '../hooks/useGyroscopic'; // Import the hook
 
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -44,28 +45,7 @@ const ProjectDetail = () => {
         {/* Project Header */}
         <ScrollFade>
           <header className="project-header">
-            <div className="project-meta-top">
-              <div className="project-category">{project.metadata.category}</div>
-
-              {/* Status and Tools at the top */}
-              <div className="project-status-tools">
-                <div className="status-indicator">
-                  <span className="status-label">Status:</span>
-                  <span className="status-value">{project.metadata.status}</span>
-                </div>
-
-                {project.metadata.tools && project.metadata.tools.length > 0 && (
-                  <div className="tools-section">
-                    <span className="tools-label">Tools:</span>
-                    <div className="tools-list">
-                      {project.metadata.tools.map((tool, index) => (
-                        <span key={index} className="tool-tag">{tool}</span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
+            <div className="project-category">{project.metadata.category}</div>
 
             <h1 className="project-title">{project.title}</h1>
 
@@ -73,25 +53,40 @@ const ProjectDetail = () => {
               <p className="project-subtitle">{project.subtitle}</p>
             )}
 
-            {project.metadata.publishDate && (
-              <div className="project-date">
-                {new Date(project.metadata.publishDate).getFullYear()}
+            {/* Magazine-style byline and meta information */}
+            <div className="project-byline">
+              {project.metadata.publishDate && (
+                <div className="publication-info">
+                  <span className="pub-label">Published</span>
+                  <time className="pub-date">
+                    {new Date(project.metadata.publishDate).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </time>
+                </div>
+              )}
+
+              <div className="project-status-meta">
+                <span className="status-label">Status</span>
+                <span className="status-badge">{project.metadata.status}</span>
+              </div>
+            </div>
+
+            {/* Technical specifications section */}
+            {project.metadata.tools && project.metadata.tools.length > 0 && (
+              <div className="project-specs">
+                <div className="specs-label">Technical Specifications</div>
+                <div className="specs-list">
+                  {project.metadata.tools.map((tool, index) => (
+                    <span key={index} className="spec-item">{tool}</span>
+                  ))}
+                </div>
               </div>
             )}
 
-            {/* Interactive Links */}
-            {project.metadata.interactive?.hasLiveVersion && project.metadata.interactive.liveUrl && (
-              <div className="project-live-link">
-                <a
-                  href={project.metadata.interactive.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="live-project-button"
-                >
-                  View Live Project ↗
-                </a>
-              </div>
-            )}
+
           </header>
         </ScrollFade>
 
@@ -145,11 +140,57 @@ const ProjectDetail = () => {
           </div>
         </ScrollFade>
 
+        {/* Editorial Live Project Card */}
+        {project.metadata.interactive?.hasLiveVersion && project.metadata.interactive.liveUrl && (
+          <ScrollFade delay={500}>
+            <div className="editorial-live-card" ref={useGyroscopic<HTMLDivElement>()}>
+              <div className="editorial-card-paper">
+                <div className="editorial-card-content">
+                  <div className="editorial-badge">
+                    <span>Live Project</span>
+                  </div>
+
+                  <h2 className="editorial-headline">
+                    Experience This Work
+                  </h2>
+
+                  <p className="editorial-deck">
+                    See {project.title} in action. Explore the full implementation,
+                    interact with the design, and discover the craftsmanship behind the concept.
+                  </p>
+
+                  <div className="editorial-cta-section">
+                    <a
+                      href={project.metadata.interactive.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="editorial-live-button group"
+                    >
+                      <span className="button-text">Launch Project</span>
+                      <span className="button-arrow">↗</span>
+                    </a>
+
+                    <div className="editorial-note">
+                      <span>Opens in new window</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Editorial decoration elements */}
+                <div className="editorial-decoration">
+                  <div className="ink-spot top"></div>
+                  <div className="ink-spot bottom"></div>
+                  <div className="editorial-border"></div>
+                </div>
+              </div>
+            </div>
+          </ScrollFade>
+        )}
+
         {/* Tags at the bottom */}
         {project.metadata.tags && project.metadata.tags.length > 0 && (
-          <ScrollFade delay={500}>
+          <ScrollFade delay={600}>
             <div className="project-tags-section">
-              <h3 className="tags-title">Related Topics</h3>
               <div className="tags-list">
                 {project.metadata.tags.map((tag, index) => (
                   <span key={index} className="project-tag">{tag}</span>
@@ -160,7 +201,7 @@ const ProjectDetail = () => {
         )}
 
         {/* Navigation */}
-        <ScrollFade delay={600}>
+        <ScrollFade delay={700}>
           <div className="project-navigation">
             <Link to="/work" className="back-to-work">
               ← Back to Work

@@ -1,4 +1,5 @@
 
+import MagazineFooter from './MagazineFooter';
 import { ReactNode } from 'react';
 import Navigation from './Navigation';
 import MobileLayoutWrapper from './MobileLayoutWrapper';
@@ -21,6 +22,7 @@ const Layout = ({ children, enablePullToRefresh, onRefresh }: LayoutProps) => {
         onRefresh={onRefresh}
       >
         {children}
+        <MagazineFooter />
       </MobileLayoutWrapper>
     );
   }
@@ -32,6 +34,7 @@ const Layout = ({ children, enablePullToRefresh, onRefresh }: LayoutProps) => {
       <main className="pt-[60px] md:pt-[60px] overflow-x-hidden w-full">
         {children}
       </main>
+      <MagazineFooter />
     </div>
   );
 };

@@ -1,237 +1,101 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const MagazineFooter = () => {
-  const tickerRef = useRef<HTMLDivElement>(null);
-  const [currentTime, setCurrentTime] = useState(new Date());
+const editorNotes = [
+  "Is it ‘minimal’ or did you just run out of ideas?",
+  "The best designs are the ones you don't notice. Or do you?",
+  "Breaking: Designer discovers that good typography is just fancy spacing.",
+  "That's not a bug, it's an undocumented feature.",
+  "Why every button needs a hover state and a backstory.",
+  "User research reveals people actually read the content (shocking).",
+  "Whitespace is not empty space. It's a silent partner.",
+  "The correlation between coffee consumption and pixel perfection is real.",
+];
 
-  // Live time updates
+const MagazineFooter = () => {
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [currentNote, setCurrentNote] = useState(0);
+
   useEffect(() => {
-    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
-    return () => clearInterval(timer);
+    const timeTimer = setInterval(() => setCurrentTime(new Date()), 1000);
+    const noteTimer = setInterval(() => {
+      setCurrentNote((prevNote) => (prevNote + 1) % editorNotes.length);
+    }, 4000); // Change note every 4 seconds
+
+    return () => {
+      clearInterval(timeTimer);
+      clearInterval(noteTimer);
+    };
   }, []);
 
-  // Format time in a magazine-style way
-  const formatMagazineTime = (date: Date) => {
-    const timeString = date.toLocaleTimeString('en-US', {
-      hour12: false,
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit'
-    });
-    const dateString = date.toLocaleDateString('en-US', {
-      month: 'short',
-      day: '2-digit',
-      year: 'numeric'
-    });
-    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-    return { timeString, dateString, timezone };
+  const format = (date: Date) => {
+    const timeString = date.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' });
+    const dateString = date.toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' });
+    return { timeString, dateString };
   };
 
-  const { timeString, dateString, timezone } = formatMagazineTime(currentTime);
-
-  // Ticker messages that will cycle through - clever and relevant
-  const tickerMessages = [
-    "BREAKING: Designer discovers that good typography is just fancy spacing",
-    "LATEST: User research reveals people actually read the content (shocking)",
-    "UPDATE: CSS Grid finally makes sense after 47 attempts",
-    "FEATURE: Why every button needs a hover state and a backstory",
-    "INSIGHT: The best designs are the ones you don't notice",
-    "TRENDING: Designers everywhere are questioning their life choices",
-    "ANALYSIS: How to explain design decisions without crying",
-    "REPORT: The correlation between coffee consumption and pixel perfection",
-    "DEVELOPMENT: New study shows users prefer interfaces that work",
-    "INNOVATION: Revolutionary discovery: white space is not empty space",
-    "EXCLUSIVE: The secret to good design? Start with the content",
-    "FLASH: Designer successfully explains design thinking to stakeholders",
-    "URGENT: Someone finally figured out what 'responsive' actually means",
-    "SPECIAL: The untold story of why designers love dark mode",
-    "LIVE: Breaking news - good design is invisible, bad design is everywhere"
-  ];
+  const { timeString, dateString } = format(currentTime);
 
   return (
-    <footer className="newspaper-footer">
-      <div className="footer-content">
-        <div className="footer-classified-grid">
-          {/* Section 1: Index */}
-          <div className="classified-section">
-            <h3 className="classified-title">Index</h3>
-            <div className="nav-list">
-              <Link to="/" className="nav-item">
-                <span className="nav-text">Home</span>
-                <span className="nav-number">p.01</span>
-              </Link>
-              <Link to="/work" className="nav-item">
-                <span className="nav-text">Work</span>
-                <span className="nav-number">p.02</span>
-              </Link>
-              <Link to="/playground" className="nav-item">
-                <span className="nav-text">Playground</span>
-                <span className="nav-number">p.03</span>
-              </Link>
-              <Link to="/about" className="nav-item">
-                <span className="nav-text">About</span>
-                <span className="nav-number">p.04</span>
-              </Link>
-            </div>
-          </div>
-
-          {/* Section 2: Streamlined Colophon */}
-          <div className="classified-section colophon-enhanced">
-            <h3 className="classified-title">Colophon</h3>
-            <div className="classified-list colophon-left-aligned">
-              <div className="colophon-masthead">
-                <div className="publication-name">THE GRYD</div>
-                <div className="publication-subtitle">Vol. I, Issue 001</div>
-              </div>
-
-              <div className="colophon-details">
-                <div className="classified-item colophon-item">
-                  <span className="label">Editor:</span>
-                  <span>Aditya Nawal</span>
-                </div>
-                <div className="classified-item colophon-item">
-                  <span className="label">Published:</span>
-                  <span>Winter MMXXIV</span>
-                </div>
-                <div className="classified-item colophon-item">
-                  <span className="label">Typography:</span>
-                  <span>Platypi SC, Fraunces, JetBrains Mono</span>
-                </div>
-                <div className="classified-item colophon-item">
-                  <span className="label">Technology:</span>
-                  <span>React, Sanity CMS, Tailwind CSS</span>
-                </div>
-                <div className="classified-item colophon-item">
-                  <span className="label">Hosting:</span>
-                  <span>Vercel Edge Network</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Section 3: Inquiries - Clean and Focused */}
-          <div className="classified-section inquiry-section">
-            <h3 className="classified-title">Inquiries</h3>
-            <div className="classified-list">
-              <div className="inquiry-intro">
-                <p className="inquiry-description">
-                  For projects, collaborations, creative conversations, or simply to exchange thoughts:
-                </p>
-              </div>
-
-              <div className="contact-details">
-                <div className="contact-item primary-contact">
-                  <span className="contact-label">Email:</span>
-                  <a href="mailto:hey@naw.al" className="contact-link">hey@naw.al</a>
-                </div>
-
-                <div className="contact-item response-time">
-                  <span className="contact-label">Response:</span>
-                  <span className="contact-value">Usually within 24hrs</span>
-                </div>
-
-                <div className="contact-item availability">
-                  <span className="contact-label">Status:</span>
-                  <span className="contact-value availability-open">Open to new projects</span>
-                </div>
-              </div>
-
-              <div className="inquiry-note">
-                <p>Whether it's a detailed brief or a simple "hello" — all messages welcome.</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Section 4: Socials */}
-          <div className="classified-section social-section">
-            <h3 className="classified-title">Connect</h3>
-            <div className="classified-list">
-              <div className="social-links">
-                <div className="social-item">
-                  <span className="social-label">Professional:</span>
-                  <a href="https://www.linkedin.com/in/adityanawal/" target="_blank" rel="noopener noreferrer" className="social-link">LinkedIn</a>
-                </div>
-                <div className="social-item">
-                  <span className="social-label">Code:</span>
-                  <a href="https://github.com/nawwwal" target="_blank" rel="noopener noreferrer" className="social-link">GitHub</a>
-                </div>
-                <div className="social-item">
-                  <span className="social-label">Updates:</span>
-                  <a href="https://twitter.com/adityanawal" target="_blank" rel="noopener noreferrer" className="social-link">Twitter</a>
-                </div>
-              </div>
-
-              <div className="social-note">
-                <p>Find me across the digital landscape — always happy to connect.</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Section 5: Live Status - Dedicated Column */}
-          <div className="classified-section status-section">
-            <h3 className="classified-title">Live Status</h3>
-            <div className="classified-list">
-              <div className="live-status-section">
-                <div className="live-indicator">
-                  <span className="live-dot"></span>
-                  <span className="live-label">LIVE</span>
-                </div>
-                <div className="printing-time">
-                  <div className="time-label">Current Print Time:</div>
-                  <div className="time-display">
-                    <span className="time-main">{timeString}</span>
-                    <span className="time-meta">{timezone}</span>
-                  </div>
-                  <div className="date-display">{dateString}</div>
-                </div>
-                <div className="press-info">
-                  <div className="press-run">Press run: ∞ digital copies</div>
-                  <div className="binding-style">Binding: Perfect web</div>
-                  <div className="edition-info">Edition: Continuous</div>
-                </div>
-              </div>
-            </div>
-          </div>
+    <footer className="grid-footer">
+      <div className="footer-board">
+        {/* Row 1 */}
+        <div className="cell star-cell flex items-center justify-center" data-cta="Explore">
+          <Link to="/playground" className="cell-link-overlay" aria-label="Explore the Playground"></Link>
+          <span className="star-icon">✶</span>
+        </div>
+        <div className="cell title-cell col-span-2 flex items-center justify-center">
+          <h1 className="footer-title">THE GRYD MAGAZINE</h1>
+        </div>
+        <div className="cell editor-note-cell p-4 flex flex-col justify-center">
+          <h3 className="cell-heading">Editor's Note</h3>
+          <p className="cell-text note-ticker">{editorNotes[currentNote]}</p>
         </div>
 
-        {/* Footer Bottom */}
-        <div className="footer-bottom">
-          <div className="footer-info">
-            <span className="copyright">© 2025 THE GRYD. All rights reserved.</span>
-            <span className="motto">"Making complex things feel inevitable"</span>
+        {/* Row 2 */}
+        <div className="cell discovery-cell p-4" data-cta="Read Philosophy">
+          <Link to="/about" className="cell-link-overlay" aria-label="Read more about my philosophy"></Link>
+          <h3 className="cell-heading">Discovery for creative survival</h3>
+          <p className="cell-text">Design isn’t a fixed state; it’s a living method of inquiry. Here, we explore the thinking behind the pixels.</p>
+        </div>
+        <div className="cell photo-cell overflow-hidden" data-cta="Meet the Editor">
+          <Link to="/about" className="cell-link-overlay" aria-label="Learn more about Aditya Nawal"></Link>
+          <img src="/aditya nawal.jpg" alt="Aditya Nawal" className="photo w-full h-full object-cover" />
+        </div>
+        <div className="cell many-cell p-4" data-cta="View Projects">
+          <Link to="/work" className="cell-link-overlay" aria-label="View my work"></Link>
+          <h3 className="cell-heading">There are many of us</h3>
+          <p className="cell-text">A collection of projects exploring brand, system, and interface design for clients big and small.</p>
+        </div>
+        <div className="cell freedom-cell p-4" data-cta="Get in Touch">
+          <Link to="/contact" className="cell-link-overlay" aria-label="Contact me"></Link>
+          <h3 className="cell-heading">Cultural freedom<br/>and cold code</h3>
+        </div>
+
+        {/* Row 3 */}
+        <div className="cell bang-cell col-span-2 flex items-center justify-center" data-cta="Enter Playground">
+          <Link to="/playground" className="cell-link-overlay" aria-label="See my experimental work"></Link>
+          <h2 className="bang-text">EXPERIMENTS</h2>
+        </div>
+        <div className="cell humanity-cell p-4" data-cta="See Case Studies">
+          <Link to="/work" className="cell-link-overlay" aria-label="Explore my case studies"></Link>
+          <h3 className="cell-heading">Humanity at work</h3>
+          <p className="cell-text">Beyond the deliverables, this is where design meets purpose. A look at process, challenges, and outcomes.</p>
+        </div>
+        <div className="cell status-cell p-4 flex flex-col justify-between">
+          <div>
+            <h3 className="cell-heading">Now printing</h3>
+            <p className="status-time font-mono">{timeString} — {dateString}</p>
+          </div>
+          <div className="flex items-center space-x-2">
+            <span className="status-dot" />
+            <span className="font-body text-sm">Open for projects</span>
           </div>
         </div>
       </div>
 
-      {/* Continuous Ticker */}
-      <div className="news-ticker" ref={tickerRef}>
-        <div className="ticker-container">
-          <div className="ticker-track">
-            {tickerMessages.map((message, index) => {
-              const label = message.split(':')[0];
-              const content = message.split(': ').slice(1).join(': ');
-              return (
-                <div key={index} className="ticker-item">
-                  <span className="ticker-label">{label}:</span>
-                  <span className="ticker-message">{content}</span>
-                </div>
-              );
-            })}
-            {/* Duplicate for seamless loop */}
-            {tickerMessages.map((message, index) => {
-              const label = message.split(':')[0];
-              const content = message.split(': ').slice(1).join(': ');
-              return (
-                <div key={`duplicate-${index}`} className="ticker-item">
-                  <span className="ticker-label">{label}:</span>
-                  <span className="ticker-message">{content}</span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+      <div className="footer-bottom-bar text-center">
+        © 2025 THE GRYD. Making complex things feel inevitable.
       </div>
     </footer>
   );

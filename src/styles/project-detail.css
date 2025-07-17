@@ -16,55 +16,10 @@
     @apply space-y-8 mb-16;
   }
 
-  .project-meta-top {
-    @apply space-y-6 border-l-4 border-gryd-accent pl-6;
-  }
-
   .project-category {
-    @apply text-sm uppercase tracking-[0.2em] text-gryd-accent font-bold;
+    @apply text-xs uppercase tracking-[0.3em] text-gryd-accent font-bold mb-6;
     font-family: 'Platypi', serif;
-  }
-
-  .project-status-tools {
-    @apply space-y-4;
-  }
-
-  .status-indicator {
-    @apply flex items-center gap-3 text-sm;
-  }
-
-  .status-label {
-    @apply text-gryd-soft uppercase tracking-wide;
-    font-family: 'Platypi', serif;
-    font-size: 0.75rem;
-  }
-
-  .status-value {
-    @apply text-gryd-text font-medium px-3 py-1 bg-gryd-soft/10 rounded-sm;
-    font-family: 'Fraunces', serif;
-  }
-
-  .tools-section {
-    @apply space-y-2;
-  }
-
-  .tools-label {
-    @apply text-gryd-soft uppercase tracking-wide text-xs;
-    font-family: 'Platypi', serif;
-  }
-
-  .tools-list {
-    @apply flex flex-wrap gap-2;
-  }
-
-  .tool-tag {
-    @apply text-xs px-2 py-1 bg-gryd-text/5 text-gryd-text rounded-sm border border-gryd-soft/20;
-    font-family: 'JetBrains Mono', monospace;
-    transition: all 0.2s ease;
-  }
-
-  .tool-tag:hover {
-    @apply bg-gryd-accent/10 border-gryd-accent/30;
+    letter-spacing: 0.3em;
   }
 
   /* Project Title */
@@ -81,25 +36,200 @@
     font-weight: 400;
   }
 
-  .project-date {
-    @apply text-gryd-soft text-sm;
+  /* Magazine-style byline and meta information */
+  .project-byline {
+    @apply flex flex-wrap items-center gap-6 mt-6 pb-6 border-b border-gryd-soft/20;
+  }
+
+  .publication-info {
+    @apply flex items-center gap-2;
+  }
+
+  .pub-label {
+    @apply text-xs uppercase tracking-wider text-gryd-soft;
+    font-family: 'Platypi', serif;
+    font-weight: 600;
+  }
+
+  .pub-date {
+    @apply text-sm text-gryd-text;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+  }
+
+  .project-status-meta {
+    @apply flex items-center gap-2;
+  }
+
+  .status-label {
+    @apply text-xs uppercase tracking-wider text-gryd-soft;
+    font-family: 'Platypi', serif;
+    font-weight: 600;
+  }
+
+  .status-badge {
+    @apply text-sm px-2 py-1 bg-gryd-accent/10 text-gryd-accent border border-gryd-accent/20 rounded-sm;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+  }
+
+  /* Technical specifications - magazine style */
+  .project-specs {
+    @apply mt-8 p-4 bg-gryd-soft/5 border-l-2 border-gryd-accent/30;
+  }
+
+  .specs-label {
+    @apply text-xs uppercase tracking-wider text-gryd-soft mb-3;
+    font-family: 'Platypi', serif;
+    font-weight: 600;
+  }
+
+  .specs-list {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .spec-item {
+    @apply text-xs px-2 py-1 bg-white text-gryd-text border border-gryd-soft/20 rounded-sm;
+    font-family: 'JetBrains Mono', monospace;
+    transition: all 0.2s ease;
+  }
+
+  .spec-item:hover {
+    @apply border-gryd-accent/40 bg-gryd-accent/5;
+  }
+
+  /* Editorial Live Project Card */
+  .editorial-live-card {
+    @apply my-16;
+    animation: editorialCardEntrance 0.8s ease-out 0.5s forwards;
+    opacity: 0;
+    transform: translateY(30px);
+    perspective: 1000px; /* Add perspective for 3D effect */
+  }
+
+  @keyframes editorialCardEntrance {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .editorial-card-paper {
+    @apply relative bg-gryd-text text-white p-12 overflow-hidden; /* Solid dark background for readability */
+    background-image:
+      radial-gradient(circle at 20% 50%, rgba(217,119,6,0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(217,119,6,0.08) 0%, transparent 50%),
+      linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 50%);
+    box-shadow:
+      0 25px 50px -12px rgba(0,0,0,0.25), /* Softer, more modern shadow */
+      inset 0 1px 0 rgba(255,255,255,0.05);
+    transform-style: preserve-3d;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: rotateX(var(--rotate-x, 0)) rotateY(var(--rotate-y, 0));
+  }
+
+  .editorial-card-content {
+    @apply relative z-10 space-y-8;
+  }
+
+  .editorial-badge {
+    @apply inline-block;
+  }
+
+  .editorial-badge span {
+    @apply text-xs uppercase tracking-[0.3em] text-orange-200 bg-black/30 px-3 py-1 border border-orange-200/40; /* High contrast text */
+    font-family: 'Platypi', serif;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+  }
+
+  .editorial-headline {
+    @apply text-5xl font-bold leading-[1.1] text-white;
+    font-family: 'Platypi', serif;
+    font-weight: 700;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.5); /* Softer text shadow */
+  }
+
+  /* Ensure deck text remains readable */
+  .editorial-deck {
+    @apply text-xl leading-relaxed text-gray-300 max-w-2xl;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+  }
+
+  .editorial-cta-section {
+    @apply space-y-6;
+  }
+
+  .editorial-live-button {
+    @apply inline-flex items-center gap-4 px-8 py-4 bg-gryd-accent hover:bg-gryd-accent/90 text-white font-bold text-lg rounded-sm transition-all duration-300;
+    font-family: 'Platypi', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    box-shadow:
+      0 8px 20px rgba(217,119,6,0.4),
+      inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  .editorial-live-button:hover {
+    @apply transform -translate-y-1 shadow-2xl;
+    box-shadow:
+      0 12px 30px rgba(217,119,6,0.5),
+      inset 0 1px 0 rgba(255,255,255,0.3);
+  }
+
+  .button-text {
+    @apply transition-transform duration-300;
+  }
+
+  .button-arrow {
+    @apply text-2xl transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1;
+  }
+
+  .editorial-note {
+    @apply flex items-center gap-2;
+  }
+
+  .editorial-note span {
+    @apply text-sm text-gray-300 italic;
     font-family: 'JetBrains Mono', monospace;
   }
 
-  .project-live-link {
-    @apply mt-6;
+  /* Editorial decoration elements */
+  .editorial-decoration {
+    @apply absolute inset-0 pointer-events-none;
   }
 
-  .live-project-button {
-    @apply inline-flex items-center gap-2 px-4 py-2 bg-gryd-accent text-white rounded-sm hover:bg-gryd-accent/90 transition-all duration-200;
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    text-transform: lowercase;
-    letter-spacing: 0.025em;
+  .ink-spot {
+    @apply absolute w-24 h-24 bg-gryd-accent/20 rounded-full;
+    filter: blur(20px);
   }
 
-  .live-project-button:hover {
-    @apply transform -translate-y-0.5 shadow-lg;
+  .ink-spot.top {
+    @apply -top-12 -right-12;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .ink-spot.bottom {
+    @apply -bottom-12 -left-12;
+    animation: float 8s ease-in-out infinite reverse;
+  }
+
+  .editorial-border {
+    @apply absolute inset-0 border border-white/10 pointer-events-none;
+    background: linear-gradient(45deg,
+      transparent 30%,
+      rgba(255,255,255,0.05) 50%,
+      transparent 70%);
+  }
+
+  /* Floating animation */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) scale(1);
+    }
+    50% {
+      transform: translateY(-10px) scale(1.05);
+    }
   }
 
   /* Hero Image Section */
@@ -215,28 +345,24 @@
     font-family: 'Platypi', serif;
   }
 
-  /* Tags Section */
+  /* Tags Section - minimalist magazine style */
   .project-tags-section {
-    @apply space-y-6 py-8 border-t border-gryd-soft/20 mt-16;
-  }
-
-  .tags-title {
-    @apply text-xl font-semibold text-gryd-text;
-    font-family: 'Platypi', serif;
+    @apply py-6 border-t border-gryd-soft/10 mt-16;
   }
 
   .tags-list {
-    @apply flex flex-wrap gap-3;
+    @apply flex flex-wrap gap-2;
   }
 
   .project-tag {
-    @apply px-3 py-1 bg-gryd-accent/10 text-gryd-accent text-sm rounded-sm border border-gryd-accent/20;
-    font-family: 'Fraunces', serif;
+    @apply px-2 py-1 text-xs text-gryd-soft border border-gryd-soft/30 rounded-sm;
+    font-family: 'JetBrains Mono', monospace;
     transition: all 0.2s ease;
+    background: transparent;
   }
 
   .project-tag:hover {
-    @apply bg-gryd-accent/20 border-gryd-accent/40;
+    @apply text-gryd-text border-gryd-text/40;
   }
 
   /* Navigation */
@@ -317,7 +443,7 @@
     font-family: 'Fraunces', serif;
   }
 
-  /* Responsive adjustments */
+      /* Responsive adjustments */
   @media (max-width: 768px) {
     .project-article {
       @apply px-6 py-12;
@@ -327,6 +453,14 @@
       @apply text-4xl;
     }
 
+    .project-byline {
+      @apply flex-col items-start gap-4;
+    }
+
+    .project-specs {
+      @apply p-3;
+    }
+
     .hero-photo-frame {
       @apply p-4;
     }
@@ -334,6 +468,27 @@
     .project-rich-content p,
     .legacy-paragraph {
       @apply text-base;
+    }
+
+    /* Editorial card mobile adjustments */
+    .editorial-card-paper {
+      @apply p-8;
+    }
+
+    .editorial-headline {
+      @apply text-4xl;
+    }
+
+    .editorial-deck {
+      @apply text-lg;
+    }
+
+    .editorial-live-button {
+      @apply px-6 py-3 text-base;
+    }
+
+    .editorial-card-content {
+      @apply space-y-6;
     }
   }
 }
