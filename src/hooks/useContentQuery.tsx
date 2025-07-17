@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
-import { sanityClient } from '../lib/sanityClient';
+import sanityClient from '../lib/sanityClient';
 import type { WorkProject, PlaygroundExperiment } from '../types/content';
 
 // Default query options for optimal performance

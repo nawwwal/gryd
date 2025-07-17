@@ -379,7 +379,8 @@ export const Callout = ({ type = 'info', title, content }: CalloutProps) => {
   );
 };
 
-// Export all components
+// Export all components as named exports for Fast Refresh compatibility
+// Keep the object export for backward compatibility
 export const richContentComponents = {
   CodeDemo,
   ImageGallery,

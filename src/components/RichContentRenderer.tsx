@@ -1,6 +1,13 @@
 import React from 'react';
 import { PortableText, PortableTextComponents } from '@portabletext/react';
-import { richContentComponents } from './mdx/RichContentComponents';
+import {
+  CodeDemo,
+  ImageGallery,
+  VideoEmbed,
+  ProjectTimeline,
+  TechStack,
+  Callout,
+} from './mdx/RichContentComponents';
 import { getSanityImageUrl } from '../utils/imageUtils';
 import type { SanityImage } from '../types/content';
 
@@ -65,72 +72,54 @@ const portableTextComponents: PortableTextComponents = {
 
   // Custom types (our embedded components)
   types: {
-    codeDemo: ({ value }) => {
-      const { CodeDemo } = richContentComponents;
-      return (
-        <CodeDemo
-          title={value.title}
-          language={value.language}
-          code={value.code}
-          description={value.description}
-        />
-      );
-    },
+    codeDemo: ({ value }) => (
+      <CodeDemo
+        title={value.title}
+        language={value.language}
+        code={value.code}
+        description={value.description}
+      />
+    ),
 
-    imageGallery: ({ value }) => {
-      const { ImageGallery } = richContentComponents;
-      return (
-        <ImageGallery
-          title={value.title}
-          layout={value.layout}
-          images={value.images}
-          caption={value.caption}
-        />
-      );
-    },
+    imageGallery: ({ value }) => (
+      <ImageGallery
+        title={value.title}
+        layout={value.layout}
+        images={value.images}
+        caption={value.caption}
+      />
+    ),
 
-    videoEmbed: ({ value }) => {
-      const { VideoEmbed } = richContentComponents;
-      return (
-        <VideoEmbed
-          title={value.title}
-          url={value.url}
-          caption={value.caption}
-          autoplay={value.autoplay}
-        />
-      );
-    },
+    videoEmbed: ({ value }) => (
+      <VideoEmbed
+        title={value.title}
+        url={value.url}
+        caption={value.caption}
+        autoplay={value.autoplay}
+      />
+    ),
 
-    projectTimeline: ({ value }) => {
-      const { ProjectTimeline } = richContentComponents;
-      return (
-        <ProjectTimeline
-          title={value.title}
-          events={value.events}
-        />
-      );
-    },
+    projectTimeline: ({ value }) => (
+      <ProjectTimeline
+        title={value.title}
+        events={value.events}
+      />
+    ),
 
-    techStack: ({ value }) => {
-      const { TechStack } = richContentComponents;
-      return (
-        <TechStack
-          title={value.title}
-          categories={value.categories}
-        />
-      );
-    },
+    techStack: ({ value }) => (
+      <TechStack
+        title={value.title}
+        categories={value.categories}
+      />
+    ),
 
-    callout: ({ value }) => {
-      const { Callout } = richContentComponents;
-      return (
-        <Callout
-          type={value.type}
-          title={value.title}
-          content={value.content}
-        />
-      );
-    },
+    callout: ({ value }) => (
+      <Callout
+        type={value.type}
+        title={value.title}
+        content={value.content}
+      />
+    ),
 
     // Handle regular images in content
     image: ({ value }: { value: SanityImage }) => (
