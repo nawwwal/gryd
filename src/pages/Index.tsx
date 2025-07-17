@@ -3,7 +3,6 @@ import MagazineHero from '../components/MagazineHero';
 import FeaturedArticle from '../components/FeaturedArticle';
 import ArticleGrid from '../components/ArticleGrid';
 import LettersToEditor from '../components/LettersToEditor';
-import MagazineFooter from '../components/MagazineFooter';
 import { useWorkProjects } from '../hooks/useContentQuery';
 import type { WorkProject } from '../types/content';
 import { useMobileOptimization } from '../hooks/useMobileOptimization';
@@ -87,8 +86,6 @@ const Index = () => {
       <div id="letters">
         <LettersToEditor />
       </div>
-
-      <MagazineFooter />
 
       {/* Mobile Section Indicator */}
       {isMobile && isTouch && (

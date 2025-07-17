@@ -2,7 +2,6 @@ import { useWorkProjects } from '../hooks/useContentQuery';
 import { getSanityImageUrl } from '../utils/imageUtils';
 import { Link } from 'react-router-dom';
 import ScrollFade from '../components/ScrollFade';
-import MagazineFooter from '../components/MagazineFooter';
 import MobileOptimizedImage from '../components/MobileOptimizedImage';
 import MobileTouchFeedback from '../components/MobileTouchFeedback';
 import { useGyroscopic } from '../hooks/useGyroscopic';
@@ -169,7 +168,6 @@ const Work = () => {
         </ScrollFade>
       </div>
 
-              <MagazineFooter />
       </div>;
 };
 export default Work;

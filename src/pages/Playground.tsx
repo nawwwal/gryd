@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import ScrollFade from '../components/ScrollFade';
-import MagazineFooter from '../components/MagazineFooter';
 import InteractiveBackground from '../components/InteractiveBackground';
 import { MorphingText } from '../components/MorphingText';
 import { loadPlaygroundExperiments } from '../utils/contentLoader';
@@ -214,9 +213,8 @@ const Playground = () => {
         </div>
       </div>
 
-              <MagazineFooter />
-      </div>
-    );
+    </div>
+  );
 };
 
 export default Playground;

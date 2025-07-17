@@ -22,7 +22,6 @@ const Layout = ({ children, enablePullToRefresh, onRefresh }: LayoutProps) => {
         onRefresh={onRefresh}
       >
         {children}
-        <MagazineFooter />
       </MobileLayoutWrapper>
     );
   }

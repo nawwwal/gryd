@@ -4,7 +4,6 @@ import EditorInterview from '../components/EditorInterview';
 import EditorsPicks from '../components/EditorsPicks';
 import RapidFire from '../components/RapidFire';
 import EpilogueSection from '../components/EpilogueSection';
-import MagazineFooter from '../components/MagazineFooter';
 
 const About = () => {
   return (
@@ -198,7 +197,6 @@ const About = () => {
       {/* Epilogue Section */}
       <EpilogueSection />
 
-              <MagazineFooter />
       </div>
     );
 };

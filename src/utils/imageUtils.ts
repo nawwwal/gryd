@@ -22,131 +22,86 @@ const imageClient = createClient({
 
 const builder = imageUrlBuilder(imageClient)
 
-// Device pixel ratio detection
-const getDevicePixelRatio = (): number => {
-  return typeof window !== 'undefined' ? (window.devicePixelRatio || 1) : 1
-}
-
-// Adaptive image quality based on connection
-const getAdaptiveQuality = (): number => {
-  if (typeof window === 'undefined') return 80
-
-  try {
-    // Temporarily use simplified connection detection
-    const connection = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
-
-    if (connection) {
-      if (connection.saveData || connection.effectiveType === 'slow-2g') {
-        return 40 // Very low quality for data saver mode
-      } else if (connection.effectiveType === '2g') {
-        return 50 // Low quality for 2G
-      } else if (connection.effectiveType === '3g') {
-        return 70 // Medium quality for 3G
-      }
-    }
-
-    return 85 // High quality for 4G and above
-  } catch (error) {
-    console.warn('Failed to get adaptive quality, using default:', error)
-    return 80 // Safe default
+/**
+ * Checks if the asset is an SVG.
+ *
+ * @param source - The image source object.
+ * @returns True if the image is an SVG, false otherwise.
+ */
+function isSvg(source: SanityImage | SanityImageAsset | string): boolean {
+  if (typeof source === 'string') {
+    return source.endsWith('.svg')
   }
-}
-
-// Get optimal format based on browser support
-const getOptimalFormat = (): 'webp' | 'jpg' => {
-  if (typeof window === 'undefined') return 'webp' // Default to webp for SSR
-
-  // Check for WebP support
-  try {
-    const canvas = document.createElement('canvas')
-    canvas.width = 1
-    canvas.height = 1
-    const webpSupport = canvas.toDataURL('image/webp').startsWith('data:image/webp')
-    return webpSupport ? 'webp' : 'jpg'
-  } catch (error) {
-    console.warn('Failed to detect WebP support, using default:', error)
-    return 'webp' // Safe default
-  }
+  const asset = 'asset' in source ? source.asset : source
+  return asset?.url?.endsWith('.svg') || false
 }
 
 export function urlFor(source: SanityImage | SanityImageAsset | string) {
+  const asset = 'asset' in source ? source.asset : source
+
+  if (isSvg(source) && asset && 'url' in asset) {
+    // For SVGs, we return a simple object that has a `url()` method,
+    // mimicking the builder but just returning the direct URL.
+    return {
+      url: () => asset.url,
+    }
+  }
   return builder.image(source)
 }
 
-// Helper function to get optimized image URLs with adaptive loading
+/**
+ * Generates an optimized image URL from a Sanity image source.
+ * This function simplifies the previous implementation by removing complex adaptive logic
+ * and focusing on delivering high-quality images.
+ *
+ * @param image - The Sanity image asset or object.
+ * @param options - Configuration for the image URL.
+ * @returns A URL string or null if the image is invalid.
+ */
 export function getOptimizedImageUrl(
   image: SanityImage | SanityImageAsset | null | undefined,
   options: {
     width?: number
     height?: number
-    format?: 'webp' | 'jpg' | 'png'
     quality?: number
-    crop?: 'center' | 'top' | 'bottom' | 'left' | 'right'
-    adaptive?: boolean // New option for adaptive loading
-    dpr?: number // Manual device pixel ratio override
+    format?: 'webp' | 'jpg' | 'png'
   } = {}
 ): string | null {
   if (!image) return null
 
-  // Handle both direct asset references and full image objects
-  // SanityImage has .asset property, SanityImageAsset is the asset itself
   const imageRef = 'asset' in image ? image.asset : image
-
   if (!imageRef) return null
 
-    const {
-    width = 800,
-    height,
-    format = 'webp',
-    quality = 80,
-    crop = 'center',
-    adaptive = false, // Default to false to maintain compatibility
-    dpr = 1 // Default to 1 to avoid issues
-  } = options
+  // If the image is an SVG, return its direct URL
+  if (isSvg(imageRef)) {
+    return imageRef.url || null
+  }
+
+  const { width, height, quality = 90, format = 'webp' } = options
 
   try {
-    let imageBuilder = urlFor(imageRef)
+    let imageBuilder = builder.image(imageRef).auto('format').format(format).quality(quality)
 
-    // Determine actual values based on adaptive mode
-    const actualFormat = adaptive ? getOptimalFormat() : format
-    const actualQuality = adaptive ? getAdaptiveQuality() : quality
-    const actualDpr = adaptive && dpr === 1 ? getDevicePixelRatio() : dpr
-
-    // Apply dimensions with device pixel ratio scaling
-    const scaledWidth = Math.round(width * actualDpr)
-    const scaledHeight = height ? Math.round(height * actualDpr) : undefined
-
-    if (scaledWidth) {
-      imageBuilder = imageBuilder.width(scaledWidth)
+    if (width) {
+      imageBuilder = imageBuilder.width(Math.round(width))
     }
 
-    if (scaledHeight) {
-      imageBuilder = imageBuilder.height(scaledHeight)
-      if (crop) {
-        imageBuilder = imageBuilder.crop(crop)
-      }
+    if (height) {
+      imageBuilder = imageBuilder.height(Math.round(height))
     }
-
-    // Apply format and quality with adaptive optimization
-    imageBuilder = imageBuilder
-      .format(actualFormat)
-      .quality(actualQuality)
 
     return imageBuilder.url()
   } catch (error) {
-    console.warn('Failed to generate image URL:', error)
-
-    // Fallback: try basic URL generation
+    console.warn('Failed to generate optimized image URL:', error)
+    // Fallback to a basic URL if optimization fails
     try {
-      return urlFor(imageRef).width(width || 800).url()
+      return builder.image(imageRef).url()
     } catch (fallbackError) {
       console.warn('Fallback image URL generation also failed:', fallbackError)
       return null
     }
   }
 }
-
-// Alias for consistency with component usage
 export const getSanityImageUrl = getOptimizedImageUrl
 
 // Get file URL for attachments
@@ -157,18 +112,15 @@ export function getFileUrl(file: SanityFile | null | undefined): string | null {
 
 // Get responsive image URLs for different screen sizes
 export function getResponsiveImageUrls(
-  image: SanityImage | SanityImageAsset | null | undefined,
-  options: { adaptive?: boolean } = {}
+  image: SanityImage | SanityImageAsset | null | undefined
 ) {
   if (!image) return {}
 
-  const { adaptive = true } = options
-
   return {
-    mobile: getOptimizedImageUrl(image, { width: 480, adaptive }),
-    tablet: getOptimizedImageUrl(image, { width: 768, adaptive }),
-    desktop: getOptimizedImageUrl(image, { width: 1200, adaptive }),
-    large: getOptimizedImageUrl(image, { width: 1920, adaptive })
+    mobile: getOptimizedImageUrl(image, { width: 480 }),
+    tablet: getOptimizedImageUrl(image, { width: 768 }),
+    desktop: getOptimizedImageUrl(image, { width: 1200 }),
+    large: getOptimizedImageUrl(image, { width: 1920 })
   }
 }
 
@@ -190,12 +142,11 @@ export function generateSrcSet(
   image: SanityImage | SanityImageAsset | null | undefined,
   options: {
     baseWidth?: number
-    adaptive?: boolean
   } = {}
 ): string {
   if (!image) return ''
 
-  const { baseWidth, adaptive = true } = options
+  const { baseWidth } = options
 
   const widths = baseWidth
     ? [
@@ -210,8 +161,7 @@ export function generateSrcSet(
     return widths
       .map(width => {
         const url = getOptimizedImageUrl(image, {
-          width,
-          adaptive // Use adaptive optimization when enabled
+          width
         })
         return url ? `${url} ${width}w` : null
       })
@@ -219,15 +169,13 @@ export function generateSrcSet(
       .join(', ')
   } catch (error) {
     console.warn('Failed to generate srcset, using basic fallback:', error)
-
     // Fallback to basic srcset
     return widths
       .map(width => {
         const url = getOptimizedImageUrl(image, {
           width,
           format: 'webp',
-          quality: 80,
-          adaptive: false
+          quality: 80
         })
         return url ? `${url} ${width}w` : null
       })
@@ -245,7 +193,7 @@ export function getLQIP(image: SanityImage | SanityImageAsset | null | undefined
   if (!imageRef) return null
 
   try {
-    return urlFor(imageRef)
+    return builder.image(imageRef)
       .width(40)
       .height(30)
       .quality(20)

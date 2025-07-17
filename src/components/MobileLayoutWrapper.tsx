@@ -2,6 +2,7 @@ import { ReactNode, useEffect, useState, useRef, TouchEvent } from 'react';
 import { useIsMobile } from '../hooks/use-mobile';
 import { useMobileNavigationState } from '../hooks/useMobileNavigationState';
 import MobileBottomNavigation from './MobileBottomNavigation';
+import MagazineFooter from './MagazineFooter';
 
 interface MobileLayoutWrapperProps {
   children: ReactNode;
@@ -166,6 +167,7 @@ const MobileLayoutWrapper = ({
 
           {children}
         </div>
+        <MagazineFooter />
       </div>
 
       {/* Bottom Navigation */}
