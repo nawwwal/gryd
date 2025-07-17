@@ -1,0 +1,339 @@
+@layer components {
+  /* Project Detail Container */
+  .project-detail-container {
+    @apply min-h-screen bg-gryd-bg;
+    background:
+      linear-gradient(135deg, #fafafa 0%, #f8f8f8 100%),
+      radial-gradient(circle at 20% 80%, rgba(217,119,6,0.03) 0%, transparent 50%);
+  }
+
+  .project-article {
+    @apply max-w-[700px] mx-auto px-8 py-16;
+  }
+
+  /* Project Header */
+  .project-header {
+    @apply space-y-8 mb-16;
+  }
+
+  .project-meta-top {
+    @apply space-y-6 border-l-4 border-gryd-accent pl-6;
+  }
+
+  .project-category {
+    @apply text-sm uppercase tracking-[0.2em] text-gryd-accent font-bold;
+    font-family: 'Platypi', serif;
+  }
+
+  .project-status-tools {
+    @apply space-y-4;
+  }
+
+  .status-indicator {
+    @apply flex items-center gap-3 text-sm;
+  }
+
+  .status-label {
+    @apply text-gryd-soft uppercase tracking-wide;
+    font-family: 'Platypi', serif;
+    font-size: 0.75rem;
+  }
+
+  .status-value {
+    @apply text-gryd-text font-medium px-3 py-1 bg-gryd-soft/10 rounded-sm;
+    font-family: 'Fraunces', serif;
+  }
+
+  .tools-section {
+    @apply space-y-2;
+  }
+
+  .tools-label {
+    @apply text-gryd-soft uppercase tracking-wide text-xs;
+    font-family: 'Platypi', serif;
+  }
+
+  .tools-list {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .tool-tag {
+    @apply text-xs px-2 py-1 bg-gryd-text/5 text-gryd-text rounded-sm border border-gryd-soft/20;
+    font-family: 'JetBrains Mono', monospace;
+    transition: all 0.2s ease;
+  }
+
+  .tool-tag:hover {
+    @apply bg-gryd-accent/10 border-gryd-accent/30;
+  }
+
+  /* Project Title */
+  .project-title {
+    @apply text-5xl font-bold leading-[1.1] text-gryd-text;
+    font-family: 'Platypi', serif;
+    font-weight: 700;
+    margin-top: 2rem;
+  }
+
+  .project-subtitle {
+    @apply text-xl text-gryd-soft leading-relaxed;
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+  }
+
+  .project-date {
+    @apply text-gryd-soft text-sm;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .project-live-link {
+    @apply mt-6;
+  }
+
+  .live-project-button {
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-gryd-accent text-white rounded-sm hover:bg-gryd-accent/90 transition-all duration-200;
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    text-transform: lowercase;
+    letter-spacing: 0.025em;
+  }
+
+  .live-project-button:hover {
+    @apply transform -translate-y-0.5 shadow-lg;
+  }
+
+  /* Hero Image Section */
+  .project-hero-section {
+    @apply mb-16;
+  }
+
+  .hero-photo-frame {
+    @apply relative bg-white shadow-xl p-6;
+    background:
+      linear-gradient(135deg, #ffffff 0%, #fdfdfd 100%);
+  }
+
+  .hero-photo-frame::before {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background: radial-gradient(circle at 30% 70%, rgba(0,0,0,0.02) 0%, transparent 50%);
+  }
+
+  .hero-image {
+    @apply w-full h-auto object-cover;
+    filter: contrast(1.05) saturate(0.95);
+  }
+
+  .hero-caption {
+    @apply mt-4 pt-4 border-t border-gryd-soft/20;
+  }
+
+  .hero-caption span {
+    @apply text-gryd-soft text-sm leading-relaxed italic;
+    font-family: 'Fraunces', serif;
+  }
+
+  /* Project Description */
+  .project-description {
+    @apply mb-12;
+  }
+
+  .description-text {
+    @apply text-lg leading-relaxed text-gryd-text;
+    font-family: 'Fraunces', serif;
+    /* Drop cap for standalone description */
+    &::first-letter {
+      @apply text-5xl font-bold float-left mr-3 mt-1 leading-none;
+      font-family: 'Platypi', serif;
+    }
+  }
+
+  /* Project Content */
+  .project-content {
+    @apply space-y-8 mb-16;
+  }
+
+  .project-rich-content {
+    @apply space-y-8;
+  }
+
+  /* Style rich content elements */
+  .project-rich-content h2 {
+    @apply text-3xl font-bold text-gryd-text mt-12 mb-6;
+    font-family: 'Platypi', serif;
+  }
+
+  .project-rich-content h3 {
+    @apply text-2xl font-semibold text-gryd-text mt-8 mb-4;
+    font-family: 'Platypi', serif;
+  }
+
+  .project-rich-content p {
+    @apply text-lg leading-relaxed text-gryd-text mb-6;
+    font-family: 'Fraunces', serif;
+    max-width: 65ch;
+  }
+
+  .project-rich-content img {
+    @apply w-full h-auto my-8 shadow-lg;
+    border-radius: 2px;
+  }
+
+  .project-rich-content blockquote {
+    @apply border-l-4 border-gryd-accent pl-6 my-8 italic text-gryd-soft text-xl;
+    font-family: 'Fraunces', serif;
+  }
+
+  .project-rich-content ul,
+  .project-rich-content ol {
+    @apply space-y-2 mb-6 ml-6;
+  }
+
+  .project-rich-content li {
+    @apply text-lg leading-relaxed text-gryd-text;
+    font-family: 'Fraunces', serif;
+  }
+
+  .project-rich-content code {
+    @apply bg-gryd-soft/10 px-2 py-1 rounded text-sm text-gryd-accent;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Legacy Content */
+  .legacy-content {
+    @apply space-y-6;
+  }
+
+  .legacy-paragraph {
+    @apply text-lg leading-relaxed text-gryd-text;
+    font-family: 'Fraunces', serif;
+    max-width: 65ch;
+  }
+
+  .legacy-paragraph:first-child::first-letter {
+    @apply text-5xl font-bold float-left mr-3 mt-1 leading-none;
+    font-family: 'Platypi', serif;
+  }
+
+  /* Tags Section */
+  .project-tags-section {
+    @apply space-y-6 py-8 border-t border-gryd-soft/20 mt-16;
+  }
+
+  .tags-title {
+    @apply text-xl font-semibold text-gryd-text;
+    font-family: 'Platypi', serif;
+  }
+
+  .tags-list {
+    @apply flex flex-wrap gap-3;
+  }
+
+  .project-tag {
+    @apply px-3 py-1 bg-gryd-accent/10 text-gryd-accent text-sm rounded-sm border border-gryd-accent/20;
+    font-family: 'Fraunces', serif;
+    transition: all 0.2s ease;
+  }
+
+  .project-tag:hover {
+    @apply bg-gryd-accent/20 border-gryd-accent/40;
+  }
+
+  /* Navigation */
+  .project-navigation {
+    @apply pt-8 border-t border-gryd-soft/20 mt-12;
+  }
+
+  .back-to-work {
+    @apply inline-flex items-center gap-2 text-gryd-accent hover:text-gryd-text transition-colors text-lg;
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+  }
+
+  .back-to-work:hover {
+    @apply transform -translate-x-1;
+    transition: all 0.2s ease;
+  }
+
+  /* Rich content component overrides */
+  .project-rich-content .image-gallery {
+    @apply my-12;
+  }
+
+  .project-rich-content .image-gallery img {
+    @apply shadow-xl p-4 bg-white;
+    background:
+      linear-gradient(135deg, #ffffff 0%, #fdfdfd 100%);
+  }
+
+  .project-rich-content .code-demo {
+    @apply my-8 shadow-lg;
+  }
+
+  .project-rich-content .video-embed {
+    @apply my-12;
+  }
+
+  .project-rich-content .project-timeline {
+    @apply my-12;
+  }
+
+  .project-rich-content .tech-stack {
+    @apply my-12;
+  }
+
+  .project-rich-content .callout {
+    @apply my-8;
+  }
+
+  /* Content Image Frame Styling */
+  .content-image-frame {
+    @apply my-12;
+  }
+
+  .image-photo-frame {
+    @apply relative bg-white shadow-xl p-6;
+    background:
+      linear-gradient(135deg, #ffffff 0%, #fdfdfd 100%);
+  }
+
+  .image-photo-frame::before {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background: radial-gradient(circle at 30% 70%, rgba(0,0,0,0.02) 0%, transparent 50%);
+  }
+
+  .content-image {
+    @apply w-full h-auto object-cover;
+    filter: contrast(1.05) saturate(0.95);
+  }
+
+  .image-caption {
+    @apply mt-4 pt-4 border-t border-gryd-soft/20;
+  }
+
+  .image-caption span {
+    @apply text-gryd-soft text-sm leading-relaxed italic;
+    font-family: 'Fraunces', serif;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .project-article {
+      @apply px-6 py-12;
+    }
+
+    .project-title {
+      @apply text-4xl;
+    }
+
+    .hero-photo-frame {
+      @apply p-4;
+    }
+
+    .project-rich-content p,
+    .legacy-paragraph {
+      @apply text-base;
+    }
+  }
+}

@@ -22,7 +22,7 @@ const COMMON_FIELDS = `
   _id,
   title,
   subtitle,
-  slug,
+  "slug": slug.current,
   description,
   content,
   contentLegacy,

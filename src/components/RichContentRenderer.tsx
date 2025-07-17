@@ -123,17 +123,19 @@ const portableTextComponents: PortableTextComponents = {
 
     // Handle regular images in content
     image: ({ value }: { value: SanityImage }) => (
-      <div className="my-8">
-        <img
-          src={getSanityImageUrl(value, { width: 800, adaptive: true }) || ''}
-          alt={value.alt || 'Content image'}
-          className="w-full rounded-lg shadow-lg"
-        />
-        {value.caption && (
-          <p className="caption text-gryd-soft mt-4 text-center italic">
-            {value.caption}
-          </p>
-        )}
+      <div className="content-image-frame">
+        <div className="image-photo-frame">
+          <img
+            src={getSanityImageUrl(value, { width: 800, adaptive: true }) || ''}
+            alt={value.alt || 'Content image'}
+            className="content-image"
+          />
+          {value.caption && (
+            <div className="image-caption">
+              <span>{value.caption}</span>
+            </div>
+          )}
+        </div>
       </div>
     ),
   },
