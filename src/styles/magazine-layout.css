@@ -8,6 +8,9 @@
     @apply min-h-screen;
     background: transparent;
     padding-bottom: 0;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
   }
 
   /* Work Page Linear Layout */
@@ -262,6 +265,9 @@
     min-height: clamp(70vh, 100vh, 100vh);
     padding: clamp(1rem, 4vw, 2rem);
     perspective: 1000px;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
   }
 
   .hero-paper {
@@ -278,32 +284,33 @@
 
   @media (max-width: 800px) {
     .magazine-hero {
-      /* Center and scale the entire hero section */
+      /* Proper responsive layout without fixed widths */
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      width: 1200px; /* base design width */
+      width: 100%;
+      max-width: 100vw;
       margin: 0 auto;
-      padding-left: 1rem;
-      padding-right: 1rem;
-      transform-origin: top center;
-      transform: scale(calc((100vw - 2rem) / 1200));
+      padding: clamp(1rem, 4vw, 2rem);
+      overflow: hidden;
     }
 
-    /* Keep the hero-paper at its design width so scaling is uniform */
+    /* Responsive hero paper without fixed widths */
     .hero-paper {
-      max-width: none !important;
-      width: 1200px;
+      width: 100%;
+      max-width: min(95vw, 800px);
       transform: rotateX(0.5deg) rotateY(-0.25deg);
-      flex-shrink: 0;
+      flex-shrink: 1;
     }
   }
 
   @media (max-width: 400px) {
     .magazine-hero {
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-      transform: scale(calc((100vw - 1rem) / 1200));
+      padding: 0.5rem;
+    }
+
+    .hero-paper {
+      max-width: calc(100vw - 1rem);
     }
   }
 
@@ -379,6 +386,9 @@
     @apply py-12 sm:py-16 md:py-20;
     padding-left: clamp(1rem, 4vw, 4rem);
     padding-right: clamp(1rem, 4vw, 4rem);
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
   }
 
   /* ... keep existing code (article grid and other sections) */

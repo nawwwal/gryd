@@ -132,41 +132,43 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Analytics/>
-      <SpeedInsights/>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Suspense
-            fallback={
-              <div className="route-loading">
-                <div className="loading-spinner" />
-                <p>Loading page...</p>
-              </div>
-            }
-          >
-            <Routes>
-              {/* Public Routes - With Layout */}
-              <Route path="/" element={<Layout><Index /></Layout>} />
-              <Route path="/work" element={<Layout><Work /></Layout>} />
-              <Route path="/work/:slug" element={<Layout><ProjectDetail /></Layout>} />
-              <Route path="/about" element={<Layout><About /></Layout>} />
-              <Route path="/playground" element={<Layout><Playground /></Layout>} />
-              <Route path="*" element={<Layout><NotFound /></Layout>} />
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
-      </TooltipProvider>
+      <div className="overflow-x-hidden w-full max-w-full">
+        <Analytics/>
+        <SpeedInsights/>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <ScrollToTop />
+            <Suspense
+              fallback={
+                <div className="route-loading">
+                  <div className="loading-spinner" />
+                  <p>Loading page...</p>
+                </div>
+              }
+            >
+              <Routes>
+                {/* Public Routes - With Layout */}
+                <Route path="/" element={<Layout><Index /></Layout>} />
+                <Route path="/work" element={<Layout><Work /></Layout>} />
+                <Route path="/work/:slug" element={<Layout><ProjectDetail /></Layout>} />
+                <Route path="/about" element={<Layout><About /></Layout>} />
+                <Route path="/playground" element={<Layout><Playground /></Layout>} />
+                <Route path="*" element={<Layout><NotFound /></Layout>} />
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </TooltipProvider>
 
-      {/* Development Tools - only in development */}
-      {import.meta.env.DEV && (
-        <>
-          <ReactQueryDevtools initialIsOpen={false} />
+        {/* Development Tools - only in development */}
+        {import.meta.env.DEV && (
+          <>
+            <ReactQueryDevtools initialIsOpen={false} />
 
-        </>
-      )}
+          </>
+        )}
+      </div>
     </QueryClientProvider>
   );
 }

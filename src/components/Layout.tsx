@@ -27,9 +27,9 @@ const Layout = ({ children, enablePullToRefresh, onRefresh }: LayoutProps) => {
 
   // Desktop layout (unchanged)
   return (
-    <div className="min-h-screen bg-gryd-bg">
+    <div className="min-h-screen bg-gryd-bg overflow-x-hidden w-full max-w-full">
       <Navigation />
-      <main className="pt-[60px] md:pt-[60px]">
+      <main className="pt-[60px] md:pt-[60px] overflow-x-hidden w-full">
         {children}
       </main>
     </div>

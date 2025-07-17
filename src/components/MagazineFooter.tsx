@@ -111,52 +111,87 @@ const MagazineFooter = () => {
             </div>
           </div>
 
-          {/* Section 3: Inquiries with Live Widget */}
-          <div className="classified-section">
+          {/* Section 3: Inquiries - Clean and Focused */}
+          <div className="classified-section inquiry-section">
             <h3 className="classified-title">Inquiries</h3>
             <div className="classified-list">
-                <div className="classified-item">
-                    <span>For projects, collaborations, or just to say hello:</span>
-                </div>
-                <div className="classified-item">
-                    <a href="mailto:hey@naw.al">hey@naw.al</a>
+              <div className="inquiry-intro">
+                <p className="inquiry-description">
+                  For projects, collaborations, creative conversations, or simply to exchange thoughts:
+                </p>
+              </div>
+
+              <div className="contact-details">
+                <div className="contact-item primary-contact">
+                  <span className="contact-label">Email:</span>
+                  <a href="mailto:hey@naw.al" className="contact-link">hey@naw.al</a>
                 </div>
 
-                {/* Live Publishing Status - Moved from Colophon */}
-                <div className="live-status-section">
-                  <div className="live-indicator">
-                    <span className="live-dot"></span>
-                    <span className="live-label">LIVE</span>
-                  </div>
-                  <div className="printing-time">
-                    <div className="time-label">Current Print Time:</div>
-                    <div className="time-display">
-                      <span className="time-main">{timeString}</span>
-                      <span className="time-meta">{timezone}</span>
-                    </div>
-                    <div className="date-display">{dateString}</div>
-                  </div>
-                  <div className="press-info">
-                    <div className="press-run">Press run: ∞ digital copies</div>
-                    <div className="binding-style">Binding: Perfect web</div>
-                  </div>
+                <div className="contact-item response-time">
+                  <span className="contact-label">Response:</span>
+                  <span className="contact-value">Usually within 24hrs</span>
                 </div>
+
+                <div className="contact-item availability">
+                  <span className="contact-label">Status:</span>
+                  <span className="contact-value availability-open">Open to new projects</span>
+                </div>
+              </div>
+
+              <div className="inquiry-note">
+                <p>Whether it's a detailed brief or a simple "hello" — all messages welcome.</p>
+              </div>
             </div>
           </div>
 
           {/* Section 4: Socials */}
-          <div className="classified-section">
-            <h3 className="classified-title">Socials</h3>
+          <div className="classified-section social-section">
+            <h3 className="classified-title">Connect</h3>
             <div className="classified-list">
-                <div className="classified-item">
-                    <a href="https://www.linkedin.com/in/adityanawal/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <div className="social-links">
+                <div className="social-item">
+                  <span className="social-label">Professional:</span>
+                  <a href="https://www.linkedin.com/in/adityanawal/" target="_blank" rel="noopener noreferrer" className="social-link">LinkedIn</a>
                 </div>
-                <div className="classified-item">
-                    <a href="https://twitter.com/adityanawal" target="_blank" rel="noopener noreferrer">Twitter</a>
+                <div className="social-item">
+                  <span className="social-label">Code:</span>
+                  <a href="https://github.com/nawwwal" target="_blank" rel="noopener noreferrer" className="social-link">GitHub</a>
                 </div>
-                <div className="classified-item">
-                    <a href="https://github.com/nawwwal" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <div className="social-item">
+                  <span className="social-label">Updates:</span>
+                  <a href="https://twitter.com/adityanawal" target="_blank" rel="noopener noreferrer" className="social-link">Twitter</a>
                 </div>
+              </div>
+
+              <div className="social-note">
+                <p>Find me across the digital landscape — always happy to connect.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Section 5: Live Status - Dedicated Column */}
+          <div className="classified-section status-section">
+            <h3 className="classified-title">Live Status</h3>
+            <div className="classified-list">
+              <div className="live-status-section">
+                <div className="live-indicator">
+                  <span className="live-dot"></span>
+                  <span className="live-label">LIVE</span>
+                </div>
+                <div className="printing-time">
+                  <div className="time-label">Current Print Time:</div>
+                  <div className="time-display">
+                    <span className="time-main">{timeString}</span>
+                    <span className="time-meta">{timezone}</span>
+                  </div>
+                  <div className="date-display">{dateString}</div>
+                </div>
+                <div className="press-info">
+                  <div className="press-run">Press run: ∞ digital copies</div>
+                  <div className="binding-style">Binding: Perfect web</div>
+                  <div className="edition-info">Edition: Continuous</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -53,7 +53,7 @@ const Index = () => {
 
   // Show the main layout even if no projects, but handle featured project gracefully
   return (
-    <div className="magazine-container" ref={swipeRef}>
+    <div className="magazine-container overflow-x-hidden w-full max-w-full" ref={swipeRef}>
       <div id="hero">
         <MagazineHero />
       </div>
