@@ -44,12 +44,17 @@ const About = () => {
                   A publication of systems, stories & sidequests
                 </div>
 
-                {/* PDF Download Button */}
+                {/* PDF Download Link */}
                 <div className="masthead-actions mt-8">
-                  <button className="print-issue-btn">
+                  <a
+                    href="/Aditya Nawal Resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="print-issue-btn"
+                  >
                     <span>📄</span>
-                    <span>PRINT THIS ISSUE</span>
-                  </button>
+                    <span>Download Dossier</span>
+                  </a>
                 </div>
               </div>
             </ScrollFade>
