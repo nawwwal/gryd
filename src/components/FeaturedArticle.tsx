@@ -29,7 +29,7 @@ const getContentExcerpt = (project: WorkProject, maxLength: number = 200): strin
   }
 
   // Final fallback to description
-  return project.description;
+  return project.description || '';
 };
 
 const FeaturedArticle = ({ project }: FeaturedArticleProps) => {
@@ -44,9 +44,13 @@ const FeaturedArticle = ({ project }: FeaturedArticleProps) => {
           <p className="article-deck">{project.subtitle}</p>
 
           <div className="article-meta">
-            <span>{project.timeline}</span>
-            <span>•</span>
-            <span className="impact">{project.impact}</span>
+            <span>{project.metadata.status}</span>
+            {project.metadata.publishDate && (
+              <>
+                <span>•</span>
+                <span>{new Date(project.metadata.publishDate).getFullYear()}</span>
+              </>
+            )}
           </div>
         </div>
       </ScrollFade>

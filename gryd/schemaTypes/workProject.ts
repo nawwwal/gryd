@@ -14,8 +14,7 @@ export default defineType({
     defineField({
       name: 'subtitle',
       title: 'Subtitle',
-      type: 'string',
-      validation: Rule => Rule.required()
+      type: 'string'
     }),
     defineField({
       name: 'slug',
@@ -30,20 +29,7 @@ export default defineType({
     defineField({
       name: 'description',
       title: 'Description',
-      type: 'text',
-      validation: Rule => Rule.required()
-    }),
-    defineField({
-      name: 'timeline',
-      title: 'Timeline',
-      type: 'string',
-      validation: Rule => Rule.required()
-    }),
-    defineField({
-      name: 'impact',
-      title: 'Impact',
-      type: 'string',
-      validation: Rule => Rule.required()
+      type: 'text'
     }),
     defineField({
       name: 'content',
@@ -532,27 +518,22 @@ export default defineType({
       type: 'object',
       fields: [
         defineField({
-          name: 'type',
-          title: 'Type',
-          type: 'string',
-          options: {
-            list: [
-              {title: 'Photography', value: 'photography'},
-              {title: 'Code', value: 'code'},
-              {title: 'Blog', value: 'blog'},
-              {title: 'Prototype', value: 'prototype'},
-              {title: 'Research', value: 'research'},
-              {title: 'Visual', value: 'visual'},
-              {title: 'Note', value: 'note'},
-            ]
-          },
-          validation: Rule => Rule.required()
-        }),
-        defineField({
           name: 'category',
           title: 'Category',
           type: 'string',
-          validation: Rule => Rule.required()
+          options: {
+            list: [
+              {title: 'Product Design', value: 'product-design'},
+              {title: 'UX Research', value: 'ux-research'},
+              {title: 'Visual Design', value: 'visual-design'},
+              {title: 'Design System', value: 'design-system'},
+              {title: 'Branding', value: 'branding'},
+              {title: 'Web Design', value: 'web-design'},
+              {title: 'Mobile Design', value: 'mobile-design'},
+              {title: 'Prototyping', value: 'prototyping'},
+              {title: 'Case Study', value: 'case-study'},
+            ]
+          }
         }),
         defineField({
           name: 'status',
@@ -566,53 +547,38 @@ export default defineType({
               {title: 'Ongoing', value: 'ongoing'},
               {title: 'Draft', value: 'draft'},
             ]
-          },
-          validation: Rule => Rule.required()
+          }
         }),
         defineField({
           name: 'featured',
           title: '⭐ Featured Project',
           type: 'boolean',
           initialValue: false,
-          description: 'Mark this project as featured - will appear on the homepage',
-          validation: Rule => Rule.required()
+          description: 'Mark this project as featured - will appear on the homepage'
         }),
         defineField({
           name: 'publishDate',
           title: 'Publish Date',
-          type: 'date',
-          validation: Rule => Rule.required()
+          type: 'date'
         }),
         defineField({
           name: 'lastUpdated',
           title: 'Last Updated',
-          type: 'date',
-          validation: Rule => Rule.required()
+          type: 'date'
         }),
         defineField({
           name: 'tools',
           title: 'Tools',
           type: 'array',
-          of: [{type: 'string'}]
+          of: [{type: 'string'}],
+          description: 'Design tools used (e.g., Figma, Sketch, Adobe XD)'
         }),
         defineField({
           name: 'tags',
           title: 'Tags',
           type: 'array',
-          of: [{type: 'string'}]
-        }),
-        defineField({
-          name: 'difficulty',
-          title: 'Difficulty',
-          type: 'string',
-          options: {
-            list: [
-              {title: 'Beginner', value: 'Beginner'},
-              {title: 'Intermediate', value: 'Intermediate'},
-              {title: 'Advanced', value: 'Advanced'},
-              {title: 'Expert', value: 'Expert'},
-            ]
-          }
+          of: [{type: 'string'}],
+          description: 'Relevant tags for filtering and search'
         }),
         defineField({
           name: 'interactive',
@@ -620,20 +586,17 @@ export default defineType({
           type: 'object',
           fields: [
             defineField({
-              name: 'hasDemo',
-              title: 'Has Live Demo',
+              name: 'hasLiveVersion',
+              title: 'Has Live Version',
               type: 'boolean',
-              initialValue: false
+              initialValue: false,
+              description: 'Does this project have a live/deployed version?'
             }),
             defineField({
-              name: 'demoUrl',
-              title: 'Demo URL',
-              type: 'url'
-            }),
-            defineField({
-              name: 'codeUrl',
-              title: 'Source Code URL',
-              type: 'url'
+              name: 'liveUrl',
+              title: 'Live URL',
+              type: 'url',
+              description: 'Link to the live version of the project'
             })
           ]
         })

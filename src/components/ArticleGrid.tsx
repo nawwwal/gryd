@@ -36,7 +36,7 @@ const ArticleGrid = ({ projects }: ArticleGridProps) => {
                   <p className="grid-excerpt">{project.subtitle}</p>
 
                   <div className="grid-meta">
-                    <span className="grid-impact">{project.impact}</span>
+                    <span className="grid-impact">View Project →</span>
                   </div>
                 </div>
               </article>

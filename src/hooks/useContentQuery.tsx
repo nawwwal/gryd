@@ -1,367 +1,239 @@
-import { useQuery, useQueryClient, UseQueryOptions } from '@tanstack/react-query'
-import { WorkProject, PlaygroundExperiment, ContentItem, ContentMetadata } from '../types/content'
-import optimizedClient from '../lib/sanityClient'
-
-// Query keys for consistent cache management
-export const QUERY_KEYS = {
-  workProjects: ['work-projects'] as const,
-  playgroundExperiments: ['playground-experiments'] as const,
-  contentBySlug: (slug: string, type: 'work' | 'playground') => ['content', type, slug] as const,
-  contentByType: (type: ContentMetadata['type']) => ['content-by-type', type] as const,
-  allContent: ['all-content'] as const,
-} as const
-
-// Optimized queries for different content types
-const QUERIES = {
-  workProjects: `*[_type == "workProject"]|order(metadata.publishDate desc){
-    "slug": slug.current,
-    title,
-    subtitle,
-    description,
-    timeline,
-    impact,
-    content,
-    heroImage{
-      asset->{
-        _id,
-        url,
-        metadata{
-          dimensions,
-          lqip,
-          palette
-        }
-      },
-      alt,
-      hotspot
-    },
-    gallery[]{
-      asset->{
-        _id,
-        url,
-        metadata{
-          dimensions,
-          lqip,
-          palette
-        }
-      },
-      alt,
-      caption,
-      hotspot
-    },
-    attachments[]{
-      asset->{
-        _id,
-        url,
-        originalFilename,
-        size
-      },
-      title,
-      description
-    },
-    metadata
-  }`,
-
-  playgroundExperiments: `*[_type == "playgroundExperiment"]|order(metadata.publishDate desc){
-    "slug": slug.current,
-    title,
-    subtitle,
-    description,
-    intensity,
-    visual,
-    content,
-    heroImage{
-      asset->{
-        _id,
-        url,
-        metadata{
-          dimensions,
-          lqip,
-          palette
-        }
-      },
-      alt,
-      hotspot
-    },
-    gallery[]{
-      asset->{
-        _id,
-        url,
-        metadata{
-          dimensions,
-          lqip,
-          palette
-        }
-      },
-      alt,
-      caption,
-      hotspot
-    },
-    attachments[]{
-      asset->{
-        _id,
-        url,
-        originalFilename,
-        size
-      },
-      title,
-      description
-    },
-    metadata
-  }`,
-
-  contentBySlug: (type: 'work' | 'playground') => `*[_type == "${type === 'work' ? 'workProject' : 'playgroundExperiment'}" && slug.current == $slug][0]{
-    "slug": slug.current,
-    title,
-    subtitle,
-    description,
-    ${type === 'work' ? 'timeline, impact,' : 'intensity, visual,'}
-    content,
-    heroImage{
-      asset->{
-        _id,
-        url,
-        metadata{
-          dimensions,
-          lqip,
-          palette
-        }
-      },
-      alt,
-      hotspot
-    },
-    gallery[]{
-      asset->{
-        _id,
-        url,
-        metadata{
-          dimensions,
-          lqip,
-          palette
-        }
-      },
-      alt,
-      caption,
-      hotspot
-    },
-    attachments[]{
-      asset->{
-        _id,
-        url,
-        originalFilename,
-        size
-      },
-      title,
-      description
-    },
-    metadata
-  }`,
-
-  contentByType: `*[(_type == "workProject" || _type == "playgroundExperiment") && metadata.type == $contentType]|order(metadata.publishDate desc){
-    "slug": slug.current,
-    "contentType": _type,
-    title,
-    subtitle,
-    description,
-    timeline,
-    impact,
-    intensity,
-    visual,
-    content,
-    heroImage{
-      asset->{
-        _id,
-        url,
-        metadata{
-          dimensions,
-          lqip,
-          palette
-        }
-      },
-      alt,
-      hotspot
-    },
-    metadata
-  }`
-}
+import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
+import { sanityClient } from '../lib/sanityClient';
+import type { WorkProject, PlaygroundExperiment } from '../types/content';
 
 // Default query options for optimal performance
-const DEFAULT_QUERY_OPTIONS = {
+export const DEFAULT_QUERY_OPTIONS = {
   staleTime: 5 * 60 * 1000, // 5 minutes
-  gcTime: 30 * 60 * 1000, // 30 minutes (formerly cacheTime)
+  gcTime: 30 * 60 * 1000, // 30 minutes (garbage collection time)
   refetchOnWindowFocus: false,
   refetchOnMount: false,
   refetchOnReconnect: true,
   retry: (failureCount: number, error: any) => {
-    // Don't retry on 4xx errors, but retry on network/5xx errors
-    if (error?.status >= 400 && error?.status < 500) return false
-    return failureCount < 3
+    // Don't retry on client errors (4xx), but retry on server errors (5xx) and network errors
+    if (error?.status >= 400 && error?.status < 500) return false;
+    return failureCount < 3;
   },
   retryDelay: (attemptIndex: number) => Math.min(1000 * 2 ** attemptIndex, 30000), // Exponential backoff
-} as const
+};
 
-// Hook for work projects with optimizations
-export const useWorkProjects = (options?: Partial<UseQueryOptions<WorkProject[], Error>>) => {
-  return useQuery({
-    queryKey: QUERY_KEYS.workProjects,
-    queryFn: () => optimizedClient.fetch<WorkProject[]>(QUERIES.workProjects, undefined, { ttl: 10 * 60 * 1000 }), // 10 min cache
+// Common fields for all content types
+const COMMON_FIELDS = `
+  _id,
+  title,
+  subtitle,
+  slug,
+  description,
+  content,
+  contentLegacy,
+  heroImage {
+    asset->{
+      _id,
+      url,
+      metadata {
+        dimensions,
+        palette,
+        lqip,
+        blurHash
+      }
+    },
+    alt,
+    hotspot
+  },
+  gallery[] {
+    asset->{
+      _id,
+      url,
+      metadata {
+        dimensions,
+        palette,
+        lqip,
+        blurHash
+      }
+    },
+    alt,
+    caption,
+    hotspot
+  },
+  attachments[] {
+    asset->{
+      _id,
+      url,
+      originalFilename,
+      size
+    },
+    title,
+    description
+  },
+  metadata {
+    category,
+    status,
+    featured,
+    publishDate,
+    lastUpdated,
+    tools,
+    tags,
+    interactive {
+      hasLiveVersion,
+      liveUrl
+    }
+  }
+`;
+
+// Work Projects Query
+const WORK_PROJECTS_QUERY = `*[_type == "workProject"] | order(metadata.publishDate desc) {
+  ${COMMON_FIELDS}
+}`;
+
+// Playground Experiments Query
+const PLAYGROUND_EXPERIMENTS_QUERY = `*[_type == "playgroundExperiment"] | order(metadata.publishDate desc) {
+  ${COMMON_FIELDS},
+  intensity,
+  visual
+}`;
+
+// Single content item by slug and type
+const CONTENT_BY_SLUG_QUERY = (type: 'work' | 'playground') => `
+  *[_type == "${type === 'work' ? 'workProject' : 'playgroundExperiment'}" && slug.current == $slug][0] {
+    ${COMMON_FIELDS}
+    ${type === 'work' ? '' : ', intensity, visual'}
+  }
+`;
+
+// Content by metadata category
+const CONTENT_BY_TYPE_QUERY = (contentType: 'work' | 'playground') => `
+  *[(_type == "workProject" || _type == "playgroundExperiment") && metadata.category == $contentCategory] | order(metadata.publishDate desc) {
+    ${COMMON_FIELDS}
+    ${contentType === 'work' ? '' : ', intensity, visual'}
+  }
+`;
+
+// Featured content query
+const FEATURED_CONTENT_QUERY = `*[(_type == "workProject" || _type == "playgroundExperiment") && metadata.featured == true] | order(metadata.publishDate desc) {
+  ${COMMON_FIELDS}
+}`;
+
+// All content queries
+const QUERIES = {
+  workProjects: WORK_PROJECTS_QUERY,
+  playgroundExperiments: PLAYGROUND_EXPERIMENTS_QUERY,
+  contentBySlug: CONTENT_BY_SLUG_QUERY,
+  contentByType: CONTENT_BY_TYPE_QUERY,
+  featuredContent: FEATURED_CONTENT_QUERY,
+} as const;
+
+// Hook for work projects
+export const useWorkProjects = () => {
+  return useQuery<WorkProject[]>({
+    queryKey: ['workProjects'],
+    queryFn: () => sanityClient.fetch(QUERIES.workProjects),
     ...DEFAULT_QUERY_OPTIONS,
-    ...options,
-  })
-}
+  });
+};
 
-// Hook for playground experiments with optimizations
-export const usePlaygroundExperiments = (options?: Partial<UseQueryOptions<PlaygroundExperiment[], Error>>) => {
-  return useQuery({
-    queryKey: QUERY_KEYS.playgroundExperiments,
-    queryFn: () => optimizedClient.fetch<PlaygroundExperiment[]>(QUERIES.playgroundExperiments, undefined, { ttl: 10 * 60 * 1000 }),
+// Hook for playground experiments
+export const usePlaygroundExperiments = () => {
+  return useQuery<PlaygroundExperiment[]>({
+    queryKey: ['playgroundExperiments'],
+    queryFn: () => sanityClient.fetch(QUERIES.playgroundExperiments),
     ...DEFAULT_QUERY_OPTIONS,
-    ...options,
-  })
-}
+  });
+};
 
-// Hook for content by slug with optimizations
-export const useContentBySlug = (
-  slug: string,
-  type: 'work' | 'playground',
-  options?: Partial<UseQueryOptions<ContentItem | null, Error>>
-) => {
-  return useQuery({
-    queryKey: QUERY_KEYS.contentBySlug(slug, type),
-    queryFn: () => optimizedClient.fetch<ContentItem | null>(
-      QUERIES.contentBySlug(type),
-      { slug },
-      { ttl: 15 * 60 * 1000 } // 15 min cache for individual items
-    ),
+// Hook for single content item by slug
+export const useContentBySlug = (type: 'work' | 'playground', slug: string) => {
+  return useQuery<WorkProject | PlaygroundExperiment | null>({
+    queryKey: ['content', type, slug],
+    queryFn: () => sanityClient.fetch(QUERIES.contentBySlug(type), { slug }),
     enabled: !!slug,
     ...DEFAULT_QUERY_OPTIONS,
-    ...options,
-  })
-}
+  });
+};
 
-// Hook for content by type with optimizations
-export const useContentByType = (
-  contentType: ContentMetadata['type'],
-  options?: Partial<UseQueryOptions<ContentItem[], Error>>
-) => {
-  return useQuery({
-    queryKey: QUERY_KEYS.contentByType(contentType),
-    queryFn: () => optimizedClient.fetch<ContentItem[]>(
-      QUERIES.contentByType,
-      { contentType },
-      { ttl: 8 * 60 * 1000 } // 8 min cache
-    ),
-    enabled: !!contentType,
+// Hook for content by category
+export const useContentByType = (contentCategory: string) => {
+  return useQuery<(WorkProject | PlaygroundExperiment)[]>({
+    queryKey: ['contentByType', contentCategory],
+    queryFn: () => sanityClient.fetch(QUERIES.contentByType('work'), { contentCategory }),
+    enabled: !!contentCategory,
     ...DEFAULT_QUERY_OPTIONS,
-    ...options,
-  })
-}
+  });
+};
 
-// Hook for prefetching content (for performance optimization)
+// Hook for featured content
+export const useFeaturedContent = () => {
+  return useQuery<(WorkProject | PlaygroundExperiment)[]>({
+    queryKey: ['featuredContent'],
+    queryFn: () => sanityClient.fetch(QUERIES.featuredContent),
+    ...DEFAULT_QUERY_OPTIONS,
+  });
+};
+
+// Hook for prefetching content
 export const usePrefetchContent = () => {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
-  const prefetchWorkProjects = async () => {
-    await queryClient.prefetchQuery({
-      queryKey: QUERY_KEYS.workProjects,
-      queryFn: () => optimizedClient.fetch<WorkProject[]>(QUERIES.workProjects),
+  const prefetchWorkProjects = () => {
+    queryClient.prefetchQuery({
+      queryKey: ['workProjects'],
+      queryFn: () => sanityClient.fetch(QUERIES.workProjects),
       ...DEFAULT_QUERY_OPTIONS,
-    })
-  }
+    });
+  };
 
-  const prefetchPlaygroundExperiments = async () => {
-    await queryClient.prefetchQuery({
-      queryKey: QUERY_KEYS.playgroundExperiments,
-      queryFn: () => optimizedClient.fetch<PlaygroundExperiment[]>(QUERIES.playgroundExperiments),
+  const prefetchPlaygroundExperiments = () => {
+    queryClient.prefetchQuery({
+      queryKey: ['playgroundExperiments'],
+      queryFn: () => sanityClient.fetch(QUERIES.playgroundExperiments),
       ...DEFAULT_QUERY_OPTIONS,
-    })
-  }
+    });
+  };
 
-  const prefetchContentBySlug = async (slug: string, type: 'work' | 'playground') => {
-    await queryClient.prefetchQuery({
-      queryKey: QUERY_KEYS.contentBySlug(slug, type),
-      queryFn: () => optimizedClient.fetch<ContentItem | null>(QUERIES.contentBySlug(type), { slug }),
+  const prefetchContentBySlug = (type: 'work' | 'playground', slug: string) => {
+    queryClient.prefetchQuery({
+      queryKey: ['content', type, slug],
+      queryFn: () => sanityClient.fetch(QUERIES.contentBySlug(type), { slug }),
       ...DEFAULT_QUERY_OPTIONS,
-    })
-  }
+    });
+  };
 
   return {
     prefetchWorkProjects,
     prefetchPlaygroundExperiments,
     prefetchContentBySlug,
-  }
-}
+  };
+};
 
-// Hook for cache management
+// Cache management hook
 export const useCacheManager = () => {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
-  const invalidateWorkProjects = () => {
-    queryClient.invalidateQueries({ queryKey: QUERY_KEYS.workProjects })
-    optimizedClient.invalidateCache('workProject')
-  }
+  const invalidateContent = (type?: 'work' | 'playground') => {
+    if (type) {
+      queryClient.invalidateQueries({
+        queryKey: type === 'work' ? ['workProjects'] : ['playgroundExperiments']
+      });
+    } else {
+      queryClient.invalidateQueries({ queryKey: ['workProjects'] });
+      queryClient.invalidateQueries({ queryKey: ['playgroundExperiments'] });
+    }
+  };
 
-  const invalidatePlaygroundExperiments = () => {
-    queryClient.invalidateQueries({ queryKey: QUERY_KEYS.playgroundExperiments })
-    optimizedClient.invalidateCache('playgroundExperiment')
-  }
-
-  const invalidateContentBySlug = (slug: string, type: 'work' | 'playground') => {
-    queryClient.invalidateQueries({ queryKey: QUERY_KEYS.contentBySlug(slug, type) })
-    optimizedClient.invalidateCache(slug)
-  }
-
-  const invalidateAllContent = () => {
-    queryClient.invalidateQueries({ queryKey: QUERY_KEYS.allContent })
-    optimizedClient.invalidateCache()
-  }
+  const clearCache = () => {
+    queryClient.clear();
+  };
 
   const getCacheStats = () => {
-    const reactQueryCache = queryClient.getQueryCache().getAll().map(query => ({
-      key: JSON.stringify(query.queryKey),
-      dataUpdatedAt: query.state.dataUpdatedAt,
-      status: query.state.status,
-      fetchStatus: query.state.fetchStatus,
-    }))
-
-    const sanityCache = optimizedClient.getCacheStats()
-
+    const cache = queryClient.getQueryCache();
     return {
-      reactQuery: {
-        size: reactQueryCache.length,
-        queries: reactQueryCache,
-      },
-      sanity: sanityCache,
-    }
-  }
+      queries: cache.getAll().length,
+      size: cache.getAll().reduce((acc, query) => acc + (query.state.dataUpdatedAt || 0), 0)
+    };
+  };
 
   return {
-    invalidateWorkProjects,
-    invalidatePlaygroundExperiments,
-    invalidateContentBySlug,
-    invalidateAllContent,
+    invalidateContent,
+    clearCache,
     getCacheStats,
-  }
-}
-
-// Background refresh hook for keeping data fresh
-export const useBackgroundRefresh = () => {
-  const queryClient = useQueryClient()
-
-  const setupBackgroundRefresh = () => {
-    // Refresh critical data every 10 minutes in the background
-    const interval = setInterval(() => {
-      queryClient.invalidateQueries({
-        queryKey: QUERY_KEYS.workProjects,
-        refetchType: 'none' // Don't trigger loading states
-      })
-      queryClient.invalidateQueries({
-        queryKey: QUERY_KEYS.playgroundExperiments,
-        refetchType: 'none'
-      })
-    }, 10 * 60 * 1000)
-
-    return () => clearInterval(interval)
-  }
-
-  return { setupBackgroundRefresh }
-}
+  };
+};

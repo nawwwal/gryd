@@ -155,27 +155,24 @@ export type RichContentBlock =
   | ImageBlock;
 
 export interface ContentMetadata {
-  type: 'photography' | 'code' | 'blog' | 'prototype' | 'research' | 'visual' | 'note';
-  category: string;
-  status: 'live' | 'prototype' | 'archived' | 'ongoing' | 'draft';
-  featured: boolean;
-  publishDate: string;
-  lastUpdated: string;
-  tools: string[];
-  tags: string[];
-  difficulty?: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
+  category?: 'product-design' | 'ux-research' | 'visual-design' | 'design-system' | 'branding' | 'web-design' | 'mobile-design' | 'prototyping' | 'case-study';
+  status?: 'live' | 'prototype' | 'archived' | 'ongoing' | 'draft';
+  featured?: boolean;
+  publishDate?: string;
+  lastUpdated?: string;
+  tools?: string[];
+  tags?: string[];
   interactive?: {
-    hasDemo: boolean;
-    demoUrl?: string;
-    codeUrl?: string;
+    hasLiveVersion?: boolean;
+    liveUrl?: string;
   };
 }
 
 export interface ContentItem {
   slug: string;
   title: string;
-  subtitle: string;
-  description: string;
+  subtitle?: string;
+  description?: string;
   metadata: ContentMetadata;
   // Support both legacy and new content formats
   content?: RichContentBlock[]; // New rich content format
@@ -186,8 +183,8 @@ export interface ContentItem {
 }
 
 export interface WorkProject extends ContentItem {
-  timeline: string;
-  impact: string;
+  // WorkProject now has the same structure as ContentItem
+  // Removed timeline and impact fields
 }
 
 export interface PlaygroundExperiment extends ContentItem {

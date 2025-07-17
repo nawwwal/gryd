@@ -11,6 +11,12 @@
     overflow-x: hidden;
     width: 100%;
     max-width: 100vw;
+    position: relative;
+  }
+
+  /* Hero section gets special overflow treatment to preserve shadows */
+  .magazine-container > #hero {
+    overflow: visible;
   }
 
   /* Work Page Linear Layout */
@@ -265,14 +271,15 @@
     min-height: clamp(70vh, 100vh, 100vh);
     padding: clamp(1rem, 4vw, 2rem);
     perspective: 1000px;
-    overflow-x: hidden;
+    overflow: visible;
     width: 100%;
     max-width: 100vw;
   }
 
   .hero-paper {
-    @apply relative w-full bg-white shadow-2xl;
-    max-width: min(95vw, 1200px);
+    @apply relative bg-white shadow-2xl;
+    width: 100%;
+    max-width: min(90vw, 1200px);
     transform: rotateX(0.5deg) rotateY(-0.25deg);
     background:
       linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%),
@@ -280,6 +287,7 @@
     background-size: 100% 100%, 10px 10px;
     border: 1px solid rgba(0,0,0,0.1);
     animation: paper-settle 1s ease-out;
+    box-sizing: border-box;
   }
 
   @media (max-width: 800px) {
@@ -292,13 +300,13 @@
       max-width: 100vw;
       margin: 0 auto;
       padding: clamp(1rem, 4vw, 2rem);
-      overflow: hidden;
+      overflow: visible;
     }
 
     /* Responsive hero paper without fixed widths */
     .hero-paper {
       width: 100%;
-      max-width: min(95vw, 800px);
+      max-width: min(88vw, 800px);
       transform: rotateX(0.5deg) rotateY(-0.25deg);
       flex-shrink: 1;
     }
@@ -310,7 +318,7 @@
     }
 
     .hero-paper {
-      max-width: calc(100vw - 1rem);
+      max-width: calc(100vw - 2rem);
     }
   }
 
@@ -369,6 +377,10 @@
 
   .continue-reading {
     @apply text-sm uppercase tracking-wider text-orange-600 font-mono font-semibold mt-8;
+  }
+
+  .continue-reading-text {
+    @apply text-sm uppercase tracking-wider text-orange-600 font-mono font-semibold transition-colors duration-300 cursor-pointer;
   }
 
   .paper-corner {
