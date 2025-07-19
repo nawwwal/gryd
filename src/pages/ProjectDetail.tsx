@@ -7,6 +7,7 @@ import { useGyroscopic } from '../hooks/useGyroscopic'; // Import the hook
 
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
+  const gyroscopicRef = useGyroscopic<HTMLDivElement>();
 
   const {
     data: project,
@@ -143,7 +144,7 @@ const ProjectDetail = () => {
         {/* Editorial Live Project Card */}
         {project.metadata.interactive?.hasLiveVersion && project.metadata.interactive.liveUrl && (
           <ScrollFade delay={500}>
-            <div className="editorial-live-card" ref={useGyroscopic<HTMLDivElement>()}>
+            <div className="editorial-live-card" ref={gyroscopicRef}>
               <div className="editorial-card-paper">
                 <div className="editorial-card-content">
                   <div className="editorial-badge">
