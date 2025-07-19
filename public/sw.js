@@ -148,6 +148,11 @@ self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
 
+  // Only handle http(s) requests
+  if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+    return;
+  }
+
   // Skip non-GET requests
   if (request.method !== 'GET') {
     return;
