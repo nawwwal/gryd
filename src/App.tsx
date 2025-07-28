@@ -82,15 +82,17 @@ function App() {
 
     initializeClarity();
 
-    // Register service worker for caching
+    // Register service worker for caching, but only in production
     if ('serviceWorker' in navigator && import.meta.env.PROD) {
-      navigator.serviceWorker.register('/sw.js')
-        .then(registration => {
-          console.log('[SW] Registered successfully:', registration);
-        })
-        .catch(error => {
-          console.warn('[SW] Registration failed:', error);
-        });
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('[SW] Registered successfully:', registration);
+          })
+          .catch(error => {
+            console.warn('[SW] Registration failed:', error);
+          });
+      });
     }
 
     // Initialize performance monitoring

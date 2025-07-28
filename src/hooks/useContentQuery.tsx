@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import sanityClient from '../lib/sanityClient';
-import type { WorkProject, PlaygroundExperiment } from '../types/content';
+import type { WorkProject, PlaygroundEntry } from '../types/content';
 
 // Default query options for optimal performance
 export const DEFAULT_QUERY_OPTIONS = {
@@ -24,7 +24,21 @@ const COMMON_FIELDS = `
   subtitle,
   "slug": slug.current,
   description,
-  content,
+  'content': content[]{
+    ...,
+    _type == 'image' => {
+      asset->
+    },
+    _type == 'fileAttachment' => {
+      ...,
+      file {
+        asset->
+      },
+      coverImage {
+        asset->
+      }
+    }
+  },
   contentLegacy,
   heroImage {
     asset->{
@@ -85,38 +99,37 @@ const WORK_PROJECTS_QUERY = `*[_type == "workProject"] | order(metadata.publishD
   ${COMMON_FIELDS}
 }`;
 
-// Playground Experiments Query
-const PLAYGROUND_EXPERIMENTS_QUERY = `*[_type == "playgroundExperiment"] | order(metadata.publishDate desc) {
+// Playground Entries Query
+const PLAYGROUND_ENTRIES_QUERY = `*[_type == "playgroundEntry"] | order(metadata.publishDate desc) {
   ${COMMON_FIELDS},
-  intensity,
-  visual
+  entryType
 }`;
 
 // Single content item by slug and type
 const CONTENT_BY_SLUG_QUERY = (type: 'work' | 'playground') => `
-  *[_type == "${type === 'work' ? 'workProject' : 'playgroundExperiment'}" && slug.current == $slug][0] {
+  *[_type == "${type === 'work' ? 'workProject' : 'playgroundEntry'}" && slug.current == $slug][0] {
     ${COMMON_FIELDS}
-    ${type === 'work' ? '' : ', intensity, visual'}
+    ${type === 'work' ? '' : ', entryType'}
   }
 `;
 
 // Content by metadata category
 const CONTENT_BY_TYPE_QUERY = (contentType: 'work' | 'playground') => `
-  *[(_type == "workProject" || _type == "playgroundExperiment") && metadata.category == $contentCategory] | order(metadata.publishDate desc) {
+  *[(_type == "workProject" || _type == "playgroundEntry") && metadata.category == $contentCategory] | order(metadata.publishDate desc) {
     ${COMMON_FIELDS}
-    ${contentType === 'work' ? '' : ', intensity, visual'}
+    ${contentType === 'work' ? '' : ', entryType'}
   }
 `;
 
 // Featured content query
-const FEATURED_CONTENT_QUERY = `*[(_type == "workProject" || _type == "playgroundExperiment") && metadata.featured == true] | order(metadata.publishDate desc) {
+const FEATURED_CONTENT_QUERY = `*[(_type == "workProject" || _type == "playgroundEntry") && metadata.featured == true] | order(metadata.publishDate desc) {
   ${COMMON_FIELDS}
 }`;
 
 // All content queries
 const QUERIES = {
   workProjects: WORK_PROJECTS_QUERY,
-  playgroundExperiments: PLAYGROUND_EXPERIMENTS_QUERY,
+  playgroundEntries: PLAYGROUND_ENTRIES_QUERY,
   contentBySlug: CONTENT_BY_SLUG_QUERY,
   contentByType: CONTENT_BY_TYPE_QUERY,
   featuredContent: FEATURED_CONTENT_QUERY,
@@ -131,18 +144,18 @@ export const useWorkProjects = () => {
   });
 };
 
-// Hook for playground experiments
-export const usePlaygroundExperiments = () => {
-  return useQuery<PlaygroundExperiment[]>({
-    queryKey: ['playgroundExperiments'],
-    queryFn: () => sanityClient.fetch(QUERIES.playgroundExperiments),
+// Hook for playground entries
+export const usePlaygroundEntries = () => {
+  return useQuery<PlaygroundEntry[]>({
+    queryKey: ['playgroundEntries'],
+    queryFn: () => sanityClient.fetch(QUERIES.playgroundEntries),
     ...DEFAULT_QUERY_OPTIONS,
   });
 };
 
 // Hook for single content item by slug
 export const useContentBySlug = (type: 'work' | 'playground', slug: string) => {
-  return useQuery<WorkProject | PlaygroundExperiment | null>({
+  return useQuery<WorkProject | PlaygroundEntry | null>({
     queryKey: ['content', type, slug],
     queryFn: () => sanityClient.fetch(QUERIES.contentBySlug(type), { slug }),
     enabled: !!slug,
@@ -152,7 +165,7 @@ export const useContentBySlug = (type: 'work' | 'playground', slug: string) => {
 
 // Hook for content by category
 export const useContentByType = (contentCategory: string) => {
-  return useQuery<(WorkProject | PlaygroundExperiment)[]>({
+  return useQuery<(WorkProject | PlaygroundEntry)[]>({
     queryKey: ['contentByType', contentCategory],
     queryFn: () => sanityClient.fetch(QUERIES.contentByType('work'), { contentCategory }),
     enabled: !!contentCategory,
@@ -162,7 +175,7 @@ export const useContentByType = (contentCategory: string) => {
 
 // Hook for featured content
 export const useFeaturedContent = () => {
-  return useQuery<(WorkProject | PlaygroundExperiment)[]>({
+  return useQuery<(WorkProject | PlaygroundEntry)[]>({
     queryKey: ['featuredContent'],
     queryFn: () => sanityClient.fetch(QUERIES.featuredContent),
     ...DEFAULT_QUERY_OPTIONS,
@@ -181,10 +194,10 @@ export const usePrefetchContent = () => {
     });
   };
 
-  const prefetchPlaygroundExperiments = () => {
+  const prefetchPlaygroundEntries = () => {
     queryClient.prefetchQuery({
-      queryKey: ['playgroundExperiments'],
-      queryFn: () => sanityClient.fetch(QUERIES.playgroundExperiments),
+      queryKey: ['playgroundEntries'],
+      queryFn: () => sanityClient.fetch(QUERIES.playgroundEntries),
       ...DEFAULT_QUERY_OPTIONS,
     });
   };
@@ -199,7 +212,7 @@ export const usePrefetchContent = () => {
 
   return {
     prefetchWorkProjects,
-    prefetchPlaygroundExperiments,
+    prefetchPlaygroundEntries,
     prefetchContentBySlug,
   };
 };
@@ -211,11 +224,11 @@ export const useCacheManager = () => {
   const invalidateContent = (type?: 'work' | 'playground') => {
     if (type) {
       queryClient.invalidateQueries({
-        queryKey: type === 'work' ? ['workProjects'] : ['playgroundExperiments']
+        queryKey: type === 'work' ? ['workProjects'] : ['playgroundEntries']
       });
     } else {
       queryClient.invalidateQueries({ queryKey: ['workProjects'] });
-      queryClient.invalidateQueries({ queryKey: ['playgroundExperiments'] });
+      queryClient.invalidateQueries({ queryKey: ['playgroundEntries'] });
     }
   };
 

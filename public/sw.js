@@ -191,7 +191,7 @@ self.addEventListener('fetch', event => {
       request.destination === 'script' ||
       request.destination === 'font' ||
       url.pathname.match(/\.(css|js|woff|woff2|ttf|eot)$/i)) {
-    event.respondWith(CACHE_STRATEGIES.cacheFirst(request, STATIC_CACHE, 86400000)); // 24 hours
+    event.respondWith(CACHE_STRATEGIES.networkFirst(request, STATIC_CACHE));
     return;
   }
 

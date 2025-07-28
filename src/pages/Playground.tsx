@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import ScrollFade from '../components/ScrollFade';
 import InteractiveBackground from '../components/InteractiveBackground';
 import { MorphingText } from '../components/MorphingText';
-import { loadPlaygroundEntries } from '../utils/contentLoader';
+import { usePlaygroundEntries } from '../hooks/useContentQuery';
 import { getSanityImageUrl } from '../utils/imageUtils';
 import { PlaygroundEntry } from '../types/content';
 import ExperimentsSkeleton from '../components/skeletons/ExperimentsSkeleton';
@@ -11,8 +11,7 @@ import ExperimentsSkeleton from '../components/skeletons/ExperimentsSkeleton';
 const Playground = () => {
   const masonryRef = useRef<HTMLDivElement>(null);
   const backgroundRef = useRef<HTMLDivElement>(null);
-  const [entries, setEntries] = useState<PlaygroundEntry[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data: entries = [], isLoading: loading } = usePlaygroundEntries();
   const [mousePos, setMousePos] = useState({
     x: 0,
     y: 0
@@ -34,20 +33,6 @@ const Playground = () => {
       backgroundElement.addEventListener('mousemove', handleMouseMove);
       return () => backgroundElement.removeEventListener('mousemove', handleMouseMove);
     }
-  }, []);
-
-  useEffect(() => {
-    const loadContent = async () => {
-      try {
-        const playgroundEntries = await loadPlaygroundEntries();
-        setEntries(playgroundEntries);
-      } catch (error) {
-        console.error('Failed to load playground entries:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadContent();
   }, []);
 
   useEffect(() => {
