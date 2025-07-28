@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import MagazineHero from '../components/MagazineHero';
 import FeaturedArticle from '../components/FeaturedArticle';
 import ArticleGrid from '../components/ArticleGrid';
 import LettersToEditor from '../components/LettersToEditor';
 import { useWorkProjects } from '../hooks/useContentQuery';
-import type { WorkProject } from '../types/content';
 import { useMobileOptimization } from '../hooks/useMobileOptimization';
-import { useSwipeGesture } from '../hooks/useSwipeGesture';
+import { useMobileNavigationState } from '../hooks/useMobileNavigationState';
+
+const SECTION_IDS = ['hero', 'featured', 'letters'] as const;
 
 const Index = () => {
   const {
@@ -21,38 +22,46 @@ const Index = () => {
     ? projects.filter(p => p.slug !== featuredProject.slug).slice(0, 6)
     : [];
   const { isMobile, isTouch } = useMobileOptimization();
+  const { triggerHaptic } = useMobileNavigationState();
   const [currentSection, setCurrentSection] = useState(0);
 
-  // Move sections array declaration before useSwipeGesture
-  const sections = ['hero', 'featured', 'letters'];
 
-  // Fix useSwipeGesture usage to match expected interface and use functional updates
-  const swipeRef = useSwipeGesture<HTMLDivElement>({
-    onSwipeUp: () => {
-      setCurrentSection(prev => {
-        const nextSection = Math.min(prev + 1, sections.length - 1);
-        if (nextSection !== prev) {
-          document.getElementById(sections[nextSection])?.scrollIntoView({ behavior: 'smooth' });
-        }
-        return nextSection;
-      });
-    },
-    onSwipeDown: () => {
-      setCurrentSection(prev => {
-        const prevSection = Math.max(prev - 1, 0);
-        if (prevSection !== prev) {
-          document.getElementById(sections[prevSection])?.scrollIntoView({ behavior: 'smooth' });
-        }
-        return prevSection;
-      });
-    }
-  });
+  // Observe sections to update indicator and provide haptic feedback
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    SECTION_IDS.forEach((id, index) => {
+      const element = document.getElementById(id);
+      if (!element) return;
+
+      const observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+              setCurrentSection(index);
+              if (isMobile && isTouch) {
+                triggerHaptic({ intensity: 'light' });
+              }
+            }
+          });
+        },
+        { threshold: 0.5, rootMargin: '-25% 0px -25% 0px' }
+      );
+
+      observer.observe(element);
+      observers.push(observer);
+    });
+
+    return () => {
+      observers.forEach(o => o.disconnect());
+    };
+  }, [isMobile, isTouch, triggerHaptic]);
 
   // Removed skeleton loader - show content immediately
 
   // Show the main layout even if no projects, but handle featured project gracefully
   return (
-    <div className="magazine-container overflow-x-hidden w-full max-w-full" ref={swipeRef}>
+    <div className="magazine-container overflow-x-hidden w-full max-w-full">
       <div id="hero">
         <MagazineHero />
       </div>
@@ -90,7 +99,7 @@ const Index = () => {
       {/* Mobile Section Indicator */}
       {isMobile && isTouch && (
         <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-40 space-y-2">
-          {sections.map((_, index) => (
+          {SECTION_IDS.map((_, index) => (
             <div
               key={index}
               className={`w-2 h-2 rounded-full transition-colors ${
