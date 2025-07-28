@@ -37,12 +37,10 @@ const P5jsSketch = ({ value }) => {
     }
 
     if (coverImage && coverImage.asset) {
-      const imageUrl = getSanityImageUrl(coverImage, { width: 300 });
+      const imageUrl = getSanityImageUrl(coverImage, { width: 800 });
       return (
         <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="book-cover-link">
-          <div className="book-cover">
-            <img src={imageUrl} alt={description || 'Book Cover'} className="book-cover-image" />
-          </div>
+          <img src={imageUrl} alt={description || 'Book Cover'} className="book-cover-image" />
           <p className="book-cover-title">{description || 'View File'}</p>
         </a>
       );
