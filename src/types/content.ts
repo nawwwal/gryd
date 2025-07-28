@@ -187,7 +187,7 @@ export interface WorkProject extends ContentItem {
   // Removed timeline and impact fields
 }
 
-export interface PlaygroundExperiment extends ContentItem {
-  intensity: 'low' | 'medium' | 'high';
-  visual: 'geometric' | 'photographic' | 'interactive' | 'analytical' | 'colorful' | 'technical' | 'motion' | 'typographic';
+export interface PlaygroundEntry extends ContentItem {
+  entryType: 'p5js' | 'threejs' | 'photography' | 'photo-story' | 'graphic-design' | 'article' | 'critique';
+  coverImage?: SanityImage;
 }

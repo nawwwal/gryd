@@ -1,5 +1,5 @@
 import client from '../lib/sanityClient'
-import { ContentItem, WorkProject, PlaygroundExperiment, ContentMetadata } from '../types/content'
+import { ContentItem, WorkProject, PlaygroundEntry, ContentMetadata } from '../types/content'
 
 export const loadWorkProjects = async (): Promise<WorkProject[]> => {
   const query = `*[_type == "workProject"]|order(metadata.publishDate desc){
@@ -44,50 +44,28 @@ export const loadWorkProjects = async (): Promise<WorkProject[]> => {
   return await client.fetch(query)
 }
 
-export const loadPlaygroundExperiments = async (): Promise<PlaygroundExperiment[]> => {
-  const query = `*[_type == "playgroundExperiment"]|order(metadata.publishDate desc){
+export const loadPlaygroundEntries = async (): Promise<PlaygroundEntry[]> => {
+  const query = `*[_type == "playgroundEntry"]|order(metadata.publishDate desc){
     "slug": slug.current,
     title,
-    subtitle,
+    entryType,
+    coverImage{
+      asset->{
+        _id,
+        url,
+        metadata
+      },
+      alt,
+      hotspot
+    },
     description,
-    intensity,
-    visual,
     content,
-    heroImage{
-      asset->{
-        _id,
-        url,
-        metadata
-      },
-      alt,
-      hotspot
-    },
-    gallery[]{
-      asset->{
-        _id,
-        url,
-        metadata
-      },
-      alt,
-      caption,
-      hotspot
-    },
-    attachments[]{
-      asset->{
-        _id,
-        url,
-        originalFilename,
-        size
-      },
-      title,
-      description
-    },
     metadata
   }`
   return await client.fetch(query)
 }
 
-export const getContentBySlug = async (slug: string, type: 'work' | 'playground'): Promise<WorkProject | PlaygroundExperiment | null> => {
+export const getContentBySlug = async (slug: string, type: 'work' | 'playground'): Promise<WorkProject | PlaygroundEntry | null> => {
   if (type === 'work') {
     const query = `*[_type == "workProject" && slug.current == $slug][0]{
       "slug": slug.current,
@@ -148,64 +126,34 @@ export const getContentBySlug = async (slug: string, type: 'work' | 'playground'
       }
     } as WorkProject
   } else {
-    const query = `*[_type == "playgroundExperiment" && slug.current == $slug][0]{
+    const query = `*[_type == "playgroundEntry" && slug.current == $slug][0]{
       "slug": slug.current,
       title,
-      subtitle,
+      entryType,
+      coverImage{
+        asset->{
+          _id,
+          url,
+          metadata
+        },
+        alt,
+        hotspot
+      },
       description,
-      intensity,
-      visual,
       content,
-      heroImage{
-        asset->{
-          _id,
-          url,
-          metadata
-        },
-        alt,
-        hotspot
-      },
-      gallery[]{
-        asset->{
-          _id,
-          url,
-          metadata
-        },
-        alt,
-        caption,
-        hotspot
-      },
-      attachments[]{
-        asset->{
-          _id,
-          url,
-          originalFilename,
-          size
-        },
-        title,
-        description
-      },
       metadata
     }`
     const result = await client.fetch(query, { slug })
-    return (result as PlaygroundExperiment) || {
+    return (result as PlaygroundEntry) || {
       slug: slug || '',
       title: '',
-      subtitle: '',
+      entryType: 'article' as const,
       description: '',
-      intensity: 'low' as const,
-      visual: 'geometric' as const,
       metadata: {
-        type: 'prototype' as const,
-        category: '',
-        status: 'draft' as const,
-        featured: false,
         publishDate: '',
-        lastUpdated: '',
         tags: [],
-        tools: []
       }
-    } as PlaygroundExperiment
+    } as PlaygroundEntry
   }
 }
 
@@ -252,43 +200,21 @@ export const getAllContentByType = async (contentType: ContentMetadata['type']):
   }`
 
   // Fetch playground experiments
-  const playgroundQuery = `*[_type == "playgroundExperiment" && metadata.type == $contentType]{
+  const playgroundQuery = `*[_type == "playgroundEntry" && metadata.type == $contentType]{
     "slug": slug.current,
     title,
-    subtitle,
+    entryType,
+    coverImage{
+        asset->{
+            _id,
+            url,
+            metadata
+        },
+        alt,
+        hotspot
+    },
     description,
-    intensity,
-    visual,
     content,
-    heroImage{
-      asset->{
-        _id,
-        url,
-        metadata
-      },
-      alt,
-      hotspot
-    },
-    gallery[]{
-      asset->{
-        _id,
-        url,
-        metadata
-      },
-      alt,
-      caption,
-      hotspot
-    },
-    attachments[]{
-      asset->{
-        _id,
-        url,
-        originalFilename,
-        size
-      },
-      title,
-      description
-    },
     metadata
   }`
 

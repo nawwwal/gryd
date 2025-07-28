@@ -1,4 +1,4 @@
 import workProject from './workProject'
-import playgroundExperiment from './playgroundExperiment'
+import playgroundEntry from './playgroundEntry'
 
-export const schemaTypes = [workProject, playgroundExperiment]
+export const schemaTypes = [workProject, playgroundEntry]

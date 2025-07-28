@@ -199,6 +199,41 @@
   pointer-events: none;
 }
 
+.book-cover-link {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .book-cover-link:hover {
+    transform: translateY(-5px);
+  }
+
+  .book-cover {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .book-cover-image {
+    max-width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .book-cover-title {
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+    color: #333;
+  }
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .rich-content h2 {

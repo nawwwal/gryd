@@ -11,6 +11,7 @@ import Work from "./pages/Work";
 import About from "./pages/About";
 import Playground from "./pages/Playground";
 import ProjectDetail from "./pages/ProjectDetail";
+import PlaygroundDetail from "./pages/PlaygroundDetail";
 import NotFound from "./pages/NotFound";
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/react"
@@ -155,6 +156,7 @@ function App() {
                 <Route path="/work/:slug" element={<Layout><ProjectDetail /></Layout>} />
                 <Route path="/about" element={<Layout><About /></Layout>} />
                 <Route path="/playground" element={<Layout><Playground /></Layout>} />
+                <Route path="/playground/:slug" element={<Layout><PlaygroundDetail /></Layout>} />
                 <Route path="*" element={<Layout><NotFound /></Layout>} />
               </Routes>
             </Suspense>

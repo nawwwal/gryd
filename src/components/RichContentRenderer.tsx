@@ -1,165 +1,90 @@
-import React from 'react';
 import { PortableText, PortableTextComponents } from '@portabletext/react';
-import {
-  CodeDemo,
-  ImageGallery,
-  VideoEmbed,
-  ProjectTimeline,
-  TechStack,
-  Callout,
-} from './mdx/RichContentComponents';
 import { getSanityImageUrl } from '../utils/imageUtils';
-import type { SanityImage } from '../types/content';
 
-// Define the content block types that come from Sanity
-interface ContentBlock {
-  _type: string;
-  _key: string;
-  [key: string]: any;
-}
-
-interface RichContentRendererProps {
-  content: ContentBlock[];
-  className?: string;
-}
-
-// Custom components for PortableText rendering
-const portableTextComponents: PortableTextComponents = {
-  // Text blocks
-  block: {
-    normal: ({ children }) => <p className="body mb-6">{children}</p>,
-    h2: ({ children }) => <h2 className="headline-small mt-12 mb-6">{children}</h2>,
-    h3: ({ children }) => <h3 className="subhead mt-8 mb-4">{children}</h3>,
-    h4: ({ children }) => <h4 className="body font-semibold mt-6 mb-3">{children}</h4>,
-    blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-gryd-accent pl-6 my-8 italic text-gryd-soft">
-        {children}
-      </blockquote>
-    ),
-  },
-
-  // Lists
-  list: {
-    bullet: ({ children }) => <ul className="list-disc list-inside space-y-2 mb-6 ml-4">{children}</ul>,
-    number: ({ children }) => <ol className="list-decimal list-inside space-y-2 mb-6 ml-4">{children}</ol>,
-  },
-  listItem: {
-    bullet: ({ children }) => <li className="body">{children}</li>,
-    number: ({ children }) => <li className="body">{children}</li>,
-  },
-
-  // Marks (inline formatting)
-  marks: {
-    strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
-    em: ({ children }) => <em className="italic">{children}</em>,
-    code: ({ children }) => (
-      <code className="bg-gryd-soft/10 px-2 py-1 rounded text-sm font-mono text-gryd-accent">
-        {children}
-      </code>
-    ),
-    'strike-through': ({ children }) => <del className="line-through">{children}</del>,
-    link: ({ children, value }) => (
-      <a
-        href={value?.href}
-        target={value?.blank ? '_blank' : '_self'}
-        rel={value?.blank ? 'noopener noreferrer' : undefined}
-        className="text-gryd-accent hover:underline"
-      >
-        {children}
-      </a>
-    ),
-  },
-
-  // Custom types (our embedded components)
-  types: {
-    codeDemo: ({ value }) => (
-      <CodeDemo
-        title={value.title}
-        language={value.language}
-        code={value.code}
-        description={value.description}
+const P5jsSketch = ({ value }) => {
+    const { url, height } = value;
+    return (
+      <iframe
+        src={url}
+        width="100%"
+        height={height || 400}
+        className="my-4 border-0"
+        loading='lazy'
       />
-    ),
+    );
+  };
 
-    imageGallery: ({ value }) => (
-      <ImageGallery
-        title={value.title}
-        layout={value.layout}
-        images={value.images}
-        caption={value.caption}
+  const FigmaEmbed = ({ value }) => {
+    const { url, height } = value;
+    return (
+      <iframe
+        src={`https://www.figma.com/embed?embed_host=share&url=${url}`}
+        width="100%"
+        height={height || 400}
+        className="my-4 border-0"
+        loading='lazy'
+        allowFullScreen
       />
-    ),
+    );
+  };
 
-    videoEmbed: ({ value }) => (
-      <VideoEmbed
-        title={value.title}
-        url={value.url}
-        caption={value.caption}
-        autoplay={value.autoplay}
-      />
-    ),
+  const FileAttachment = ({ value }) => {
+    const { file, description, coverImage } = value;
+    const fileUrl = file?.asset?.url;
 
-    projectTimeline: ({ value }) => (
-      <ProjectTimeline
-        title={value.title}
-        events={value.events}
-      />
-    ),
+    if (!fileUrl) {
+      return null;
+    }
 
-    techStack: ({ value }) => (
-      <TechStack
-        title={value.title}
-        categories={value.categories}
-      />
-    ),
+    if (coverImage && coverImage.asset) {
+      const imageUrl = getSanityImageUrl(coverImage, { width: 300 });
+      return (
+        <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="book-cover-link">
+          <div className="book-cover">
+            <img src={imageUrl} alt={description || 'Book Cover'} className="book-cover-image" />
+          </div>
+          <p className="book-cover-title">{description || 'View File'}</p>
+        </a>
+      );
+    }
 
-    callout: ({ value }) => (
-      <Callout
-        type={value.type}
-        title={value.title}
-        content={value.content}
-      />
-    ),
-
-    // Handle regular images in content
-    image: ({ value }: { value: SanityImage }) => (
-      <div className="content-image-frame">
-        <div className="image-photo-frame">
-          <img
-            src={getSanityImageUrl(value, { width: 800, adaptive: true }) || ''}
-            alt={value.alt || 'Content image'}
-            className="content-image"
-          />
-          {value.caption && (
-            <div className="image-caption">
-              <span>{value.caption}</span>
-            </div>
-          )}
-        </div>
+    return (
+      <div className="my-4 p-4 border rounded-lg flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        </svg>
+        <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+          {description || 'Download file'}
+        </a>
       </div>
+    );
+  };
+
+const components: PortableTextComponents = {
+  types: {
+    image: ({ value }) => (
+      <img
+        src={getSanityImageUrl(value, { width: 800 })}
+        alt={value.alt || ' '}
+        className="my-4 rounded-lg"
+        loading="lazy"
+      />
     ),
+    code: ({ value }) => (
+        <pre className="my-4 p-4 bg-gray-800 text-white rounded-lg overflow-x-auto">
+          <code>{value.code}</code>
+        </pre>
+      ),
+    p5jsSketch: P5jsSketch,
+    figmaEmbed: FigmaEmbed,
+    fileAttachment: FileAttachment,
   },
 };
 
-const RichContentRenderer: React.FC<RichContentRendererProps> = ({
-  content,
-  className = ""
-}) => {
-  // Handle empty or invalid content
-  if (!content || !Array.isArray(content) || content.length === 0) {
-    return (
-      <div className={`rich-content ${className}`}>
-        <p className="body text-gryd-soft italic">No content available.</p>
-      </div>
-    );
-  }
-
+const RichContentRenderer = ({ content, className = '' }) => {
   return (
-    <div className={`rich-content prose prose-gryd max-w-none ${className}`}>
-      <PortableText
-        value={content}
-        components={portableTextComponents}
-      />
+    <div className={`rich-content ${className}`}>
+      <PortableText value={content} components={components} />
     </div>
   );
 };

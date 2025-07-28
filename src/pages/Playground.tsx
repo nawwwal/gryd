@@ -1,16 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import ScrollFade from '../components/ScrollFade';
 import InteractiveBackground from '../components/InteractiveBackground';
 import { MorphingText } from '../components/MorphingText';
-import { loadPlaygroundExperiments } from '../utils/contentLoader';
+import { loadPlaygroundEntries } from '../utils/contentLoader';
 import { getSanityImageUrl } from '../utils/imageUtils';
-import { PlaygroundExperiment } from '../types/content';
+import { PlaygroundEntry } from '../types/content';
 import ExperimentsSkeleton from '../components/skeletons/ExperimentsSkeleton';
 
 const Playground = () => {
   const masonryRef = useRef<HTMLDivElement>(null);
   const backgroundRef = useRef<HTMLDivElement>(null);
-  const [experiments, setExperiments] = useState<PlaygroundExperiment[]>([]);
+  const [entries, setEntries] = useState<PlaygroundEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [mousePos, setMousePos] = useState({
     x: 0,
@@ -38,10 +39,10 @@ const Playground = () => {
   useEffect(() => {
     const loadContent = async () => {
       try {
-        const playgroundExperiments = await loadPlaygroundExperiments();
-        setExperiments(playgroundExperiments);
+        const playgroundEntries = await loadPlaygroundEntries();
+        setEntries(playgroundEntries);
       } catch (error) {
-        console.error('Failed to load playground experiments:', error);
+        console.error('Failed to load playground entries:', error);
       } finally {
         setLoading(false);
       }
@@ -50,7 +51,7 @@ const Playground = () => {
   }, []);
 
   useEffect(() => {
-    if (!loading && experiments.length > 0) {
+    if (!loading && entries.length > 0) {
       const cards = masonryRef.current?.querySelectorAll('.experiment-card');
       if (!cards) return;
 
@@ -70,7 +71,7 @@ const Playground = () => {
         (card as HTMLElement).style.transform = `rotate(${rotation}deg) translate(${translateX}px, ${translateY}px)`;
       });
     }
-  }, [loading, experiments]);
+  }, [loading, entries]);
 
   return (
     <div className="magazine-container">
@@ -110,24 +111,22 @@ const Playground = () => {
             </div>
             <div className="experiments-meta">
               <span className="lab-number">LAB #47</span>
-              <span className="experiment-count">{experiments.length} active studies</span>
+              <span className="experiment-count">{entries.length} active studies</span>
             </div>
           </div>
 
           <div ref={masonryRef} className="experiments-grid">
             {loading ? (
-              <div className="text-center py-16 col-span-full">
-                <p className="body text-gryd-soft">Loading experiments...</p>
-              </div>
-            ) : experiments.length > 0 ? (
-              experiments.map((experiment, index) => (
-                <div key={experiment.slug} className={`experiment-card experiment-${experiment.visual} intensity-${experiment.intensity}`} data-category={experiment.metadata?.category}>
+              <ExperimentsSkeleton count={6} />
+            ) : entries.length > 0 ? (
+                entries.map((entry, index) => (
+                <Link to={`/playground/${entry.slug}`} key={entry.slug} className={`experiment-card experiment-${entry.entryType}`} data-category={entry.entryType}>
                   {/* Visual Background Element or Hero Image */}
-                  {experiment.heroImage ? (
+                  {entry.coverImage ? (
                     <div className="experiment-image">
                       <img
-                        src={getSanityImageUrl(experiment.heroImage, { width: 400, height: 300 }) || '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png'}
-                        alt={experiment.heroImage?.alt || experiment.title}
+                        src={getSanityImageUrl(entry.coverImage, { width: 400, height: 300 }) || '/lovable-uploads/c6b12080-f90a-463b-a0cf-70e56178bc31.png'}
+                        alt={entry.coverImage?.alt || entry.title}
                         className="experiment-hero-image"
                       />
                       <div className="image-overlay"></div>
@@ -144,16 +143,16 @@ const Playground = () => {
                     <div className="experiment-header">
                       <div className="experiment-meta">
                         <span className="experiment-number">#{String(index + 1).padStart(2, '0')}</span>
-                        <span className="experiment-type">{experiment.metadata?.category}</span>
+                        <span className="experiment-type">{entry.entryType}</span>
                       </div>
                       <div className="experiment-status">
                         <div className="status-dot"></div>
-                        <span className="status-text">{experiment.metadata?.status}</span>
+                        <span className="status-text">{entry.metadata?.status}</span>
                       </div>
                     </div>
 
                     <h3 className="experiment-title">
-                      {experiment.title.split('').map((char, i) => (
+                      {entry.title.split('').map((char, i) => (
                         <span key={i} className="title-char" style={{
                           animationDelay: `${i * 50}ms`
                         }}>
@@ -162,21 +161,21 @@ const Playground = () => {
                       ))}
                     </h3>
 
-                    <p className="experiment-description">{experiment.description}</p>
+                    <p className="experiment-description">{entry.description}</p>
 
                     <div className="experiment-details">
                       <div className="detail-grid">
                         <div className="detail-item">
                           <span className="detail-label">Category</span>
-                          <span className="detail-value">{experiment.metadata?.category}</span>
+                          <span className="detail-value">{entry.entryType}</span>
                         </div>
                         <div className="detail-item">
-                          <span className="detail-label">Intensity</span>
-                          <span className="detail-value">{experiment.intensity}</span>
+                          <span className="detail-label">Tags</span>
+                          <span className="detail-value">{entry.metadata?.tags?.join(', ')}</span>
                         </div>
                       </div>
                       <div className="tools-list">
-                        {experiment.metadata?.tools?.map((tool, i) => (
+                        {entry.metadata?.tools?.map((tool, i) => (
                           <span key={i} className="tool-tag">{tool}</span>
                         ))}
                       </div>
@@ -184,7 +183,7 @@ const Playground = () => {
 
                     <div className="experiment-footer">
                       <span className="experiment-date">
-                        {new Date(experiment.metadata?.publishDate || Date.now()).toLocaleDateString('en-US', {
+                        {new Date(entry.metadata?.publishDate || Date.now()).toLocaleDateString('en-US', {
                           month: 'short',
                           year: 'numeric'
                         })}
@@ -201,7 +200,7 @@ const Playground = () => {
                     <div className="noise-overlay"></div>
                     <div className="scan-line"></div>
                   </div>
-                </div>
+                </Link>
               ))
             ) : (
               <div className="text-center py-16 col-span-full">
