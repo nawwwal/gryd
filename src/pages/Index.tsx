@@ -7,6 +7,8 @@ import { useWorkProjects } from '../hooks/useContentQuery';
 import { useMobileOptimization } from '../hooks/useMobileOptimization';
 import { useMobileNavigationState } from '../hooks/useMobileNavigationState';
 
+const SECTION_IDS = ['hero', 'featured', 'letters'] as const;
+
 const Index = () => {
   const {
     data: projects = [],
@@ -23,20 +25,19 @@ const Index = () => {
   const { triggerHaptic } = useMobileNavigationState();
   const [currentSection, setCurrentSection] = useState(0);
 
-  const sections = ['hero', 'featured', 'letters'];
 
   // Observe sections to update indicator and provide haptic feedback
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
 
-    sections.forEach((id, index) => {
+    SECTION_IDS.forEach((id, index) => {
       const element = document.getElementById(id);
       if (!element) return;
 
       const observer = new IntersectionObserver(
         entries => {
           entries.forEach(entry => {
-            if (entry.isIntersecting) {
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
               setCurrentSection(index);
               if (isMobile && isTouch) {
                 triggerHaptic({ intensity: 'light' });
@@ -44,7 +45,7 @@ const Index = () => {
             }
           });
         },
-        { threshold: 0.6 }
+        { threshold: 0.5, rootMargin: '-25% 0px -25% 0px' }
       );
 
       observer.observe(element);
@@ -98,7 +99,7 @@ const Index = () => {
       {/* Mobile Section Indicator */}
       {isMobile && isTouch && (
         <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-40 space-y-2">
-          {sections.map((_, index) => (
+          {SECTION_IDS.map((_, index) => (
             <div
               key={index}
               className={`w-2 h-2 rounded-full transition-colors ${
