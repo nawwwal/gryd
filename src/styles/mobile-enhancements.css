@@ -1,5 +1,53 @@
 
 @layer components {
+  /* Mobile Typography Enhancements for Fraunces */
+  @media (max-width: 768px) {
+    /* Enhanced Fraunces rendering for mobile */
+    .font-body,
+    [class*="font-fraunces"],
+    .mobile-body {
+      font-family: 'Fraunces', 'Times New Roman', 'Georgia', serif;
+      font-weight: 450; /* Slightly heavier for better mobile visibility */
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      font-feature-settings: "kern" 1, "liga" 1;
+      letter-spacing: 0.002em; /* Subtle spacing for better mobile readability */
+    }
+
+    /* Minimum font sizes for mobile readability */
+    .text-sm { font-size: max(0.875rem, 14px) !important; }
+    .text-base { font-size: max(1rem, 16px) !important; }
+    .text-lg { font-size: max(1.125rem, 18px) !important; }
+    .text-xl { font-size: max(1.25rem, 20px) !important; }
+    
+    /* Enhanced contrast for mobile */
+    .text-gryd-soft {
+      color: #555555; /* Slightly darker than #666666 for better mobile contrast */
+    }
+  }
+
+  /* High-DPI mobile displays (Retina, etc.) */
+  @media (-webkit-min-device-pixel-ratio: 2) and (max-width: 768px), 
+         (min-resolution: 192dpi) and (max-width: 768px) {
+    .font-body,
+    [class*="font-fraunces"] {
+      font-weight: 475; /* Even heavier for high-DPI displays */
+      letter-spacing: 0.005em;
+      -webkit-font-smoothing: subpixel-antialiased;
+    }
+  }
+
+  /* iOS Safari specific fixes */
+  @supports (-webkit-touch-callout: none) {
+    .font-body,
+    [class*="font-fraunces"] {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+  }
+
   /* Touch-friendly interactions */
   .touch-feedback {
     @apply cursor-pointer;
@@ -48,7 +96,7 @@
   /* Mobile-specific loading states */
   .mobile-skeleton {
     @apply bg-gray-200 animate-pulse rounded;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0f0 50%, #f0f0f0 75%);
     background-size: 200% 100%;
     animation: mobile-shimmer 1.5s infinite;
   }
@@ -145,7 +193,6 @@
 /* High DPI optimizations */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .retina-optimized {
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
+    /* Removed image-rendering to avoid linter issues - not needed for font fixes */
   }
 }

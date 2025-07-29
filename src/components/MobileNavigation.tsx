@@ -52,8 +52,10 @@ const MobileNavigation = () => {
           <div className="flex items-center justify-between p-4 border-b border-gray-200">
             <span className="font-serif text-lg font-bold text-gray-900">Navigation</span>
             <button
+              type="button"
               onClick={closeMenu}
               className="p-2 text-gray-600 hover:text-orange-600 transition-colors"
+              aria-label="Close menu"
             >
               <X size={20} />
             </button>
