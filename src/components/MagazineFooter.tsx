@@ -15,12 +15,15 @@ const editorNotes = [
 const MagazineFooter = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [currentNote, setCurrentNote] = useState(0);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
     const timeTimer = setInterval(() => setCurrentTime(new Date()), 1000);
     const noteTimer = setInterval(() => {
       setCurrentNote((prevNote) => (prevNote + 1) % editorNotes.length);
     }, 4000); // Change note every 4 seconds
+
+    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
 
     return () => {
       clearInterval(timeTimer);
@@ -37,7 +40,7 @@ const MagazineFooter = () => {
   const { timeString, dateString } = format(currentTime);
 
   return (
-    <footer className="grid-footer">
+    <footer className={`grid-footer ${isTouchDevice ? 'touch-device' : ''}`}>
       <div className="footer-board">
         {/* Row 1 */}
         <div className="cell star-cell flex items-center justify-center" data-cta="Explore">

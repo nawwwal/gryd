@@ -15,7 +15,7 @@ const MobileBottomNavigation = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const isMobile = useIsMobile();
   const location = useLocation();
-  const { isVisible, handleNavInteraction, triggerHaptic } = useMobileNavigationState();
+  const { isVisible, handleNavInteraction, triggerHaptic, scrollToTop } = useMobileNavigationState();
 
   const navItems: NavItem[] = [
     {
@@ -55,6 +55,7 @@ const MobileBottomNavigation = () => {
   const handleNavClick = (index: number, path: string) => {
     setActiveIndex(index);
     handleNavInteraction(path);
+    scrollToTop();
   };
 
   if (!isMobile) return null;

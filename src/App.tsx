@@ -133,6 +133,19 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+      // Small delay to ensure all content is painted
+      setTimeout(() => {
+        preloader.classList.add('fade-out');
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 500); // Match CSS transition duration
+      }, 100);
+    }
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <div className="overflow-x-hidden w-full max-w-full">

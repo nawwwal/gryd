@@ -75,9 +75,9 @@
   transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-/* === ANIMATIONS & HOVER STATES === */
+/* === ANIMATIONS & INTERACTIVE STATES === */
 
-/* General cell hover prep */
+/* General cell prep */
 .cell > * {
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
@@ -97,74 +97,90 @@
   z-index: 2;
 }
 
-.cell:hover::after {
-  opacity: 1;
-  transform: translateY(0);
+/* --- Desktop Hover Effects --- */
+@media (hover: hover) and (pointer: fine) {
+  .cell:hover::after {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .photo-cell:hover .photo {
+    transform: scale(1.05);
+  }
+
+  .photo-cell:hover::after, .discovery-cell:hover::after, .many-cell:hover::after, .humanity-cell:hover::after, .freedom-cell:hover::after {
+    color: var(--gryd-accent);
+  }
+
+  .discovery-cell::before, .many-cell::before, .humanity-cell::before, .freedom-cell::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(17,17,17,0.8);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .photo-cell::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--gryd-accent);
+    mix-blend-mode: multiply;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .discovery-cell:hover::before, .many-cell:hover::before, .humanity-cell:hover::before, .freedom-cell:hover::before, .photo-cell:hover::before {
+    opacity: 1;
+  }
+
+  .discovery-cell:hover > *, .many-cell:hover > *, .humanity-cell:hover > *, .freedom-cell:hover > * {
+    opacity: 0;
+  }
+
+  .star-cell:hover .star-icon {
+    transform: rotate(180deg);
+    color: var(--gryd-accent);
+  }
+
+  .bang-cell::after {
+    bottom: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    font-size: 1rem;
+    color: var(--gryd-bg);
+    background: var(--gryd-accent);
+    padding: 0.5rem 1rem;
+  }
+
+  .bang-cell:hover .bang-text {
+    opacity: 0.2;
+  }
+
+  .bang-cell:hover::after {
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
-/* Animation 1: Content fade out, image zoom */
-.photo-cell:hover .photo {
-  transform: scale(1.05);
-}
-.photo-cell:hover::after, .discovery-cell:hover::after, .many-cell:hover::after, .humanity-cell:hover::after, .freedom-cell:hover::after {
+/* --- Mobile and Touch Active Effects --- */
+.cell:active .star-icon {
+  transform: scale(0.9) rotate(15deg);
   color: var(--gryd-accent);
 }
 
-/* Overlay effect for content cells */
-.discovery-cell::before, .many-cell::before, .humanity-cell::before, .freedom-cell::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(17,17,17,0.8);
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
+.cell:active .photo {
+  transform: scale(1.02);
+  filter: brightness(0.8);
 }
 
-/* Orange multiply effect for photo cell */
-.photo-cell::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: var(--gryd-accent);
-  mix-blend-mode: multiply;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-
-.discovery-cell:hover::before, .many-cell:hover::before, .humanity-cell:hover::before, .freedom-cell:hover::before, .photo-cell:hover::before {
- opacity: 1;
-}
-
-.discovery-cell:hover > *, .many-cell:hover > *, .humanity-cell:hover > *, .freedom-cell:hover > * {
-  opacity: 0;
-}
-
-/* Animation 2: Star spin */
-.star-cell:hover .star-icon {
-  transform: rotate(180deg);
-  color: var(--gryd-accent);
-}
-
-/* Animation 3: Text reveal for bang-cell */
-.bang-cell::after {
-  bottom: auto;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.8);
-  font-size: 1rem;
-  color: var(--gryd-bg);
-  background: var(--gryd-accent);
-  padding: 0.5rem 1rem;
-}
-.bang-cell:hover .bang-text {
-  opacity: 0.2;
-}
-.bang-cell:hover::after {
-  transform: translate(-50%, -50%) scale(1);
+.cell:active {
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 /* Editor's Note Ticker */
@@ -205,12 +221,43 @@
   text-align: center;
 }
 
-/* Responsive */
+/* === RESPONSIVE LAYOUT === */
+
+/* Tablet */
 @media (max-width: 768px) {
   .footer-board {
     grid-template-columns: repeat(2, 1fr);
   }
   .title-cell, .bang-cell {
     grid-column: span 2;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .footer-board {
+    grid-template-columns: 1fr;
+  }
+  .title-cell, .bang-cell {
+    grid-column: span 1;
+  }
+  .footer-board .cell {
+    border-left: none;
+    border-top: 1px solid var(--gryd-text);
+  }
+  .footer-board .cell:first-child {
+    border-top: none;
+  }
+  .cell-heading {
+    font-size: 0.875rem;
+  }
+  .cell-text {
+    font-size: 0.8rem;
+  }
+  .footer-title {
+    font-size: 1.5rem;
+  }
+  .bang-text {
+    font-size: 2.5rem;
   }
 }

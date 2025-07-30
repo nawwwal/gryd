@@ -89,11 +89,20 @@ export const useMobileNavigationState = () => {
     }));
   }, []);
 
+  // Smooth scroll to top
+  const scrollToTop = useCallback(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, []);
+
   return {
     ...navState,
     triggerHaptic,
     handleNavInteraction,
     showNavigation,
-    hideNavigation
+    hideNavigation,
+    scrollToTop
   };
 };

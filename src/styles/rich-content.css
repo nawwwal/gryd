@@ -23,7 +23,7 @@
 }
 
 .rich-content p {
-  @apply text-body font-body text-gryd-text;
+  @apply rich-text-body text-gryd-text;
   margin-bottom: 1.5rem;
 }
 
@@ -37,7 +37,7 @@
 
 .rich-content ul,
 .rich-content ol {
-  @apply text-body font-body text-gryd-text;
+  @apply rich-text-body text-gryd-text;
   margin-bottom: 1.5rem;
   padding-left: 1.5rem;
 }
@@ -231,13 +231,13 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .rich-content h2 {
-    @apply text-xl;
+    @apply text-2xl;
     margin-top: 2rem;
     margin-bottom: 1rem;
   }
 
   .rich-content h3 {
-    @apply text-lg;
+    @apply text-xl;
     margin-top: 1.5rem;
     margin-bottom: 0.75rem;
   }
