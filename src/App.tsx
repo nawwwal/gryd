@@ -82,12 +82,57 @@ function App() {
 
     initializeClarity();
 
+    // Add global function to clear cache (for debugging)
+    if (import.meta.env.DEV) {
+      (window as any).clearServiceWorkerCache = async () => {
+        if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+          const messageChannel = new MessageChannel();
+
+          return new Promise((resolve) => {
+            messageChannel.port1.onmessage = (event) => {
+              if (event.data.success) {
+                console.log('[SW] Cache cleared successfully');
+                window.location.reload();
+              }
+              resolve(event.data);
+            };
+
+            navigator.serviceWorker.controller.postMessage(
+              { type: 'CLEAR_CACHE' },
+              [messageChannel.port2]
+            );
+          });
+        }
+      };
+    }
+
     // Register service worker for caching, but only in production
     if ('serviceWorker' in navigator && import.meta.env.PROD) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
           .then(registration => {
             console.log('[SW] Registered successfully:', registration);
+
+            // Check for updates on visibility change
+            document.addEventListener('visibilitychange', () => {
+              if (!document.hidden && registration) {
+                registration.update();
+              }
+            });
+
+            // Handle updates
+            registration.addEventListener('updatefound', () => {
+              const newWorker = registration.installing;
+              if (newWorker) {
+                newWorker.addEventListener('statechange', () => {
+                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    // New version available, skip waiting
+                    newWorker.postMessage({ type: 'SKIP_WAITING' });
+                    window.location.reload();
+                  }
+                });
+              }
+            });
           })
           .catch(error => {
             console.warn('[SW] Registration failed:', error);
