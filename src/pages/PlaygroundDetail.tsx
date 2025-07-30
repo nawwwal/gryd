@@ -3,6 +3,7 @@ import { getSanityImageUrl } from '../utils/imageUtils';
 import RichContentRenderer from '../components/RichContentRenderer';
 import { useContentBySlug } from '../hooks/useContentQuery';
 import ScrollFade from '../components/ScrollFade';
+import PageLoader from '../components/PageLoader';
 
 const PlaygroundDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -14,14 +15,7 @@ const PlaygroundDetail = () => {
   } = useContentBySlug('playground', slug || '');
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <div className="loading-spinner mx-auto" />
-          <p className="text-gryd-soft">Loading entry...</p>
-        </div>
-      </div>
-    );
+    return <PageLoader />;
   }
 
   if (error || !entry) {

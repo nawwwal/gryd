@@ -4,6 +4,7 @@ import RichContentRenderer from '../components/RichContentRenderer';
 import { useContentBySlug } from '../hooks/useContentQuery';
 import ScrollFade from '../components/ScrollFade';
 import { useGyroscopic } from '../hooks/useGyroscopic'; // Import the hook
+import PageLoader from '../components/PageLoader';
 
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -16,14 +17,7 @@ const ProjectDetail = () => {
   } = useContentBySlug('work', slug || '');
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <div className="loading-spinner mx-auto" />
-          <p className="text-gryd-soft">Loading project...</p>
-        </div>
-      </div>
-    );
+    return <PageLoader />;
   }
 
   if (error || !project) {

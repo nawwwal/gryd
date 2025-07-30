@@ -67,7 +67,13 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Fraunces', serif;
+    font-family: "Fraunces", serif;
+    font-optical-sizing: auto;
+    font-weight: 400; /* A neutral base weight */
+    font-style: normal;
+    font-variation-settings:
+      "SOFT" 75,
+      "WONK" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background:

@@ -7,7 +7,7 @@ import MobileTouchFeedback from '../components/MobileTouchFeedback';
 import { useGyroscopic } from '../hooks/useGyroscopic';
 import { useMobileOptimization } from '../hooks/useMobileOptimization';
 import { useSwipeGesture } from '../hooks/useSwipeGesture';
-import ProjectsSkeleton from '../components/skeletons/ProjectsSkeleton';
+import PageLoader from '../components/PageLoader';
 
 const Work = () => {
   const {
@@ -35,11 +35,7 @@ const Work = () => {
   });
 
   if (loading) {
-    return (
-      <div className="magazine-container">
-        <ProjectsSkeleton count={3} className="py-16" />
-      </div>
-    );
+    return <PageLoader />;
   }
 
   if (isError) {

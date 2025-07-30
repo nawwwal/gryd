@@ -6,7 +6,7 @@ import { MorphingText } from '../components/MorphingText';
 import { usePlaygroundEntries } from '../hooks/useContentQuery';
 import { getSanityImageUrl } from '../utils/imageUtils';
 import { PlaygroundEntry } from '../types/content';
-import ExperimentsSkeleton from '../components/skeletons/ExperimentsSkeleton';
+import PageLoader from '../components/PageLoader';
 
 const Playground = () => {
   const masonryRef = useRef<HTMLDivElement>(null);
@@ -102,7 +102,7 @@ const Playground = () => {
 
           <div ref={masonryRef} className="experiments-grid">
             {loading ? (
-              <ExperimentsSkeleton count={6} />
+              <PageLoader />
             ) : entries.length > 0 ? (
                 entries.map((entry, index) => (
                 <Link to={`/playground/${entry.slug}`} key={entry.slug} className={`experiment-card experiment-${entry.entryType}`} data-category={entry.entryType}>
