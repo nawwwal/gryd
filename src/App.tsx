@@ -179,16 +179,22 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const preloader = document.getElementById('preloader');
-    if (preloader) {
-      // Small delay to ensure all content is painted
-      setTimeout(() => {
+    // Hide preloader after component mounts
+    const hidePreloader = () => {
+      const preloader = document.getElementById('preloader');
+      if (preloader) {
         preloader.classList.add('fade-out');
         setTimeout(() => {
           preloader.style.display = 'none';
-        }, 500); // Match CSS transition duration
-      }, 100);
-    }
+        }, 500);
+      }
+    };
+
+    // Small delay to ensure all content is painted
+    const timer = setTimeout(hidePreloader, 100);
+
+    // Cleanup timeout on unmount
+    return () => clearTimeout(timer);
   }, []);
 
   return (

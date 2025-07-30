@@ -1,3 +1,7 @@
+import MagazineHero from '../components/MagazineHero';
+import FeaturedArticle from '../components/FeaturedArticle';
+import ArticleGrid from '../components/ArticleGrid';
+import LettersToEditor from '../components/LettersToEditor';
 import { useWorkProjects } from '../hooks/useContentQuery';
 import { useMobileOptimization } from '../hooks/useMobileOptimization';
 import { useMobileNavigationState } from '../hooks/useMobileNavigationState';
