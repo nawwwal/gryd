@@ -1,13 +1,6 @@
-import { useState, useEffect } from 'react';
-import MagazineHero from '../components/MagazineHero';
-import FeaturedArticle from '../components/FeaturedArticle';
-import ArticleGrid from '../components/ArticleGrid';
-import LettersToEditor from '../components/LettersToEditor';
 import { useWorkProjects } from '../hooks/useContentQuery';
 import { useMobileOptimization } from '../hooks/useMobileOptimization';
 import { useMobileNavigationState } from '../hooks/useMobileNavigationState';
-
-const SECTION_IDS = ['hero', 'featured', 'letters'] as const;
 
 const Index = () => {
   const {
@@ -23,39 +16,6 @@ const Index = () => {
     : [];
   const { isMobile, isTouch } = useMobileOptimization();
   const { triggerHaptic } = useMobileNavigationState();
-  const [currentSection, setCurrentSection] = useState(0);
-
-
-  // Observe sections to update indicator and provide haptic feedback
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-
-    SECTION_IDS.forEach((id, index) => {
-      const element = document.getElementById(id);
-      if (!element) return;
-
-      const observer = new IntersectionObserver(
-        entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-              setCurrentSection(index);
-              if (isMobile && isTouch) {
-                triggerHaptic({ intensity: 'light' });
-              }
-            }
-          });
-        },
-        { threshold: 0.5, rootMargin: '-25% 0px -25% 0px' }
-      );
-
-      observer.observe(element);
-      observers.push(observer);
-    });
-
-    return () => {
-      observers.forEach(o => o.disconnect());
-    };
-  }, [isMobile, isTouch, triggerHaptic]);
 
   // Removed skeleton loader - show content immediately
 
@@ -95,20 +55,6 @@ const Index = () => {
       <div id="letters">
         <LettersToEditor />
       </div>
-
-      {/* Mobile Section Indicator */}
-      {isMobile && isTouch && (
-        <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-40 space-y-2">
-          {SECTION_IDS.map((_, index) => (
-            <div
-              key={index}
-              className={`w-2 h-2 rounded-full transition-colors ${
-                index === currentSection ? 'bg-orange-600' : 'bg-gray-300'
-              }`}
-            />
-          ))}
-        </div>
-      )}
     </div>
   );
 };

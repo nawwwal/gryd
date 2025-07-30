@@ -1,25 +1,26 @@
 
 import { ReactNode, useState, TouchEvent } from 'react';
+import { triggerHapticFeedback, HapticFeedbackType } from '../utils/haptics';
 
 interface MobileTouchFeedbackProps {
   children: ReactNode;
   className?: string;
   onTap?: () => void;
-  hapticFeedback?: boolean;
+  haptic?: HapticFeedbackType;
 }
 
-const MobileTouchFeedback = ({ 
-  children, 
-  className = '', 
+const MobileTouchFeedback = ({
+  children,
+  className = '',
   onTap,
-  hapticFeedback = false 
+  haptic
 }: MobileTouchFeedbackProps) => {
   const [isPressed, setIsPressed] = useState(false);
 
   const handleTouchStart = (e: TouchEvent) => {
     setIsPressed(true);
-    if (hapticFeedback && 'vibrate' in navigator) {
-      navigator.vibrate(10);
+    if (haptic) {
+      triggerHapticFeedback(haptic);
     }
   };
 
