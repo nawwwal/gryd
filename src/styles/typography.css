@@ -11,10 +11,37 @@
 
   .body {
     @apply font-body text-body;
+    font-weight: 400;
+    font-optical-sizing: auto;
   }
 
   .caption {
     @apply font-mono text-caption text-gryd-soft uppercase tracking-wide font-medium;
+  }
+
+  /* Mobile-specific typography improvements */
+  @media (max-width: 768px) {
+    .body {
+      font-weight: 450; /* Slightly heavier for better mobile visibility */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      font-feature-settings: "kern" 1;
+    }
+    
+    .headline, .subhead {
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+  }
+
+  /* High DPI mobile displays */
+  @media (-webkit-min-device-pixel-ratio: 2) and (max-width: 768px), 
+         (min-resolution: 192dpi) and (max-width: 768px) {
+    .body {
+      font-weight: 450;
+      letter-spacing: 0.005em; /* Slight letter spacing for better readability */
+    }
   }
 }
 

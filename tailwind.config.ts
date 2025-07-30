@@ -61,8 +61,8 @@ export default {
 			},
 			fontFamily: {
 				'headline': ['Platypi', 'serif'],
-				'body': ['Fraunces', 'serif'],
-				'sans': ['"Schibsted Grotesk"', 'sans-serif'],
+				'body': ['Fraunces', 'Times New Roman', 'Georgia', 'serif'],
+				'sans': ['"Schibsted Grotesk"', 'system-ui', '-apple-system', 'sans-serif'],
 			},
 			fontSize: {
 				'headline': ['3.75rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
