@@ -14,7 +14,7 @@ const EpilogueSection = () => {
     <div className="magazine-spread" id="epilogue">
       <ScrollFade>
         <div className="flip-card-container">
-          <div className={`flip-card ${isFlipped ? 'flipped' : ''}`}>
+          <div className={`flip-card ${isFlipped ? 'flipped' : ''}`}>            
             {/* Front of the card */}
             <div className="flip-card-front">
               <div className="epilogue-front-content">
@@ -54,61 +54,54 @@ const EpilogueSection = () => {
               </div>
             </div>
 
-            {/* Back of the card - Streamlined */}
+            {/* Back of the card */}
             <div className="flip-card-back">
               <div className="epilogue-back-content-redesigned">
                 {/* Back Navigation */}
-                <div className="back-navigation">
+                <div className="back-navigation flex justify-center">
                   <button onClick={() => setIsFlipped(false)} className="back-button-magazine">
                     <span className="back-arrow">←</span>
                     <span className="back-label">back to story</span>
                   </button>
                 </div>
 
-                {/* Centered Magazine-Style Bio - Streamlined */}
-                <div className="magazine-bio-section">
-                  {/* Author Portrait Section */}
-                  <div className="author-portrait-section">
-                    <div className="author-name-display">
-                      <h2 className="contributor-name">ADITYA NAWAL</h2>
-                      <div className="contributor-title">Product Designer</div>
-                    </div>
-                  </div>
+                {/* Editorial Note – Option B */}
+                <div className="editor-note-container relative flex-1 flex flex-col items-center justify-center text-center max-w-4xl mx-auto">
+                  {/* Letter from the editor */}
+                  <p className="font-serif text-xl leading-relaxed text-gray-800">
+                    Stories end, but conversations keep unfolding. Thank you for paging through GRYD;<br />every pixel here is a promise that design can make life a little better.
+                  </p>
 
-                  {/* Status & Availability */}
-                  <div className="bio-content">
-                    <div className="bio-paragraph">
-                      <p className="bio-text" style={{ fontStyle: 'italic', fontSize: '1.05rem', color: '#44403c' }}>
-                        This magazine is a living document of my work and process. I hope it offers a glimpse into not just what I do, but how I think.
-                      </p>
-                    </div>
-                    <div className="status-section">
-                      <div className="status-indicator">
-                        <div className="status-dot-live"></div>
-                        <span className="status-text">Currently exploring new roles & collaborations</span>
-                      </div>
-                    </div>
-                  </div>
+                  {/* Signature image - Positioned absolutely to overlay without pushing content */}
+                  <img
+                    src="/Signature.png"
+                    alt="Aditya Nawal signature"
+                    className="absolute inset-0 m-auto h-60 w-auto object-contain pointer-events-none -translate-y-5"
+                  />
 
-                  {/* Essential Contact */}
-                  <div className="contact-section-compact">
-                    <div className="primary-contact flex items-center justify-center space-x-6">
+                  {/* Placeholder to create space for the signature */}
+                  <div className="h-48" />
+
+                  {/* Correspondence */}
+                  <div className="space-y-4 w-full">
+                    <h3 className="font-mono uppercase tracking-widest text-xs text-gray-400">Correspondence</h3>
+
+                    {/* Primary contact */}
+                    <div className="flex items-center justify-center space-x-6">
                       <a
-                        href="mailto:hey@naw.al?subject=A%20note%20from%20your%20portfolio&body=Hey%20Adi%2C%0A%0ACame%20across%20your%20portfolio%20and%20really%20enjoyed%20your%20work.%0A%0AWould%20love%20to%20connect.%0A%0ABest%2C"
+                        href="mailto:hey@naw.al?subject=A%20note%20from%20your%20portfolio&body=Hey%20Adi%2C%0A%0AI%20just%20finished%20reading%20GRYD%20and%20would%20love%20to%20connect.%0A%0ABest%2C"
                         className="contact-email"
                       >
                         hey@naw.al
                       </a>
                       <span className="text-gray-400 font-mono text-lg">/</span>
-                      <a
-                        href="tel:+918320443632"
-                        className="contact-email"
-                      >
-                        +91 83204 43632
+                      <a href="tel:+918320443632" className="contact-email">
+                        +91&nbsp;83204&nbsp;43632
                       </a>
                     </div>
 
-                    <div className="social-connections-compact">
+                    {/* Social links */}
+                    <div className="flex flex-wrap justify-center gap-4">
                       <a href="https://www.linkedin.com/in/adityanawal/" target="_blank" rel="noopener noreferrer" className="social-link-magazine">
                         <span className="platform-name">LinkedIn</span>
                         <span className="external-arrow">↗</span>

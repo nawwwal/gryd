@@ -417,7 +417,7 @@
   .back-button-magazine {
     @apply flex items-center space-x-3 transition-all duration-200;
     @apply text-gryd-soft hover:text-gryd-accent;
-    @apply transform hover:translate-x-1;
+    @apply transform hover:-translate-x-1;
   }
 
   .back-arrow {
