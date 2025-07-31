@@ -70,7 +70,7 @@
   }
 
   .magazine-title {
-    @apply font-serif text-8xl font-black tracking-tight text-gray-900 mb-4;
+    @apply font-serif text-6xl font-black tracking-tight text-gray-900 mb-4;
     text-shadow: 2px 2px 0px rgba(0,0,0,0.05);
   }
 
@@ -378,7 +378,7 @@
 
   .flip-card-front,
   .flip-card-back {
-    @apply w-full;
+    @apply w-full h-full;
     backface-visibility: hidden;
     background:
       linear-gradient(135deg, #ffffff 0%, #fdfcfa 100%),
@@ -388,6 +388,9 @@
       0 20px 40px rgba(0,0,0,0.1),
       inset 0 1px 0 rgba(255,255,255,0.8);
     border: 2px solid #e5d3b3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .flip-card-back {
@@ -402,7 +405,7 @@
 
   /* Redesigned Back Content */
   .epilogue-back-content-redesigned {
-    @apply p-12 h-full flex flex-col;
+    @apply p-12 h-full flex flex-col justify-center;
     min-height: auto;
   }
 
@@ -642,7 +645,7 @@
   /* Responsive Design */
   @media (max-width: 768px) {
     .magazine-title {
-      @apply text-5xl;
+      @apply text-4xl;
     }
 
     .masthead-paper {

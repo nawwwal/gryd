@@ -334,11 +334,11 @@
   .magazine-logo {
     @apply font-headline text-6xl font-black text-center tracking-tight;
     font-size: clamp(3rem, 8vw, 6rem);
-    text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
   }
 
   .magazine-logo .subtitle {
-    @apply block text-lg font-normal mt-2 text-gray-600 font-body;
+    @apply block text-lg font-normal mt-2 text-gray-600 font-body tracking-normal;
+    word-spacing: 0.15em;
   }
 
   .feature-banner {

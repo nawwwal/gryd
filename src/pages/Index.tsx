@@ -13,7 +13,6 @@ const Index = () => {
     error,
     isError
   } = useWorkProjects();
-
   const featuredProject = projects.find(p => p.metadata?.featured) || projects[0];
   const otherProjects = featuredProject
     ? projects.filter(p => p.slug !== featuredProject.slug).slice(0, 6)

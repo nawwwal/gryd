@@ -63,7 +63,7 @@ const MagazineHero = () => {
 
                 <h1 className="magazine-logo">
                   THE GRYD
-                  <span className="subtitle">Design  Portfolio  &  Journal</span>
+                  <span className="subtitle">Design Portfolio &amp; Journal</span>
                 </h1>
 
                 <div className="feature-banner">

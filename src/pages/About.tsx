@@ -24,20 +24,20 @@ const About = () => {
                 </div>
 
                 <h1 className="magazine-title">
-                  {'GRYD'.split('').map((letter, index) => (
+                  {'ADITYA NAWAL'.split('').map((letter, index) => (
                     <span
                       key={index}
                       className="hover-letter title-letter"
-                      style={{ animationDelay: `${index * 100}ms` }}
+                      style={{ animationDelay: `${index * 50}ms` }}
                     >
-                      {letter}
+                      {letter === ' ' ? '\u00A0' : letter}
                     </span>
                   ))}
                 </h1>
 
                 <div className="editor-credit">
-                  <span className="edited-by">EDITED BY</span>
-                  <span className="editor-name">ADITYA NAWAL</span>
+                  <span className="edited-by">EDITOR OF</span>
+                  <span className="editor-name">GRYD</span>
                 </div>
 
                 <div className="publication-subtitle">
@@ -53,7 +53,7 @@ const About = () => {
                     className="print-issue-btn"
                   >
                     <span>📄</span>
-                    <span>Download Dossier</span>
+                    <span>Download Full R&eacute;sum&eacute;</span>
                   </a>
                 </div>
               </div>

@@ -16,7 +16,7 @@ const EpilogueSection = () => {
         <div className="flip-card-container">
           <div className={`flip-card ${isFlipped ? 'flipped' : ''}`}>
             {/* Front of the card */}
-            <div className="flip-card-front h-fit">
+            <div className="flip-card-front">
               <div className="epilogue-front-content">
                 {/* Page Header */}
                 <div className="text-center mb-12">
@@ -55,7 +55,7 @@ const EpilogueSection = () => {
             </div>
 
             {/* Back of the card - Streamlined */}
-            <div className="flip-card-back h-fit">
+            <div className="flip-card-back">
               <div className="epilogue-back-content-redesigned">
                 {/* Back Navigation */}
                 <div className="back-navigation">
@@ -71,16 +71,21 @@ const EpilogueSection = () => {
                   <div className="author-portrait-section">
                     <div className="author-name-display">
                       <h2 className="contributor-name">ADITYA NAWAL</h2>
-                      <div className="contributor-title">Editor-in-Chief & Product Designer</div>
+                      <div className="contributor-title">Product Designer</div>
                     </div>
                   </div>
 
                   {/* Status & Availability */}
                   <div className="bio-content">
+                    <div className="bio-paragraph">
+                      <p className="bio-text" style={{ fontStyle: 'italic', fontSize: '1.05rem', color: '#44403c' }}>
+                        This magazine is a living document of my work and process. I hope it offers a glimpse into not just what I do, but how I think.
+                      </p>
+                    </div>
                     <div className="status-section">
                       <div className="status-indicator">
                         <div className="status-dot-live"></div>
-                        <span className="status-text">Available for new opportunities</span>
+                        <span className="status-text">Currently exploring new roles & collaborations</span>
                       </div>
                     </div>
                   </div>
@@ -88,7 +93,10 @@ const EpilogueSection = () => {
                   {/* Essential Contact */}
                   <div className="contact-section-compact">
                     <div className="primary-contact">
-                      <a href="mailto:hey@naw.al" className="contact-email">
+                      <a
+                        href="mailto:hey@naw.al?subject=A%20note%20from%20your%20portfolio&body=Hey%20Adi%2C%0A%0ACame%20across%20your%20portfolio%20and%20really%20enjoyed%20your%20work.%0A%0AWould%20love%20to%20connect.%0A%0ABest%2C"
+                        className="contact-email"
+                      >
                         hey@naw.al
                       </a>
                     </div>
