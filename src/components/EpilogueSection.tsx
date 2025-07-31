@@ -11,7 +11,7 @@ const EpilogueSection = () => {
   }, []);
 
   return (
-    <div className="magazine-spread">
+    <div className="magazine-spread" id="epilogue">
       <ScrollFade>
         <div className="flip-card-container">
           <div className={`flip-card ${isFlipped ? 'flipped' : ''}`}>

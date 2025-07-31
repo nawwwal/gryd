@@ -71,7 +71,7 @@ const MagazineFooter = () => {
           <p className="cell-text">A collection of projects exploring brand, system, and interface design for clients big and small.</p>
         </div>
         <div className="cell freedom-cell p-4" data-cta="Get in Touch">
-          <Link to="/contact" className="cell-link-overlay" aria-label="Contact me"></Link>
+          <Link to="/about#epilogue" className="cell-link-overlay" aria-label="Contact me"></Link>
           <h3 className="cell-heading">Cultural freedom<br/>and cold code</h3>
         </div>
 
