@@ -92,12 +92,19 @@ const EpilogueSection = () => {
 
                   {/* Essential Contact */}
                   <div className="contact-section-compact">
-                    <div className="primary-contact">
+                    <div className="primary-contact flex items-center justify-center space-x-6">
                       <a
                         href="mailto:hey@naw.al?subject=A%20note%20from%20your%20portfolio&body=Hey%20Adi%2C%0A%0ACame%20across%20your%20portfolio%20and%20really%20enjoyed%20your%20work.%0A%0AWould%20love%20to%20connect.%0A%0ABest%2C"
                         className="contact-email"
                       >
                         hey@naw.al
+                      </a>
+                      <span className="text-gray-400 font-mono text-lg">/</span>
+                      <a
+                        href="tel:+918320443632"
+                        className="contact-email"
+                      >
+                        +91 83204 43632
                       </a>
                     </div>
 
@@ -108,6 +115,14 @@ const EpilogueSection = () => {
                       </a>
                       <a href="https://github.com/nawwwal" target="_blank" rel="noopener noreferrer" className="social-link-magazine">
                         <span className="platform-name">GitHub</span>
+                        <span className="external-arrow">↗</span>
+                      </a>
+                      <a href="https://x.com/naawwwal" target="_blank" rel="noopener noreferrer" className="social-link-magazine">
+                        <span className="platform-name">X (Twitter)</span>
+                        <span className="external-arrow">↗</span>
+                      </a>
+                      <a href="https://www.instagram.com/naawwwaal/" target="_blank" rel="noopener noreferrer" className="social-link-magazine">
+                        <span className="platform-name">Instagram</span>
                         <span className="external-arrow">↗</span>
                       </a>
                     </div>
