@@ -1,10 +1,11 @@
 
-import { useHashScroll } from '../hooks/useHashScroll';
 import ScrollFade from '../components/ScrollFade';
 import EditorInterview from '../components/EditorInterview';
 import EditorsPicks from '../components/EditorsPicks';
 import RapidFire from '../components/RapidFire';
 import EpilogueSection from '../components/EpilogueSection';
+
+import { useHashScroll } from '../hooks/useHashScroll';
 
 const About = () => {
   useHashScroll();
