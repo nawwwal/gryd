@@ -72,14 +72,14 @@ const LettersToEditor = () => {
                     </div>
                     <div className="method-content">
                       <span className="method-label">Let's Talk</span>
-                      <span className="method-value">Visit our dedicated contact page for all the ways to reach out</span>
+                      <span className="method-value">See the epilogue on the editor's page for all the ways to reach out</span>
                     </div>
                   </div>
                 </div>
 
                 <div className="contact-cta-section">
-                  <Link to="/contact" className="magazine-cta-button">
-                    <span className="cta-text text-gryd-bg">Visit Contact Page</span>
+                  <Link to="/about#epilogue" className="magazine-cta-button">
+                    <span className="cta-text text-gryd-bg">Meet the Editor</span>
                     <ArrowRight size={16} />
                   </Link>
                 </div>
