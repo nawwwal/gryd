@@ -2,6 +2,7 @@ import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import { initPerformanceOptimizations } from './utils/serviceWorker'
+import { HelmetProvider } from 'react-helmet-async'
 
 // Initialize performance optimizations
 initPerformanceOptimizations().then(() => {
@@ -10,4 +11,8 @@ initPerformanceOptimizations().then(() => {
   console.warn('[Performance] Failed to initialize optimizations:', error);
 });
 
-createRoot(document.getElementById("root")!).render(<App />);
+createRoot(document.getElementById("root")!).render(
+  <HelmetProvider>
+    <App />
+  </HelmetProvider>
+);
