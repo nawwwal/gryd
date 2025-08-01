@@ -20,7 +20,12 @@ const MetaTags: React.FC<MetaTagsProps> = ({ title, description, imageUrl, keywo
   const pageDescription = description || defaultDescription;
   const pageKeywords = keywords ? `${keywords}, ${defaultKeywords}` : defaultKeywords;
   const pageImageUrl = imageUrl || `${baseUrl}/placeholder.svg`;
+
+  // Canonical URL should represent the definitive version of the page, typically without query parameters unless they are essential to the content.
   const canonicalUrl = `${baseUrl}${location.pathname}`;
+
+  // The `og:url` should be the full, shareable URL, including any parameters or hashes.
+  const shareUrl = `${baseUrl}${location.pathname}${location.search}${location.hash}`;
 
   return (
     <Helmet>
@@ -29,11 +34,11 @@ const MetaTags: React.FC<MetaTagsProps> = ({ title, description, imageUrl, keywo
       <meta name="keywords" content={pageKeywords} />
       <link rel="canonical" href={canonicalUrl} />
 
-      {/* Open Graph Tags */}
+      {/* Open Graph Tags for social sharing */}
       <meta property="og:title" content={pageTitle} />
       <meta property="og:description" content={pageDescription} />
       <meta property="og:image" content={pageImageUrl} />
-      <meta property="og:url" content={canonicalUrl} />
+      <meta property="og:url" content={shareUrl} />
       <meta property="og:type" content="website" />
 
       {/* Twitter Card Tags */}
