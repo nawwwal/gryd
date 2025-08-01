@@ -8,13 +8,14 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run sitemap && vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
     "test:sanity": "node scripts/final-sanity-test.mjs",
     "seed:sanity": "node scripts/final-sanity-test.mjs --seed",
     "fix:images": "node scripts/final-sanity-test.mjs --fix-images",
+    "sitemap": "node scripts/generate-sitemap.mjs",
     "vercel-build": "npm install --include=optional && npm run build"
   },
   "dependencies": {
@@ -70,6 +71,7 @@
     "react": "^18.3.1",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18.3.1",
+    "react-helmet-async": "^2.0.5",
     "react-hook-form": "^7.53.0",
     "react-resizable-panels": "^2.1.3",
     "react-router-dom": "^6.26.2",
