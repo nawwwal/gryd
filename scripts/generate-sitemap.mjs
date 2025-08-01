@@ -15,7 +15,7 @@ const client = createClient({
 });
 
 async function generateSitemap() {
-  const baseUrl = 'https://thegryd.com'; 
+  const baseUrl = 'https://naw.al'; 
 
   const staticPages = [
     { url: `${baseUrl}/`, changefreq: 'daily', priority: 1.0 },

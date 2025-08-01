@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://thegryd.com/sitemap.xml
+Sitemap: https://naw.al/sitemap.xml
