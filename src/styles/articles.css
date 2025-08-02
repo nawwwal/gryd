@@ -2,7 +2,7 @@
 @layer components {
   /* Featured Article */
   .featured-article {
-    @apply bg-white shadow-xl p-12 space-y-12 text-left;
+    @apply bg-white shadow-xl p-12 space-y-12;
     background:
       linear-gradient(135deg, #ffffff 0%, #fdfdfd 100%),
       radial-gradient(circle at 20% 80%, rgba(251,146,60,0.05) 0%, transparent 50%);
