@@ -45,11 +45,12 @@
   }
 
   .linear-project-image img {
-    @apply w-full h-full object-cover transition-transform duration-500;
+    @apply w-full h-full object-cover transition-all duration-500 grayscale;
   }
 
   .linear-project-card:hover .linear-project-image img {
     @apply scale-105;
+    filter: none;
   }
 
   .linear-project-info {
