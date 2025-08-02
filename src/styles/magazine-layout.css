@@ -412,7 +412,7 @@
   }
 
   .grid-title {
-    @apply text-center border-b border-gray-200 pb-6;
+    @apply text-center pb-6;
   }
 
   .grid-title h4 {
@@ -420,7 +420,8 @@
   }
 
   .title-underline {
-    @apply w-16 h-px bg-orange-600 mx-auto;
+    @apply h-px bg-gradient-to-r from-transparent via-orange-600 to-transparent mx-auto;
+    width: clamp(100px, 30vw, 200px);
   }
 
   .grid-articles {
