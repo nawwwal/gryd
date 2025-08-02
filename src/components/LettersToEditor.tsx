@@ -43,19 +43,6 @@ const LettersToEditor = () => {
                 <div className="contact-story-header">
                   <div className="story-category">CORRESPONDENCE</div>
                   <h3 className="story-headline">Ready to Create Something Extraordinary?</h3>
-                  <div className="story-dateline">Available for select projects • Winter 2024</div>
-                </div>
-
-                <div className="contact-story-body">
-                  <p className="story-paragraph">
-                    Whether you're building the next breakthrough product or fixing something that's broken,
-                    let's explore how thoughtful design can transform your vision into reality.
-                  </p>
-
-                  <div className="story-highlight">
-                    <strong>Currently accepting:</strong> Product design projects, design system work,
-                    and strategic design consultations for forward-thinking teams.
-                  </div>
                 </div>
               </div>
 

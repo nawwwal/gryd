@@ -112,7 +112,7 @@
   }
 
   .contact-story-section {
-    @apply space-y-6 text-center;
+    @apply space-y-6 text-center pb-8;
   }
 
   .contact-story-header {
