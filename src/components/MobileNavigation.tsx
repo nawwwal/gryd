@@ -10,7 +10,7 @@ const MobileNavigation = () => {
   const scrollDirection = useScrollDirection();
 
   const links = [
-    { path: '/work', label: 'portfolio' },
+    { path: '/work', label: 'work' },
     { path: '/about', label: 'editor' },
     { path: '/playground', label: 'experiments' },
   ];
