@@ -8,6 +8,9 @@
 }
 
 @layer components {
+  .font-handwritten {
+    font-family: 'Letters Home', cursive;
+  }
   /* About Editor Page Layout */
   .about-editor-page {
     background:

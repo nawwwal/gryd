@@ -68,7 +68,7 @@ const EpilogueSection = () => {
                 {/* Editorial Note – Option B */}
                 <div className="editor-note-container relative flex-1 flex flex-col items-center justify-center text-center max-w-4xl mx-auto">
                   {/* Letter from the editor */}
-                  <p className="font-serif text-xl leading-relaxed text-gray-800">
+                  <p className="font-handwritten text-xl leading-relaxed text-gray-800">
                     Stories end, but conversations keep unfolding. Thank you for paging through GRYD;<br />every pixel here is a promise that design can make life a little better.
                   </p>
 
