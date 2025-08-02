@@ -155,7 +155,10 @@
   }
 
   .discovery-cell:hover > *, .many-cell:hover > *, .humanity-cell:hover > *, .freedom-cell:hover > * {
-    opacity: 0;
+    color: white;
+    opacity: 1;
+    position: relative;
+    z-index: 2;
   }
 
   .star-cell:hover .star-icon {
